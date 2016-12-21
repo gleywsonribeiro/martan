@@ -49,12 +49,12 @@ public class LoginController implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
             //this.usuario = user;
-            usuario.setNome("Administrador");
+            usuario.setNome("Gleywson");
             httpSession.setAttribute("currentUser", usuario);
             return "index?faces-redirect=true";
         } else {
             JsfUtil.addErrorMessage("Usuario ou senha inválidos!");
-            return "login?faces-redirect=true";
+            return "";
         }
 
     }

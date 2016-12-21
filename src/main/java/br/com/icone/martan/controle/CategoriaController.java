@@ -20,21 +20,20 @@ import javax.inject.Inject;
  */
 @Named(value = "categoriaController")
 @ViewScoped
-public class CategoriaController implements Serializable{
+public class CategoriaController implements Serializable {
 
     private Categoria categoria;
     private List<Categoria> categorias;
-    
+
     @Inject
     private CategoriaFacade repositorio;
-    
-    
+
     public CategoriaController() {
         categoria = new Categoria();
     }
-    
+
     public void salvar() {
-        if(categoria.getId() == null) {
+        if (categoria.getId() == null) {
             repositorio.create(categoria);
         } else {
             repositorio.edit(categoria);
@@ -42,12 +41,17 @@ public class CategoriaController implements Serializable{
         categoria = new Categoria();
         categorias = null;
     }
-    
+
     public void remover() {
-        repositorio.remove(categoria);
-        JsfUtil.addSuccessMessage("Categoria " + categoria.getNome() + " removida com sucesso!");
-        categoria = new Categoria();
-        categorias = null;
+        try {
+            repositorio.remove(categoria);
+            JsfUtil.addSuccessMessage("Categoria " + categoria.getNome() + " removida com sucesso!");
+            categoria = new Categoria();
+            categorias = null;
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Categoria " + categoria.getNome() + " não pode ser excluída!");
+            categoria = new Categoria();
+        }
     }
 
     public Categoria getCategoria() {
@@ -59,7 +63,7 @@ public class CategoriaController implements Serializable{
     }
 
     public List<Categoria> getCategorias() {
-        if(categorias == null) {
+        if (categorias == null) {
             categorias = repositorio.findAll();
         }
         return categorias;
