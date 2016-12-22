@@ -31,12 +31,24 @@
                         </h:panelGrid>
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Nome" for="nome"/>
-                            <p:inputText id="nome" size="50" maxlength="50" value="#{clienteController.cliente.nome}" required="true"/>
+                            <p:inputText id="nome" size="67" maxlength="50" value="#{clienteController.cliente.nome}" required="true"/>
                         </h:panelGrid>
-                        <h:panelGrid style="float: left">
+                        
+                        <h:panelGrid style="clear: left; float: left">
                             <p:outputLabel value="E-mail" for="email"/>
                             <p:inputText id="email" value="#{clienteController.cliente.contato.email}" size="35"/>
                         </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Celular" for="celular"/>
+                            <p:inputMask mask="(99)99999-9999" id="celular" size="15" maxlength="15" value="#{clienteController.cliente.contato.celular}"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Telefone" for="telefone"/>
+                            <p:inputMask mask="(99)9999-9999" id="telefone" size="15" maxlength="15" value="#{clienteController.cliente.contato.telefone}"/>
+                        </h:panelGrid>
+
                         <h:panelGrid style="clear: left; float: left">
                             <p:outputLabel value="Tipo de Pessoa" for="pessoa"/>
                             <p:selectOneRadio id="pessoa" value="#{clienteController.cliente.tipo}" required="true" requiredMessage="Escolha o tipo de pessoa">
@@ -57,19 +69,9 @@
                         </h:panelGrid>
 
 
+
+
                         <!--                        <h:panelGrid style="float: left">
-                                                    <p:outputLabel value="Valor de Custo" for="custo"/>
-                                                    <p:inputNumber id="custo" size="15" symbol="R$ " decimalSeparator=","
-                                                                   value=""
-                                                                   thousandSeparator="." decimalPlaces="2" required="true"
-                                                                   requiredMessage="Por favor, informe o valor de custo">
-                                                        <p:ajax update="venda"
-                                                                listener=""
-                                                                process="@this"/>
-                                                    </p:inputNumber>
-                                                </h:panelGrid>
-                                                
-                                                <h:panelGrid style="float: left">
                                                     <p:outputLabel value="Lucro (%)" for="percentual"/>
                                                     <p:inputNumber id="percentual" size="7" symbol="%" symbolPosition="s" decimalSeparator="," thousandSeparator="."
                                                                    required="true" value=""
