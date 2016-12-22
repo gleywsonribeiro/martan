@@ -6,15 +6,15 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <ui:define name="titulo">Estoque</ui:define>
+    <ui:define name="titulo">Cliente</ui:define>
 
     <ui:define name="corpo">
         <h:form>
             <p:messages autoUpdate="true" closable="true"/>
             <p:toolbar style="margin-bottom: 5px">
                 <f:facet name="left">
-                    <p:commandButton value="Novo" icon="ui-icon-document" action="#{cadastroProdutoController.novo()}" process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
-                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{cadastroProdutoController.salvar()}" update="@form"/>
+                    <p:commandButton value="Novo" icon="ui-icon-document" /> <!--outcome="/produtos/CadastroProduto"-->
+                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{clienteController.salvar()}" update="@form"/>
                 </f:facet>
                 <f:facet name="right">
                     <p:button value="Pesquisar" icon="ui-icon-search"/>
@@ -22,65 +22,72 @@
             </p:toolbar>
             <!--<h1>Cadastro do Produto</h1>-->
 
-            <p:panel header="Cadastro de Produto">
+            <p:panel header="Cadastro de Cliente">
                 <h:panelGrid columns="2">
                     <h:panelGroup style="float: left">
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Código" for="codigo"/>
-                            <p:inputText id="codigo" size="5" disabled="true" value="#{cadastroProdutoController.produto.id}"/>
+                            <p:inputText id="codigo" size="5" disabled="true" value="#{clienteController.cliente.id}"/>
                         </h:panelGrid>
                         <h:panelGrid style="float: left">
-                            <p:outputLabel value="Nome do Produto" for="nome"/>
-                            <p:inputText id="nome" size="50" maxlength="50" value="#{cadastroProdutoController.produto.nome}" required="true"/>
+                            <p:outputLabel value="Nome" for="nome"/>
+                            <p:inputText id="nome" size="50" maxlength="50" value="#{clienteController.cliente.nome}" required="true"/>
                         </h:panelGrid>
                         <h:panelGrid style="float: left">
-                            <p:outputLabel value="Categoria" for="categoria"/>
-                            <p:selectOneMenu id="categoria" style="width: 100px" value="#{cadastroProdutoController.produto.categoria}"
-                                             required="true" requiredMessage="A categoria deve ser informada" converter="#{categoriaConverter}">
-                                <f:selectItem itemLabel="Selecione"/>
-                                <f:selectItems value="#{categoriaController.categorias}" var="categoria"
-                                               itemValue="#{categoria}" itemLabel="#{categoria.nome}"/>
-                            </p:selectOneMenu>
+                            <p:outputLabel value="E-mail" for="email"/>
+                            <p:inputText id="email" value="#{clienteController.cliente.contato.email}" size="35"/>
                         </h:panelGrid>
                         <h:panelGrid style="clear: left; float: left">
-                            <p:outputLabel value="Qtd Estoque" for="estoque"/>
-                            <p:spinner id="estoque" size="8" value="#{cadastroProdutoController.produto.quantidadeEstoque}" required="true"/>
+                            <p:outputLabel value="Tipo de Pessoa" for="pessoa"/>
+                            <p:selectOneRadio id="pessoa" value="#{clienteController.cliente.tipo}" required="true" requiredMessage="Escolha o tipo de pessoa">
+                                <f:selectItems value="#{clienteController.tiposPessoa}" var="tipoPessoa" itemValue="#{tipoPessoa}" itemLabel="#{tipoPessoa.descricao}" />
+                                <p:ajax event="change" update="grupoLabel, grupoInput" process="@this" />
+                            </p:selectOneRadio>
                         </h:panelGrid>
                         <h:panelGrid style="float: left">
-                            <p:outputLabel value="Estoque Mínimo" for="minimo"/>
-                            <p:spinner id="minimo" size="8" value="#{cadastroProdutoController.produto.estoqueMinimo}" required="true"/>
-                        </h:panelGrid>
-                        <h:panelGrid style="float: left">
-                            <p:outputLabel value="Valor de Custo" for="custo"/>
-                            <p:inputNumber id="custo" size="15" symbol="R$ " decimalSeparator=","
-                                           value="#{cadastroProdutoController.produto.valorCusto}"
-                                           thousandSeparator="." decimalPlaces="2" required="true"
-                                           requiredMessage="Por favor, informe o valor de custo">
-                                <p:ajax update="venda"
-                                        listener="#{cadastroProdutoController.produto.calculaValorVenda()}"
-                                        process="@this"/>
-                            </p:inputNumber>
-                        </h:panelGrid>
-                        
-                        <h:panelGrid style="float: left">
-                            <p:outputLabel value="Lucro (%)" for="percentual"/>
-                            <p:inputNumber id="percentual" size="7" symbol="%" symbolPosition="s" decimalSeparator="," thousandSeparator="."
-                                           required="true" value="#{cadastroProdutoController.produto.percentualLucro}"
-                                           requiredMessage="Por favor, informe o percentual de lucro">
-                                <p:ajax update="venda"
-                                        listener="#{cadastroProdutoController.produto.calculaValorVenda()}"
-                                        process="@this"/>
-                            </p:inputNumber>
+                            <h:panelGroup id="grupoLabel">
+                                <p:outputLabel value="CPF:" for="cpf" rendered="#{clienteController.cliente.tipo eq 'FISICA'}" />
+                                <p:outputLabel value="CNPJ:" for="cnpj" rendered="#{clienteController.cliente.tipo eq 'JURIDICA'}" />
+                            </h:panelGroup>
+
+                            <h:panelGroup id="grupoInput">
+                                <p:inputMask mask="999.999.999-99" required="true" value="#{clienteController.cliente.documentoReceitaFederal}" id="cpf" rendered="#{clienteController.cliente.tipo eq 'FISICA'}" size="15"/>
+                                <p:inputMask mask="99.999.999/9999-99" required="true" value="#{clienteController.cliente.documentoReceitaFederal}" id="cnpj" rendered="#{clienteController.cliente.tipo eq 'JURIDICA'}" size="20" />
+                            </h:panelGroup>
                         </h:panelGrid>
 
-                        <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em">
-                            <p:outputLabel value="Valor de Venda" for="venda"/>
-                            <h:outputText id="venda" value="#{cadastroProdutoController.produto.valorVenda}">
-                                <f:convertNumber type="currency"/>
-                            </h:outputText>
-                        </h:panelGrid>
 
+                        <!--                        <h:panelGrid style="float: left">
+                                                    <p:outputLabel value="Valor de Custo" for="custo"/>
+                                                    <p:inputNumber id="custo" size="15" symbol="R$ " decimalSeparator=","
+                                                                   value=""
+                                                                   thousandSeparator="." decimalPlaces="2" required="true"
+                                                                   requiredMessage="Por favor, informe o valor de custo">
+                                                        <p:ajax update="venda"
+                                                                listener=""
+                                                                process="@this"/>
+                                                    </p:inputNumber>
+                                                </h:panelGrid>
+                                                
+                                                <h:panelGrid style="float: left">
+                                                    <p:outputLabel value="Lucro (%)" for="percentual"/>
+                                                    <p:inputNumber id="percentual" size="7" symbol="%" symbolPosition="s" decimalSeparator="," thousandSeparator="."
+                                                                   required="true" value=""
+                                                                   requiredMessage="Por favor, informe o percentual de lucro">
+                                                        <p:ajax update="venda"
+                                                                listener=""
+                                                                process="@this"/>
+                                                    </p:inputNumber>
+                                                </h:panelGrid>
                         
+                                                <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em">
+                                                    <p:outputLabel value="Valor de Venda" for="venda"/>
+                                                    <h:outputText id="venda" value="">
+                                                        <f:convertNumber type="currency"/>
+                                                    </h:outputText>
+                                                </h:panelGrid>-->
+
+
                     </h:panelGroup>
                 </h:panelGrid>
 

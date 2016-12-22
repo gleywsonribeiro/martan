@@ -31,9 +31,6 @@ public class Cliente implements Serializable {
     @Column(nullable = false, length = 100)
     private String nome;
 
-    @Column(nullable = false)
-    private String email;
-
     @Column(nullable = false, length = 20, name = "doc_receita_federal")
     private String documentoReceitaFederal;
 
@@ -43,6 +40,14 @@ public class Cliente implements Serializable {
     
     @OneToMany(mappedBy = "cliente")
     private List<Endereco> enderecos;
+    
+    private Contato contato;
+
+    public Cliente() {
+        this.contato = new Contato();
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -60,13 +65,6 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getDocumentoReceitaFederal() {
         return documentoReceitaFederal;
@@ -92,6 +90,15 @@ public class Cliente implements Serializable {
         this.enderecos = enderecos;
     }
 
+    public Contato getContato() {
+        return contato;
+    }
+
+    public void setContato(Contato contato) {
+        this.contato = contato;
+    }
+
+    
     
     
     @Override

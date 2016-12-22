@@ -10,6 +10,16 @@ package br.com.icone.martan.modelo;
  * @author Gleywson
  */
 public enum TipoPessoa {
-    FISICA,
-    JURIDICA
+    FISICA("Física"),
+    JURIDICA("Jurídica");
+
+    private TipoPessoa(String descricao) {
+        this.descricao = descricao;
+    }
+    
+    private final String descricao;
+    
+    public String getDescricao() {
+        return descricao;
+    }
 }
