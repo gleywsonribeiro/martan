@@ -11,6 +11,7 @@ import br.com.icone.martan.modelo.repositorio.ClienteFacade;
 import br.com.icone.martan.util.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -20,7 +21,8 @@ import javax.inject.Inject;
  * @author Gleywson
  */
 @Named(value = "clienteController")
-@ViewScoped
+//@ViewScoped
+@SessionScoped
 public class ClienteController implements Serializable{
 
     private Cliente cliente;
@@ -34,6 +36,16 @@ public class ClienteController implements Serializable{
         cliente  = new Cliente();
     }
     
+    public void novo() {
+        this.cliente = new Cliente();
+    }
+    
+    public void remover() {
+        repositorio.remove(cliente);
+        JsfUtil.addSuccessMessage("Cliente removido com sucesso!");
+        this.clientes = null;
+    }
+    
     public void salvar() {
         if(cliente.getId() == null) {
             repositorio.create(cliente);
@@ -41,6 +53,7 @@ public class ClienteController implements Serializable{
             repositorio.edit(cliente);
         }
         this.cliente = new Cliente();
+        this.clientes = null;
         JsfUtil.addSuccessMessage("Cliente inserido com sucesso!");
     }
 

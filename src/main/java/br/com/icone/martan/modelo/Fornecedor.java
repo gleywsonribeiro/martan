@@ -6,7 +6,6 @@
 package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -16,41 +15,46 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  *
  * @author Gleywson
  */
 @Entity
-public class Cliente implements Serializable {
+public class Fornecedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     @Column(nullable = false, length = 100)
     private String nome;
-
-    @Column(nullable = false, length = 20, name = "doc_receita_federal")
-    private String documentoReceitaFederal;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
-    private TipoPessoa tipo;
     
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Endereco> enderecos;
+    @Column(nullable = false, length = 100, name = "nome_fantasia")
+    private String nomeFantasia;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 15)
+    private TipoPessoa tipoPessoa;
+    
+    
+    @Column(name = "doc_receita_federal", nullable = false, length = 25)
+    private String documentoReceitaFederal;
+    
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(nullable = false)
+    private Endereco endereco;
     
     @Embedded
     private Contato contato;
 
-    public Cliente() {
+    public Fornecedor() {
         this.contato = new Contato();
+        this.endereco = new Endereco();
     }
-    
-    
 
     public Long getId() {
         return id;
@@ -68,6 +72,21 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
+
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
+    }
+
+    public TipoPessoa getTipoPessoa() {
+        return tipoPessoa;
+    }
+
+    public void setTipoPessoa(TipoPessoa tipoPessoa) {
+        this.tipoPessoa = tipoPessoa;
+    }
 
     public String getDocumentoReceitaFederal() {
         return documentoReceitaFederal;
@@ -77,20 +96,12 @@ public class Cliente implements Serializable {
         this.documentoReceitaFederal = documentoReceitaFederal;
     }
 
-    public TipoPessoa getTipo() {
-        return tipo;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setTipo(TipoPessoa tipo) {
-        this.tipo = tipo;
-    }
-
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public Contato getContato() {
@@ -103,7 +114,6 @@ public class Cliente implements Serializable {
 
     
     
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -114,10 +124,10 @@ public class Cliente implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cliente)) {
+        if (!(object instanceof Fornecedor)) {
             return false;
         }
-        Cliente other = (Cliente) object;
+        Fornecedor other = (Fornecedor) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -126,7 +136,7 @@ public class Cliente implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.icone.martan.modelo.Cliente[ id=" + id + " ]";
+        return "br.com.icone.martan.modelo.Fornecedor[ id=" + id + " ]";
     }
-
+    
 }

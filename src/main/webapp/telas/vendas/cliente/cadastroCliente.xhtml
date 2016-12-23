@@ -13,11 +13,11 @@
             <p:messages autoUpdate="true" closable="true"/>
             <p:toolbar style="margin-bottom: 5px">
                 <f:facet name="left">
-                    <p:commandButton value="Novo" icon="ui-icon-document" /> <!--outcome="/produtos/CadastroProduto"-->
+                    <p:commandButton value="Novo" icon="ui-icon-document" action="#{clienteController.novo()}" process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
                     <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{clienteController.salvar()}" update="@form"/>
                 </f:facet>
                 <f:facet name="right">
-                    <p:button value="Pesquisar" icon="ui-icon-search"/>
+                    <p:button value="Pesquisar" icon="ui-icon-search" outcome="pesquisaCliente"/>
                 </f:facet>
             </p:toolbar>
             <!--<h1>Cadastro do Produto</h1>-->
@@ -33,7 +33,7 @@
                             <p:outputLabel value="Nome" for="nome"/>
                             <p:inputText id="nome" size="67" maxlength="50" value="#{clienteController.cliente.nome}" required="true"/>
                         </h:panelGrid>
-                        
+
                         <h:panelGrid style="clear: left; float: left">
                             <p:outputLabel value="E-mail" for="email"/>
                             <p:inputText id="email" value="#{clienteController.cliente.contato.email}" size="35"/>
@@ -67,33 +67,32 @@
                                 <p:inputMask mask="99.999.999/9999-99" required="true" value="#{clienteController.cliente.documentoReceitaFederal}" id="cnpj" rendered="#{clienteController.cliente.tipo eq 'JURIDICA'}" size="20" />
                             </h:panelGroup>
                         </h:panelGrid>
-
-
-
-
-                        <!--                        <h:panelGrid style="float: left">
-                                                    <p:outputLabel value="Lucro (%)" for="percentual"/>
-                                                    <p:inputNumber id="percentual" size="7" symbol="%" symbolPosition="s" decimalSeparator="," thousandSeparator="."
-                                                                   required="true" value=""
-                                                                   requiredMessage="Por favor, informe o percentual de lucro">
-                                                        <p:ajax update="venda"
-                                                                listener=""
-                                                                process="@this"/>
-                                                    </p:inputNumber>
-                                                </h:panelGrid>
-                        
-                                                <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em">
-                                                    <p:outputLabel value="Valor de Venda" for="venda"/>
-                                                    <h:outputText id="venda" value="">
-                                                        <f:convertNumber type="currency"/>
-                                                    </h:outputText>
-                                                </h:panelGrid>-->
-
-
                     </h:panelGroup>
                 </h:panelGrid>
-
-
+                <p:panel header="Endereços" toggleable="true" style="width: 510px">
+                    <p:commandButton icon="ui-icon-plus" title="Inserir"/>
+                    <p:dataTable id="enderecos" value="#{clienteController.cliente.enderecos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                                 var="endereco" style="margin-top: 2px;" rendered="#{not empty clienteController.cliente.enderecos}" paginator="true" rows="5">
+                        <p:column headerText="Logradouro">
+                            <h:outputText value="#{endereco.logradouro}"/>
+                        </p:column>
+                        <p:column headerText="Número" style="width: 50px; text-align: center">
+                            <h:outputText value="#{endereco.numero}"/>
+                        </p:column>
+                        <p:column headerText="CEP" style="width: 100px; text-align: center">
+                            <h:outputText value="#{endereco.cep}"/>
+                        </p:column>
+                        <p:column style="width: 60px; text-align: center">
+                            <p:commandButton icon="ui-icon-pencil" title="Editar">
+                                <f:setPropertyActionListener target="" value=""/>
+                            </p:commandButton>
+                            <p:commandButton icon="ui-icon-trash" title="Excluir">
+                                <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir este cliente?" icon="ui-icon-alert"/>
+                                <f:setPropertyActionListener target="" value=""/>
+                            </p:commandButton> 
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
             </p:panel>
         </h:form>
     </ui:define>

@@ -6,57 +6,57 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:h="http://xmlns.jcp.org/jsf/html">
 
-    <ui:define name="titulo">Produtos</ui:define>
+    <ui:define name="titulo">Clientes</ui:define>
 
     <ui:define name="corpo">
         <h:form>
-            <p:growl autoUpdate="true"/>
-            <h:form id="formProdutos">
+            <p:messages autoUpdate="true" closable="true"/>
+            <h:form id="formClientes">
                 <p:toolbar>
                     <p:toolbarGroup>
                         <p:commandButton value="Pesquisar"/>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
-                        <p:commandButton value="Novo" id="novo" action="#{cadastroProdutoController.novo()}"/>
+                        <p:commandButton value="Novo" id="novo" action="cadastroCliente?faces-redirect=true" actionListener="#{clienteController.novo()}"/>
                     </p:toolbarGroup>
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
                     <p:outputLabel value="Código" for="codigo"/>
                     <p:inputText id="codigo" size="5"/>
 
-                    <p:outputLabel value="Nome do Produto" for="nome"/>
+                    <p:outputLabel value="Nome Cliente" for="nome"/>
                     <p:inputText id="nome" size="60"/>
                 </h:panelGrid>
 
-                <p:dataTable id="produtoTable" value="#{cadastroProdutoController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                             var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+                <p:dataTable id="clienteTable" value="#{clienteController.clientes}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                             var="cliente" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                     <p:column headerText="Código" style="text-align: center; width: 100px">
-                        <h:outputText value="#{produto.id}"/>
+                        <h:outputText value="#{cliente.id}"/>
                     </p:column>
 
-                    <p:column headerText="Produto">
-                        <h:outputText value="#{produto.nome}"/>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{cliente.nome}"/>
                     </p:column>
 
-                    <p:column headerText="Custo" style="text-align: center">
-                        <h:outputText value="#{produto.valorCusto}">
-                            <f:convertNumber type="currency"/>
-                        </h:outputText>
+                    <p:column headerText="E-mail">
+                        <h:outputText value="#{cliente.contato.email}"/>
                     </p:column>
 
-                    <p:column headerText="Venda" style="text-align: center">
-                        <h:outputText value="#{produto.valorVenda}">
-                            <f:convertNumber type="currency"/>
-                        </h:outputText>
+                    <p:column headerText="Celular" style="text-align: center">
+                        <h:outputText value="#{cliente.contato.celular}"/>
+                    </p:column>
+                    
+                    <p:column headerText="Telefone"  style="text-align: center">
+                        <h:outputText value="#{cliente.contato.telefone}"/>
                     </p:column>
                     <p:column style="width: 100px; text-align: center">
-                        <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastroProduto?faces-redirect=true">
-                            <f:setPropertyActionListener target="#{cadastroProdutoController.produto}" value="#{produto}"/>
+                        <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastroCliente?faces-redirect=true">
+                            <f:setPropertyActionListener target="#{clienteController.cliente}" value="#{cliente}"/>
                         </p:commandButton>
-                        <!--                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="" update="sedeTable, :formProduto:novo">
-                                                    <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir a Sede?" icon="ui-icon-alert"/>
-                                                    <f:setPropertyActionListener target="" value=""/>
-                                                </p:commandButton>                -->
+                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{clienteController.remover()}" update="clienteTable">
+                            <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir este cliente?" icon="ui-icon-alert"/>
+                            <f:setPropertyActionListener target="#{clienteController.cliente}" value="#{cliente}"/>
+                        </p:commandButton>                
                     </p:column>
                 </p:dataTable>
 
