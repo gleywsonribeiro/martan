@@ -6,6 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Fornecedor;
+import br.com.icone.martan.modelo.TipoPessoa;
 import br.com.icone.martan.modelo.repositorio.FornecedorFacade;
 import br.com.icone.martan.util.JsfUtil;
 import java.io.Serializable;
@@ -60,5 +61,8 @@ public class FornecedorController implements Serializable{
         this.fornecedores = null;
         JsfUtil.addSuccessMessage("Fornecedor cadastrado com sucesso!");
     }
-    
+
+    public TipoPessoa[] getTiposPessoa() {
+        return TipoPessoa.values();
+    }
 }
