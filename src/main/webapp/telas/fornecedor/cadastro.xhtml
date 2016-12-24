@@ -14,7 +14,7 @@
             <p:toolbar style="margin-bottom: 5px">
                 <f:facet name="left">
                     <p:commandButton value="Novo" icon="ui-icon-document"/> <!--outcome="/produtos/CadastroProduto"-->
-                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk"/>
+                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{fornecedorController.salvar()}" update="@form"/>
                 </f:facet>
                 <f:facet name="right">
                     <p:button value="Pesquisar" icon="ui-icon-search" outcome="pesquisa"/>
@@ -58,12 +58,55 @@
                                 <p:inputMask mask="99.999.999/9999-99" required="true" value="#{fornecedorController.fornecedor.documentoReceitaFederal}" id="cnpj" rendered="#{fornecedorController.fornecedor.tipoPessoa eq 'JURIDICA'}" size="20" />
                             </h:panelGroup>
                         </h:panelGrid>
-
+                        
+                        <h:panelGrid style="clear: left; float: left">
+                            <p:outputLabel value="E-mail" for="email"/>
+                            <p:inputText id="email" size="30" maxlength="50" value="#{fornecedorController.fornecedor.contato.email}"/>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Telefone" for="telefone"/>
+                            <p:inputMask mask="(99)9999-9999" id="telefone" size="15" maxlength="15" value="#{fornecedorController.fornecedor.contato.telefone}"/>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Celular" for="celular"/>
+                            <p:inputMask mask="(99)99999-9999" id="celular" size="15" maxlength="15" value="#{fornecedorController.fornecedor.contato.celular}"/>
+                        </h:panelGrid>
                         
                     </h:panelGroup>
                 </h:panelGrid>
 
-
+                <p:fieldset legend="Endereço" style="width: 510px">
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Endereço" for="endereco"/>
+                        <p:inputText id="endereco" value="#{fornecedorController.fornecedor.endereco.logradouro}" size="35"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Número" for="numero"/>
+                        <p:inputText id="numero" value="#{fornecedorController.fornecedor.endereco.numero}" size="10"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="CEP" for="cep"/>
+                        <p:inputText id="cep" value="#{fornecedorController.fornecedor.endereco.cep}" size="10"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="clear: left; float: left">
+                        <p:outputLabel value="Complemento" for="complemento"/>
+                        <p:inputText id="complemento" value="#{fornecedorController.fornecedor.endereco.complemento}" size="40"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="clear: left; float: left">
+                        <p:outputLabel value="Estado" for="estado"/>
+                        <p:inputText id="estado" value="#{fornecedorController.fornecedor.endereco.uf}" size="5"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Cidade" for="cidade"/>
+                        <p:inputText id="cidade" value="#{fornecedorController.fornecedor.endereco.cidade}" size="30"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Bairro" for="bairro"/>
+                        <p:inputText id="bairro" value="#{fornecedorController.fornecedor.endereco.bairro}" size="20"/>
+                    </h:panelGrid>
+                </p:fieldset>
             </p:panel>
         </h:form>
     </ui:define>

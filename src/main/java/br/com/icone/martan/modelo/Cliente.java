@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -40,18 +41,17 @@ public class Cliente implements Serializable {
     @Column(nullable = false, length = 10)
     private TipoPessoa tipo;
     
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Endereco> enderecos;
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    private Endereco endereco;
     
     @Embedded
     private Contato contato;
 
     public Cliente() {
         this.contato = new Contato();
+        this.endereco = new Endereco();
     }
     
-    
-
     public Long getId() {
         return id;
     }
@@ -68,7 +68,16 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+
+    
     public String getDocumentoReceitaFederal() {
         return documentoReceitaFederal;
     }
@@ -83,14 +92,6 @@ public class Cliente implements Serializable {
 
     public void setTipo(TipoPessoa tipo) {
         this.tipo = tipo;
-    }
-
-    public List<Endereco> getEnderecos() {
-        return enderecos;
-    }
-
-    public void setEnderecos(List<Endereco> enderecos) {
-        this.enderecos = enderecos;
     }
 
     public Contato getContato() {

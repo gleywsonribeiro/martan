@@ -69,30 +69,36 @@
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGrid>
-                <p:panel header="Endereços" toggleable="true" style="width: 510px">
-                    <p:commandButton icon="ui-icon-plus" title="Inserir"/>
-                    <p:dataTable id="enderecos" value="#{clienteController.cliente.enderecos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                                 var="endereco" style="margin-top: 2px;" rendered="#{not empty clienteController.cliente.enderecos}" paginator="true" rows="5">
-                        <p:column headerText="Logradouro">
-                            <h:outputText value="#{endereco.logradouro}"/>
-                        </p:column>
-                        <p:column headerText="Número" style="width: 50px; text-align: center">
-                            <h:outputText value="#{endereco.numero}"/>
-                        </p:column>
-                        <p:column headerText="CEP" style="width: 100px; text-align: center">
-                            <h:outputText value="#{endereco.cep}"/>
-                        </p:column>
-                        <p:column style="width: 60px; text-align: center">
-                            <p:commandButton icon="ui-icon-pencil" title="Editar">
-                                <f:setPropertyActionListener target="" value=""/>
-                            </p:commandButton>
-                            <p:commandButton icon="ui-icon-trash" title="Excluir">
-                                <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir este cliente?" icon="ui-icon-alert"/>
-                                <f:setPropertyActionListener target="" value=""/>
-                            </p:commandButton> 
-                        </p:column>
-                    </p:dataTable>
-                </p:panel>
+                <p:fieldset legend="Endereço" style="width: 510px">
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Endereço" for="endereco"/>
+                        <p:inputText id="endereco" value="#{clienteController.cliente.endereco.logradouro}" size="35"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Número" for="numero"/>
+                        <p:inputText id="numero" value="#{clienteController.cliente.endereco.numero}" size="10"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="CEP" for="cep"/>
+                        <p:inputText id="cep" value="#{clienteController.cliente.endereco.cep}" size="10"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="clear: left; float: left">
+                        <p:outputLabel value="Complemento" for="complemento"/>
+                        <p:inputText id="complemento" value="#{clienteController.cliente.endereco.complemento}" size="40"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="clear: left; float: left">
+                        <p:outputLabel value="Estado" for="estado"/>
+                        <p:inputText id="estado" value="#{clienteController.cliente.endereco.uf}" size="5"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Cidade" for="cidade"/>
+                        <p:inputText id="cidade" value="#{clienteController.cliente.endereco.cidade}" size="30"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Bairro" for="bairro"/>
+                        <p:inputText id="bairro" value="#{clienteController.cliente.endereco.bairro}" size="20"/>
+                    </h:panelGrid>
+                </p:fieldset>
             </p:panel>
         </h:form>
     </ui:define>

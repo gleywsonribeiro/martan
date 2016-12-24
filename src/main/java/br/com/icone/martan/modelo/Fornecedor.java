@@ -44,8 +44,8 @@ public class Fornecedor implements Serializable {
     @Column(name = "doc_receita_federal", nullable = false, length = 25)
     private String documentoReceitaFederal;
     
+    
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(nullable = false)
     private Endereco endereco;
     
     @Embedded

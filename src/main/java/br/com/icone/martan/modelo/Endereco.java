@@ -11,8 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -35,6 +33,9 @@ public class Endereco implements Serializable {
     @Column(length = 150)
     private String complemento;
     
+    @Column(length = 50)
+    private String bairro;
+    
     @Column(nullable = false, length = 60)
     private String cidade;
     
@@ -44,10 +45,6 @@ public class Endereco implements Serializable {
     @Column(nullable = false, length = 9)
     private String cep;
     
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Cliente cliente;
-
     public Long getId() {
         return id;
     }
@@ -62,6 +59,14 @@ public class Endereco implements Serializable {
 
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public String getNumero() {
@@ -104,15 +109,6 @@ public class Endereco implements Serializable {
         this.cep = cep;
     }
 
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    
     
     @Override
     public int hashCode() {
