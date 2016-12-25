@@ -11,6 +11,7 @@ import br.com.icone.martan.modelo.repositorio.FornecedorFacade;
 import br.com.icone.martan.util.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -20,14 +21,14 @@ import javax.inject.Inject;
  * @author Gleywson
  */
 @Named(value = "fornecedorController")
-@ViewScoped
-public class FornecedorController implements Serializable{
-    
+@SessionScoped
+public class FornecedorController implements Serializable {
+
     private Fornecedor fornecedor;
     private List<Fornecedor> fornecedores;
     @Inject
     private FornecedorFacade repositorio;
-    
+
     public FornecedorController() {
         this.fornecedor = new Fornecedor();
     }
@@ -41,25 +42,33 @@ public class FornecedorController implements Serializable{
     }
 
     public List<Fornecedor> getFornecedores() {
-        return fornecedores;
-    }
-
-    public void setFornecedores(List<Fornecedor> fornecedores) {
-        if(this.fornecedores == null) {
+        if (this.fornecedores == null) {
             fornecedores = repositorio.findAll();
         }
-        this.fornecedores = fornecedores;
+        return fornecedores;
     }
     
+    public void novo() {
+        this.fornecedor = new Fornecedor();
+    }
+
     public void salvar() {
-        if(fornecedor.getId() == null) {
+        if (fornecedor.getId() == null) {
             repositorio.create(fornecedor);
+            JsfUtil.addSuccessMessage("Fornecedor cadastrado com sucesso!");
         } else {
             repositorio.edit(fornecedor);
+            JsfUtil.addSuccessMessage("Fornecedor alterado com sucesso!");
         }
         this.fornecedor = new Fornecedor();
         this.fornecedores = null;
-        JsfUtil.addSuccessMessage("Fornecedor cadastrado com sucesso!");
+    }
+
+    public void remover() {
+        this.repositorio.remove(fornecedor);
+        fornecedor = new Fornecedor();
+        fornecedores = null;
+        JsfUtil.addSuccessMessage("Fornecedor removido com sucesso!");
     }
 
     public TipoPessoa[] getTiposPessoa() {

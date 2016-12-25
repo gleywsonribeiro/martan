@@ -35,21 +35,6 @@
                         </h:panelGrid>
 
                         <h:panelGrid style="clear: left; float: left">
-                            <p:outputLabel value="E-mail" for="email"/>
-                            <p:inputText id="email" value="#{clienteController.cliente.contato.email}" size="35"/>
-                        </h:panelGrid>
-
-                        <h:panelGrid style="float: left">
-                            <p:outputLabel value="Celular" for="celular"/>
-                            <p:inputMask mask="(99)99999-9999" id="celular" size="15" maxlength="15" value="#{clienteController.cliente.contato.celular}"/>
-                        </h:panelGrid>
-
-                        <h:panelGrid style="float: left">
-                            <p:outputLabel value="Telefone" for="telefone"/>
-                            <p:inputMask mask="(99)9999-9999" id="telefone" size="15" maxlength="15" value="#{clienteController.cliente.contato.telefone}"/>
-                        </h:panelGrid>
-
-                        <h:panelGrid style="clear: left; float: left">
                             <p:outputLabel value="Tipo de Pessoa" for="pessoa"/>
                             <p:selectOneRadio id="pessoa" value="#{clienteController.cliente.tipo}" required="true" requiredMessage="Escolha o tipo de pessoa">
                                 <f:selectItems value="#{clienteController.tiposPessoa}" var="tipoPessoa" itemValue="#{tipoPessoa}" itemLabel="#{tipoPessoa.descricao}" />
@@ -69,6 +54,24 @@
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGrid>
+
+                <p:fieldset legend="Contato" style="width: 510px; margin-bottom: 10px">
+                    <h:panelGrid style="clear: left; float: left">
+                        <p:outputLabel value="E-mail" for="email"/>
+                        <p:inputText id="email" value="#{clienteController.cliente.contato.email}" size="35"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Celular" for="celular"/>
+                        <p:inputMask mask="(99)99999-9999" id="celular" size="15" maxlength="15" value="#{clienteController.cliente.contato.celular}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Telefone" for="telefone"/>
+                        <p:inputMask mask="(99)9999-9999" id="telefone" size="15" maxlength="15" value="#{clienteController.cliente.contato.telefone}"/>
+                    </h:panelGrid>
+                </p:fieldset>
+
                 <p:fieldset legend="Endereço" style="width: 510px">
                     <h:panelGrid style="float: left">
                         <p:outputLabel value="Endereço" for="endereco"/>

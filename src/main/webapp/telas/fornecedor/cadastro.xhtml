@@ -29,17 +29,17 @@
                             <p:outputLabel value="Código" for="codigo"/>
                             <p:inputText id="codigo" size="5" disabled="true" value="#{fornecedorController.fornecedor.id}"/>
                         </h:panelGrid>
-                        
+
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Nome" for="nome"/>
                             <p:inputText id="nome" size="50" maxlength="50" value="#{fornecedorController.fornecedor.nome}" required="true"/>
                         </h:panelGrid>
-                        
+
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Nome Fantasia" for="nomeFantasia"/>
                             <p:inputText id="nomeFantasia" size="50" maxlength="50" value="#{fornecedorController.fornecedor.nomeFantasia}"/>
                         </h:panelGrid>
-                        
+
                         <h:panelGrid style="clear: left; float: left">
                             <p:outputLabel value="Tipo de Pessoa" for="pessoa"/>
                             <p:selectOneRadio id="pessoa" value="#{fornecedorController.fornecedor.tipoPessoa}" required="true" requiredMessage="Escolha o tipo de pessoa">
@@ -58,24 +58,26 @@
                                 <p:inputMask mask="99.999.999/9999-99" required="true" value="#{fornecedorController.fornecedor.documentoReceitaFederal}" id="cnpj" rendered="#{fornecedorController.fornecedor.tipoPessoa eq 'JURIDICA'}" size="20" />
                             </h:panelGroup>
                         </h:panelGrid>
-                        
-                        <h:panelGrid style="clear: left; float: left">
-                            <p:outputLabel value="E-mail" for="email"/>
-                            <p:inputText id="email" size="30" maxlength="50" value="#{fornecedorController.fornecedor.contato.email}"/>
-                        </h:panelGrid>
-                        
-                        <h:panelGrid style="float: left">
-                            <p:outputLabel value="Telefone" for="telefone"/>
-                            <p:inputMask mask="(99)9999-9999" id="telefone" size="15" maxlength="15" value="#{fornecedorController.fornecedor.contato.telefone}"/>
-                        </h:panelGrid>
-                        
-                        <h:panelGrid style="float: left">
-                            <p:outputLabel value="Celular" for="celular"/>
-                            <p:inputMask mask="(99)99999-9999" id="celular" size="15" maxlength="15" value="#{fornecedorController.fornecedor.contato.celular}"/>
-                        </h:panelGrid>
-                        
+
                     </h:panelGroup>
                 </h:panelGrid>
+
+                <p:fieldset legend="Contato" style="width: 510px; margin-bottom: 10px">
+                    <h:panelGrid style="clear: left; float: left">
+                        <p:outputLabel value="E-mail" for="email"/>
+                        <p:inputText id="email" size="30" maxlength="50" value="#{fornecedorController.fornecedor.contato.email}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Telefone" for="telefone"/>
+                        <p:inputMask mask="(99)9999-9999" id="telefone" size="15" maxlength="15" value="#{fornecedorController.fornecedor.contato.telefone}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Celular" for="celular"/>
+                        <p:inputMask mask="(99)99999-9999" id="celular" size="15" maxlength="15" value="#{fornecedorController.fornecedor.contato.celular}"/>
+                    </h:panelGrid>
+                </p:fieldset>
 
                 <p:fieldset legend="Endereço" style="width: 510px">
                     <h:panelGrid style="float: left">
