@@ -32,21 +32,24 @@ public class Produto implements Serializable {
     //Unidade
     //Barcode
     @Column(nullable = false, length = 75)
-    private String nome;
+    private String descricao;
 
     @Column(nullable = false, name = "qtd_estoque")
     private int quantidadeEstoque;
 
-    @Column(nullable = false, name = "vl_venda")
+    @Column(nullable = false, name = "vl_venda", scale = 10, precision = 2)
     private double valorVenda;
 
-    @Column(nullable = false, name = "vl_custo")
+    @Column(nullable = false, name = "vl_custo", scale = 10, precision = 2)
     private double valorCusto;
 
     @Column(nullable = false, name = "estoque_min")
     private int estoqueMinimo;
+    
+    @Column(name = "codigo_barras", length = 50)
+    private String codigoDeBarras;
 
-    @Column(nullable = false, name = "percent_lucro")
+    @Column(nullable = false, name = "percent_lucro", scale = 10, precision = 2)
     private float percentualLucro;
 
     public Long getId() {
@@ -65,13 +68,22 @@ public class Produto implements Serializable {
         this.categoria = categoria;
     }
 
-    
-    public String getNome() {
-        return nome;
+    public String getCodigoDeBarras() {
+        return codigoDeBarras;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setCodigoDeBarras(String codigoDeBarras) {
+        this.codigoDeBarras = codigoDeBarras;
+    }
+
+    
+    
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public int getQuantidadeEstoque() {

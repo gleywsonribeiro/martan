@@ -6,6 +6,7 @@
 package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -36,6 +38,10 @@ public class Cliente implements Serializable {
 
     @Column(nullable = false, length = 20, name = "doc_receita_federal")
     private String documentoReceitaFederal;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "dt_nascimento")
+    private Date dataNascimento;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
@@ -58,6 +64,14 @@ public class Cliente implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
     }
 
     public String getNome() {
