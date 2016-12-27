@@ -73,10 +73,12 @@ public class Produto implements Serializable {
     }
 
     public void setCodigoDeBarras(String codigoDeBarras) {
-        this.codigoDeBarras = codigoDeBarras;
+       this.codigoDeBarras = codigoDeBarras;
     }
-
     
+    public void setCodigoDeBarras(long codigoDeBarras) {
+       this.codigoDeBarras = String.format("%010d", codigoDeBarras);
+    }
     
     public String getDescricao() {
         return descricao;
@@ -151,6 +153,10 @@ public class Produto implements Serializable {
         return true;
     }
 
+    public boolean isPossuiCodBarras() {
+        return this.codigoDeBarras != null;
+    }
+    
     @Override
     public String toString() {
         return "br.com.iconeinformartica.martan.modelo.Produto[ id=" + id + " ]";

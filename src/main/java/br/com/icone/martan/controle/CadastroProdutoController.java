@@ -67,5 +67,13 @@ public class CadastroProdutoController implements Serializable {
         return produtos;
     }
     
+    public void gerarEtiquetas() {
+        List<Produto> produtosSemCodBarra = repositorio.getProdutosSemCodigoBarras();
+        for (Produto prod : produtosSemCodBarra) {
+            prod.setCodigoDeBarras(prod.getId());
+            repositorio.edit(prod);
+        }
+        JsfUtil.addSuccessMessage("Códigos de barras gerados com sucesso!");
+    }
     
 }

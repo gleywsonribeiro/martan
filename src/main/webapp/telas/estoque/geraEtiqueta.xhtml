@@ -1,15 +1,19 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                template="./../../WEB-INF/template/layout.xhtml">
+                template="./../../WEB-INF/template/layout.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <ui:define name="titulo">Estoque</ui:define>
 
     <ui:define name="corpo">
-        <center>
-            <h1>Etiquetas</h1>
-            <h3>Controle de Geração de etiquetas aqui</h3>
-        </center>
+        <h:form>
+            <p:messages autoUpdate="true"/>
+            <p:panel header="Geração de etiquetas">
+                <p:commandButton value="Gerar etiquetas para produtos sem código" action="#{cadastroProdutoController.gerarEtiquetas()}"/>
+            </p:panel>
+        </h:form>
     </ui:define>
 
 </ui:composition>

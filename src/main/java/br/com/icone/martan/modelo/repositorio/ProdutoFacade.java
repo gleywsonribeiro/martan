@@ -6,6 +6,7 @@
 package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.Produto;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +30,7 @@ public class ProdutoFacade extends AbstractFacade<Produto> {
         super(Produto.class);
     }
     
+    public List<Produto> getProdutosSemCodigoBarras() {
+        return getEntityManager().createQuery("SELECT produto FROM Produto AS produto WHERE produto.codigoDeBarras IS NULL", Produto.class).getResultList();
+    }
 }

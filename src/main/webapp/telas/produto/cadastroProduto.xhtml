@@ -61,7 +61,7 @@
                                         process="@this"/>
                             </p:inputNumber>
                         </h:panelGrid>
-                        
+
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Lucro (%)" for="percentual"/>
                             <p:inputNumber id="percentual" size="7" symbol="%" symbolPosition="s" decimalSeparator="," thousandSeparator="."
@@ -80,7 +80,14 @@
                             </h:outputText>
                         </h:panelGrid>
 
-                        
+
+                        <h:panelGrid style="clear: left; float: left" rendered="#{cadastroProdutoController.produto.possuiCodBarras}">
+                            <p:outputLabel value="Código de Barras" for="barcode"/>
+                            <p:barcode id="barcode" value="#{cadastroProdutoController.produto.codigoDeBarras}" type="codabar"/>
+                        </h:panelGrid>
+
+
+
                     </h:panelGroup>
                 </h:panelGrid>
 
