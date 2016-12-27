@@ -11,7 +11,9 @@
         <h:form>
             <p:messages autoUpdate="true"/>
             <p:panel header="Geração de etiquetas">
-                <p:commandButton value="Gerar etiquetas para produtos sem código" action="#{cadastroProdutoController.gerarEtiquetas()}"/>
+                <p:commandButton value="Gerar etiquetas" title="Gera somentes para os produtos sem etiqueta"
+                                 action="#{cadastroProdutoController.gerarEtiquetas()}"/>
+                <p:commandButton value="Gerar 1000 produtos" action="#{geraProdutoController.gerarProdutos()}"/>
             </p:panel>
         </h:form>
     </ui:define>

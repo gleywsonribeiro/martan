@@ -53,10 +53,10 @@
                         <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastroProduto?faces-redirect=true">
                             <f:setPropertyActionListener target="#{cadastroProdutoController.produto}" value="#{produto}"/>
                         </p:commandButton>
-                        <!--                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="" update="sedeTable, :formProduto:novo">
-                                                    <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir a Sede?" icon="ui-icon-alert"/>
-                                                    <f:setPropertyActionListener target="" value=""/>
-                                                </p:commandButton>                -->
+                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{cadastroProdutoController.remover()}" update="produtoTable">
+                            <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja este produto?" icon="ui-icon-alert"/>
+                            <f:setPropertyActionListener target="#{cadastroProdutoController.produto}" value="#{produto}"/>
+                        </p:commandButton>                
                     </p:column>
                 </p:dataTable>
 

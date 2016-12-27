@@ -15,10 +15,10 @@
     <h:body>
         <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
         <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
-<!--            <center>
-                <h:outputText value="Carregando..."/><br/>
-            </center>-->
-            <p:graphicImage library="imagens" name="ajax-loader.gif"/>
+            <center>
+                <h:outputText value="Processando..."/><br/>
+            </center>
+            <p:graphicImage library="imagens" name="gear.gif"/>
         </p:dialog>
         <header>
             <div style="float: left">

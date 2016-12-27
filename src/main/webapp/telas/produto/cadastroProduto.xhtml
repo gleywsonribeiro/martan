@@ -81,9 +81,10 @@
                         </h:panelGrid>
 
 
-                        <h:panelGrid style="clear: left; float: left" rendered="#{cadastroProdutoController.produto.possuiCodBarras}">
+                        <h:panelGrid style="clear: left; float: left; text-align: center; margin-top: 10px"
+                                     rendered="#{cadastroProdutoController.produto.possuiCodBarras}">
                             <p:outputLabel value="Código de Barras" for="barcode"/>
-                            <p:barcode id="barcode" value="#{cadastroProdutoController.produto.codigoDeBarras}" type="codabar"/>
+                            <p:barcode id="barcode" value="#{cadastroProdutoController.produto.codigoDeBarras}" type="code39"/>
                         </h:panelGrid>
 
 

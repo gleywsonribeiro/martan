@@ -5,6 +5,7 @@
  */
 package br.com.icone.martan.controle;
 
+import br.com.icone.martan.modelo.Categoria;
 import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.util.JsfUtil;
@@ -24,16 +25,16 @@ public class CadastroProdutoController implements Serializable {
 
     private Produto produto;
     private List<Produto> produtos;
-    
+
     @Inject
     private ProdutoFacade repositorio;
-    
+
     public CadastroProdutoController() {
         this.produto = new Produto();
     }
-    
+
     public void salvar() {
-        if(produto.getId() == null) {
+        if (produto.getId() == null) {
             repositorio.create(produto);
         } else {
             repositorio.edit(produto);
@@ -42,14 +43,17 @@ public class CadastroProdutoController implements Serializable {
         this.produtos = null;
         JsfUtil.addSuccessMessage("Salvo com sucesso!");
     }
-    
+
     public String novo() {
         this.produto = new Produto();
         return "cadastroProduto?faces-redirect=true";
     }
-    
+
     public void remover() {
-        
+        repositorio.remove(produto);
+        produtos = null;
+        produto = new Produto();
+        JsfUtil.addSuccessMessage("Produto removido com sucesso!");
     }
 
     public Produto getProduto() {
@@ -61,19 +65,25 @@ public class CadastroProdutoController implements Serializable {
     }
 
     public List<Produto> getProdutos() {
-        if(produtos == null) {
+        if (produtos == null) {
             produtos = repositorio.findAll();
         }
         return produtos;
     }
-    
+
     public void gerarEtiquetas() {
         List<Produto> produtosSemCodBarra = repositorio.getProdutosSemCodigoBarras();
-        for (Produto prod : produtosSemCodBarra) {
-            prod.setCodigoDeBarras(prod.getId());
-            repositorio.edit(prod);
+
+        if (produtosSemCodBarra.isEmpty()) {
+            JsfUtil.addErrorMessage("Não existem produtos para etiquetar!");
+        } else {
+            for (Produto prod : produtosSemCodBarra) {
+                prod.setCodigoDeBarras(prod.getId());
+                repositorio.edit(prod);
+            }
+            JsfUtil.addSuccessMessage("Códigos de barras gerados com sucesso!");
         }
-        JsfUtil.addSuccessMessage("Códigos de barras gerados com sucesso!");
+
     }
-    
+
 }
