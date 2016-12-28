@@ -38,7 +38,7 @@
                             <p:outputLabel value="Tipo de Pessoa" for="pessoa"/>
                             <p:selectOneRadio id="pessoa" value="#{clienteController.cliente.tipo}" required="true" requiredMessage="Escolha o tipo de pessoa">
                                 <f:selectItems value="#{clienteController.tiposPessoa}" var="tipoPessoa" itemValue="#{tipoPessoa}" itemLabel="#{tipoPessoa.descricao}" />
-                                <p:ajax event="change" update="grupoLabel, grupoInput, grupoNascimento" process="@this" />
+                                <p:ajax event="change" update="grupoLabel, grupoInput, grupoNascimento, grupoRG" process="@this" />
                             </p:selectOneRadio>
                         </h:panelGrid>
                         <h:panelGrid style="float: left">
@@ -54,8 +54,13 @@
                         </h:panelGrid>
                         <h:panelGrid style="float: left" id="grupoNascimento">
                             <p:outputLabel value="Data de Nascimento" for="dtCadastro" rendered="#{clienteController.cliente.tipo eq 'FISICA'}"/>
-                            <p:calendar id="dtCadastro" value="#{clienteController.cliente.dataNascimento}"
+                            <p:calendar id="dtCadastro" value="#{clienteController.cliente.dataNascimento}" size="15"
                                         rendered="#{clienteController.cliente.tipo eq 'FISICA'}" pattern="dd/MM/yyyy" />
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left" id="grupoRG">
+                            <p:outputLabel value="RG" for="rg" rendered="#{clienteController.cliente.tipo eq 'FISICA'}"/>
+                            <p:inputText id="rg" value="#{clienteController.cliente.rg}" size="13" maxlength="10" 
+                                        rendered="#{clienteController.cliente.tipo eq 'FISICA'}"/>
                         </h:panelGrid>
                     </h:panelGroup>
                 </h:panelGrid>
@@ -63,7 +68,7 @@
                 <p:fieldset legend="Contato" style="width: 510px; margin-bottom: 10px">
                     <h:panelGrid style="clear: left; float: left">
                         <p:outputLabel value="E-mail" for="email"/>
-                        <p:inputText id="email" value="#{clienteController.cliente.contato.email}" size="35"/>
+                        <p:inputText id="email" value="#{clienteController.cliente.contato.email}" size="33"/>
                     </h:panelGrid>
 
                     <h:panelGrid style="float: left">

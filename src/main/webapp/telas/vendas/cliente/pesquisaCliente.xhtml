@@ -37,6 +37,10 @@
                     <p:column headerText="Nome">
                         <h:outputText value="#{cliente.nome}"/>
                     </p:column>
+                    
+                    <p:column headerText="CPF/CNPJ">
+                        <h:outputText value="#{cliente.documentoReceitaFederal}"/>
+                    </p:column>
 
                     <p:column headerText="E-mail">
                         <h:outputText value="#{cliente.contato.email}"/>

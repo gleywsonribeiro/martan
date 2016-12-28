@@ -32,12 +32,12 @@
 
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Nome" for="nome"/>
-                            <p:inputText id="nome" size="50" maxlength="50" value="#{fornecedorController.fornecedor.nome}" required="true"/>
+                            <p:inputText id="nome" size="34" maxlength="50" value="#{fornecedorController.fornecedor.nome}" required="true"/>
                         </h:panelGrid>
 
                         <h:panelGrid style="float: left">
-                            <p:outputLabel value="Nome Fantasia" for="nomeFantasia"/>
-                            <p:inputText id="nomeFantasia" size="50" maxlength="50" value="#{fornecedorController.fornecedor.nomeFantasia}"/>
+                            <p:outputLabel value="Razão Social" for="razaoSocial"/>
+                            <p:inputText id="razaoSocial" size="30" maxlength="50" value="#{fornecedorController.fornecedor.razaoSocial}"/>
                         </h:panelGrid>
 
                         <h:panelGrid style="clear: left; float: left">
@@ -119,6 +119,10 @@
                     <h:panelGrid style="float: left">
                         <p:outputLabel value="Bairro" for="bairro"/>
                         <p:inputText id="bairro" value="#{fornecedorController.fornecedor.endereco.bairro}" size="20"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="clear: left; float: left">
+                        <p:outputLabel value="Observações" for="obs"/>
+                        <p:inputTextarea id="obs" value="" rows="4" cols="75" autoResize="false" style="resize: none"/>
                     </h:panelGrid>
                 </p:fieldset>
             </p:panel>

@@ -6,6 +6,7 @@
 package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -17,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -30,11 +32,15 @@ public class Fornecedor implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable = false, name = "dt_cadastro")
+    private Date dataCadastro;
+    
     @Column(nullable = false, length = 100)
     private String nome;
     
-    @Column(nullable = false, length = 100, name = "nome_fantasia")
-    private String nomeFantasia;
+    @Column(nullable = false, length = 100, name = "razao_social")
+    private String razaoSocial;
     
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15)
@@ -44,6 +50,8 @@ public class Fornecedor implements Serializable {
     @Column(name = "doc_receita_federal", nullable = false, length = 25)
     private String documentoReceitaFederal;
     
+    @Column(columnDefinition = "text")
+    private String observacao;
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Endereco endereco;
@@ -54,6 +62,7 @@ public class Fornecedor implements Serializable {
     public Fornecedor() {
         this.contato = new Contato();
         this.endereco = new Endereco();
+        this.dataCadastro = new Date();
     }
 
     public Long getId() {
@@ -68,16 +77,32 @@ public class Fornecedor implements Serializable {
         return nome;
     }
 
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public Date getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public String getRazaoSocial() {
+        return razaoSocial;
+    }
+
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
     }
 
     public TipoPessoa getTipoPessoa() {

@@ -35,6 +35,17 @@ public class Cliente implements Serializable {
 
     @Column(nullable = false, length = 100)
     private String nome;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(nullable = false, name = "dt_cadastro")
+    private Date dataCadastro;
+    
+    @Column(length = 10)
+    private String rg;
+    
+    @Temporal(javax.persistence.TemporalType.DATE)
+    @Column(name = "dt_ult_compra")
+    private Date dataUltimaCompra;
 
     @Column(nullable = false, length = 20, name = "doc_receita_federal")
     private String documentoReceitaFederal;
@@ -56,6 +67,7 @@ public class Cliente implements Serializable {
     public Cliente() {
         this.contato = new Contato();
         this.endereco = new Endereco();
+        this.dataCadastro = new Date();
     }
     
     public Long getId() {
@@ -64,6 +76,30 @@ public class Cliente implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getRg() {
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
+    }
+
+    public Date getDataUltimaCompra() {
+        return dataUltimaCompra;
+    }
+
+    public void setDataUltimaCompra(Date dataUltimaCompra) {
+        this.dataUltimaCompra = dataUltimaCompra;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
     public Date getDataNascimento() {
