@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -36,11 +37,10 @@ public class Endereco implements Serializable {
     @Column(length = 50)
     private String bairro;
     
-    @Column(nullable = false, length = 60)
-    private String cidade;
-    
-    @Column(nullable = false, length = 60)
-    private String uf;
+    @ManyToOne
+    private Cidade cidade;
+    @ManyToOne
+    private Estado estado;
     
     @Column(nullable = false, length = 9)
     private String cep;
@@ -85,20 +85,20 @@ public class Endereco implements Serializable {
         this.complemento = complemento;
     }
 
-    public String getCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
 
-    public String getUf() {
-        return uf;
+    public Estado getEstado() {
+        return estado;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setEstado(Estado estado) {
+        this.estado = estado;
     }
 
     public String getCep() {

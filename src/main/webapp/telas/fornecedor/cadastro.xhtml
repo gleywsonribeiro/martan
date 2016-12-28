@@ -97,11 +97,24 @@
                     </h:panelGrid>
                     <h:panelGrid style="clear: left; float: left">
                         <p:outputLabel value="Estado" for="estado"/>
-                        <p:inputText id="estado" value="#{fornecedorController.fornecedor.endereco.uf}" size="5"/>
+                        <p:selectOneMenu id="estado" style="width: 100px" value="#{fornecedorController.fornecedor.endereco.estado}"
+                                         filter="true" filterMatchMode="startsWith"
+                                         required="true" requiredMessage="Escolha um Estado" converter="#{estadoConverter}">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItems value="#{estadosController.estados}" var="estado"
+                                           itemValue="#{estado}" itemLabel="#{estado.uf}"/>
+                            <p:ajax update="cidade" process="@this"/>
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <h:panelGrid style="float: left">
                         <p:outputLabel value="Cidade" for="cidade"/>
-                        <p:inputText id="cidade" value="#{fornecedorController.fornecedor.endereco.cidade}" size="30"/>
+                        <p:selectOneMenu id="cidade" style="width: 100px" value="#{fornecedorController.fornecedor.endereco.cidade}"
+                                         filter="true" filterMatchMode="startsWith"
+                                         required="true" requiredMessage="Escolha uma Cidade" converter="#{cidadeConverter}">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItems value="#{fornecedorController.fornecedor.endereco.estado.cidades}" var="cidade"
+                                           itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+                        </p:selectOneMenu>
                     </h:panelGrid>
                     <h:panelGrid style="float: left">
                         <p:outputLabel value="Bairro" for="bairro"/>

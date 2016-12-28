@@ -1,4 +1,4 @@
-use apogeu;
+use martan;
 INSERT INTO `pais` (`ID`, `NOME`, `SIGlA`) VALUES (1, 'Brasil', 'BR');
 
 INSERT INTO `estado` (`ID`, `NOME`, `UF`, `PAIS_ID`) VALUES
