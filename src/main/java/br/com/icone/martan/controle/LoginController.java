@@ -6,6 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Usuario;
+import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
 import br.com.icone.martan.util.JsfUtil;
 import java.io.IOException;
 import javax.inject.Named;
@@ -15,6 +16,7 @@ import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,24 +29,30 @@ public class LoginController implements Serializable {
 
     private Usuario usuario;
 
+    @Inject
+    private UsuarioFacade repositorio;
+
     public LoginController() {
         this.usuario = new Usuario();
     }
 
     public String login() {
-//        List<Usuario> lista = facade.findAll();
-//
-//        for (Usuario user : lista) {
-//            if (user.getLogin().equals(usuario.getLogin()) && user.getSenha().equals(usuario.getSenha())) {
-//                FacesContext context = FacesContext.getCurrentInstance();
-//                HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
-//                this.usuario = user;
-//                httpSession.setAttribute("currentUser", usuario);
-//                return "index";
-//            }
-//        }
+        
+        Usuario logado = repositorio.getUsuarioPorLogin(usuario.getLogin());
+        
+        if(logado == null) {
+            JsfUtil.addErrorMessage("Usuario ou senha inválidos!");
+            return "";
+        }
 
-        //FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Bem vindo "+usuario.getLogin()));
+        if (usuario.getLogin().equals(logado.getLogin()) && usuario.getSenha().equals(logado.getSenha())) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+            usuario = logado;
+            httpSession.setAttribute("currentUser", usuario);
+            return "index?faces-redirect=true";
+        }
+
         if (usuario.getLogin().equals("admin") && usuario.getSenha().equals("admin")) {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
@@ -82,7 +90,7 @@ public class LoginController implements Serializable {
         if (hora >= 18) {
             saudacao = "Boa noite";
         }
-        saudacao +=  " " + usuario.getNome();
+        saudacao += " " + usuario.getNome();
         return saudacao;
     }
 

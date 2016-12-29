@@ -29,10 +29,6 @@ public class Categoria implements Serializable {
     
     @Column(length = 30, nullable = false)
     private String nome;
-
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubCategoria> subCategorias;
-
     
     public String getNome() {
         return nome;
@@ -41,17 +37,7 @@ public class Categoria implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public List<SubCategoria> getSubCategorias() {
-        return subCategorias;
-    }
-
-    public void setSubCategorias(List<SubCategoria> subCategorias) {
-        this.subCategorias = subCategorias;
-    }
     
-    
-
     public Long getId() {
         return id;
     }

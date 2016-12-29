@@ -34,10 +34,10 @@ public class GeraProdutoController implements Serializable{
     }
     
     public void gerarProdutos() {
-        //Categoria categoria = categoriaFacade.find(1);
+        Categoria categoria = categoriaFacade.find(new Long(1));
         this.produto = new Produto();
         for (int i = 0; i < 1000; i++) {
-            //produto.setCategoria(categoria);
+            produto.setCategoria(categoria);
             produto.setDescricao("Produto " + (i+1));
             produto.setQuantidadeEstoque(10);
             produto.setEstoqueMinimo(5);
