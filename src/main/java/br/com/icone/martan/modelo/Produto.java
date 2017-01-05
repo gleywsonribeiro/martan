@@ -27,7 +27,7 @@ public class Produto implements Serializable {
     private Long id;
 
     @ManyToOne
-    //@JoinColumn(nullable = false)
+    @JoinColumn(nullable = false)
     Categoria categoria;
     //Unidade
     //Barcode

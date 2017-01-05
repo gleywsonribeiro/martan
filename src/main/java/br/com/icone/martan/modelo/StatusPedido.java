@@ -14,7 +14,7 @@ public enum StatusPedido {
     EMITIDO("Emitido"),
     CANCELADO("Cancelado");
 
-    private String descricao;
+    private final String descricao;
 
     StatusPedido(String descricao) {
         this.descricao = descricao;

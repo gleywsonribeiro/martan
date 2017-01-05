@@ -54,6 +54,7 @@ public class Fornecedor implements Serializable {
     private String observacao;
     
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(nullable = false)
     private Endereco endereco;
     
     @Embedded
