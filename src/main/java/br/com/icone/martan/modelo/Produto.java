@@ -34,24 +34,53 @@ public class Produto implements Serializable {
     @Column(nullable = false, length = 75)
     private String descricao;
 
-    @Column(nullable = false, name = "qtd_estoque")
-    private int quantidadeEstoque;
-
     @Column(nullable = false, name = "vl_venda", scale = 10, precision = 2)
     private double valorVenda;
 
     @Column(nullable = false, name = "vl_custo", scale = 10, precision = 2)
     private double valorCusto;
-
-    @Column(nullable = false, name = "estoque_min")
-    private int estoqueMinimo;
     
     @Column(name = "codigo_barras", length = 50)
     private String codigoDeBarras;
 
     @Column(nullable = false, name = "percent_lucro", scale = 10, precision = 2)
     private float percentualLucro;
+    
+    @Column(nullable = false, name = "estoque_atual")
+    private int estoqueAtual;
+    
+    @Column(nullable = false, name = "estoque_min")
+    private int estoqueMinimo;
+    
+    @Column(nullable = false, name = "estoque_max")
+    private int estoqueMaximo;
 
+    public int getEstoqueAtual() {
+        return estoqueAtual;
+    }
+
+    public void setEstoqueAtual(int estoqueAtual) {
+        this.estoqueAtual = estoqueAtual;
+    }
+
+    public int getEstoqueMinimo() {
+        return estoqueMinimo;
+    }
+
+    public void setEstoqueMinimo(int estoqueMinimo) {
+        this.estoqueMinimo = estoqueMinimo;
+    }
+
+    public int getEstoqueMaximo() {
+        return estoqueMaximo;
+    }
+
+    public void setEstoqueMaximo(int estoqueMaximo) {
+        this.estoqueMaximo = estoqueMaximo;
+    }
+
+
+    
     public Long getId() {
         return id;
     }
@@ -88,14 +117,6 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public int getQuantidadeEstoque() {
-        return quantidadeEstoque;
-    }
-
-    public void setQuantidadeEstoque(int quantidadeEstoque) {
-        this.quantidadeEstoque = quantidadeEstoque;
-    }
-
     public double getValorVenda() {
         return valorVenda;
     }
@@ -110,14 +131,6 @@ public class Produto implements Serializable {
 
     public void setValorCusto(double valorCusto) {
         this.valorCusto = valorCusto;
-    }
-
-    public int getEstoqueMinimo() {
-        return estoqueMinimo;
-    }
-
-    public void setEstoqueMinimo(int estoqueMinimo) {
-        this.estoqueMinimo = estoqueMinimo;
     }
 
     public float getPercentualLucro() {

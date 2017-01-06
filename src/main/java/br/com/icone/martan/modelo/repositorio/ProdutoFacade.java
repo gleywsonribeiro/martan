@@ -6,6 +6,7 @@
 package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.Produto;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,7 +17,7 @@ import javax.persistence.PersistenceContext;
  * @author Gleywson
  */
 @Stateless
-public class ProdutoFacade extends AbstractFacade<Produto> {
+public class ProdutoFacade extends AbstractFacade<Produto> implements Serializable{
 
     @PersistenceContext(unitName = "martanPU")
     private EntityManager em;

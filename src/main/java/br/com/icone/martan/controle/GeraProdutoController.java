@@ -39,8 +39,8 @@ public class GeraProdutoController implements Serializable{
         for (int i = 0; i < 1000; i++) {
             produto.setCategoria(categoria);
             produto.setDescricao("Produto " + (i+1));
-            produto.setQuantidadeEstoque(10);
             produto.setEstoqueMinimo(5);
+            produto.setEstoqueMaximo(10);
             produto.setValorCusto(150);
             produto.setValorVenda(150);
             produtoFacade.create(produto);

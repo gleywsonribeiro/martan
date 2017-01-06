@@ -43,8 +43,8 @@
                             </p:selectOneMenu>
                         </h:panelGrid>
                         <h:panelGrid style="clear: left; float: left">
-                            <p:outputLabel value="Qtd Estoque" for="estoque"/>
-                            <p:spinner id="estoque" size="8" value="#{cadastroProdutoController.produto.quantidadeEstoque}" required="true"/>
+                            <p:outputLabel value="Estoque Máximo" for="maximo"/>
+                            <p:spinner id="maximo" size="8" value="#{cadastroProdutoController.produto.estoqueMaximo}" required="true"/>
                         </h:panelGrid>
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Estoque Mínimo" for="minimo"/>

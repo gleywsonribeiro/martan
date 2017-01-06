@@ -54,7 +54,7 @@
                             <f:setPropertyActionListener target="#{cadastroProdutoController.produto}" value="#{produto}"/>
                         </p:commandButton>
                         <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{cadastroProdutoController.remover()}" update="produtoTable">
-                            <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja este produto?" icon="ui-icon-alert"/>
+                            <p:confirm header="Exclusão da Produto" message="Tem certeza que deseja este produto?" icon="ui-icon-alert"/>
                             <f:setPropertyActionListener target="#{cadastroProdutoController.produto}" value="#{produto}"/>
                         </p:commandButton>                
                     </p:column>
