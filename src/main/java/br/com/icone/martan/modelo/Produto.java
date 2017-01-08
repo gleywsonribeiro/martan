@@ -26,6 +26,9 @@ public class Produto implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 10)
+    private String sku;
+    
     @ManyToOne
     @JoinColumn(nullable = false)
     Categoria categoria;
@@ -61,6 +64,14 @@ public class Produto implements Serializable {
 
     public void setEstoqueAtual(int estoqueAtual) {
         this.estoqueAtual = estoqueAtual;
+    }
+
+    public String getSku() {
+        return sku;
+    }
+
+    public void setSku(String sku) {
+        this.sku = sku;
     }
 
     public int getEstoqueMinimo() {
