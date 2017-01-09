@@ -9,6 +9,9 @@
     <ui:define name="titulo">Produtos</ui:define>
 
     <ui:define name="corpo">
+        <f:metadata>
+            <f:viewAction action="#{cadastroProdutoController.iniciar()}" />
+        </f:metadata>
         <h:form>
             <p:growl autoUpdate="true"/>
             <h:form id="formProdutos">

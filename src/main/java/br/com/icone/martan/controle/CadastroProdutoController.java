@@ -57,7 +57,6 @@ public class CadastroProdutoController implements Serializable {
     }
 
     public String novo() {
-        iniciar();
         this.produto = new Produto();
         return "cadastroProduto?faces-redirect=true";
     }
@@ -104,7 +103,7 @@ public class CadastroProdutoController implements Serializable {
 
     }
 
-    private void iniciar() {
+    public void iniciar() {
         if (conversacao.isTransient()) {
             conversacao.begin();
         }

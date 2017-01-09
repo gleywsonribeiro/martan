@@ -29,6 +29,8 @@ public class Produto implements Serializable {
     @Column(length = 10)
     private String sku;
     
+    private boolean ativo;
+    
     @ManyToOne
     @JoinColumn(nullable = false)
     Categoria categoria;
@@ -58,12 +60,24 @@ public class Produto implements Serializable {
     @Column(nullable = false, name = "estoque_max")
     private int estoqueMaximo;
 
+    public Produto() {
+        this.ativo = true;
+    }
+
     public int getEstoqueAtual() {
         return estoqueAtual;
     }
 
     public void setEstoqueAtual(int estoqueAtual) {
         this.estoqueAtual = estoqueAtual;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 
     public String getSku() {

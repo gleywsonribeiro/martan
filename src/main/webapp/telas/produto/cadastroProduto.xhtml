@@ -80,6 +80,11 @@
                                         process="@this"/>
                             </p:inputNumber>
                         </h:panelGrid>
+                        
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Ativo?" for="ativo"/>
+                            <p:inputSwitch id="ativo" value="#{cadastroProdutoController.produto.ativo}" offLabel="não" onLabel="sim"/>
+                        </h:panelGrid>
 
                         <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em">
                             <p:outputLabel value="Valor de Venda" for="venda"/>
