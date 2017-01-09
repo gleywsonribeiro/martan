@@ -58,7 +58,7 @@
                         </h:outputText>
                     </p:column>
                     <p:column style="width: 100px; text-align: center">
-                        <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastroProduto?faces-redirect=true">
+                        <p:commandButton icon="ui-icon-pencil" title="Editar" action="#{cadastroProdutoController.editar()}">
                             <f:setPropertyActionListener target="#{cadastroProdutoController.produto}" value="#{produto}"/>
                         </p:commandButton>
                         <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{cadastroProdutoController.remover()}" update="produtoTable">

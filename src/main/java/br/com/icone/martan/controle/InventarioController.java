@@ -7,6 +7,7 @@ package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
+import br.com.icone.martan.util.JsfUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,32 +26,16 @@ import javax.inject.Inject;
 @ViewScoped
 public class InventarioController implements Serializable {
 
-    private Produto produto;
     private List<Produto> produtos;
 
     @Inject
     private ProdutoFacade repositorio;
-
-    public InventarioController() {
-        this.produto = new Produto();
-        this.produtos = new ArrayList<Produto>();
-    }
-
-    public void atualizar() {
-        repositorio.edit(produto);
-        this.produto = new Produto();
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
+    
     public List<Produto> getProdutos() {
-        return repositorio.findAll();
+        if(this.produtos == null) {
+            this.produtos = repositorio.findAll();
+        }
+        return this.produtos;
     }
 
     public void setProdutos(List<Produto> produtos) {
@@ -68,7 +53,10 @@ public class InventarioController implements Serializable {
     }
 
     public void atualizarEstoque() {
-
+        for (Produto item : produtos) {
+            repositorio.edit(item);
+        }
+        JsfUtil.addSuccessMessage("Inventário finalizado com sucesso!");
     }
 
 }

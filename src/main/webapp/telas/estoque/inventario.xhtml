@@ -10,28 +10,25 @@
 
     <ui:define name="corpo">
         <h:form id="form">
-            <p:growl id="msgs" showDetail="true"/>
+            <p:messages autoUpdate="true"/>
             <h:form id="formProdutos">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="Pesquisar"/>
+                        <p:commandButton value="Finalizar Inventário" action="#{inventarioController.atualizarEstoque()}" process="@this" update="produtoTable"/>
                     </p:toolbarGroup>
                 </p:toolbar>
 
                 <p:dataTable id="produtoTable" value="#{inventarioController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                              var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5"
                              editable="true" editMode="cell">
-                    <!--editable="true" editMode="cell"-->
-
-
-                    <p:ajax event="cellEdit" update="produtoTable" />
-
-
-                    <p:column headerText="Código" style="text-align: center; width: 100px">
+                    
+                    <p:ajax event="cellEdit" update="produtoTable"/>
+                    <p:ajax event="cellEditCancel" update="produtoTable"/>
+                    <p:column headerText="Código" style="text-align: center; width: 50px">
                         <h:outputText value="#{produto.id}"/>
                     </p:column>
 
-                    <p:column headerText="SKU" style="text-align: center; width: 100px">
+                    <p:column headerText="SKU" style="text-align: center; width: 50px">
                         <h:outputText value="#{produto.sku}"/>
                     </p:column>
 
@@ -39,7 +36,7 @@
                         <h:outputText value="#{produto.descricao}"/>
                     </p:column>
 
-                    <p:column headerText="Estoque Atual" style="text-align: right">
+                    <p:column headerText="Estoque Atual" style="text-align: right; width: 100px">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{produto.estoqueAtual}"/>

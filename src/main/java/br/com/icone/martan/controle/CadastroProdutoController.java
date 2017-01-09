@@ -13,6 +13,8 @@ import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 
 /**
@@ -20,7 +22,7 @@ import javax.inject.Inject;
  * @author Gleywson
  */
 @Named(value = "cadastroProdutoController")
-@SessionScoped
+@ConversationScoped
 public class CadastroProdutoController implements Serializable {
 
     private Produto produto;
@@ -29,8 +31,18 @@ public class CadastroProdutoController implements Serializable {
     @Inject
     private ProdutoFacade repositorio;
 
+    @Inject
+    private Conversation conversacao;
+
     public CadastroProdutoController() {
         this.produto = new Produto();
+    }
+
+    public String validar() {
+        if (conversacao.isTransient()) {
+            return "pesquisaProduto?faces-redirect=true";
+        }
+        return null;
     }
 
     public void salvar() {
@@ -45,7 +57,13 @@ public class CadastroProdutoController implements Serializable {
     }
 
     public String novo() {
+        iniciar();
         this.produto = new Produto();
+        return "cadastroProduto?faces-redirect=true";
+    }
+
+    public String editar() {
+        iniciar();
         return "cadastroProduto?faces-redirect=true";
     }
 
@@ -84,6 +102,19 @@ public class CadastroProdutoController implements Serializable {
             JsfUtil.addSuccessMessage("Códigos de barras gerados com sucesso!");
         }
 
+    }
+
+    private void iniciar() {
+        if (conversacao.isTransient()) {
+            conversacao.begin();
+        }
+    }
+
+    public String finalizar() {
+        if (!conversacao.isTransient()) {
+            conversacao.end();
+        }
+        return "pesquisaProduto?faces-redirect=true";
     }
 
 }
