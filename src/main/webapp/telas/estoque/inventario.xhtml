@@ -9,47 +9,51 @@
     <ui:define name="titulo">Estoque</ui:define>
 
     <ui:define name="corpo">
-        <h:form>
-            <p:growl autoUpdate="true"/>
+        <h:form id="form">
+            <p:growl id="msgs" showDetail="true"/>
             <h:form id="formProdutos">
                 <p:toolbar>
                     <p:toolbarGroup>
                         <p:commandButton value="Pesquisar"/>
                     </p:toolbarGroup>
                 </p:toolbar>
-                <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
-                    <p:outputLabel value="Código" for="codigo"/>
-                    <p:inputText id="codigo" size="5"/>
-
-                    <p:outputLabel value="Nome do Produto" for="nome"/>
-                    <p:inputText id="nome" size="60"/>
-                </h:panelGrid>
-                
-                <p:panelGrid id="tela" columns="4">
-                    <h:outputText value="#{inventarioController.produto.id}"/>
-                    <h:outputText value="#{inventarioController.produto.descricao}"/>
-                    <p:inputText value="#{inventarioController.produto.estoqueAtual}"/>
-                    <p:commandButton value="Atualizar" action="#{inventarioController.atualizar()}"/>
-                </p:panelGrid>
 
                 <p:dataTable id="produtoTable" value="#{inventarioController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                             var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+                             var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5"
+                             editable="true" editMode="cell">
+                    <!--editable="true" editMode="cell"-->
+
+
+                    <p:ajax event="cellEdit" update="produtoTable" />
+
+
                     <p:column headerText="Código" style="text-align: center; width: 100px">
                         <h:outputText value="#{produto.id}"/>
+                    </p:column>
+
+                    <p:column headerText="SKU" style="text-align: center; width: 100px">
+                        <h:outputText value="#{produto.sku}"/>
                     </p:column>
 
                     <p:column headerText="Produto">
                         <h:outputText value="#{produto.descricao}"/>
                     </p:column>
 
-                    <p:column headerText="Estoque Atual">
-                        <h:outputText value="#{produto.estoqueAtual}"/>
+                    <p:column headerText="Estoque Atual" style="text-align: right">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{produto.estoqueAtual}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:spinner value="#{produto.estoqueAtual}" min="0" style="width: 100%"/>
+                            </f:facet>
+                        </p:cellEditor>
                     </p:column>
-                    <p:column style="width: 100px; text-align: center">
-                        <p:commandButton icon="ui-icon-pencil" title="Editar">
-                            <f:setPropertyActionListener target="#{inventarioController.produto}" value="#{produto}"/>
-                        </p:commandButton>                
-                    </p:column>
+                    <!--                    <p:column style="width: 100px; text-align: center">
+                                            <p:commandButton icon="ui-icon-pencil" title="Editar">
+                                                <f:setPropertyActionListener target="" value=""/>
+                                            </p:commandButton>                
+                                        </p:column>-->
                 </p:dataTable>
             </h:form>
         </h:form>
