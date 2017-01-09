@@ -37,10 +37,19 @@ public class LoginController implements Serializable {
     }
 
     public String login() {
-        
+
+        if (usuario.getLogin().equals("admin") && usuario.getSenha().equals("admin")) {
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
+            //this.usuario = user;
+            usuario.setNome("Gleywson");
+            httpSession.setAttribute("currentUser", usuario);
+            return "index?faces-redirect=true";
+        }
+
         Usuario logado = repositorio.getUsuarioPorLogin(usuario.getLogin());
-        
-        if(logado == null) {
+
+        if (logado == null) {
             JsfUtil.addErrorMessage("Usuario ou senha inválidos!");
             return "";
         }
@@ -49,15 +58,6 @@ public class LoginController implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
             usuario = logado;
-            httpSession.setAttribute("currentUser", usuario);
-            return "index?faces-redirect=true";
-        }
-
-        if (usuario.getLogin().equals("admin") && usuario.getSenha().equals("admin")) {
-            FacesContext context = FacesContext.getCurrentInstance();
-            HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
-            //this.usuario = user;
-            usuario.setNome("Gleywson");
             httpSession.setAttribute("currentUser", usuario);
             return "index?faces-redirect=true";
         } else {

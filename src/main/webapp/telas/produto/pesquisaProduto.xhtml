@@ -33,18 +33,26 @@
                     <p:column headerText="Código" style="text-align: center; width: 100px">
                         <h:outputText value="#{produto.id}"/>
                     </p:column>
+                    
+                    <p:column headerText="SKU" style="text-align: center; width: 100px">
+                        <h:outputText value="#{produto.sku}"/>
+                    </p:column>
 
                     <p:column headerText="Produto">
                         <h:outputText value="#{produto.descricao}"/>
                     </p:column>
+                    
+                    <p:column headerText="Estoque" style="text-align: right">
+                        <h:outputText value="#{produto.estoqueAtual}"/>
+                    </p:column>
 
-                    <p:column headerText="Custo" style="text-align: center">
+                    <p:column headerText="Custo" style="text-align: right">
                         <h:outputText value="#{produto.valorCusto}">
                             <f:convertNumber type="currency"/>
                         </h:outputText>
                     </p:column>
 
-                    <p:column headerText="Venda" style="text-align: center">
+                    <p:column headerText="Venda" style="text-align: right">
                         <h:outputText value="#{produto.valorVenda}">
                             <f:convertNumber type="currency"/>
                         </h:outputText>
