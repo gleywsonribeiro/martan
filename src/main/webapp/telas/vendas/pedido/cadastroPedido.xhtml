@@ -31,15 +31,15 @@
             <p:panel>
                 <h:panelGrid id="painel" columns="4" style="margin-top: 10px; width: 100%" columnClasses="rotulo, campo, rotulo, campo">
                     <p:outputLabel value="Número"/>
-                    <h:outputText value=""/>
+                    <h:inputText value="" disabled="true" size="10"/>
 
                     <p:outputLabel value="Data de Criação"/>
-                    <h:outputText value="">
+                    <p:outputLabel value="#{pedidoController.pedido.dataCriacao}" style="font-weight: bold">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
+                    </p:outputLabel>
 
                     <p:outputLabel value="Status"/>
-                    <h:outputText value=""/>
+                    <p:outputLabel value="#{pedidoController.pedido.status.descricao}" style="font-weight: bold"/>
 
                     <p:outputLabel value="Vendedor" for="vendedor"/>
                     <p:selectOneMenu id="vendedor" value="">
