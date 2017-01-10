@@ -68,6 +68,114 @@
                     <h:outputText style="font-weight: bold; font-size: 1.1em" id="totalPedido" value=""/>
 
                 </h:panelGrid>
+
+                <p:tabView style="margin-top: 20px">
+                    <p:tab title="Itens">
+                        <!--                        <p:panelGrid style="width: 100%">
+                                                    <f:facet name="header">
+                                                        <p:row>
+                                                            <p:column style="width: 100px">
+                                                                SKU
+                                                            </p:column>
+                                                            <p:column>
+                                                                Produto
+                                                            </p:column>
+                                                            <p:column style="width: 100px">
+                                                                Valor Unitário
+                                                            </p:column>
+                                                            <p:column style="width: 100px">
+                                                                Quantidade
+                                                            </p:column>
+                                                            <p:column style="width: 100px">
+                                                                Estoque
+                                                            </p:column>
+                                                            <p:column style="width: 100px">
+                                                                Valor Total
+                                                            </p:column>
+                                                        </p:row>
+                                                    </f:facet>
+                                                    <p:row>
+                                                        <p:column>
+                                                            <p:inputText style="width: 100px"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:inputText style="width: 100%"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:inputText style="width: 100px"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:inputText style="width: 100px"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:inputText style="width: 100px"/>
+                                                        </p:column>
+                                                        <p:column>
+                                                            <p:inputText style="width: 100px"/>
+                                                        </p:column>
+                                                    </p:row>
+                        
+                                                </p:panelGrid>-->
+
+                        <h:panelGrid columns="7">
+                            <h:panelGroup>
+                                <p:watermark for="sku" value="Código"/>
+                                <p:inputText id="sku" style="width: 110px"/>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup>
+                                <p:watermark for="produto" value="Produto"/>
+                                <p:inputText id="produto" style="width: 100px"/>
+                            </h:panelGroup>
+                            
+                            
+                            <h:panelGroup>
+                                <p:watermark for="qtd" value="Quantidade"/>
+                                <p:inputText id="qtd" style="width: 100px"/>
+                            </h:panelGroup>
+                            
+                            <p:inputText id="estoque" style="width: 100px" disabled="true"/>
+                            
+                            <h:panelGroup>
+                                <p:watermark for="total" value="Valor Total"/>
+                                <p:inputText id="total" style="width: 100px"/>
+                            </h:panelGroup>
+                            
+                            <p:commandButton value="Inserir" icon="fa fa-shopping-cart"/>
+                        </h:panelGrid>
+
+                        <p:dataTable id="itens" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                                     var="item" style="margin-top: 5px;" emptyMessage="Sem itens." paginator="true" rows="20">
+
+
+                            <p:column  headerText="Código" style="width: 100px">
+                                SKU
+                            </p:column>
+                            <p:column>
+                                Produto
+                            </p:column>
+                            <p:column style="width: 100px">
+                                Valor Unitário
+                            </p:column>
+                            <p:column style="width: 100px">
+                                Quantidade
+                            </p:column>
+                            <p:column style="width: 100px">
+                                Estoque
+                            </p:column>
+                            <p:column style="width: 100px">
+                                Valor Total
+                            </p:column>
+                        </p:dataTable>
+                        <!--                    <ui:include src="../WEB-INF/template/pedido/itensPedido.xhtml" />-->
+                    </p:tab>
+                    <p:tab title="Dados de entrega">
+                        <!--<ui:include src="../WEB-INF/template/pedido/dadosEntregaPedido.xhtml" />-->
+                    </p:tab>
+                    <p:tab title="Observação">
+                        <!--<ui:include src="../WEB-INF/template/pedido/observacaoPedido.xhtml" />-->
+                    </p:tab>
+                </p:tabView>
             </p:panel>
         </h:form>
     </ui:define>

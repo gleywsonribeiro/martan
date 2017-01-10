@@ -42,8 +42,12 @@ public class PedidoController implements Serializable {
         this.pedido = pedido;
     }
     
-    
-    
-    
+    public void salvar() {
+        if(pedido.getId() == null) {
+            repositorio.create(pedido);
+        } else {
+            repositorio.edit(pedido);
+        }
+    }
     
 }
