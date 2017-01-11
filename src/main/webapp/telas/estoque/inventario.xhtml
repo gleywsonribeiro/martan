@@ -19,7 +19,7 @@
                 </p:toolbar>
 
                 <p:dataTable id="produtoTable" value="#{inventarioController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                             var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5"
+                             var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="30"
                              editable="true" editMode="cell">
                     
                     <p:ajax event="cellEdit" update="produtoTable"/>

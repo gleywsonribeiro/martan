@@ -15,7 +15,7 @@
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <p:button value="Novo"/> 
-                    <p:commandButton value="Salvar" id="botaSalvar"/>
+                    <p:commandButton value="Salvar" id="botaSalvar" action="#{pedidoController.salvar()}" process="@this" update="@all"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <p:commandButton value="Emitir"/>
@@ -31,7 +31,7 @@
             <p:panel>
                 <h:panelGrid id="painel" columns="4" style="margin-top: 10px; width: 100%" columnClasses="rotulo, campo, rotulo, campo">
                     <p:outputLabel value="Número"/>
-                    <h:inputText value="" disabled="true" size="10"/>
+                    <h:inputText value="#{pedidoController.pedido.id}" disabled="true" size="10"/>
 
                     <p:outputLabel value="Data de Criação"/>
                     <p:outputLabel value="#{pedidoController.pedido.dataCriacao}" style="font-weight: bold">
@@ -50,19 +50,21 @@
                     <p:autoComplete id="cliente" size="40" dropdown="true" value=""/>
 
                     <p:outputLabel value="Forma de pagamento" for="pagamento"/>
-                    <p:selectOneMenu id="pagamento" value="">
+                    <p:selectOneMenu id="pagamento" value="#{pedidoController.pedido.formaPagamento}">
                         <f:selectItem itemLabel="Selecione"/>
-                        <f:selectItem itemLabel="Cartão de crédito"/>
+                        <f:selectItems value="#{pedidoController.formasPagamento}" var="pagamento" itemLabel="#{pagamento.descricao}" itemValue="#{pagamento}"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Valor do frete" for="frete"/>
-                    <p:inputNumber id="frete" size="10" maxlength="10" value=""/>
+                    <p:inputNumber id="frete" size="10" maxlength="10" value="#{pedidoController.pedido.valorFrete}"
+                                   symbol="R$ " decimalSeparator="," decimalPlaces="2" thousandSeparator="."/>
 
                     <p:outputLabel value="Subtotal" style="font-weight: bold" />
                     <h:outputText id="subtotal" value="R$ 0,00" style="font-weight: bold" />
 
                     <p:outputLabel value="Valor do desconto" for="desconto"/>
-                    <p:inputText id="desconto" size="10" maxlength="10" value=""/>
+                    <p:inputNumber id="desconto" size="10" maxlength="10" value="#{pedidoController.pedido.valorDesconto}"
+                                   symbol="R$ " decimalSeparator="," decimalPlaces="2" thousandSeparator="."/>
 
                     <p:outputLabel value="Total do pedido" style="font-weight: bold; font-size: 1.1em"/>
                     <h:outputText style="font-weight: bold; font-size: 1.1em" id="totalPedido" value=""/>
@@ -122,25 +124,25 @@
                                 <p:watermark for="sku" value="Código"/>
                                 <p:inputText id="sku" style="width: 110px"/>
                             </h:panelGroup>
-                            
+
                             <h:panelGroup>
                                 <p:watermark for="produto" value="Produto"/>
                                 <p:inputText id="produto" style="width: 100px"/>
                             </h:panelGroup>
-                            
-                            
+
+
                             <h:panelGroup>
                                 <p:watermark for="qtd" value="Quantidade"/>
                                 <p:inputText id="qtd" style="width: 100px"/>
                             </h:panelGroup>
-                            
+
                             <p:inputText id="estoque" style="width: 100px" disabled="true"/>
-                            
+
                             <h:panelGroup>
                                 <p:watermark for="total" value="Valor Total"/>
                                 <p:inputText id="total" style="width: 100px"/>
                             </h:panelGroup>
-                            
+
                             <p:commandButton value="Inserir" icon="fa fa-shopping-cart"/>
                         </h:panelGrid>
 
@@ -170,10 +172,50 @@
                         <!--                    <ui:include src="../WEB-INF/template/pedido/itensPedido.xhtml" />-->
                     </p:tab>
                     <p:tab title="Dados de entrega">
-                        <!--<ui:include src="../WEB-INF/template/pedido/dadosEntregaPedido.xhtml" />-->
+                        <h:panelGrid columns="4" style="width: 100%" >
+                            <p:outputLabel value="Data da entrega" for="dataEntrega"/>
+                            <p:calendar id="dataEntrega" size="10" pattern="dd/MM/yyyy" value="#{pedidoController.pedido.dataEntrega}"/>
+
+                            <p:spacer/>
+                            <p:spacer/>
+
+                            <p:outputLabel value="Logradoutro" for="entregaLogradouro"/>
+                            <p:inputText id="entregaLogradouro" size="50" value="#{pedidoController.pedido.enderecoEntrega.logradouro}"/>
+
+                            <p:outputLabel value="Número" for="entregaNumero"/>
+                            <p:inputText id="entregaNumero" size="5" value="#{pedidoController.pedido.enderecoEntrega.numero}"/>
+
+                            <p:outputLabel value="Complemento" for="entregaComplemento"/>
+                            <p:inputText id="entregaComplemento" size="50" value="#{pedidoController.pedido.enderecoEntrega.complemento}"/>
+
+                            <p:outputLabel value="Estado" for="estado"/>
+                            <p:selectOneMenu id="estado" style="width: 100px" value="#{pedidoController.pedido.enderecoEntrega.estado}"
+                                             filter="true" filterMatchMode="startsWith"
+                                             required="true" requiredMessage="Escolha um Estado" converter="#{estadoConverter}">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="#{estadosController.estados}" var="estado"
+                                               itemValue="#{estado}" itemLabel="#{estado.uf}"/>
+                                <p:ajax update="cidade" process="@this"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Cidade" for="cidade"/>
+                            <p:selectOneMenu id="cidade" style="width: 100px" value="#{pedidoController.pedido.enderecoEntrega.cidade}"
+                                             filter="true" filterMatchMode="startsWith"
+                                             required="true" requiredMessage="Escolha uma Cidade" converter="#{cidadeConverter}">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="#{pedidoController.pedido.enderecoEntrega.estado.cidades}" var="cidade"
+                                               itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Cep" for="entregaCep"/>
+                            <p:inputText id="entregaCep" size="10" value="#{pedidoController.pedido.enderecoEntrega.cep}"/>
+                        </h:panelGrid>
+
                     </p:tab>
                     <p:tab title="Observação">
-                        <!--<ui:include src="../WEB-INF/template/pedido/observacaoPedido.xhtml" />-->
+                        <h:panelGroup layout="block" style="padding: 3px">
+                            <p:inputTextarea rows="10" style="width: 100%" value="#{pedidoController.pedido.observacao}"/>
+                        </h:panelGroup>
                     </p:tab>
                 </p:tabView>
             </p:panel>

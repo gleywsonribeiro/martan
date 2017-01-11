@@ -5,6 +5,7 @@
  */
 package br.com.icone.martan.controle;
 
+import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.Pedido;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
 import javax.inject.Named;
@@ -48,6 +49,10 @@ public class PedidoController implements Serializable {
         } else {
             repositorio.edit(pedido);
         }
+    }
+    
+    public FormaPagamento[] getFormasPagamento() {
+        return FormaPagamento.values();
     }
     
 }
