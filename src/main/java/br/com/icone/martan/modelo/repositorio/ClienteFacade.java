@@ -7,6 +7,7 @@ package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.Cliente;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +17,7 @@ import javax.persistence.PersistenceContext;
  * @author Gleywson
  */
 @Stateless
-public class ClienteFacade extends AbstractFacade<Cliente> implements Serializable{
+public class ClienteFacade extends AbstractFacade<Cliente> implements Serializable {
 
     @PersistenceContext(unitName = "martanPU")
     private EntityManager em;
@@ -29,5 +30,10 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements Serializab
     public ClienteFacade() {
         super(Cliente.class);
     }
-    
+
+    public List<Cliente> getClientesPorNome(String nome) { 
+        return getEntityManager().createQuery("SELECT c FROM Cliente AS c WHERE UPPER(c.nome) LIKE :nome", Cliente.class)
+                .setParameter("nome", "%" + nome.toUpperCase() + "%").getResultList();
+    }
+
 }

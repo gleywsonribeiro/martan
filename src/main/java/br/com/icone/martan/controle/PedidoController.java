@@ -5,13 +5,17 @@
  */
 package br.com.icone.martan.controle;
 
+import br.com.icone.martan.modelo.Cliente;
 import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.Pedido;
+import br.com.icone.martan.modelo.Usuario;
+import br.com.icone.martan.modelo.repositorio.ClienteFacade;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
+import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 import javax.inject.Inject;
 
 /**
@@ -23,16 +27,18 @@ import javax.inject.Inject;
 public class PedidoController implements Serializable {
 
     @Inject
-    private LoginController lc;
-    
-    @Inject
     private PedidoFacade repositorio;
+    @Inject
+    private UsuarioFacade usuarioRepositoy;
+    @Inject
+    private ClienteFacade clienteRepository;
     
     private Pedido pedido;
+    
+    private List<Usuario> vendedores;
 
     public PedidoController() {
         this.pedido = new Pedido();
-        this.pedido.setDataCriacao(new Date());
     }
 
     public Pedido getPedido() {
@@ -41,6 +47,13 @@ public class PedidoController implements Serializable {
 
     public void setPedido(Pedido pedido) {
         this.pedido = pedido;
+    }
+
+    public List<Usuario> getVendedores() {
+        if(vendedores == null) {
+            vendedores = usuarioRepositoy.findAll();
+        }
+        return vendedores;
     }
     
     public void salvar() {
@@ -55,4 +68,7 @@ public class PedidoController implements Serializable {
         return FormaPagamento.values();
     }
     
+    public List<Cliente> completarClientes(String nome) {
+        return clienteRepository.getClientesPorNome(nome);
+    }
 }

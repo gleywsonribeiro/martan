@@ -80,6 +80,8 @@ public class Pedido implements Serializable {
     private List<ItemPedido> itens;
 
     public Pedido() {
+        this.dataCriacao = new Date();
+        this.enderecoEntrega = new Endereco();
         this.itens = new ArrayList<ItemPedido>();
     }
     
@@ -98,6 +100,9 @@ public class Pedido implements Serializable {
         return hash;
     }
 
+    public boolean isNovo() {
+        return getId() == null;
+    }
     public Date getDataCriacao() {
         return dataCriacao;
     }
