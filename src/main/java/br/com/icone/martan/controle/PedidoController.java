@@ -120,6 +120,7 @@ public class PedidoController implements Serializable {
     public void adicionar() {
         this.pedido.getItens().add(item);
         item = new ItemPedido();
+//        this.pedido.recalcularValorTotal();
     }
     
     //Vai ser usado para selecionar o endereço do cliente e usar na entrega

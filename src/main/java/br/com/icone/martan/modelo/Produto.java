@@ -6,6 +6,7 @@
 package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,16 +41,16 @@ public class Produto implements Serializable {
     private String descricao;
 
     @Column(nullable = false, name = "vl_venda", scale = 10, precision = 2)
-    private double valorVenda;
+    private BigDecimal valorVenda;
 
     @Column(nullable = false, name = "vl_custo", scale = 10, precision = 2)
-    private double valorCusto;
+    private BigDecimal valorCusto;
     
     @Column(name = "codigo_barras", length = 50)
     private String codigoDeBarras;
 
     @Column(nullable = false, name = "percent_lucro", scale = 10, precision = 2)
-    private float percentualLucro;
+    private BigDecimal percentualLucro;
     
     @Column(nullable = false, name = "estoque_atual")
     private int estoqueAtual;
@@ -142,32 +143,33 @@ public class Produto implements Serializable {
         this.descricao = descricao;
     }
 
-    public double getValorVenda() {
+    public BigDecimal getValorVenda() {
         return valorVenda;
     }
 
-    public void setValorVenda(double valorVenda) {
+    public void setValorVenda(BigDecimal valorVenda) {
         this.valorVenda = valorVenda;
     }
 
-    public double getValorCusto() {
+    public BigDecimal getValorCusto() {
         return valorCusto;
     }
 
-    public void setValorCusto(double valorCusto) {
+    public void setValorCusto(BigDecimal valorCusto) {
         this.valorCusto = valorCusto;
     }
 
-    public float getPercentualLucro() {
+    public BigDecimal getPercentualLucro() {
         return percentualLucro;
     }
 
-    public void setPercentualLucro(float percentualLucro) {
+    public void setPercentualLucro(BigDecimal percentualLucro) {
         this.percentualLucro = percentualLucro;
     }
 
     public void calculaValorVenda() {
-        double valor = getValorCusto() + getValorCusto() * getPercentualLucro() / 100;
+        BigDecimal valor = getValorCusto().add(getValorCusto().multiply(getPercentualLucro().divide(new BigDecimal("100"))));
+        //double valor = getValorCusto() + getValorCusto() * getPercentualLucro() / 100;
         setValorVenda(valor);
     }
 

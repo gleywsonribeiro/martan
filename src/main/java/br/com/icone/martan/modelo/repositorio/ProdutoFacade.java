@@ -36,7 +36,7 @@ public class ProdutoFacade extends AbstractFacade<Produto> implements Serializab
     }
     
     public List<Produto> getProdutosPorDescricao(String descricao) { 
-        return getEntityManager().createQuery("SELECT p FROM Produto AS p WHERE UPPER(p.descricao) LIKE :descricao", Produto.class)
+        return getEntityManager().createQuery("SELECT p FROM Produto AS p WHERE P.ativo = TRUE AND UPPER(p.descricao) LIKE :descricao", Produto.class)
                 .setParameter("descricao", "%" + descricao.toUpperCase() + "%").getResultList();
     }
 }

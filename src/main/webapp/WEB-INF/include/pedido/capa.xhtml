@@ -43,14 +43,18 @@
                        symbol="R$ " decimalSeparator="," decimalPlaces="2" thousandSeparator="."/>
 
         <p:outputLabel value="Subtotal" style="font-weight: bold" />
-        <h:outputText id="subtotal" value="R$ 0,00" style="font-weight: bold" />
+        <h:outputText id="subtotal" value="R$ 0,00" style="font-weight: bold" >
+            <f:convertNumber type="currency" />
+        </h:outputText>
 
         <p:outputLabel value="Valor do desconto" for="desconto"/>
         <p:inputNumber id="desconto" size="10" maxlength="10" value="#{pedidoController.pedido.valorDesconto}"
                        symbol="R$ " decimalSeparator="," decimalPlaces="2" thousandSeparator="."/>
 
         <p:outputLabel value="Total do pedido" style="font-weight: bold; font-size: 1.1em"/>
-        <h:outputText style="font-weight: bold; font-size: 1.1em" id="totalPedido" value=""/>
+        <h:outputText style="font-weight: bold; font-size: 1.1em" id="totalPedido" value="#{pedidoController.pedido.valorTotal}">
+            <f:convertNumber type="currency" />
+        </h:outputText>
 
     </h:panelGrid>
 </ui:composition>

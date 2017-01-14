@@ -75,7 +75,7 @@ public class Pedido implements Serializable {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "end_entrega_id")
     private Endereco enderecoEntrega;
-    
+
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemPedido> itens;
 
@@ -84,7 +84,7 @@ public class Pedido implements Serializable {
         this.enderecoEntrega = new Endereco();
         this.itens = new ArrayList<ItemPedido>();
     }
-    
+
     public Long getId() {
         return id;
     }
@@ -103,6 +103,7 @@ public class Pedido implements Serializable {
     public boolean isNovo() {
         return getId() == null;
     }
+
     public Date getDataCriacao() {
         return dataCriacao;
     }
@@ -199,9 +200,21 @@ public class Pedido implements Serializable {
         this.itens = itens;
     }
 
+    public void recalcularValorTotal() {
+        BigDecimal total = BigDecimal.ZERO;
+        total = total.add(this.getValorFrete()).subtract(this.getValorDesconto());
 
-    
-    
+        for (ItemPedido item : itens) {
+//            if (item.getProduto() != null && item.getProduto().getId() != null) {
+            total = total.add(item.getValorTotal());
+//            }
+        }
+    }
+
+    public BigDecimal getValorSubtotal() {
+        return this.getValorTotal().subtract(this.getValorFrete()).add(this.getValorDesconto());
+    }
+
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

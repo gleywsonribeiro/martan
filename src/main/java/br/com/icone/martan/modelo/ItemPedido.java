@@ -30,7 +30,7 @@ public class ItemPedido implements Serializable {
     private Long id;
 
     @Column(nullable = false, length = 3)
-    private int quantidade;
+    private int quantidade = 1;
 
     @Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorUnitario = BigDecimal.ZERO;
@@ -97,6 +97,11 @@ public class ItemPedido implements Serializable {
         this.pedido = pedido;
     }
 
+    
+    public BigDecimal getValorTotal() {
+        return this.getProduto().getValorVenda().multiply(new BigDecimal(this.getQuantidade()));
+        //return this.produto.getValorVenda() * this.quantidade;
+    }
     
     
     @Override
