@@ -15,7 +15,7 @@
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <p:commandButton value="Novo" action="#{pedidoController.novo()}" process="@this" update="@form"/> 
-                    <p:commandButton value="Salvar" id="botaSalvar" action="#{pedidoController.salvar()}" update="@form"/>
+                    <p:commandButton value="Salvar" id="botaoSalvar" action="#{pedidoController.salvar()}" update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <p:commandButton value="Emitir"/>
@@ -29,194 +29,16 @@
             </p:toolbar>
 
             <p:panel>
-                <h:panelGrid id="painel" columns="4" style="margin-top: 10px; width: 100%" columnClasses="rotulo, campo, rotulo, campo">
-                    <p:outputLabel value="Número"/>
-                    <p:inputText value="#{pedidoController.pedido.id}" disabled="true" size="10"/>
-
-                    <p:outputLabel value="Data de Criação"/>
-                    <p:outputLabel value="#{pedidoController.pedido.dataCriacao}" style="font-weight: bold">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </p:outputLabel>
-
-                    <p:outputLabel value="Status"/>
-                    <p:outputLabel value="#{pedidoController.pedido.status.descricao}" style="font-weight: bold"/>
-
-                    <p:outputLabel value="Vendedor" for="vendedor"/>
-                    <p:selectOneMenu id="vendedor" value="#{pedidoController.pedido.vendedor}" converter="#{usuarioConverter}" required="true">
-                        <f:selectItem itemLabel="Selecione"/>
-                        <f:selectItems value="#{pedidoController.vendedores}" var="vendedor" itemLabel="#{vendedor.nome}" itemValue="#{vendedor}"/>
-                    </p:selectOneMenu>
-
-                    <p:outputLabel value="Cliente" for="cliente"/>
-                    <p:autoComplete value="#{pedidoController.pedido.cliente}" converter="#{clienteConverter}"
-                                    var="client" itemLabel="#{client.nome}" itemValue="#{client}"
-                                    completeMethod="#{pedidoController.completarClientes}"
-                                    forceSelection="true" id="cliente" dropdown="true"
-                                    required="true" requiredMessage="Escolha um membro">
-
-                    </p:autoComplete>
-
-                    <p:outputLabel value="Forma de pagamento" for="pagamento"/>
-                    <p:selectOneMenu id="pagamento" value="#{pedidoController.pedido.formaPagamento}">
-                        <f:selectItem itemLabel="Selecione"/>
-                        <f:selectItems value="#{pedidoController.formasPagamento}" var="pagamento" itemLabel="#{pagamento.descricao}" itemValue="#{pagamento}"/>
-                    </p:selectOneMenu>
-
-                    <p:outputLabel value="Valor do frete" for="frete"/>
-                    <p:inputNumber id="frete" size="10" maxlength="10" value="#{pedidoController.pedido.valorFrete}"
-                                   symbol="R$ " decimalSeparator="," decimalPlaces="2" thousandSeparator="."/>
-
-                    <p:outputLabel value="Subtotal" style="font-weight: bold" />
-                    <h:outputText id="subtotal" value="R$ 0,00" style="font-weight: bold" />
-
-                    <p:outputLabel value="Valor do desconto" for="desconto"/>
-                    <p:inputNumber id="desconto" size="10" maxlength="10" value="#{pedidoController.pedido.valorDesconto}"
-                                   symbol="R$ " decimalSeparator="," decimalPlaces="2" thousandSeparator="."/>
-
-                    <p:outputLabel value="Total do pedido" style="font-weight: bold; font-size: 1.1em"/>
-                    <h:outputText style="font-weight: bold; font-size: 1.1em" id="totalPedido" value=""/>
-
-                </h:panelGrid>
+                
+                <ui:include src="/WEB-INF/include/pedido/capa.xhtml" />
 
                 <p:tabView style="margin-top: 20px">
                     <p:tab title="Itens">
-                        <!--                        <p:panelGrid style="width: 100%">
-                                                    <f:facet name="header">
-                                                        <p:row>
-                                                            <p:column style="width: 100px">
-                                                                SKU
-                                                            </p:column>
-                                                            <p:column>
-                                                                Produto
-                                                            </p:column>
-                                                            <p:column style="width: 100px">
-                                                                Valor Unitário
-                                                            </p:column>
-                                                            <p:column style="width: 100px">
-                                                                Quantidade
-                                                            </p:column>
-                                                            <p:column style="width: 100px">
-                                                                Estoque
-                                                            </p:column>
-                                                            <p:column style="width: 100px">
-                                                                Valor Total
-                                                            </p:column>
-                                                        </p:row>
-                                                    </f:facet>
-                                                    <p:row>
-                                                        <p:column>
-                                                            <p:inputText style="width: 100px"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:inputText style="width: 100%"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:inputText style="width: 100px"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:inputText style="width: 100px"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:inputText style="width: 100px"/>
-                                                        </p:column>
-                                                        <p:column>
-                                                            <p:inputText style="width: 100px"/>
-                                                        </p:column>
-                                                    </p:row>
-                        
-                                                </p:panelGrid>-->
-
-                        <h:panelGrid columns="4">
-                            <h:panelGroup>
-                                <p:watermark for="sku" value="Código"/>
-                                <p:inputText id="sku" style="width: 110px" value="#{pedidoController.produtoCorrente.id}" />
-                            </h:panelGroup>
-
-                            <h:panelGroup>
-                                <p:watermark for="produto" value="Produto"/>
-                                <p:autoComplete id="produto" value="#{pedidoController.produtoCorrente}" converter="#{produtoConverter}"
-                                                var="produto" itemLabel="#{produto.descricao}" itemValue="#{produto}"
-                                                completeMethod="#{pedidoController.buscaProdutoDescricao(descricao)}" forceSelection="true"
-                                                required="true">
-                                    <p:ajax update="sku" event="itemSelect"/>
-                                </p:autoComplete>
-                                
-                            </h:panelGroup>
-
-
-                            <h:panelGroup>
-                                <p:watermark for="qtd" value="Quantidade"/>
-                                <p:inputText id="qtd" style="width: 100px" value=""/>
-                            </h:panelGroup>
-
-                            <p:commandButton value="Inserir" icon="fa fa-shopping-cart"/>
-                        </h:panelGrid>
-
-                        <p:dataTable id="itens" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                                     var="item" style="margin-top: 5px;" emptyMessage="Sem itens." paginator="true" rows="20">
-
-
-                            <p:column headerText="Código" style="width: 100px">
-                                SKU
-                            </p:column>
-                            <p:column headerText="Produto">
-                                Produto
-                            </p:column>
-                            <p:column headerText="Valor Unitário" style="width: 100px">
-                                Valor Unitário
-                            </p:column>
-                            <p:column headerText="Quantidade" style="width: 100px">
-                                Quantidade
-                            </p:column>
-                            <p:column headerText="Estoque" style="width: 100px">
-                                Estoque
-                            </p:column>
-                            <p:column headerText="Total" style="width: 100px">
-                                Valor Total
-                            </p:column>
-                        </p:dataTable>
+                        <ui:include src="/WEB-INF/include/pedido/itens.xhtml"/>
                         <!--                    <ui:include src="../WEB-INF/template/pedido/itensPedido.xhtml" />-->
                     </p:tab>
                     <p:tab title="Dados de entrega">
-                        <h:panelGrid columns="4" style="width: 100%" >
-                            <p:outputLabel value="Data da entrega" for="dataEntrega"/>
-                            <p:calendar id="dataEntrega" size="10" pattern="dd/MM/yyyy" value="#{pedidoController.pedido.dataEntrega}"/>
-                            
-                            <p:spacer/>
-                            <p:spacer/>
-
-                            <p:outputLabel value="Logradoutro" for="entregaLogradouro"/>
-                            <p:inputText id="entregaLogradouro" size="50" value="#{pedidoController.pedido.enderecoEntrega.logradouro}" required="true"/>
-
-                            <p:outputLabel value="Número" for="entregaNumero" />
-                            <p:inputText id="entregaNumero" size="5" value="#{pedidoController.pedido.enderecoEntrega.numero}" required="true" />
-
-                            <p:outputLabel value="Complemento" for="entregaComplemento"/>
-                            <p:inputText id="entregaComplemento" size="50" value="#{pedidoController.pedido.enderecoEntrega.complemento}" />
-
-                            <p:outputLabel value="Estado" for="estado"/>
-                            <p:selectOneMenu id="estado" style="width: 100px" value="#{pedidoController.pedido.enderecoEntrega.estado}"
-                                             filter="true" filterMatchMode="startsWith"
-                                             required="true" requiredMessage="Escolha um Estado" converter="#{estadoConverter}">
-                                <f:selectItem itemLabel="Selecione"/>
-                                <f:selectItems value="#{estadosController.estados}" var="estado"
-                                               itemValue="#{estado}" itemLabel="#{estado.uf}"/>
-                                <p:ajax update="cidade" process="@this"/>
-                            </p:selectOneMenu>
-
-                            <p:outputLabel value="Cidade" for="cidade"/>
-                            <p:selectOneMenu id="cidade" style="width: 100px" value="#{pedidoController.pedido.enderecoEntrega.cidade}"
-                                             filter="true" filterMatchMode="startsWith"
-                                             required="true" requiredMessage="Escolha uma Cidade" converter="#{cidadeConverter}">
-                                <f:selectItem itemLabel="Selecione"/>
-                                <f:selectItems value="#{pedidoController.pedido.enderecoEntrega.estado.cidades}" var="cidade"
-                                               itemValue="#{cidade}" itemLabel="#{cidade.nome}"/>
-                            </p:selectOneMenu>
-
-                            <p:outputLabel value="Cep" for="entregaCep"/>
-                            <p:inputText id="entregaCep" size="10" value="#{pedidoController.pedido.enderecoEntrega.cep}" required="true"/>
-                        </h:panelGrid>
-
+                        <ui:include src="/WEB-INF/include/pedido/dadosEntrega.xhtml" />
                     </p:tab>
                     <p:tab title="Observação">
                         <h:panelGroup layout="block" style="padding: 3px">

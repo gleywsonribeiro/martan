@@ -30,7 +30,7 @@ public class ItemPedido implements Serializable {
     private Long id;
 
     @Column(nullable = false, length = 3)
-    private int quantidade = 1;
+    private int quantidade;
 
     @Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorUnitario = BigDecimal.ZERO;
@@ -43,6 +43,13 @@ public class ItemPedido implements Serializable {
     @JoinColumn(nullable = false)
     private Pedido pedido;
 
+//    public ItemPedido() {
+//        this.pedido = new Pedido();
+//        this.produto = new Produto();
+//    }
+
+    
+    
     public Long getId() {
         return id;
     }

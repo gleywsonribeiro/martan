@@ -41,15 +41,21 @@ public class PedidoController implements Serializable {
 
     private Pedido pedido;
     
-    
     private Produto produtoCorrente;
+    
+    private ItemPedido item;
 
     private boolean usarEnderecoCliente;
 
     private List<Usuario> vendedores;
 
     public PedidoController() {
+        limpar();
+    }
+    
+    private void limpar() {
         this.pedido = new Pedido();
+        this.item = new ItemPedido();
     }
 
     public Pedido getPedido() {
@@ -68,7 +74,7 @@ public class PedidoController implements Serializable {
     }
     
     public void novo() {
-        this.pedido = new Pedido();
+        limpar();
     }
 
     public void salvar() {
@@ -102,7 +108,19 @@ public class PedidoController implements Serializable {
     public void setProdutoCorrente(Produto produtoCorrente) {
         this.produtoCorrente = produtoCorrente;
     }
+
+    public ItemPedido getItem() {
+        return item;
+    }
+
+    public void setItem(ItemPedido item) {
+        this.item = item;
+    }
     
+    public void adicionar() {
+        this.pedido.getItens().add(item);
+        item = new ItemPedido();
+    }
     
     //Vai ser usado para selecionar o endereço do cliente e usar na entrega
     public void ajustarEndereco() {
@@ -115,8 +133,6 @@ public class PedidoController implements Serializable {
             
         }
     }
-    
-    
     
     public List<Produto> buscaProdutoDescricao(String descricao) {
         return produtoRepository.getProdutosPorDescricao(descricao);
