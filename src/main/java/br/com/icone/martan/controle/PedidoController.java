@@ -123,6 +123,10 @@ public class PedidoController implements Serializable {
 //        this.pedido.recalcularValorTotal();
     }
     
+    public void recalcularPedido() {
+        this.pedido.recalcularValorTotal();
+    }
+    
     //Vai ser usado para selecionar o endereço do cliente e usar na entrega
     public void ajustarEndereco() {
         if (pedido.getCliente() != null) {

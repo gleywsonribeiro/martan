@@ -11,6 +11,7 @@ import br.com.icone.martan.modelo.repositorio.CategoriaFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.util.JsfUtil;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -41,8 +42,8 @@ public class GeraProdutoController implements Serializable{
             produto.setDescricao("Produto " + (i+1));
             produto.setEstoqueMinimo(5);
             produto.setEstoqueMaximo(10);
-            produto.setValorCusto(150);
-            produto.setValorVenda(150);
+            produto.setValorCusto(new BigDecimal("150"));
+            produto.setValorVenda(new BigDecimal("150"));
             produtoFacade.create(produto);
         }
         JsfUtil.addSuccessMessage("Geração feita com sucesso!");
