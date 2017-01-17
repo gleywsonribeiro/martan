@@ -50,6 +50,7 @@ public class ItemPedido implements Serializable {
 
     
     
+    
     public Long getId() {
         return id;
     }

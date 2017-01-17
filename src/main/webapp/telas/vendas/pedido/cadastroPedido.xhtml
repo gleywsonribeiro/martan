@@ -9,13 +9,13 @@
     <ui:define name="titulo">Pedido</ui:define>
 
     <ui:define name="corpo">
-        <h:form>
+        <h:form id="formPedido">
             <p:messages autoUpdate="true" closable="true"/>
             <h:outputText value="Novo Pedido" style="font-size: x-large; font-weight: 400; color: darkblue"/>
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <p:commandButton value="Novo" action="#{pedidoController.novo()}" process="@this" update="@form"/> 
-                    <p:commandButton value="Salvar" id="botaoSalvar" action="#{pedidoController.salvar()}" update="@form"/>
+                    <p:commandButton value="Salvar" id="botaoSalvar" process="@this painel :formPedido:tabview:entrega" action="#{pedidoController.salvar()}" update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <p:commandButton value="Emitir"/>
@@ -27,12 +27,14 @@
                     <p:button value="Pesquisar"/>
                 </p:toolbarGroup>
             </p:toolbar>
+            
+            <p:defaultCommand target="botaoSalvar"/>
 
             <p:panel>
                 
                 <ui:include src="/WEB-INF/include/pedido/capa.xhtml" />
 
-                <p:tabView style="margin-top: 20px">
+                <p:tabView style="margin-top: 20px" id="tabview">
                     <p:tab title="Itens">
                         <ui:include src="/WEB-INF/include/pedido/itens.xhtml"/>
                         <!--                    <ui:include src="../WEB-INF/template/pedido/itensPedido.xhtml" />-->

@@ -33,7 +33,7 @@
         </p:autoComplete>
 
         <p:outputLabel value="Forma de pagamento" for="pagamento"/>
-        <p:selectOneMenu id="pagamento" value="#{pedidoController.pedido.formaPagamento}">
+        <p:selectOneMenu id="pagamento" value="#{pedidoController.pedido.formaPagamento}" required="true" requiredMessage="Escolha a forma de pagamento">
             <f:selectItem itemLabel="Selecione"/>
             <f:selectItems value="#{pedidoController.formasPagamento}" var="pagamento" itemLabel="#{pagamento.descricao}" itemValue="#{pagamento}"/>
         </p:selectOneMenu>
@@ -56,7 +56,7 @@
         </p:inputNumber>
 
         <p:outputLabel value="Total do pedido" style="font-weight: bold; font-size: 1.1em"/>
-        <h:outputText style="font-weight: bold; font-size: 1.1em" id="totalPedido" value="#{pedidoController.pedido.valorTotal}">
+        <h:outputText style="font-weight: bold; font-size: 1.1em; color: red" id="totalPedido" value="#{pedidoController.pedido.valorTotal}">
             <f:convertNumber type="currency" />
         </h:outputText>
 

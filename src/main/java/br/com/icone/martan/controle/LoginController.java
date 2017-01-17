@@ -42,7 +42,7 @@ public class LoginController implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
             //this.usuario = user;
-            usuario.setNome("Gleywson");
+            usuario.setNome("Brena Melo");
             httpSession.setAttribute("currentUser", usuario);
             return "index?faces-redirect=true";
         }

@@ -16,6 +16,7 @@ import br.com.icone.martan.modelo.repositorio.ClienteFacade;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
+import br.com.icone.martan.util.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -56,6 +57,7 @@ public class PedidoController implements Serializable {
     private void limpar() {
         this.pedido = new Pedido();
         this.item = new ItemPedido();
+        //this.item.setProduto(new Produto());
     }
 
     public Pedido getPedido() {
@@ -80,8 +82,10 @@ public class PedidoController implements Serializable {
     public void salvar() {
         if (pedido.isNovo()) {
             repositorio.create(pedido);
+            JsfUtil.addSuccessMessage("Pedido salvo com sucesso!");
         } else {
             repositorio.edit(pedido);
+            JsfUtil.addSuccessMessage("Pedido alterado com sucesso com sucesso!");
         }
     }
 
@@ -118,8 +122,10 @@ public class PedidoController implements Serializable {
     }
     
     public void adicionar() {
+        this.item.setPedido(pedido);
         this.pedido.getItens().add(item);
         item = new ItemPedido();
+        this.pedido.recalcularValorTotal();
     }
     
     public void recalcularPedido() {
@@ -140,6 +146,14 @@ public class PedidoController implements Serializable {
     
     public List<Produto> buscaProdutoDescricao(String descricao) {
         return produtoRepository.getProdutosPorDescricao(descricao);
+    }
+    
+    public boolean isTemItem() {
+        return this.item.getProduto() != null;
+    }
+    
+    public boolean isNaoTemItem() {
+        return !isTemItem();
     }
 
 }
