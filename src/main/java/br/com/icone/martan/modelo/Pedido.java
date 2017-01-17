@@ -209,6 +209,7 @@ public class Pedido implements Serializable {
             total = total.add(item.getValorTotal());
 //            }
         }
+        setValorTotal(total);
     }
 
     public BigDecimal getValorSubtotal() {

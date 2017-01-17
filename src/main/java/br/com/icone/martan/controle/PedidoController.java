@@ -120,7 +120,6 @@ public class PedidoController implements Serializable {
     public void adicionar() {
         this.pedido.getItens().add(item);
         item = new ItemPedido();
-//        this.pedido.recalcularValorTotal();
     }
     
     public void recalcularPedido() {

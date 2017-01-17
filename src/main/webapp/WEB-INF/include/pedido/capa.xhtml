@@ -41,7 +41,7 @@
         <p:outputLabel value="Valor do frete" for="frete"/>
         <p:inputNumber id="frete" size="10" maxlength="10" value="#{pedidoController.pedido.valorFrete}"
                        symbol="R$ " decimalSeparator="," decimalPlaces="2" thousandSeparator=".">
-            <p:ajax event="change" update="totalPedido" listener="#{pedidoController.recalcularPedido()}"/>
+            <p:ajax event="change" update="totalPedido subtotal" listener="#{pedidoController.recalcularPedido()}"/>
         </p:inputNumber>
 
         <p:outputLabel value="Subtotal" style="font-weight: bold" />
@@ -52,7 +52,7 @@
         <p:outputLabel value="Valor do desconto" for="desconto"/>
         <p:inputNumber id="desconto" size="10" maxlength="10" value="#{pedidoController.pedido.valorDesconto}"
                        symbol="R$ " decimalSeparator="," decimalPlaces="2" thousandSeparator=".">
-            <p:ajax event="change" update="totalPedido" listener="#{pedidoController.recalcularPedido()}"/>
+            <p:ajax event="change" update="totalPedido subtotal" listener="#{pedidoController.recalcularPedido()}"/>
         </p:inputNumber>
 
         <p:outputLabel value="Total do pedido" style="font-weight: bold; font-size: 1.1em"/>
