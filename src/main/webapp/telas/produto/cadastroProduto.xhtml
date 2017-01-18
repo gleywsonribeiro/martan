@@ -86,7 +86,7 @@
                             <p:inputSwitch id="ativo" value="#{cadastroProdutoController.produto.ativo}" offLabel="não" onLabel="sim"/>
                         </h:panelGrid>
 
-                        <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em">
+                        <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em; color: darkgreen">
                             <p:outputLabel value="Valor de Venda" for="venda"/>
                             <h:outputText id="venda" value="#{cadastroProdutoController.produto.valorVenda}">
                                 <f:convertNumber type="currency"/>

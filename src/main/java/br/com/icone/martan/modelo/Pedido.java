@@ -228,6 +228,16 @@ public class Pedido implements Serializable {
         }
         return true;
     }
+    
+    public boolean isJaExiste(ItemPedido novo) {
+        for (ItemPedido item : itens) {
+            if(item.getProduto().equals(novo.getProduto())) {
+                item.setQuantidade(item.getQuantidade() + novo.getQuantidade());
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public String toString() {

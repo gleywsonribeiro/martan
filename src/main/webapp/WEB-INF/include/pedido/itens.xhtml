@@ -32,7 +32,11 @@
     <p:dataTable id="itens" paginatorAlwaysVisible="false" paginatorPosition="bottom" value="#{pedidoController.pedido.itens}"
                  var="item" style="margin-top: 5px;" emptyMessage="Sem itens." paginator="true" rows="20">
 
-
+        <p:column style="width: 40px; text-align: center">
+            <p:commandButton icon="fa fa-trash" action="#{pedidoController.removerItem()}" process="@this" update="itens :formPedido:totalPedido :formPedido:subtotal">
+                <f:setPropertyActionListener target="#{pedidoController.item}" value="#{item}"/>
+            </p:commandButton>
+        </p:column>
         <p:column headerText="Código" style="width: 100px">
             <h:outputText value="#{item.produto.id}"/>
         </p:column>
@@ -47,17 +51,19 @@
         <p:column headerText="Quantidade" style="width: 100px; text-align: right">
             <h:outputText value="#{item.quantidade}"/>
         </p:column>
-        <p:column headerText="Estoque" style="width: 100px">
-            Estoque
+        <p:column headerText="Estoque" style="width: 100px; text-align: right">
+            <h:outputText value="#{item.produto.estoqueAtual}" />
         </p:column>
+
         <p:column headerText="Total" style="width: 100px; text-align: right">
             <h:outputText value="#{item.valorTotal}">
                 <f:convertNumber type="currency"/>
             </h:outputText>
         </p:column>
+        
         <p:columnGroup type="footer">
             <p:row>
-                <p:column colspan="5" footerText="Subtotal" style="text-align: right; color: darkgreen" />
+                <p:column colspan="6" footerText="Subtotal" style="text-align: right; color: darkgreen" />
                 <p:column style="text-align: right; color: darkgreen">
                     <f:facet name="footer">
                         <h:outputText value="#{pedidoController.pedido.valorSubtotal}">

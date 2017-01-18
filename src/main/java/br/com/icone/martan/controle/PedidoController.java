@@ -41,9 +41,9 @@ public class PedidoController implements Serializable {
     private ProdutoFacade produtoRepository;
 
     private Pedido pedido;
-    
+
     private Produto produtoCorrente;
-    
+
     private ItemPedido item;
 
     private boolean usarEnderecoCliente;
@@ -53,7 +53,7 @@ public class PedidoController implements Serializable {
     public PedidoController() {
         limpar();
     }
-    
+
     private void limpar() {
         this.pedido = new Pedido();
         this.item = new ItemPedido();
@@ -74,7 +74,7 @@ public class PedidoController implements Serializable {
         }
         return vendedores;
     }
-    
+
     public void novo() {
         limpar();
     }
@@ -120,18 +120,23 @@ public class PedidoController implements Serializable {
     public void setItem(ItemPedido item) {
         this.item = item;
     }
-    
+
     public void adicionar() {
-        this.item.setPedido(pedido);
-        this.pedido.getItens().add(item);
+        if (pedido.isJaExiste(item)) {
+            //Já adiciona logo pra não ter que percorrer a lista de novo para ajustar a quantidade
+        } else {
+            this.item.setPedido(pedido);
+            this.pedido.getItens().add(item);
+        }
+
         item = new ItemPedido();
         this.pedido.recalcularValorTotal();
     }
-    
+
     public void recalcularPedido() {
         this.pedido.recalcularValorTotal();
     }
-    
+
     //Vai ser usado para selecionar o endereço do cliente e usar na entrega
     public void ajustarEndereco() {
         if (pedido.getCliente() != null) {
@@ -140,18 +145,23 @@ public class PedidoController implements Serializable {
             } else {
                 pedido.setEnderecoEntrega(new Endereco());
             }
-            
+
         }
     }
     
+    public void removerItem() {
+        pedido.getItens().remove(item);
+        this.item = new ItemPedido();
+    }
+
     public List<Produto> buscaProdutoDescricao(String descricao) {
         return produtoRepository.getProdutosPorDescricao(descricao);
     }
-    
+
     public boolean isTemItem() {
         return this.item.getProduto() != null;
     }
-    
+
     public boolean isNaoTemItem() {
         return !isTemItem();
     }
