@@ -122,5 +122,13 @@ public class ItemPedido implements Serializable {
     public String toString() {
         return "br.com.icone.martan.modelo.ItemPedido[ id=" + id + " ]";
     }
+    
+    public boolean isEstoqueSuficiente() {
+        return this.getPedido().isEmitido() || this.getProduto().getEstoqueAtual() >= this.getQuantidade();
+    }
+    
+    public boolean isEstoqueInsuficiente() {
+        return !this.isEstoqueSuficiente();
+    }
 
 }

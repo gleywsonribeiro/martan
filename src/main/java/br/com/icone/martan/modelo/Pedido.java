@@ -244,4 +244,8 @@ public class Pedido implements Serializable {
         return "br.com.icone.martan.modelo.Pedido[ id=" + id + " ]";
     }
 
+    public boolean isEmitido() {
+        return StatusPedido.EMITIDO.equals(this.getStatus());
+    }
+
 }

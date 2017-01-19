@@ -31,6 +31,10 @@
 
     <p:dataTable id="itens" paginatorAlwaysVisible="false" paginatorPosition="bottom" value="#{pedidoController.pedido.itens}"
                  var="item" style="margin-top: 5px;" emptyMessage="Sem itens." paginator="true" rows="20">
+        <!--editable="true" editMode="cell">-->
+
+        <!--        <p:ajax event="cellEdit" update="itens" process="@this" listener=""/>
+                <p:ajax event="cellEditCancel" update="itens" process="@this" listener="" />-->
 
         <p:column style="width: 40px; text-align: center">
             <p:commandButton icon="fa fa-trash" action="#{pedidoController.removerItem()}" process="@this" update="itens :formPedido:totalPedido :formPedido:subtotal">
@@ -48,8 +52,10 @@
                 <f:convertNumber type="currency"/>
             </h:outputText>
         </p:column>
-        <p:column headerText="Quantidade" style="width: 100px; text-align: right">
-            <h:outputText value="#{item.quantidade}"/>
+        <p:column headerText="Quantidade" style="width: 80px;" >
+            <p:spinner value="#{item.quantidade}" min="1" size="5">
+                <p:ajax event="change" process="@this" update="itens :formPedido:totalPedido :formPedido:subtotal"/>
+            </p:spinner>
         </p:column>
         <p:column headerText="Estoque" style="width: 100px; text-align: right">
             <h:outputText value="#{item.produto.estoqueAtual}" />
@@ -60,7 +66,7 @@
                 <f:convertNumber type="currency"/>
             </h:outputText>
         </p:column>
-        
+
         <p:columnGroup type="footer">
             <p:row>
                 <p:column colspan="6" footerText="Subtotal" style="text-align: right; color: darkgreen" />

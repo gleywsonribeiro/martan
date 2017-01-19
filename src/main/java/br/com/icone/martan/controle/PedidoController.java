@@ -152,6 +152,7 @@ public class PedidoController implements Serializable {
     public void removerItem() {
         pedido.getItens().remove(item);
         this.item = new ItemPedido();
+        this.pedido.recalcularValorTotal();
     }
 
     public List<Produto> buscaProdutoDescricao(String descricao) {
