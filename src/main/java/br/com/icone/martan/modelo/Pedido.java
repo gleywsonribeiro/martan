@@ -247,5 +247,9 @@ public class Pedido implements Serializable {
     public boolean isEmitido() {
         return StatusPedido.EMITIDO.equals(this.getStatus());
     }
+    
+    public boolean isNaoEmitido() {
+        return !isEmitido();
+    }
 
 }

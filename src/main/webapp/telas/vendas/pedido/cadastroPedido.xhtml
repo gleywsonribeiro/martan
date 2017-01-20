@@ -18,9 +18,9 @@
                     <p:commandButton value="Salvar" id="botaoSalvar" process="@this painel :formPedido:tabview:entrega" action="#{pedidoController.salvar()}" update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
-                    <p:commandButton value="Emitir" disabled="#{pedidoController.pedido.novo}"/>
-                    <p:commandButton value="Cancelar" disabled="#{pedidoController.pedido.novo}"/>
-                    <p:commandButton value="Enviar por e-mail" disabled="#{pedidoController.pedido.novo}"/>
+                    <p:commandButton id="emitir" value="Emitir" disabled="#{pedidoController.pedido.novo}" process="@this" action="#{pedidoController.emitir()}" update="status cancelar"/>
+                    <p:commandButton id="cancelar" value="Cancelar" disabled="#{pedidoController.pedido.naoEmitido}"/>
+                    <p:commandButton id="enviar" value="Enviar por e-mail" disabled="#{pedidoController.pedido.novo}"/>
 
                     <p:separator/>
 

@@ -15,7 +15,7 @@
         </p:outputLabel>
 
         <p:outputLabel value="Status"/>
-        <p:outputLabel value="#{pedidoController.pedido.status.descricao}" style="font-weight: bold"/>
+        <p:outputLabel id="status" value="#{pedidoController.pedido.status.descricao}" style="font-weight: bold"/>
 
         <p:outputLabel value="Vendedor" for="vendedor"/>
         <p:selectOneMenu id="vendedor" value="#{pedidoController.pedido.vendedor}" converter="#{usuarioConverter}" required="true">

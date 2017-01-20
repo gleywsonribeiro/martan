@@ -11,6 +11,7 @@ import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.ItemPedido;
 import br.com.icone.martan.modelo.Pedido;
 import br.com.icone.martan.modelo.Produto;
+import br.com.icone.martan.modelo.StatusPedido;
 import br.com.icone.martan.modelo.Usuario;
 import br.com.icone.martan.modelo.repositorio.ClienteFacade;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
@@ -175,5 +176,8 @@ public class PedidoController implements Serializable {
     public boolean isNaoTemItem() {
         return !isTemItem();
     }
-
+    
+    public void emitir() {
+        this.pedido.setStatus(StatusPedido.EMITIDO);
+    }
 }

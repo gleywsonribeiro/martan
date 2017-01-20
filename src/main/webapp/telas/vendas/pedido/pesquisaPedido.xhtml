@@ -74,8 +74,10 @@
                 <p:column headerText="Status" style="width: 100px">
                     <h:outputText value="#{pedido.status.descricao}"/>
                 </p:column>
-                <p:column style="width: 100px; text-align: center">
-                    <p:button icon="ui-icon-pencil" title="editar"/>                
+                <p:column style="width: 50px; text-align: center">
+                    <p:commandButton icon="fa fa-pencil" title="editar" process="@this" action="cadastroPedido?faces-redirect=true">
+                        <f:setPropertyActionListener target="#{pedidoController.pedido}" value="#{pedido}"/>
+                    </p:commandButton>                
                 </p:column>
 
             </p:dataTable>
