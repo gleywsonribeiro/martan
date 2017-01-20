@@ -50,6 +50,8 @@ public class PedidoController implements Serializable {
 
     private List<Usuario> vendedores;
 
+    private List<Pedido> pedidos;
+    
     public PedidoController() {
         limpar();
     }
@@ -89,6 +91,13 @@ public class PedidoController implements Serializable {
         }
     }
 
+    public List<Pedido> getPedidos() {
+        if(pedidos == null) {
+            this.pedidos = repositorio.findAll();
+        }
+        return pedidos;
+    }
+    
     public FormaPagamento[] getFormasPagamento() {
         return FormaPagamento.values();
     }

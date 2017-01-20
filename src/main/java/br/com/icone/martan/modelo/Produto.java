@@ -63,6 +63,9 @@ public class Produto implements Serializable {
 
     public Produto() {
         this.ativo = true;
+        this.valorCusto = BigDecimal.ZERO;
+        this.valorVenda = BigDecimal.ZERO;
+        this.percentualLucro = BigDecimal.ZERO;
     }
 
     public int getEstoqueAtual() {
