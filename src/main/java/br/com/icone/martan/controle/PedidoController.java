@@ -52,7 +52,7 @@ public class PedidoController implements Serializable {
     private List<Usuario> vendedores;
 
     private List<Pedido> pedidos;
-    
+
     public PedidoController() {
         limpar();
     }
@@ -95,12 +95,12 @@ public class PedidoController implements Serializable {
     }
 
     public List<Pedido> getPedidos() {
-        if(pedidos == null) {
+        if (pedidos == null) {
             this.pedidos = repositorio.findAll();
         }
         return pedidos;
     }
-    
+
     public FormaPagamento[] getFormasPagamento() {
         return FormaPagamento.values();
     }
@@ -160,7 +160,7 @@ public class PedidoController implements Serializable {
 
         }
     }
-    
+
     public void removerItem() {
         pedido.getItens().remove(item);
         this.item = new ItemPedido();
@@ -179,7 +179,19 @@ public class PedidoController implements Serializable {
         return !isTemItem();
     }
     
+    public boolean isAdicionarAtivo() {
+        return isNaoTemItem() || pedido.isEmitido();
+    }
+
     public void emitir() {
         this.pedido.setStatus(StatusPedido.EMITIDO);
+        if (pedido.getId() == null) {
+            repositorio.create(pedido);
+        } else {
+            repositorio.edit(pedido);
+        }
+        //dar baixa no estouqe
+        JsfUtil.addSuccessMessage("Pedido emitido com sucesso!");
+
     }
 }
