@@ -60,6 +60,7 @@ public class PedidoController implements Serializable {
     private void limpar() {
         this.pedido = new Pedido();
         this.item = new ItemPedido();
+        this.usarEnderecoCliente = false;
         //this.item.setProduto(new Produto());
     }
 
@@ -85,6 +86,7 @@ public class PedidoController implements Serializable {
     public void salvar() {
         if (pedido.isNovo()) {
             repositorio.create(pedido);
+            this.pedidos = null;
             JsfUtil.addSuccessMessage("Pedido salvo com sucesso!");
         } else {
             repositorio.edit(pedido);
