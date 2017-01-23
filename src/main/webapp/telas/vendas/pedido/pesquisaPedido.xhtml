@@ -17,7 +17,7 @@
                     <p:commandButton value="Pesquisar"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
-                    <p:button value="Novo"/>
+                    <p:commandButton value="Novo" process="@this" action="cadastroPedido?faces-redirect=true" actionListener="#{pedidoController.novo()}"/>
                 </p:toolbarGroup>
             </p:toolbar>
 
@@ -52,7 +52,7 @@
 
             <p:dataTable id="pedidosTable" value="#{pedidoController.pedidos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="pedido" style="margin-top: 20px;" emptyMessage="Nenhum pedido encontrado." paginator="true" rows="20">
-                <p:column headerText="Número" style="text-align: center; width: 100px">
+                <p:column headerText="Número" style="text-align: center; width: 50px">
                     <h:outputText value="#{pedido.id}"/>
                 </p:column>
                 <p:column headerText="Cliente">
@@ -61,7 +61,7 @@
                 <p:column headerText="Vendedor">
                     <h:outputText value="#{pedido.vendedor.nome}"/>
                 </p:column>
-                <p:column headerText="Data de Criação" style="text-align: center; width: 140px">
+                <p:column headerText="Data de Criação" style="text-align: center; width: 100px">
                     <h:outputText value="#{pedido.dataCriacao}">
                         <f:convertDateTime pattern="dd/MM/yyyy" />
                     </h:outputText>

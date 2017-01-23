@@ -39,6 +39,11 @@ public class JsfUtil {
         FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg);
         FacesContext.getCurrentInstance().addMessage("successInfo", facesMsg);
     }
+    
+    public static void addWarnMessage(String msg) {
+        FacesMessage facesMsg = new FacesMessage(FacesMessage.SEVERITY_WARN, msg, msg);
+        FacesContext.getCurrentInstance().addMessage("Aviso", facesMsg);
+    }
 
     public static Throwable getRootCause(Throwable cause) {
         if (cause != null) {

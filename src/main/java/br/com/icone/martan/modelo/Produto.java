@@ -200,6 +200,14 @@ public class Produto implements Serializable {
         return this.codigoDeBarras != null;
     }
     
+    public void baixar(int quantidade) {
+        if(this.estoqueAtual >= quantidade) {
+            this.estoqueAtual -= quantidade; 
+        } else {
+            System.out.println("Não foi possivel tirar do estoque!");
+        }
+    }
+    
     @Override
     public String toString() {
         return "br.com.iconeinformartica.martan.modelo.Produto[ id=" + id + " ]";

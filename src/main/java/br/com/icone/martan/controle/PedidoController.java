@@ -178,20 +178,38 @@ public class PedidoController implements Serializable {
     public boolean isNaoTemItem() {
         return !isTemItem();
     }
-    
+
     public boolean isAdicionarAtivo() {
         return isNaoTemItem() || pedido.isEmitido();
     }
 
     public void emitir() {
-        this.pedido.setStatus(StatusPedido.EMITIDO);
-        if (pedido.getId() == null) {
-            repositorio.create(pedido);
-        } else {
-            repositorio.edit(pedido);
-        }
-        //dar baixa no estouqe
-        JsfUtil.addSuccessMessage("Pedido emitido com sucesso!");
+        boolean possuiTodosItens = true;
 
+        for (ItemPedido itemDoCarrinho : pedido.getItens()) {
+            if (itemDoCarrinho.isEstoqueInsuficiente()) {
+                possuiTodosItens = false;
+                break;
+            }
+        }
+
+        if (possuiTodosItens) {
+
+            for (ItemPedido itemDoCarrinho : pedido.getItens()) {
+                itemDoCarrinho.getProduto().baixar(itemDoCarrinho.getQuantidade());
+            }
+
+            this.pedido.setStatus(StatusPedido.EMITIDO);
+            if (pedido.getId() == null) {
+                repositorio.create(pedido);
+            } else {
+                repositorio.edit(pedido);
+            }
+            //dar baixa no estouqe
+            JsfUtil.addSuccessMessage("Pedido emitido com sucesso!");
+
+        } else {
+            JsfUtil.addWarnMessage("Infelizmente não há estoque para todos os itens!");
+        }
     }
 }

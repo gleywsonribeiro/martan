@@ -7,6 +7,7 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class ItemPedido implements Serializable {
     @Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorUnitario = BigDecimal.ZERO;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false)
     private Produto produto;
 
