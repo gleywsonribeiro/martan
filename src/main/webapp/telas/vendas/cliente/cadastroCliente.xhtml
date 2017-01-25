@@ -13,11 +13,11 @@
             <p:messages autoUpdate="true" closable="true"/>
             <p:toolbar style="margin-bottom: 5px">
                 <f:facet name="left">
-                    <p:commandButton value="Novo" icon="ui-icon-document" action="#{clienteController.novo()}" process="@this" update="@form"/>
-                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{clienteController.salvar()}" update="@form"/>
+                    <p:commandButton value="Novo" icon="fa fa-file" action="#{clienteController.novo()}" process="@this" update="@form"/>
+                    <p:commandButton value="Salvar" id="btSalvar" icon="fa fa-save" action="#{clienteController.salvar()}" update="@form"/>
                 </f:facet>
                 <f:facet name="right">
-                    <p:button value="Pesquisar" icon="ui-icon-search" outcome="pesquisaCliente"/>
+                    <p:button value="Pesquisar" icon="fa fa-search" outcome="pesquisaCliente"/>
                 </f:facet>
             </p:toolbar>
             <!--<h1>Cadastro do Produto</h1>-->
