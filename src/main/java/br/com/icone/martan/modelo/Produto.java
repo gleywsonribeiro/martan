@@ -7,6 +7,8 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -172,8 +174,12 @@ public class Produto implements Serializable {
 
     public void calculaValorVenda() {
         BigDecimal valor = getValorCusto().add(getValorCusto().multiply(getPercentualLucro().divide(new BigDecimal("100"))));
-        //double valor = getValorCusto() + getValorCusto() * getPercentualLucro() / 100;
         setValorVenda(valor);
+    }
+    
+    public void calculaPercentual() {
+        BigDecimal percent = (getValorVenda().subtract(getValorCusto())).multiply(new BigDecimal("100").divide(getValorCusto(), MathContext.DECIMAL128));
+        setPercentualLucro(percent);
     }
 
     @Override

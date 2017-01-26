@@ -69,6 +69,18 @@
                                         process="@this"/>
                             </p:inputNumber>
                         </h:panelGrid>
+                        
+                        <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em; color: darkgreen">
+                            <p:outputLabel value="Valor de Venda" for="venda"/>
+                            <p:inputNumber id="venda" size="15" symbol="R$ " decimalSeparator=","
+                                           value="#{cadastroProdutoController.produto.valorVenda}"
+                                           thousandSeparator="." decimalPlaces="2" required="true"
+                                           requiredMessage="Por favor, informe o valor de venda">
+                                <p:ajax update="percentual"
+                                        listener="#{cadastroProdutoController.produto.calculaPercentual()}"
+                                        process="@this"/>
+                            </p:inputNumber>
+                        </h:panelGrid>
 
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Lucro (%)" for="percentual"/>
@@ -85,14 +97,6 @@
                             <p:outputLabel value="Ativo?" for="ativo"/>
                             <p:inputSwitch id="ativo" value="#{cadastroProdutoController.produto.ativo}" offLabel="não" onLabel="sim"/>
                         </h:panelGrid>
-
-                        <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em; color: darkgreen">
-                            <p:outputLabel value="Valor de Venda" for="venda"/>
-                            <h:outputText id="venda" value="#{cadastroProdutoController.produto.valorVenda}">
-                                <f:convertNumber type="currency"/>
-                            </h:outputText>
-                        </h:panelGrid>
-
 
                         <h:panelGrid style="clear: left; float: left; text-align: center; margin-top: 10px"
                                      rendered="#{cadastroProdutoController.produto.possuiCodBarras}">

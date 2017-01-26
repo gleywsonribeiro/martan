@@ -14,8 +14,8 @@
             <h:outputText value="Novo Pedido" style="font-size: x-large; font-weight: 400; color: darkblue"/>
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
-                    <p:commandButton value="Novo" action="#{pedidoController.novo()}" process="@this" update="@form"/> 
-                    <p:commandButton value="Salvar" id="botaoSalvar" process="@this painel :formPedido:tabview:entrega" action="#{pedidoController.salvar()}" update="@form"/>
+                    <p:commandButton value="Novo" icon="fa fa-file" action="#{pedidoController.novo()}" process="@this" update="@form"/> 
+                    <p:commandButton value="Salvar" icon="fa fa-save" id="botaoSalvar" process="@this painel :formPedido:tabview:entrega" action="#{pedidoController.salvar()}" update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <p:commandButton id="emitir" icon="fa fa-check" value="Emitir" disabled="#{pedidoController.pedido.emitido}" process="@this painel :formPedido:tabview:entrega" action="#{pedidoController.emitir()}" update="@form"/>
