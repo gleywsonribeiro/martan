@@ -22,8 +22,8 @@ import javax.persistence.Table;
  * @author Gleywson
  */
 @Entity
-@Table(name = "item_pedido")
-public class ItemPedido implements Serializable {
+@Table(name = "item_entrada")
+public class ItemEntrada implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -42,7 +42,7 @@ public class ItemPedido implements Serializable {
 
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Pedido pedido;
+    private Entrada entrada;
 
 //    public ItemPedido() {
 //        this.pedido = new Pedido();
@@ -89,12 +89,12 @@ public class ItemPedido implements Serializable {
         this.produto = produto;
     }
 
-    public Pedido getPedido() {
-        return pedido;
+    public Entrada getEntrada() {
+        return entrada;
     }
 
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
+    public void setEntrada(Entrada entrada) {
+        this.entrada = entrada;
     }
 
     
@@ -107,10 +107,10 @@ public class ItemPedido implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ItemPedido)) {
+        if (!(object instanceof ItemEntrada)) {
             return false;
         }
-        ItemPedido other = (ItemPedido) object;
+        ItemEntrada other = (ItemEntrada) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -119,15 +119,15 @@ public class ItemPedido implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.icone.martan.modelo.ItemPedido[ id=" + id + " ]";
+        return "br.com.icone.martan.modelo.ItemEntrada[ id=" + id + " ]";
     }
     
-    public boolean isEstoqueSuficiente() {
-        return this.getPedido().isEmitido() || this.getProduto().getEstoqueAtual() >= this.getQuantidade();
-    }
-    
-    public boolean isEstoqueInsuficiente() {
-        return !this.isEstoqueSuficiente();
-    }
+//    public boolean isEstoqueSuficiente() {
+//        return this.getEntrada().isEmitido() || this.getProduto().getEstoqueAtual() >= this.getQuantidade();
+//    }
+//    
+//    public boolean isEstoqueInsuficiente() {
+//        return !this.isEstoqueSuficiente();
+//    }
 
 }

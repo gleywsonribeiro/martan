@@ -8,10 +8,15 @@ package br.com.icone.martan.modelo;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
 
 /**
  *
@@ -25,13 +30,28 @@ public class Entrada implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(name = "nr_documento", length = 50)
     private String numeroDocumento;
-    private String serie;
-    private Fornecedor fornecedor;
-    private Date dataEmissao;
-    private Date dataEntrada;
-    private BigDecimal valorTotal;
+    @Column(length = 5)
+    private int serie;
     
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Fornecedor fornecedor;
+    
+    @Column(name = "dt_emissao")
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dataEmissao;
+    
+    @Column(name = "dt_entrada")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dataEntrada;
+    
+    @Column(name = "vl_total", scale = 10, precision = 2)
+    private BigDecimal valorTotal = BigDecimal.ZERO;
+    
+    
+//    private List<ItemPedido> itens;
     
 
     public Long getId() {
@@ -42,6 +62,56 @@ public class Entrada implements Serializable {
         this.id = id;
     }
 
+    public String getNumeroDocumento() {
+        return numeroDocumento;
+    }
+
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
+    }
+
+    public int getSerie() {
+        return serie;
+    }
+
+    public void setSerie(int serie) {
+        this.serie = serie;
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+
+    public Date getDataEmissao() {
+        return dataEmissao;
+    }
+
+    public void setDataEmissao(Date dataEmissao) {
+        this.dataEmissao = dataEmissao;
+    }
+
+    public Date getDataEntrada() {
+        return dataEntrada;
+    }
+
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
+    }
+
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    
+    
     @Override
     public int hashCode() {
         int hash = 0;
