@@ -47,13 +47,13 @@ public class Pedido implements Serializable {
     @Column(name = "dt_entrega", nullable = false)
     private Date dataEntrega;
 
-    @Column(name = "valor_frete", nullable = false, precision = 10, scale = 2)
+    @Column(name = "valor_frete", nullable = false, precision = 2, scale = 10)
     private BigDecimal valorFrete = BigDecimal.ZERO;
 
-    @Column(name = "valor_desconto", nullable = false, precision = 10, scale = 2)
+    @Column(name = "valor_desconto", nullable = false, precision = 2, scale = 10)
     private BigDecimal valorDesconto = BigDecimal.ZERO;
 
-    @Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
+    @Column(name = "valor_total", nullable = false, precision = 2, scale = 10)
     private BigDecimal valorTotal = BigDecimal.ZERO;
 
     @Enumerated(EnumType.STRING)

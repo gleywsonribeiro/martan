@@ -42,10 +42,10 @@ public class Produto implements Serializable {
     @Column(nullable = false, length = 75)
     private String descricao;
 
-    @Column(nullable = false, name = "vl_venda", scale = 10, precision = 2)
+    @Column(nullable = false, name = "vl_venda", scale = 2, precision = 10)
     private BigDecimal valorVenda;
 
-    @Column(nullable = false, name = "vl_custo", scale = 10, precision = 2)
+    @Column(nullable = false, name = "vl_custo", scale = 2, precision = 10)
     private BigDecimal valorCusto;
     
     @Column(name = "codigo_barras", length = 50)

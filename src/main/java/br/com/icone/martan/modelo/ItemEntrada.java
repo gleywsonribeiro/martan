@@ -33,7 +33,7 @@ public class ItemEntrada implements Serializable {
     @Column(nullable = false, length = 3)
     private int quantidade = 1;
 
-    @Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
+    @Column(name = "valor_unitario", nullable = false, precision = 2, scale = 10)
     private BigDecimal valorUnitario = BigDecimal.ZERO;
 
     @ManyToOne(cascade = CascadeType.MERGE)

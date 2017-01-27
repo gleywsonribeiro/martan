@@ -47,7 +47,7 @@ public class Entrada implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataEntrada;
     
-    @Column(name = "vl_total", scale = 10, precision = 2)
+    @Column(name = "vl_total", scale = 2, precision = 10)
     private BigDecimal valorTotal = BigDecimal.ZERO;
     
     
