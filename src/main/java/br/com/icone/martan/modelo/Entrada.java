@@ -9,13 +9,16 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 /**
@@ -35,6 +38,8 @@ public class Entrada implements Serializable {
     @Column(length = 5)
     private int serie;
     
+    TipoDocumentoFiscal documentoFiscal;
+    
     @ManyToOne
     @JoinColumn(nullable = false)
     private Fornecedor fornecedor;
@@ -50,8 +55,8 @@ public class Entrada implements Serializable {
     @Column(name = "vl_total", scale = 2, precision = 10)
     private BigDecimal valorTotal = BigDecimal.ZERO;
     
-    
-//    private List<ItemPedido> itens;
+    @OneToMany(mappedBy = "entrada", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ItemEntrada> itens;
     
 
     public Long getId() {
@@ -110,8 +115,22 @@ public class Entrada implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    
-    
+    public List<ItemEntrada> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemEntrada> itens) {
+        this.itens = itens;
+    }
+
+    public TipoDocumentoFiscal getDocumentoFiscal() {
+        return documentoFiscal;
+    }
+
+    public void setDocumentoFiscal(TipoDocumentoFiscal documentoFiscal) {
+        this.documentoFiscal = documentoFiscal;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

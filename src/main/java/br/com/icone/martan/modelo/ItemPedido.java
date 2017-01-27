@@ -43,6 +43,7 @@ public class ItemPedido implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Pedido pedido;
+    
 
 //    public ItemPedido() {
 //        this.pedido = new Pedido();
