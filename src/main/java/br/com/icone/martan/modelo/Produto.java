@@ -51,7 +51,7 @@ public class Produto implements Serializable {
     @Column(name = "codigo_barras", length = 50)
     private String codigoDeBarras;
 
-    @Column(nullable = false, name = "percent_lucro", scale = 10, precision = 2)
+    @Column(nullable = false, name = "percent_lucro", scale = 2, precision = 10)
     private BigDecimal percentualLucro;
     
     @Column(nullable = false, name = "estoque_atual")
