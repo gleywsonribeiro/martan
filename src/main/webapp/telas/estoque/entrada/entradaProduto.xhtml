@@ -15,7 +15,7 @@
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <p:commandButton value="Nova Entrada" process="@this" update="@form"/> 
-                    <p:commandButton value="Salvar" id="botaoSalvar" process="@this painel :formPedido:tabview:entrega" update="@form"/>
+                    <p:commandButton value="Salvar" id="botaoSalvar"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <!--<p:commandButton id="emitir" value="Emitir" process="@this" update="@form"/>-->
@@ -32,19 +32,19 @@
 
             <p:panel>
                 
-                <ui:include src="/WEB-INF/include/pedido/capa.xhtml" />
+                <!--<ui:include src="/WEB-INF/include/pedido/capa.xhtml" />-->
 
                 <p:tabView style="margin-top: 20px" id="tabview">
                     <p:tab title="Itens">
-                        <ui:include src="/WEB-INF/include/pedido/itens.xhtml"/>
+                        <!--<ui:include src="/WEB-INF/include/pedido/itens.xhtml"/>-->
                         <!--                    <ui:include src="../WEB-INF/template/pedido/itensPedido.xhtml" />-->
                     </p:tab>
                     <p:tab title="Dados de entrega">
-                        <ui:include src="/WEB-INF/include/pedido/dadosEntrega.xhtml" />
+                        <!--<ui:include src="/WEB-INF/include/pedido/dadosEntrega.xhtml" />-->
                     </p:tab>
                     <p:tab title="Observação">
                         <h:panelGroup layout="block" style="padding: 3px">
-                            <p:inputTextarea rows="6" style="width: 100%; resize: none" value="#{pedidoController.pedido.observacao}"/>
+                            
                         </h:panelGroup>
                     </p:tab>
                 </p:tabView>
