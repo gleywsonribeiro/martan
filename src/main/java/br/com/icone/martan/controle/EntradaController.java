@@ -25,14 +25,25 @@ import javax.inject.Inject;
 public class EntradaController implements Serializable {
 
     private Entrada entrada;
+    private List<Entrada> entradas;
     
     @Inject
-    private EntradaFacade repoistorio;
+    private EntradaFacade repositorio;
     @Inject
     private FornecedorFacade repositorioFornecedor;
     
     public EntradaController() {
         this.entrada = new Entrada();
+    }
+    
+    public void salvar() {
+        if(entrada.getId() == null) {
+            repositorio.create(entrada);
+        } else {
+            repositorio.edit(entrada);
+        }
+//        entrada = new Entrada();
+        entradas = null;
     }
 
     public Entrada getEntrada() {
@@ -50,5 +61,14 @@ public class EntradaController implements Serializable {
     public TipoDocumentoFiscal[] getDocFiscais() {
         return TipoDocumentoFiscal.values();
     }
+
+    public List<Entrada> getEntradas() {
+        if(entradas == null) {
+            entradas = repositorio.findAll();
+        }
+        return entradas;
+    }
+    
+    
     
 }
