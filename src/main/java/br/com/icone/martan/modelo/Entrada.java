@@ -58,6 +58,12 @@ public class Entrada implements Serializable {
     @OneToMany(mappedBy = "entrada", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ItemEntrada> itens;
 
+    public Entrada() {
+        this.dataEntrada = new Date();
+    }
+    
+    
+
     public Long getId() {
         return id;
     }
