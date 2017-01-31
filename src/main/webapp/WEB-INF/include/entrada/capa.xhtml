@@ -14,8 +14,8 @@
             <f:convertDateTime pattern="dd/MM/yyyy"/>
         </p:outputLabel>
 
-        <p:outputLabel value="Data de Emissão"/>
-        <p:calendar pattern="dd/MM/yyyy" value="#{entradaController.entrada.dataEmissao}"/>
+        <p:outputLabel value="Data de Emissão" for="tdEmissao"/>
+        <p:calendar id="tdEmissao" pattern="dd/MM/yyyy" value="#{entradaController.entrada.dataEmissao}" required="true"/>
 
         <p:outputLabel value="Fornecedor" for="fornecedor"/>
         <p:selectOneMenu id="fornecedor" value="#{entradaController.entrada.fornecedor}" converter="#{fornecedorConverter}"
@@ -35,7 +35,7 @@
         <p:inputText id="documento" value="#{entradaController.entrada.numeroDocumento}" required="true"/>
 
         <p:outputLabel value="Nº Série" for="serie"/>
-        <p:inputText id="serie" value="#{entradaController.entrada.serie}" />
+        <p:inputText id="serie" value="#{entradaController.entrada.serie}" required="true"/>
 
         <h:panelGroup>
             <p:panelGrid columns="2">

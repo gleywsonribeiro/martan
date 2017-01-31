@@ -45,6 +45,10 @@ public class EntradaController implements Serializable {
 //        entrada = new Entrada();
         entradas = null;
     }
+    
+    public void novo() {
+        this.entrada = new Entrada();
+    }
 
     public Entrada getEntrada() {
         return entrada;
@@ -68,7 +72,6 @@ public class EntradaController implements Serializable {
         }
         return entradas;
     }
-    
     
     
 }
