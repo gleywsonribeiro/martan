@@ -15,7 +15,7 @@
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <p:commandButton value="Nova Entrada" process="@this" update="@form"/> 
-                    <p:commandButton value="Salvar" id="botaoSalvar"/>
+                    <p:commandButton value="Salvar" id="botaoSalvar" update="@form" action="#{entradaController.salvar()}"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <!--<p:commandButton id="emitir" value="Emitir" process="@this" update="@form"/>-->

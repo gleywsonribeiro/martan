@@ -122,7 +122,7 @@
                     </h:panelGrid>
                     <h:panelGrid style="clear: left; float: left">
                         <p:outputLabel value="Observações" for="obs"/>
-                        <p:inputTextarea id="obs" value="" rows="4" cols="75" autoResize="false" style="resize: none"/>
+                        <p:inputTextarea id="obs" value="#{fornecedorController.fornecedor.observacao}" rows="4" cols="75" autoResize="false" style="resize: none"/>
                     </h:panelGrid>
                 </p:fieldset>
             </p:panel>
