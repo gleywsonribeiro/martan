@@ -43,8 +43,7 @@ public class PedidoController implements Serializable {
 
     private Pedido pedido;
 
-    private Produto produtoCorrente;
-
+//    private Produto produtoCorrente;
     private ItemPedido item;
 
     private boolean usarEnderecoCliente;
@@ -54,14 +53,7 @@ public class PedidoController implements Serializable {
     private List<Pedido> pedidos;
 
     public PedidoController() {
-        limpar();
-    }
-
-    private void limpar() {
-        this.pedido = new Pedido();
-        this.item = new ItemPedido();
-        this.usarEnderecoCliente = false;
-        //this.item.setProduto(new Produto());
+        novo();
     }
 
     public Pedido getPedido() {
@@ -80,7 +72,9 @@ public class PedidoController implements Serializable {
     }
 
     public void novo() {
-        limpar();
+        this.pedido = new Pedido();
+        this.item = new ItemPedido();
+        this.usarEnderecoCliente = false;
     }
 
     public void salvar() {
@@ -117,14 +111,13 @@ public class PedidoController implements Serializable {
         this.usarEnderecoCliente = usarEnderecoCliente;
     }
 
-    public Produto getProdutoCorrente() {
-        return produtoCorrente;
-    }
-
-    public void setProdutoCorrente(Produto produtoCorrente) {
-        this.produtoCorrente = produtoCorrente;
-    }
-
+//    public Produto getProdutoCorrente() {
+//        return produtoCorrente;
+//    }
+//
+//    public void setProdutoCorrente(Produto produtoCorrente) {
+//        this.produtoCorrente = produtoCorrente;
+//    }
     public ItemPedido getItem() {
         return item;
     }

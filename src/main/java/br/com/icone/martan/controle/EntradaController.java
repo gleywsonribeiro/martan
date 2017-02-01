@@ -7,9 +7,12 @@ package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Entrada;
 import br.com.icone.martan.modelo.Fornecedor;
+import br.com.icone.martan.modelo.ItemEntrada;
+import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.TipoDocumentoFiscal;
 import br.com.icone.martan.modelo.repositorio.EntradaFacade;
 import br.com.icone.martan.modelo.repositorio.FornecedorFacade;
+import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -27,13 +30,17 @@ public class EntradaController implements Serializable {
     private Entrada entrada;
     private List<Entrada> entradas;
     
+    private ItemEntrada item;
+    
     @Inject
     private EntradaFacade repositorio;
     @Inject
     private FornecedorFacade repositorioFornecedor;
+    @Inject
+    private ProdutoFacade repositorioProduto;
     
     public EntradaController() {
-        this.entrada = new Entrada();
+        novo();
     }
     
     public void salvar() {
@@ -46,8 +53,15 @@ public class EntradaController implements Serializable {
         entradas = null;
     }
     
+    public void adicionarItem() {
+        entrada.getItens().add(item);
+        item.setEntrada(entrada);
+        this.item = new ItemEntrada();
+    }
+    
     public void novo() {
         this.entrada = new Entrada();
+        this.item = new ItemEntrada();
     }
 
     public Entrada getEntrada() {
@@ -72,6 +86,17 @@ public class EntradaController implements Serializable {
         }
         return entradas;
     }
+
+    public ItemEntrada getItem() {
+        return item;
+    }
+
+    public void setItem(ItemEntrada item) {
+        this.item = item;
+    }
     
+    public List<Produto> buscaProdutoDescricao(String descricao) {
+        return repositorioProduto.getProdutosPorDescricao(descricao);
+    }
     
 }

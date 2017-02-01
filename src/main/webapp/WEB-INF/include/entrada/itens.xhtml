@@ -8,25 +8,24 @@
     <h:panelGrid columns="4" id="item">
         <h:panelGroup>
             <p:watermark for="sku" value="Código"/>
-            <p:inputText id="sku" style="width: 110px" value="#{pedidoController.item.produto.id}"/>
+            <p:inputText id="sku" style="width: 110px" value="#{entradaController.item.produto.id}"/>
         </h:panelGroup>
 
         <h:panelGroup>
             <p:watermark for="produto" value="Produto"/>
-            <p:autoComplete id="produto" value="#{pedidoController.item.produto}" converter="#{produtoConverter}"
+            <p:autoComplete id="produto" value="#{entradaController.item.produto}" converter="#{produtoConverter}"
                             var="produto" itemLabel="#{produto.descricao}" itemValue="#{produto}"
-                            completeMethod="#{pedidoController.buscaProdutoDescricao}" forceSelection="true"
+                            completeMethod="#{entradaController.buscaProdutoDescricao}" forceSelection="true"
                             >
                 <p:ajax update="item" event="itemSelect"/>
             </p:autoComplete>
 
         </h:panelGroup>
 
-        <p:spinner id="qtd" value="#{pedidoController.item.quantidade}" required="true" min="1" size="5"/>
+        <p:spinner id="qtd" value="#{entradaController.item.quantidade}" required="true" min="1" size="5"/>
 
-        <p:commandButton style="margin-left: 5px" value="Inserir" icon="fa fa-shopping-cart" process="item"
-                         update="itens :formPedido:totalPedido :formPedido:subtotal item" action="#{pedidoController.adicionar()}"
-                         disabled="#{pedidoController.adicionarAtivo}"/>
+        <p:commandButton style="margin-left: 5px" icon="fa fa-check" title="Adicionar" process="item"
+                         update="itens item" action="#{pedidoController.adicionar()}" />
     </h:panelGrid>
 
     <p:dataTable id="itens" paginatorAlwaysVisible="false" paginatorPosition="bottom" value="#{pedidoController.pedido.itens}" 
