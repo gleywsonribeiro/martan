@@ -6,11 +6,17 @@
 package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 
 /**
  *
@@ -22,17 +28,21 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false, length = 50)
     private String nome;
-    
+
     @Column(nullable = false, length = 50)
     private String login;
-    
+
     @Column(nullable = false, length = 50)
     private String senha;
-    
-    
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "grupo_id"))
+    private List<Grupo> grupos = new ArrayList<Grupo>();
+
     public Long getId() {
         return id;
     }
@@ -65,6 +75,16 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -89,5 +109,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "modelo.Usuario[ id=" + id + " ]";
     }
-    
+
 }
