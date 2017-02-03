@@ -7,6 +7,7 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -60,6 +61,7 @@ public class Entrada implements Serializable {
 
     public Entrada() {
         this.dataEntrada = new Date();
+        itens = new ArrayList<ItemEntrada>();
     }
     
     

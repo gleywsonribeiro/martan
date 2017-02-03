@@ -9,13 +9,13 @@
     <ui:define name="titulo">Entrada de Produto</ui:define>
 
     <ui:define name="corpo">
-        <h:form id="formPedido">
+        <h:form id="formEntrada">
             <p:messages autoUpdate="true" closable="true"/>
             <h:outputText value="Entrada de Produto" style="font-size: x-large; font-weight: 400; color: darkblue"/>
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <p:commandButton value="Nova Entrada" process="@this" update="@form" action="#{entradaController.novo()}"/> 
-                    <p:commandButton value="Salvar" id="botaoSalvar" update="@form" action="#{entradaController.salvar()}"/>
+                    <p:commandButton value="Salvar" id="botaoSalvar" update="@this painel :formEntrada:tabview:itens" action="#{entradaController.salvar()}"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <!--<p:commandButton id="emitir" value="Emitir" process="@this" update="@form"/>-->
