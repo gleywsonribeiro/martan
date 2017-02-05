@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 
 /**
  *
@@ -20,7 +21,7 @@ import javax.faces.view.ViewScoped;
 @Named(value = "grupoController")
 @ViewScoped
 public class GrupoController implements Serializable {
-
+    @Inject
     private GrupoFacade repositorio;
     private Grupo grupo;
     private List<Grupo> grupos;
@@ -36,6 +37,13 @@ public class GrupoController implements Serializable {
             repositorio.edit(grupo);
         }
         JsfUtil.addSuccessMessage("Salvo com sucesso!");
+        grupo = new Grupo();
+        grupos = null;
+    }
+    
+    public void remover() {
+        repositorio.remove(grupo);
+        JsfUtil.addSuccessMessage("Excluído com sucesso!");
         grupo = new Grupo();
         grupos = null;
     }

@@ -31,7 +31,7 @@
                     <p:inputText id="nome" size="60"/>
                 </h:panelGrid>
 
-                <p:dataTable id="produtoTable" value="#{cadastroProdutoController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                <p:dataTable id="grupoTable" value="#{cadastroProdutoController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                              var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                     <p:column headerText="Código" style="text-align: center; width: 100px">
                         <h:outputText value="#{produto.id}"/>

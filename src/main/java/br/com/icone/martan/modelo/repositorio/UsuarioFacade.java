@@ -6,6 +6,7 @@
 package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.Usuario;
+import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +16,7 @@ import javax.persistence.PersistenceContext;
  * @author Gleywson
  */
 @Stateless
-public class UsuarioFacade extends AbstractFacade<Usuario> {
+public class UsuarioFacade extends AbstractFacade<Usuario> implements Serializable {
 
     @PersistenceContext(unitName = "martanPU")
     private EntityManager em;

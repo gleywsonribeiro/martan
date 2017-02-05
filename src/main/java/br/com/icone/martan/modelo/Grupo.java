@@ -5,19 +5,21 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "grupo")
 public class Grupo implements Serializable {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, length = 40)
     private String nome;
+    @Column(nullable = false, length = 80)
     private String descricao;
 
-    @Id
-    @GeneratedValue
     public Long getId() {
         return id;
     }
@@ -26,7 +28,6 @@ public class Grupo implements Serializable {
         this.id = id;
     }
 
-    @Column(nullable = false, length = 40)
     public String getNome() {
         return nome;
     }
@@ -35,7 +36,6 @@ public class Grupo implements Serializable {
         this.nome = nome;
     }
 
-    @Column(nullable = false, length = 80)
     public String getDescricao() {
         return descricao;
     }

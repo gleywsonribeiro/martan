@@ -35,7 +35,10 @@
                 <p:menuitem value="Contas a Receber"/>
                 <p:menuitem value="Contas Bancárias"/>
                 <p:menuitem value="Categorias" outcome="/telas/categoria/cadastro"/>
-                <p:menuitem value="Funcionários"/>
+                <p:submenu label="Controle de Acesso">
+                    <p:menuitem value="Grupos" outcome="/telas/usuario/grupos"/>
+                    <p:menuitem value="Usuários" outcome="/telas/usuario/usuarios"/>
+                </p:submenu>
                 <p:menuitem value="Entidades"/>
                 <p:menuitem value="Métodos de Pagamento"/>
                 <p:separator/>
@@ -52,7 +55,6 @@
                 <p:menuitem value="Compras" />
                 <p:menuitem value="Fluxo de Caixa" />
                 <p:separator/>
-                <p:menuitem value="Comissão de Vendedores" />
                 <p:menuitem value="Produtos em Estoque(R$) Custo e Venda" />
                 <p:menuitem value="Estatística de Produtos (+/-Vendidos)" />
                 <p:menuitem value="Produtos com consignados" />
