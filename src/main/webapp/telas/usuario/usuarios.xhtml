@@ -14,20 +14,48 @@
         <h:form id="form">
 
             <p:panel header="Cadastro de Usuários">
+
                 <h:panelGrid columns="2" id="painel">
                     <p:outputLabel for="nome" value="Nome" />
                     <p:inputText id="nome" value="#{usuarioController.usuario.nome}" required="true" />
 
                     <p:outputLabel for="login" value="Login" />
                     <p:inputText id="login" value="#{usuarioController.usuario.login}" required="true"/>
-                    
+
                     <p:outputLabel for="senha" value="Senha"/>
-                    <p:password id="senha" value="#{usuarioController.usuario.senha}" required="true" match="confirmacao"/>
-                    
+                    <p:password id="senha" value="#{usuarioController.usuario.senha}" required="true" match="confirmacao" feedback="true"/>
+
                     <p:outputLabel for="confirmacao" value="Confirme a Senha"/>
-                    <p:password id="confirmacao" value="#{usuarioController.usuario.senha}" required="true"/>
+                    <p:password id="confirmacao" value="#{usuarioController.usuario.senha}" required="true" feedback="true"/>
                 </h:panelGrid>
-                <p:commandButton value="Salvar" action="#{grupoController.salvar()}" update="painel grupoTable"/>
+
+                <p:fieldset legend="Papéis" toggleable="true" style="margin-top: 10px">
+                    <h:panelGrid columns="3">
+                        <p:outputLabel value="Papel" for="papel"/>
+                        <p:inputText value="" id="papel" />
+                        <p:commandButton value="Adicionar"/>
+                    </h:panelGrid>
+
+                    <p:dataTable id="papeis" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                                 var="grupo" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5" rendered="#{not empty usuarioController.usuario.grupos}">
+                        <p:column headerText="Código" style="text-align: center; width: 100px">
+                            <h:outputText value="#{grupo.id}"/>
+                        </p:column>
+
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{grupo.nome}"/>
+                        </p:column>
+                        
+                        <p:column>
+                            <p:commandButton icon="ui-icon-trash"/>
+                        </p:column>
+
+                        
+                    </p:dataTable>
+
+                </p:fieldset>
+
+                <p:commandButton value="Salvar" action="#{grupoController.salvar()}" update="painel grupoTable" style="margin-top: 10px"/>
             </p:panel>
 
             <p:dataTable id="grupoTable" value="#{grupoController.grupos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
