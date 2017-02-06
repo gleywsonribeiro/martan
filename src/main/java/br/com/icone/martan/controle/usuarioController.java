@@ -5,10 +5,12 @@
  */
 package br.com.icone.martan.controle;
 
+import br.com.icone.martan.modelo.Grupo;
 import br.com.icone.martan.modelo.Usuario;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
 import br.com.icone.martan.util.JsfUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -20,30 +22,36 @@ import javax.inject.Inject;
  */
 @Named(value = "usuarioController")
 @ViewScoped
-public class usuarioController implements Serializable{
-    
+public class usuarioController implements Serializable {
+
     private Usuario usuario;
     private List<Usuario> usuarios;
-    
+    private List<Grupo> gruposSelecionados;
+
     @Inject
     private UsuarioFacade repositorio;
-    
+
     public usuarioController() {
         this.usuario = new Usuario();
+        this.gruposSelecionados = new ArrayList<Grupo>();
     }
-    
+
     public void salvar() {
-        if(usuario.getId() == null) {
+        usuario.setGrupos(gruposSelecionados);
+        if (usuario.getId() == null) {
             repositorio.create(usuario);
         } else {
             repositorio.edit(usuario);
         }
         JsfUtil.addSuccessMessage("Salvo com sucesso!");
+        gruposSelecionados.clear();
         this.usuario = new Usuario();
         this.usuarios = null;
     }
-    
-    
+
+    public void novo() {
+        this.usuario = new Usuario();
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -53,14 +61,25 @@ public class usuarioController implements Serializable{
         this.usuario = usuario;
     }
 
+    public List<Grupo> getGruposSelecionados() {
+        return gruposSelecionados;
+    }
+
+    public void setGruposSelecionados(List<Grupo> gruposSelecionados) {
+        this.gruposSelecionados = gruposSelecionados;
+    }
+
     public List<Usuario> getUsuarios() {
-        if(usuarios == null) {
+        if (usuarios == null) {
             usuarios = repositorio.findAll();
         }
         return usuarios;
     }
-    
-    
-    
-}
 
+    public void remover() {
+        this.repositorio.remove(usuario);
+        this.usuario = new Usuario();
+        this.usuarios = null;
+    }
+
+}

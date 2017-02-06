@@ -10,7 +10,7 @@
 
     <ui:define name="corpo">
 
-        <p:growl autoUpdate="true"/>
+        <p:messages autoUpdate="true" closable="true"/>
         <h:form id="form">
 
             <p:panel header="Cadastro de Usuários">
@@ -29,52 +29,36 @@
                     <p:password id="confirmacao" value="#{usuarioController.usuario.senha}" required="true" feedback="true"/>
                 </h:panelGrid>
 
-                <p:fieldset legend="Papéis" toggleable="true" style="margin-top: 10px">
-                    <h:panelGrid columns="3">
-                        <p:outputLabel value="Papel" for="papel"/>
-                        <p:inputText value="" id="papel" />
-                        <p:commandButton value="Adicionar"/>
-                    </h:panelGrid>
+                <h:panelGrid columns="1">
+                    <p:outputLabel value="Permissão" for="grupo"/>
+                    <p:selectManyMenu id="grupo" value="#{usuarioController.gruposSelecionados}"
+                                     required="true" requiredMessage="Escolha um grupo" converter="#{grupoConverter}">
+                        <f:selectItems value="#{grupoController.grupos}" var="grupo"
+                                       itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
+                    </p:selectManyMenu>
+                </h:panelGrid>
 
-                    <p:dataTable id="papeis" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                                 var="grupo" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5" rendered="#{not empty usuarioController.usuario.grupos}">
-                        <p:column headerText="Código" style="text-align: center; width: 100px">
-                            <h:outputText value="#{grupo.id}"/>
-                        </p:column>
-
-                        <p:column headerText="Nome">
-                            <h:outputText value="#{grupo.nome}"/>
-                        </p:column>
-                        
-                        <p:column>
-                            <p:commandButton icon="ui-icon-trash"/>
-                        </p:column>
-
-                        
-                    </p:dataTable>
-
-                </p:fieldset>
-
-                <p:commandButton value="Salvar" action="#{grupoController.salvar()}" update="painel grupoTable" style="margin-top: 10px"/>
+                <p:commandButton value="Salvar" action="#{usuarioController.salvar()}" update="painel usuarioTable" style="margin-top: 10px"/>
+                <p:commandButton value="Novo" action="#{usuarioController.novo()}" update="painel" style="margin-top: 10px"/>
             </p:panel>
 
-            <p:dataTable id="grupoTable" value="#{grupoController.grupos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                         var="grupo" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+            <p:dataTable id="usuarioTable" value="#{usuarioController.usuarios}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="usuario" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                 <p:column headerText="Código" style="text-align: center; width: 100px">
-                    <h:outputText value="#{grupo.id}"/>
+                    <h:outputText value="#{usuario.id}"/>
                 </p:column>
 
                 <p:column headerText="Nome">
-                    <h:outputText value="#{grupo.nome}"/>
+                    <h:outputText value="#{usuario.nome}"/>
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
                     <p:commandButton icon="ui-icon-pencil" title="Editar" process="@this" update=":form:painel">
-                        <f:setPropertyActionListener target="#{grupoController.grupo}" value="#{grupo}"/>
+                        <f:setPropertyActionListener target="#{usuarioController.usuario}" value="#{usuario}"/>
                     </p:commandButton>
-                    <p:commandButton icon="ui-icon-trash" title="Excluir" update="grupoTable :form:painel" action="#{grupoController.remover()}">
-                        <p:confirm message="Tem certeza que deseja este grupo?" icon="ui-icon-alert"/>
-                        <f:setPropertyActionListener target="#{grupoController.grupo}" value="#{grupo}"/>
+                    <p:commandButton icon="ui-icon-trash" title="Excluir" update="usuarioTable :form:painel" process="@this" action="#{usuarioController.remover()}">
+                        <p:confirm message="Tem certeza que deseja remover #{usuario.nome}?" icon="ui-icon-alert"/>
+                        <f:setPropertyActionListener target="#{usuarioController.usuario}" value="#{usuario}"/>
                     </p:commandButton>                
                 </p:column>
             </p:dataTable>
