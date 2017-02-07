@@ -26,25 +26,25 @@ public class usuarioController implements Serializable {
 
     private Usuario usuario;
     private List<Usuario> usuarios;
-    private List<Grupo> gruposSelecionados;
+//    private List<Grupo> gruposSelecionados;
 
     @Inject
     private UsuarioFacade repositorio;
 
     public usuarioController() {
         this.usuario = new Usuario();
-        this.gruposSelecionados = new ArrayList<Grupo>();
+//        this.gruposSelecionados = new ArrayList<Grupo>();
     }
 
     public void salvar() {
-        usuario.setGrupos(gruposSelecionados);
+//        usuario.setGrupos(gruposSelecionados);
         if (usuario.getId() == null) {
             repositorio.create(usuario);
         } else {
             repositorio.edit(usuario);
         }
         JsfUtil.addSuccessMessage("Salvo com sucesso!");
-        gruposSelecionados.clear();
+//        gruposSelecionados.clear();
         this.usuario = new Usuario();
         this.usuarios = null;
     }
@@ -61,13 +61,13 @@ public class usuarioController implements Serializable {
         this.usuario = usuario;
     }
 
-    public List<Grupo> getGruposSelecionados() {
-        return gruposSelecionados;
-    }
-
-    public void setGruposSelecionados(List<Grupo> gruposSelecionados) {
-        this.gruposSelecionados = gruposSelecionados;
-    }
+//    public List<Grupo> getGruposSelecionados() {
+//        return gruposSelecionados;
+//    }
+//
+//    public void setGruposSelecionados(List<Grupo> gruposSelecionados) {
+//        this.gruposSelecionados = gruposSelecionados;
+//    }
 
     public List<Usuario> getUsuarios() {
         if (usuarios == null) {

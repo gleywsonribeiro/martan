@@ -31,7 +31,7 @@
 
                 <h:panelGrid columns="1">
                     <p:outputLabel value="Permissão" for="grupo"/>
-                    <p:selectManyMenu id="grupo" value="#{usuarioController.gruposSelecionados}"
+                    <p:selectManyMenu id="grupo" value="#{usuarioController.usuario.grupos}"
                                      required="true" requiredMessage="Escolha um grupo" converter="#{grupoConverter}">
                         <f:selectItems value="#{grupoController.grupos}" var="grupo"
                                        itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
@@ -39,7 +39,7 @@
                 </h:panelGrid>
 
                 <p:commandButton value="Salvar" action="#{usuarioController.salvar()}" update="painel usuarioTable" style="margin-top: 10px"/>
-                <p:commandButton value="Novo" action="#{usuarioController.novo()}" update="painel" style="margin-top: 10px"/>
+                <p:commandButton value="Novo" action="#{usuarioController.novo()}" process="@this" update="painel" style="margin-top: 10px"/>
             </p:panel>
 
             <p:dataTable id="usuarioTable" value="#{usuarioController.usuarios}" paginatorAlwaysVisible="false" paginatorPosition="bottom"

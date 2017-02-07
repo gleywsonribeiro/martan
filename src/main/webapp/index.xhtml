@@ -14,12 +14,6 @@
             <p>Seja bem-vindo ao Sistema Martan</p>
             <p:commandButton value="ajax" action="#{ajaxController.atualizar()}"/>
 
-            <p>
-                <h3>Responsive</h3>
-                <p:selectManyCheckbox id="grid2" layout="responsive" columns="3">
-                    <f:selectItems value="#{grupoController.grupos}" var="grupo" itemLabel="#{grupo.nome}" itemValue="#{grupo}" />
-                </p:selectManyCheckbox>
-            </p>
         </center>
         <!--        <p:panelGrid columns="2">
                     <h:outputText value="Interleaved 2 of 5" />
