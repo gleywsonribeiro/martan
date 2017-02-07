@@ -6,7 +6,7 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:panelGrid id="painel" columns="4" style="margin-top: 10px; width: 100%" columnClasses="rotulo, campo, rotulo, campo">
-        <p:outputLabel value="Número"/>
+        <p:outputLabel value="Código"/>
         <p:inputText value="#{entradaController.entrada.id}" disabled="true" size="10"/>
 
         <p:outputLabel value="Data de Entrada"/>
@@ -15,7 +15,7 @@
         </p:outputLabel>
 
         <p:outputLabel value="Data de Emissão" for="tdEmissao"/>
-        <p:calendar id="tdEmissao" pattern="dd/MM/yyyy" value="#{entradaController.entrada.dataEmissao}" required="true"/>
+        <p:calendar id="tdEmissao" pattern="dd/MM/yyyy" locale="pt" value="#{entradaController.entrada.dataEmissao}" required="true"/>
 
         <p:outputLabel value="Fornecedor" for="fornecedor"/>
         <p:selectOneMenu id="fornecedor" value="#{entradaController.entrada.fornecedor}" converter="#{fornecedorConverter}"

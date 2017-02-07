@@ -54,7 +54,7 @@
                         </h:panelGrid>
                         <h:panelGrid style="float: left" id="grupoNascimento">
                             <p:outputLabel value="Data de Nascimento" for="dtCadastro" rendered="#{clienteController.cliente.tipo eq 'FISICA'}"/>
-                            <p:calendar id="dtCadastro" value="#{clienteController.cliente.dataNascimento}" size="15"
+                            <p:calendar id="dtCadastro" locale="pt" value="#{clienteController.cliente.dataNascimento}" size="15"
                                         rendered="#{clienteController.cliente.tipo eq 'FISICA'}" pattern="dd/MM/yyyy" />
                         </h:panelGrid>
                         <h:panelGrid style="float: left" id="grupoRG">
