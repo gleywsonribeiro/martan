@@ -55,6 +55,9 @@
                 <p:column headerText="Número" style="text-align: center; width: 50px">
                     <h:outputText value="#{pedido.id}"/>
                 </p:column>
+                <p:column headerText="Status">
+                    <h:outputText value="#{pedido.status.descricao}"/>
+                </p:column>
                 <p:column headerText="Cliente">
                     <h:outputText value="#{pedido.cliente.nome}"/>
                 </p:column>

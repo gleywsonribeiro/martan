@@ -60,7 +60,14 @@ public class EntradaController implements Serializable {
     public void adicionarItem() {
         entrada.getItens().add(item);
         item.setEntrada(entrada);
+        entrada.recalcularTotalNota();
         this.item = new ItemEntrada();
+    }
+    
+    public void removerItem() {
+        entrada.getItens().remove(item);
+        this.item = new ItemEntrada();
+        entrada.recalcularTotalNota();
     }
     
     public void novo() {

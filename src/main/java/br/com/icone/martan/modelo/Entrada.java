@@ -166,4 +166,13 @@ public class Entrada implements Serializable {
         return "br.com.icone.martan.modelo.Entrada[ id=" + id + " ]";
     }
     
+    public void recalcularTotalNota() {
+        BigDecimal total = BigDecimal.ZERO;
+        
+        for (ItemEntrada item : itens) {
+            total = total.add(item.getValorTotal());
+        }
+        setValorTotal(total);
+    }
+    
 }

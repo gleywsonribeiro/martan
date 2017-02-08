@@ -7,7 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:panelGrid id="entrega" columns="4" style="width: 100%" >
         <p:outputLabel value="Data da entrega" for="dataEntrega"/>
-        <p:calendar id="dataEntrega" size="10" pattern="dd/MM/yyyy" disabled="#{pedidoController.pedido.emitido}"
+        <p:calendar id="dataEntrega" size="10" pattern="dd/MM/yyyy" locale="pt" disabled="#{pedidoController.pedido.emitido}"
                     value="#{pedidoController.pedido.dataEntrega}" required="true"/>
 
         <p:outputLabel value="Endereço do Cliente" for="endcliente"/>

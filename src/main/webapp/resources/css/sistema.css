@@ -11,7 +11,8 @@ body {
     padding: 5px 0px;
     margin-bottom: 20px;
     height: 30px;
-    background-color: #545454;
+    background-color: #006699;
+    /*background-color:  #545454;*/
     color: #fff;
     box-shadow: 0px 2px 2px #ccc;
 }/*
@@ -27,8 +28,8 @@ body {
 
 */#conteudo {
     padding: 0px 8px;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 0%;
+    margin-right: 0%;
 }
 
 /*input {
