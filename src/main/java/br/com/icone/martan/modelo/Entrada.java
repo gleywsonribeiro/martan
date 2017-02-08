@@ -67,7 +67,6 @@ public class Entrada implements Serializable {
         itens = new ArrayList<ItemEntrada>();
     }
     
-    
 
     public Long getId() {
         return id;
@@ -173,6 +172,16 @@ public class Entrada implements Serializable {
             total = total.add(item.getValorTotal());
         }
         setValorTotal(total);
+    }
+    
+    public boolean isExisteItem(ItemEntrada novo) {
+        for (ItemEntrada item : itens) {
+            if(item.getProduto().equals(novo.getProduto())) {
+                item.setQuantidade(item.getQuantidade() + novo.getQuantidade());
+                return true;
+            }
+        }
+        return false;
     }
     
 }

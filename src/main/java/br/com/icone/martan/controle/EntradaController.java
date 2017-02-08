@@ -30,22 +30,22 @@ public class EntradaController implements Serializable {
 
     private Entrada entrada;
     private List<Entrada> entradas;
-    
+
     private ItemEntrada item;
-    
+
     @Inject
     private EntradaFacade repositorio;
     @Inject
     private FornecedorFacade repositorioFornecedor;
     @Inject
     private ProdutoFacade repositorioProduto;
-    
+
     public EntradaController() {
         novo();
     }
-    
+
     public void salvar() {
-        if(entrada.getId() == null) {
+        if (entrada.getId() == null) {
             repositorio.create(entrada);
             JsfUtil.addSuccessMessage("Entrada registrada com sucesso!");
         } else {
@@ -53,23 +53,28 @@ public class EntradaController implements Serializable {
             JsfUtil.addSuccessMessage("Entrada alterada com sucesso!");
         }
 //        entrada = new Entrada();
-        
+
         entradas = null;
     }
-    
+
     public void adicionarItem() {
-        entrada.getItens().add(item);
-        item.setEntrada(entrada);
+        if (entrada.isExisteItem(item)) {
+            //Adicao feita no proprio metodo de verificacao
+        } else {
+            entrada.getItens().add(item);
+            item.setEntrada(entrada);
+        }
+
         entrada.recalcularTotalNota();
         this.item = new ItemEntrada();
     }
-    
+
     public void removerItem() {
         entrada.getItens().remove(item);
         this.item = new ItemEntrada();
         entrada.recalcularTotalNota();
     }
-    
+
     public void novo() {
         this.entrada = new Entrada();
         this.item = new ItemEntrada();
@@ -82,17 +87,17 @@ public class EntradaController implements Serializable {
     public void setEntrada(Entrada entrada) {
         this.entrada = entrada;
     }
-    
+
     public List<Fornecedor> getFornecedores() {
         return repositorioFornecedor.findAll();
     }
-    
+
     public TipoDocumentoFiscal[] getDocFiscais() {
         return TipoDocumentoFiscal.values();
     }
 
     public List<Entrada> getEntradas() {
-        if(entradas == null) {
+        if (entradas == null) {
             entradas = repositorio.findAll();
         }
         return entradas;
@@ -105,9 +110,9 @@ public class EntradaController implements Serializable {
     public void setItem(ItemEntrada item) {
         this.item = item;
     }
-    
+
     public List<Produto> buscaProdutoDescricao(String descricao) {
         return repositorioProduto.getProdutosPorDescricao(descricao);
     }
-    
+
 }
