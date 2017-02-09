@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:panelGrid columns="5" id="item">
+    <h:panelGrid columns="6" id="item">
         <h:panelGroup>
             <p:watermark for="sku" value="Código"/>
             <p:inputText id="sku" style="width: 110px" value="#{entradaController.item.produto.id}"/>
@@ -22,13 +22,13 @@
 
         </h:panelGroup>
 
-<!--        <h:panelGroup>
+        <h:panelGroup>
             <p:watermark for="valorUnitario" value="Valor Unitário" />
             <p:inputNumber id="valorUnitario" size="10" symbol="R$ " decimalSeparator=","
-                           value="" thousandSeparator="." decimalPlaces="2" required="true"
+                           value="#{entradaController.item.valorUnitario}" thousandSeparator="." decimalPlaces="2" required="true"
                            requiredMessage="Por favor, informe o valor unitário do produto">
             </p:inputNumber>
-        </h:panelGroup>-->
+        </h:panelGroup>
 
         <p:spinner id="qtd" value="#{entradaController.item.quantidade}" required="true" min="1" size="5"/>
 

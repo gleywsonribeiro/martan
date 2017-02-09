@@ -52,11 +52,11 @@
                         </h:panelGrid>
                         <h:panelGrid style="clear: left; float: left">
                             <p:outputLabel value="Estoque Máximo" for="maximo"/>
-                            <p:spinner id="maximo" size="8" value="#{cadastroProdutoController.produto.estoqueMaximo}" required="true"/>
+                            <p:spinner id="maximo" size="8" min="0" value="#{cadastroProdutoController.produto.estoqueMaximo}" required="true"/>
                         </h:panelGrid>
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Estoque Mínimo" for="minimo"/>
-                            <p:spinner id="minimo" size="8" value="#{cadastroProdutoController.produto.estoqueMinimo}" required="true"/>
+                            <p:spinner id="minimo" size="8" min="0" value="#{cadastroProdutoController.produto.estoqueMinimo}" required="true"/>
                         </h:panelGrid>
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Valor de Custo" for="custo"/>
