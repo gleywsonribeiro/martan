@@ -99,7 +99,7 @@ public class ItemEntrada implements Serializable {
 
     
     public BigDecimal getValorTotal() {
-        return this.getProduto().getValorCusto().multiply(new BigDecimal(this.getQuantidade()));
+        return this.getValorUnitario().multiply(new BigDecimal(this.getQuantidade()));
         //return this.produto.getValorVenda() * this.quantidade;
     }
     

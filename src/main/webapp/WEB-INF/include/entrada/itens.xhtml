@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
-    <h:panelGrid columns="4" id="item">
+    <h:panelGrid columns="5" id="item">
         <h:panelGroup>
             <p:watermark for="sku" value="Código"/>
             <p:inputText id="sku" style="width: 110px" value="#{entradaController.item.produto.id}"/>
@@ -21,6 +21,14 @@
             </p:autoComplete>
 
         </h:panelGroup>
+
+<!--        <h:panelGroup>
+            <p:watermark for="valorUnitario" value="Valor Unitário" />
+            <p:inputNumber id="valorUnitario" size="10" symbol="R$ " decimalSeparator=","
+                           value="" thousandSeparator="." decimalPlaces="2" required="true"
+                           requiredMessage="Por favor, informe o valor unitário do produto">
+            </p:inputNumber>
+        </h:panelGroup>-->
 
         <p:spinner id="qtd" value="#{entradaController.item.quantidade}" required="true" min="1" size="5"/>
 
@@ -44,9 +52,14 @@
             <h:outputText value="#{item.produto.descricao}"/>
         </p:column>
         <p:column headerText="Valor Unitário" style="width: 100px; text-align: right">
-            <h:outputText value="#{item.produto.valorCusto}">
-                <f:convertNumber type="currency"/>
-            </h:outputText>
+            <p:inputNumber size="10" symbol="R$ " decimalSeparator=","
+                           value="#{item.valorUnitario}"
+                           thousandSeparator="." decimalPlaces="2" required="true"
+                           requiredMessage="Por favor, informe o valor unitário do produto #{item.produto.descricao}">
+                <p:ajax update="itens :formEntrada:totalNota :formEntrada:subtotal"
+                        listener="#{entradaController.entrada.recalcularTotalNota()}"
+                        process="@this"/>
+            </p:inputNumber>
         </p:column>
         <p:column headerText="Quantidade" style="width: 80px;" >
             <p:spinner value="#{item.quantidade}" min="1" size="5">
@@ -54,7 +67,7 @@
                         update="itens :formEntrada:totalNota :formEntrada:subtotal" />
             </p:spinner>
         </p:column>
-        
+
         <p:column headerText="Total" style="width: 100px; text-align: right">
             <h:outputText value="#{item.valorTotal}">
                 <f:convertNumber type="currency"/>
