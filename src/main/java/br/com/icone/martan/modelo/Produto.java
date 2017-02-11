@@ -7,8 +7,6 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -50,9 +48,6 @@ public class Produto implements Serializable {
     
     @Column(name = "codigo_barras", length = 50)
     private String codigoDeBarras;
-
-    @Column(nullable = false, name = "percent_lucro", scale = 2, precision = 10)
-    private BigDecimal percentualLucro;
     
     @Column(nullable = false, name = "estoque_atual")
     private int estoqueAtual;
@@ -67,7 +62,6 @@ public class Produto implements Serializable {
         this.ativo = true;
         this.valorCusto = BigDecimal.ZERO;
         this.valorVenda = BigDecimal.ZERO;
-        this.percentualLucro = BigDecimal.ZERO;
     }
 
     public int getEstoqueAtual() {
@@ -164,24 +158,6 @@ public class Produto implements Serializable {
         this.valorCusto = valorCusto;
     }
 
-    public BigDecimal getPercentualLucro() {
-        return percentualLucro;
-    }
-
-    public void setPercentualLucro(BigDecimal percentualLucro) {
-        this.percentualLucro = percentualLucro;
-    }
-
-    public void calculaValorVenda() {
-        BigDecimal valor = getValorCusto().add(getValorCusto().multiply(getPercentualLucro().divide(new BigDecimal("100"))));
-        setValorVenda(valor);
-    }
-    
-    public void calculaPercentual() {
-        BigDecimal percent = (getValorVenda().subtract(getValorCusto())).multiply(new BigDecimal("100").divide(getValorCusto(), MathContext.DECIMAL128));
-        setPercentualLucro(percent);
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -215,11 +191,7 @@ public class Produto implements Serializable {
     }
     
     public void adicionar(int quantidade) {
-        if(quantidade < 0) {
-            System.out.println("Não foi possível adicionar");
-        } else {
-            this.estoqueAtual += quantidade;
-        }
+        this.estoqueAtual += quantidade;
     }
     
     @Override

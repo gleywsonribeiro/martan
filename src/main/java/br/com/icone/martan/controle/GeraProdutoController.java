@@ -42,8 +42,6 @@ public class GeraProdutoController implements Serializable{
             produto.setDescricao("Produto " + (i+1));
             produto.setEstoqueMinimo(5);
             produto.setEstoqueMaximo(10);
-            produto.setPercentualLucro(new BigDecimal("0"));
-            produto.setValorCusto(new BigDecimal("150"));
             produto.setValorVenda(new BigDecimal("150"));
             produtoFacade.create(produto);
         }
