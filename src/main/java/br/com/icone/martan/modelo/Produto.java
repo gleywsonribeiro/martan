@@ -214,6 +214,14 @@ public class Produto implements Serializable {
         }
     }
     
+    public void adicionar(int quantidade) {
+        if(quantidade < 0) {
+            System.out.println("Não foi possível adicionar");
+        } else {
+            this.estoqueAtual += quantidade;
+        }
+    }
+    
     @Override
     public String toString() {
         return "br.com.iconeinformartica.martan.modelo.Produto[ id=" + id + " ]";

@@ -45,6 +45,11 @@ public class EntradaController implements Serializable {
     }
 
     public void salvar() {
+        
+        for(ItemEntrada itemDaNota:entrada.getItens()) {
+            itemDaNota.getProduto().adicionar(itemDaNota.getQuantidade());
+        }
+        
         if (entrada.getId() == null) {
             repositorio.create(entrada);
             JsfUtil.addSuccessMessage("Entrada registrada com sucesso!");
@@ -59,7 +64,7 @@ public class EntradaController implements Serializable {
 
     public void adicionarItem() {
         if (entrada.isExisteItem(item)) {
-            //Adicao feita no proprio metodo de verificacao
+            JsfUtil.addWarnMessage("Item já existe!");
         } else {
             entrada.getItens().add(item);
             item.setEntrada(entrada);

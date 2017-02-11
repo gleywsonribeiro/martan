@@ -52,14 +52,9 @@
             <h:outputText value="#{item.produto.descricao}"/>
         </p:column>
         <p:column headerText="Valor Unitário" style="width: 100px; text-align: right">
-            <p:inputNumber size="10" symbol="R$ " decimalSeparator=","
-                           value="#{item.valorUnitario}"
-                           thousandSeparator="." decimalPlaces="2" required="true"
-                           requiredMessage="Por favor, informe o valor unitário do produto #{item.produto.descricao}">
-                <p:ajax update="itens :formEntrada:totalNota :formEntrada:subtotal"
-                        listener="#{entradaController.entrada.recalcularTotalNota()}"
-                        process="@this"/>
-            </p:inputNumber>
+            <h:outputText value="#{item.valorUnitario}">
+                <f:convertNumber type="currency"/>
+            </h:outputText>
         </p:column>
         <p:column headerText="Quantidade" style="width: 80px;" >
             <p:spinner value="#{item.quantidade}" min="1" size="5">

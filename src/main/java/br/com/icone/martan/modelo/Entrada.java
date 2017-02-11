@@ -177,11 +177,15 @@ public class Entrada implements Serializable {
     public boolean isExisteItem(ItemEntrada novo) {
         for (ItemEntrada item : itens) {
             if(item.getProduto().equals(novo.getProduto())) {
-                item.setQuantidade(item.getQuantidade() + novo.getQuantidade());
+//                item.setQuantidade(item.getQuantidade() + novo.getQuantidade());
                 return true;
             }
         }
         return false;
     }
     
+    
+//    public void atualizarEstoque() {
+//        for(ItemEntrada item: itens)
+//    }
 }
