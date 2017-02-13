@@ -47,7 +47,10 @@ public class EntradaController implements Serializable {
     public void salvar() {
         
         for(ItemEntrada itemDaNota:entrada.getItens()) {
-            itemDaNota.getProduto().adicionar(itemDaNota.getQuantidade());
+            Produto p = itemDaNota.getProduto();
+            int quantidade  = itemDaNota.getQuantidade();
+            p.adicionar(quantidade);
+            repositorioProduto.edit(p);
         }
         
         if (entrada.getId() == null) {
