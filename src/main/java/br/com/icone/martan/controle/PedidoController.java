@@ -20,11 +20,14 @@ import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
 import br.com.icone.martan.util.JsfUtil;
 import br.com.icone.martan.util.mail.Mailer;
 import com.outjected.email.api.MailMessage;
+import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
+import org.apache.velocity.tools.generic.NumberTool;
 
 /**
  *
@@ -97,7 +100,10 @@ public class PedidoController implements Serializable {
         MailMessage message = mailer.novaMensagem();
         message.to(this.pedido.getCliente().getContato().getEmail())
                 .subject("Pedido " + pedido.getId())
-                .bodyHtml("<strong>Valor total:</strong> " + pedido.getValorTotal())
+                .bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template")))
+                .put("pedido", this.pedido)
+                .put("numberTool", new NumberTool())
+                .put("locale", new Locale("pt", "BR"))
                 .send();
         JsfUtil.addSuccessMessage("Email enviado com sucesso!");
     }
