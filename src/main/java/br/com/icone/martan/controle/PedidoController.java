@@ -18,6 +18,8 @@ import br.com.icone.martan.modelo.repositorio.PedidoFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
 import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.mail.Mailer;
+import com.outjected.email.api.MailMessage;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -40,6 +42,9 @@ public class PedidoController implements Serializable {
     private ClienteFacade clienteRepository;
     @Inject
     private ProdutoFacade produtoRepository;
+    
+    @Inject
+    private Mailer mailer; 
 
     private Pedido pedido;
 
@@ -86,6 +91,15 @@ public class PedidoController implements Serializable {
             repositorio.edit(pedido);
             JsfUtil.addSuccessMessage("Pedido alterado com sucesso com sucesso!");
         }
+    }
+    
+    public void enviarPorEmail() {
+        MailMessage message = mailer.novaMensagem();
+        message.to(this.pedido.getCliente().getContato().getEmail())
+                .subject("Pedido " + pedido.getId())
+                .bodyHtml("<strong>Valor total:</strong> " + pedido.getValorTotal())
+                .send();
+        JsfUtil.addSuccessMessage("Email enviado com sucesso!");
     }
 
     public List<Pedido> getPedidos() {

@@ -20,7 +20,7 @@
                 <p:toolbarGroup align="right">
                     <p:commandButton id="emitir" icon="fa fa-check" value="Emitir" disabled="#{pedidoController.pedido.emitido}" process="@this painel :formPedido:tabview:entrega" action="#{pedidoController.emitir()}" update="@form"/>
                     <p:commandButton id="cancelar" value="Cancelar" icon="fa fa-remove" disabled="#{pedidoController.pedido.naoEmitido}"/>
-                    <p:commandButton id="enviar" value="Enviar por e-mail" icon="fa fa-send" disabled="#{pedidoController.pedido.novo}"/>
+                    <p:commandButton id="enviar" value="Enviar por e-mail" icon="fa fa-send" disabled="#{pedidoController.pedido.novo}" process="@this" action="#{pedidoController.enviarPorEmail()}"/>
                     <p:commandButton value="Imprimir" type="button" icon="fa fa-print" >
                         <p:printer target="formPedido" />
                     </p:commandButton>
