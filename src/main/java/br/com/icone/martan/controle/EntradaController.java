@@ -54,7 +54,8 @@ public class EntradaController implements Serializable {
             int quantidadeProdutoEstoque = p.getEstoqueAtual();
             
             Double custoProdutoEstoque = p.getValorCusto().doubleValue();
-            Double custoProdutoNota = itemDaNota.getValorUnitario().doubleValue();
+            Double totalNota = itemDaNota.getValorUnitario().doubleValue();
+            
             
             Double custoMedio = (custoProdutoEstoque + custoProdutoNota) / (quantidadeProdutoEstoque + quantidadeProdutoNota);
             
