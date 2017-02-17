@@ -17,6 +17,7 @@ import br.com.icone.martan.util.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -48,8 +49,19 @@ public class EntradaController implements Serializable {
         
         for(ItemEntrada itemDaNota:entrada.getItens()) {
             Produto p = itemDaNota.getProduto();
-            int quantidade  = itemDaNota.getQuantidade();
-            p.adicionar(quantidade);
+            
+            int quantidadeProdutoNota  = itemDaNota.getQuantidade();
+            int quantidadeProdutoEstoque = p.getEstoqueAtual();
+            
+            Double custoProdutoEstoque = p.getValorCusto().doubleValue();
+            Double custoProdutoNota = itemDaNota.getValorUnitario().doubleValue();
+            
+            Double custoMedio = (custoProdutoEstoque + custoProdutoNota) / (quantidadeProdutoEstoque + quantidadeProdutoNota);
+            
+            //Atualiza o estoque e o custo médio
+            p.adicionar(quantidadeProdutoNota);
+            p.setValorCusto(new BigDecimal(custoMedio.toString()));
+            
             repositorioProduto.edit(p);
         }
         
@@ -64,6 +76,11 @@ public class EntradaController implements Serializable {
 
         entradas = null;
     }
+    
+    private void realizaCustoMedio() {
+        
+    }
+    
 
     public void adicionarItem() {
         if (entrada.isExisteItem(item)) {

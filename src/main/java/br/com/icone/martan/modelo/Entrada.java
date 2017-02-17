@@ -184,6 +184,18 @@ public class Entrada implements Serializable {
         return false;
     }
     
+    public boolean isNovo() {
+        return id == null;
+    }
+    
+    public boolean isEditavel() {
+        return isNovo();
+    }
+    
+    public boolean isNaoEditavel() {
+        return !isEditavel();
+    }
+    
     
 //    public void atualizarEstoque() {
 //        for(ItemEntrada item: itens)

@@ -10,32 +10,32 @@
         <p:inputText value="#{entradaController.entrada.id}" disabled="true" size="10"/>
 
         <p:outputLabel value="Data de Entrada"/>
-        <p:outputLabel value="#{entradaController.entrada.dataEntrada}" style="font-weight: bold">
+        <p:outputLabel value="#{entradaController.entrada.dataEntrada}" style="font-weight: bold" >
             <f:convertDateTime pattern="dd/MM/yyyy"/>
         </p:outputLabel>
 
         <p:outputLabel value="Data de Emissão" for="tdEmissao"/>
-        <p:calendar id="tdEmissao" pattern="dd/MM/yyyy" locale="pt" value="#{entradaController.entrada.dataEmissao}" required="true"/>
+        <p:calendar id="tdEmissao" pattern="dd/MM/yyyy" locale="pt" value="#{entradaController.entrada.dataEmissao}" required="true" disabled="#{entradaController.entrada.naoEditavel}"/>
 
         <p:outputLabel value="Fornecedor" for="fornecedor"/>
-        <p:selectOneMenu id="fornecedor" value="#{entradaController.entrada.fornecedor}" converter="#{fornecedorConverter}"
+        <p:selectOneMenu id="fornecedor" value="#{entradaController.entrada.fornecedor}" converter="#{fornecedorConverter}" disabled="#{entradaController.entrada.naoEditavel}"
                          required="true">
             <f:selectItem itemLabel="Selecione"/>
             <f:selectItems value="#{entradaController.fornecedores}" var="fornecedor" itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor}"/>
         </p:selectOneMenu>
 
         <p:outputLabel value="Documento Fiscal" for="docFiscal"/>
-        <p:selectOneMenu id="docFiscal" value="#{entradaController.entrada.documentoFiscal}" required="true"
+        <p:selectOneMenu id="docFiscal" value="#{entradaController.entrada.documentoFiscal}" required="true" disabled="#{entradaController.entrada.naoEditavel}"
                          >
             <f:selectItem itemLabel="Selecione"/>
             <f:selectItems value="#{entradaController.docFiscais}" var="docfiscal" itemLabel="#{docfiscal.descricao}" itemValue="#{docfiscal}"/>
         </p:selectOneMenu>
 
         <p:outputLabel value="Nº do Documento" for="documento"/>
-        <p:inputText id="documento" value="#{entradaController.entrada.numeroDocumento}" required="true"/>
+        <p:inputText id="documento" value="#{entradaController.entrada.numeroDocumento}" required="true" disabled="#{entradaController.entrada.naoEditavel}"/>
 
         <p:outputLabel value="Nº Série" for="serie"/>
-        <p:inputText id="serie" value="#{entradaController.entrada.serie}" required="true"/>
+        <p:inputText id="serie" value="#{entradaController.entrada.serie}" required="true" disabled="#{entradaController.entrada.naoEditavel}"/>
 
         <h:panelGroup>
             <p:panelGrid columns="2">
