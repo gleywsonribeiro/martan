@@ -47,17 +47,22 @@ public class EntradaController implements Serializable {
 
     public void salvar() {
         
+        if(entrada.getItens().isEmpty()) {
+            JsfUtil.addErrorMessage("A nota precisa de pelo menos um item!");
+            return;
+        } 
+        
         for(ItemEntrada itemDaNota:entrada.getItens()) {
             Produto p = itemDaNota.getProduto();
             
             int quantidadeProdutoNota  = itemDaNota.getQuantidade();
             int quantidadeProdutoEstoque = p.getEstoqueAtual();
             
-            Double custoProdutoEstoque = p.getValorCusto().doubleValue();
-            Double totalNota = itemDaNota.getValorUnitario().doubleValue();
+            Double totalEstoque = p.getValorCusto().doubleValue() * quantidadeProdutoEstoque;
+            Double totalNota = itemDaNota.getValorUnitario().doubleValue() * quantidadeProdutoNota;
             
             
-            Double custoMedio = (custoProdutoEstoque + custoProdutoNota) / (quantidadeProdutoEstoque + quantidadeProdutoNota);
+            Double custoMedio = (totalEstoque + totalNota) / (quantidadeProdutoEstoque + quantidadeProdutoNota);
             
             //Atualiza o estoque e o custo médio
             p.adicionar(quantidadeProdutoNota);
@@ -78,11 +83,6 @@ public class EntradaController implements Serializable {
         entradas = null;
     }
     
-    private void realizaCustoMedio() {
-        
-    }
-    
-
     public void adicionarItem() {
         if (entrada.isExisteItem(item)) {
             JsfUtil.addWarnMessage("Item já existe!");
