@@ -5,12 +5,10 @@
  */
 package br.com.icone.martan.controle;
 
-import br.com.icone.martan.modelo.Grupo;
 import br.com.icone.martan.modelo.Usuario;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -43,7 +41,7 @@ public class usuarioController implements Serializable {
         } else {
             repositorio.edit(usuario);
         }
-        JsfUtil.addSuccessMessage("Salvo com sucesso!");
+        JsfUtil.addMessage("Salvo com sucesso!");
 //        gruposSelecionados.clear();
         this.usuario = new Usuario();
         this.usuarios = null;

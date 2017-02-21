@@ -5,12 +5,10 @@
  */
 package br.com.icone.martan.controle;
 
-import br.com.icone.martan.modelo.Categoria;
 import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import javax.inject.Named;
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.Conversation;
@@ -53,7 +51,7 @@ public class CadastroProdutoController implements Serializable {
         }
         this.produto = new Produto();
         this.produtos = null;
-        JsfUtil.addSuccessMessage("Salvo com sucesso!");
+        JsfUtil.addMessage("Salvo com sucesso!");
     }
 
     public String novo() {
@@ -70,7 +68,7 @@ public class CadastroProdutoController implements Serializable {
         repositorio.remove(produto);
         produtos = null;
         produto = new Produto();
-        JsfUtil.addSuccessMessage("Produto removido com sucesso!");
+        JsfUtil.addMessage("Produto removido com sucesso!");
     }
 
     public Produto getProduto() {
@@ -98,7 +96,7 @@ public class CadastroProdutoController implements Serializable {
                 prod.setCodigoDeBarras(prod.getId());
                 repositorio.edit(prod);
             }
-            JsfUtil.addSuccessMessage("Códigos de barras gerados com sucesso!");
+            JsfUtil.addMessage("Códigos de barras gerados com sucesso!");
         }
 
     }

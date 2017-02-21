@@ -13,7 +13,7 @@ import br.com.icone.martan.modelo.TipoDocumentoFiscal;
 import br.com.icone.martan.modelo.repositorio.EntradaFacade;
 import br.com.icone.martan.modelo.repositorio.FornecedorFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -73,10 +73,10 @@ public class EntradaController implements Serializable {
         
         if (entrada.getId() == null) {
             repositorio.create(entrada);
-            JsfUtil.addSuccessMessage("Entrada registrada com sucesso!");
+            JsfUtil.addMessage("Entrada registrada com sucesso!");
         } else {
             repositorio.edit(entrada);
-            JsfUtil.addSuccessMessage("Entrada alterada com sucesso!");
+            JsfUtil.addMessage("Entrada alterada com sucesso!");
         }
 //        entrada = new Entrada();
 

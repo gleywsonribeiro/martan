@@ -7,7 +7,7 @@ package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Grupo;
 import br.com.icone.martan.modelo.repositorio.GrupoFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
@@ -36,14 +36,14 @@ public class GrupoController implements Serializable {
         } else {
             repositorio.edit(grupo);
         }
-        JsfUtil.addSuccessMessage("Salvo com sucesso!");
+        JsfUtil.addMessage("Salvo com sucesso!");
         grupo = new Grupo();
         grupos = null;
     }
     
     public void remover() {
         repositorio.remove(grupo);
-        JsfUtil.addSuccessMessage("Excluído com sucesso!");
+        JsfUtil.addMessage("Excluído com sucesso!");
         grupo = new Grupo();
         grupos = null;
     }

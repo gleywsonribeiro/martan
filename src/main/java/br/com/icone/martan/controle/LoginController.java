@@ -7,7 +7,7 @@ package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Usuario;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -42,17 +43,19 @@ public class LoginController implements Serializable {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession httpSession = (HttpSession) context.getExternalContext().getSession(false);
             //this.usuario = user;
-            usuario.setNome("Gleywson");
+            usuario.setNome("Administrador");
             httpSession.setAttribute("currentUser", usuario);
             return "index?faces-redirect=true";
         }
 
-        Usuario logado = repositorio.getUsuarioPorLogin(usuario.getLogin());
-
-        if (logado == null) {
+        Usuario logado = new Usuario();
+        
+        try {
+            logado = repositorio.getUsuarioPorLogin(usuario.getLogin());
+        } catch (NoResultException e) {
             JsfUtil.addErrorMessage("Usuario ou senha inválidos!");
-            return "";
         }
+
 
         if (usuario.getLogin().equals(logado.getLogin()) && usuario.getSenha().equals(logado.getSenha())) {
             FacesContext context = FacesContext.getCurrentInstance();

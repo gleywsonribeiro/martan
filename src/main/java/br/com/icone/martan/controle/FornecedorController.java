@@ -8,7 +8,7 @@ package br.com.icone.martan.controle;
 import br.com.icone.martan.modelo.Fornecedor;
 import br.com.icone.martan.modelo.TipoPessoa;
 import br.com.icone.martan.modelo.repositorio.FornecedorFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -55,10 +55,10 @@ public class FornecedorController implements Serializable {
     public void salvar() {
         if (fornecedor.getId() == null) {
             repositorio.create(fornecedor);
-            JsfUtil.addSuccessMessage("Fornecedor cadastrado com sucesso!");
+            JsfUtil.addMessage("Fornecedor cadastrado com sucesso!");
         } else {
             repositorio.edit(fornecedor);
-            JsfUtil.addSuccessMessage("Fornecedor alterado com sucesso!");
+            JsfUtil.addMessage("Fornecedor alterado com sucesso!");
         }
         this.fornecedor = new Fornecedor();
         this.fornecedores = null;
@@ -68,7 +68,7 @@ public class FornecedorController implements Serializable {
         this.repositorio.remove(fornecedor);
         fornecedor = new Fornecedor();
         fornecedores = null;
-        JsfUtil.addSuccessMessage("Fornecedor removido com sucesso!");
+        JsfUtil.addMessage("Fornecedor removido com sucesso!");
     }
 
     public TipoPessoa[] getTiposPessoa() {

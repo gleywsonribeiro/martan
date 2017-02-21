@@ -11,9 +11,9 @@ body {
     padding: 5px 0px;
     margin-bottom: 20px;
     height: 30px;
-    background-color: #006699;
+    /*background-color: #006699;*/
     /*background: linear-gradient(#878717, burlywood, #e3e304);  Standard syntax */
-    /*background-color:  #545454;*/
+    background-color:  #545454;
     color: #fff;
     box-shadow: 0px 2px 2px #ccc;
 }/*

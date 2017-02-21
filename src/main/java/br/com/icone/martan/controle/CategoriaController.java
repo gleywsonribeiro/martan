@@ -7,7 +7,7 @@ package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Categoria;
 import br.com.icone.martan.modelo.repositorio.CategoriaFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
@@ -45,7 +45,7 @@ public class CategoriaController implements Serializable {
     public void remover() {
         try {
             repositorio.remove(categoria);
-            JsfUtil.addSuccessMessage("Categoria " + categoria.getNome() + " removida com sucesso!");
+            JsfUtil.addMessage("Categoria " + categoria.getNome() + " removida com sucesso!");
             categoria = new Categoria();
             categorias = null;
         } catch (Exception e) {

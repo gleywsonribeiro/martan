@@ -17,7 +17,7 @@ import br.com.icone.martan.modelo.repositorio.ClienteFacade;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import br.com.icone.martan.util.mail.Mailer;
 import com.outjected.email.api.MailMessage;
 import com.outjected.email.impl.templating.velocity.VelocityTemplate;
@@ -89,10 +89,10 @@ public class PedidoController implements Serializable {
         if (pedido.isNovo()) {
             repositorio.create(pedido);
             this.pedidos = null;
-            JsfUtil.addSuccessMessage("Pedido salvo com sucesso!");
+            JsfUtil.addMessage("Pedido salvo com sucesso!");
         } else {
             repositorio.edit(pedido);
-            JsfUtil.addSuccessMessage("Pedido alterado com sucesso com sucesso!");
+            JsfUtil.addMessage("Pedido alterado com sucesso com sucesso!");
         }
     }
     
@@ -105,7 +105,7 @@ public class PedidoController implements Serializable {
                 .put("numberTool", new NumberTool())
                 .put("locale", new Locale("pt", "BR"))
                 .send();
-        JsfUtil.addSuccessMessage("Email enviado com sucesso!");
+        JsfUtil.addMessage("Email enviado com sucesso!");
     }
 
     public List<Pedido> getPedidos() {
@@ -219,7 +219,7 @@ public class PedidoController implements Serializable {
                 repositorio.edit(pedido);
             }
             //dar baixa no estouqe
-            JsfUtil.addSuccessMessage("Pedido emitido com sucesso!");
+            JsfUtil.addMessage("Pedido emitido com sucesso!");
 
         } else {
             JsfUtil.addWarnMessage("Infelizmente não há estoque para todos os itens!");

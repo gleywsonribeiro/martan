@@ -6,16 +6,13 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Cliente;
-import br.com.icone.martan.modelo.Estado;
 import br.com.icone.martan.modelo.TipoPessoa;
 import br.com.icone.martan.modelo.repositorio.ClienteFacade;
-import br.com.icone.martan.modelo.repositorio.EstadoFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
 /**
@@ -44,7 +41,7 @@ public class ClienteController implements Serializable{
     
     public void remover() {
         repositorio.remove(cliente);
-        JsfUtil.addSuccessMessage("Cliente removido com sucesso!");
+        JsfUtil.addMessage("Cliente removido com sucesso!");
         this.clientes = null;
     }
     
@@ -56,7 +53,7 @@ public class ClienteController implements Serializable{
         }
         this.cliente = new Cliente();
         this.clientes = null;
-        JsfUtil.addSuccessMessage("Cliente inserido com sucesso!");
+        JsfUtil.addMessage("Cliente inserido com sucesso!");
     }
 
     public Cliente getCliente() {

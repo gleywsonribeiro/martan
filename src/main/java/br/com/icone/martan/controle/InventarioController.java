@@ -7,9 +7,8 @@ package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
-import br.com.icone.martan.util.JsfUtil;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javax.faces.application.FacesMessage;
@@ -56,7 +55,7 @@ public class InventarioController implements Serializable {
         for (Produto item : produtos) {
             repositorio.edit(item);
         }
-        JsfUtil.addSuccessMessage("Inventário finalizado com sucesso!");
+        JsfUtil.addMessage("Inventário finalizado com sucesso!");
     }
 
 }
