@@ -42,7 +42,7 @@ public class Endereco implements Serializable {
     @ManyToOne
     private Estado estado;
     
-    @Column(nullable = false, length = 9)
+    @Column(length = 9)
     private String cep;
     
     public Long getId() {

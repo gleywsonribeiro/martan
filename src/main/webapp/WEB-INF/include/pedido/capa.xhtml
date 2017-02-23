@@ -31,8 +31,10 @@
                         disabled="#{pedidoController.pedido.emitido}"
                         forceSelection="true" id="cliente" dropdown="true"
                         required="true" requiredMessage="Escolha o cliente">
-
+            <p:ajax update=":formPedido:tabview:entrega"/>
         </p:autoComplete>
+
+
 
         <p:outputLabel value="Forma de pagamento" for="pagamento"/>
         <p:selectOneMenu id="pagamento" value="#{pedidoController.pedido.formaPagamento}" required="true"

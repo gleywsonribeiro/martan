@@ -130,6 +130,10 @@ public class PedidoController implements Serializable {
     public void setUsarEnderecoCliente(boolean usarEnderecoCliente) {
         this.usarEnderecoCliente = usarEnderecoCliente;
     }
+    
+    public List<Cliente> getClientes() {
+        return clienteRepository.findAll();
+    } 
 
 //    public Produto getProdutoCorrente() {
 //        return produtoCorrente;
@@ -171,7 +175,10 @@ public class PedidoController implements Serializable {
                 pedido.setEnderecoEntrega(new Endereco());
             }
 
+        } else {
+            JsfUtil.addWarnMessage("Selecione um cliente antes!");
         }
+//        System.out.println("Cliente:" + this.pedido.getCliente().getNome());
     }
 
     public void removerItem() {
