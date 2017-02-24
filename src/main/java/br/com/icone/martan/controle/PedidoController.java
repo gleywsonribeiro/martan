@@ -168,17 +168,11 @@ public class PedidoController implements Serializable {
 
     //Vai ser usado para selecionar o endereço do cliente e usar na entrega
     public void ajustarEndereco() {
-        if (pedido.getCliente() != null) {
-            if (usarEnderecoCliente) {
-                pedido.setEnderecoEntrega(this.pedido.getCliente().getEndereco());
-            } else {
-                pedido.setEnderecoEntrega(new Endereco());
-            }
-
-        } else {
-            JsfUtil.addWarnMessage("Selecione um cliente antes!");
-        }
-//        System.out.println("Cliente:" + this.pedido.getCliente().getNome());
+        this.pedido.setEnderecoEntrega(new Endereco());
+    }
+    
+    public void setMesmoEnderecoCliente() {
+        pedido.setEnderecoEntrega(pedido.getCliente().getEndereco());
     }
 
     public void removerItem() {

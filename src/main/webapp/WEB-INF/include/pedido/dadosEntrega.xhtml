@@ -7,7 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
-    <p:tooltip value="Usar endereço do cliente" for="usaEndCliente"/>
+    <p:tooltip value="Usar um endereço diferente para a entrega" for="usaEndCliente"/>
     <p:commandButton process="@this" id="usaEndCliente" icon="fa fa-copy" style="margin-left: 5px" update="entrega" action="#{pedidoController.ajustarEndereco()}"/>
 
     <h:panelGrid id="entrega" columns="2">
@@ -45,7 +45,7 @@
                 </p:selectOneMenu>
             </h:panelGrid>
 
-            <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em; color: darkgreen">
+            <h:panelGrid style="float: left;">
                 <p:outputLabel value="Cidade" for="cidade"/>
                 <p:selectOneMenu id="cidade" style="width: 100px" value="#{pedidoController.pedido.enderecoEntrega.cidade}"
                                  disabled="#{pedidoController.pedido.emitido}"

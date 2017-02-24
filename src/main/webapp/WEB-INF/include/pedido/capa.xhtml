@@ -31,7 +31,7 @@
                         disabled="#{pedidoController.pedido.emitido}"
                         forceSelection="true" id="cliente" dropdown="true"
                         required="true" requiredMessage="Escolha o cliente">
-            <!--<p:ajax update=":formPedido:tabview:entrega"/>-->
+            <p:ajax update=":formPedido:tabview:entrega" event="itemSelect" listener="${pedidoController.setMesmoEnderecoCliente()}"/>
         </p:autoComplete>
 
 
