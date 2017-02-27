@@ -65,6 +65,13 @@ h1 {
  Customiza TabView - fim 
 
 */
+.gridLabel {
+    text-align: right;
+}
+
+.gridContent {
+    text-align: left;
+}
 
 .menu-sistema {
     border: 0px !important;

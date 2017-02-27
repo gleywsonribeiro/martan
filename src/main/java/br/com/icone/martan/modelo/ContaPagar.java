@@ -37,7 +37,7 @@ public class ContaPagar implements Serializable {
     @Column(name = "dt_vencimento", nullable = false)
     private Date vencimento;
 
-    @Column(name = "nr_documento", length = 50, nullable = false)
+    @Column(name = "nr_documento", length = 50)
     private String numeroDocumento;
 
     @Column(nullable = false)
@@ -65,6 +65,12 @@ public class ContaPagar implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     private Fornecedor fornecedor;
+
+    public ContaPagar() {
+        this.lancamento = new Date();
+    }
+    
+    
 
     public Long getId() {
         return id;
