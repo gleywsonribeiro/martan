@@ -59,6 +59,8 @@ public class Pedido implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private StatusPedido status = StatusPedido.ORCAMENTO;
+    
+    private boolean entrega;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento", nullable = false, length = 20)
@@ -73,7 +75,7 @@ public class Pedido implements Serializable {
     private Cliente cliente;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = false, name = "end_entrega_id")
+    @JoinColumn(name = "end_entrega_id")
     private Endereco enderecoEntrega;
 
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -112,6 +114,16 @@ public class Pedido implements Serializable {
         this.dataCriacao = dataCriacao;
     }
 
+    public boolean isEntrega() {
+        return entrega;
+    }
+
+    public void setEntrega(boolean entrega) {
+        this.entrega = entrega;
+    }
+
+    
+    
     public String getObservacao() {
         return observacao;
     }
