@@ -12,19 +12,27 @@
         <p:messages autoUpdate="true"/>
         <h:form id="formProdutos">
             <p:toolbar>
-                <p:toolbarGroup>
-                    <p:commandButton value="Finalizar Inventário" action="#{inventarioController.atualizarEstoque()}" process="@this" update="produtoTable"/>
-                    <p:commandButton value="Abrir Inventário"/>
-                </p:toolbarGroup>
                 <p:toolbarGroup align="right">
+                    <p:commandButton value="Finalizar Inventário" action="#{inventarioController.atualizarEstoque()}" process="@this" update="produtoTable"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="left">
                     <p:commandButton value="Pesquisar"/>
                 </p:toolbarGroup>
             </p:toolbar>
-            
-            <h3 style="text-align: center; color: crimson">
-                O Inventário irá bloquear todos os produtos no processo até que ocorra a finalização
-            </h3>
 
+            <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
+                <p:outputLabel value="Código" for="codigo"/>
+                <p:inputText id="codigo" size="5"/>
+
+                <p:outputLabel value="Nome do Produto" for="nome"/>
+                <p:inputText id="nome" size="60"/>
+
+                <p:outputLabel value="Categoria" for="categoria"/>
+                <p:selectOneMenu id="categoria" style="width: 100px" converter="#{categoriaConverter}">
+                    <f:selectItem itemLabel="Selecione"/>
+                    <f:selectItems value="#{categoriaController.categorias}" var="categoria" itemValue="#{categoria}" itemLabel="#{categoria.nome}"/>
+                </p:selectOneMenu>
+            </h:panelGrid>
 
             <p:dataTable id="produtoTable" value="#{inventarioController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="30"
@@ -32,6 +40,13 @@
 
                 <p:ajax event="cellEdit" update="produtoTable"/>
                 <p:ajax event="cellEditCancel" update="produtoTable"/>
+
+                <f:facet name="header">
+                    <div align="right">
+                        <p:outputLabel value="Responsável: " style="font-weight: bold"/>
+                        <h:outputText id="responsavel" value="#{loginController.usuario.nome}" style="font-weight: bold"/>
+                    </div>
+                </f:facet>
 
                 <p:column headerText="Código" style="text-align: center; width: 50px">
                     <h:outputText value="#{produto.id}"/>

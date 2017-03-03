@@ -7,10 +7,12 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -30,7 +32,13 @@ public class Inventario implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataFechamento;
     
+    @Column(nullable = false, name = "qtd_anterior")
+    private int quantidadeAnterior;
+    @Column(nullable = false, name = "qtd_ajustada")
+    private int quantidadeAjustada;
     
+    
+    @OneToOne
     private Usuario usuario;
 
     public Long getId() {
@@ -40,6 +48,48 @@ public class Inventario implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public int getQuantidadeAnterior() {
+        return quantidadeAnterior;
+    }
+
+    public void setQuantidadeAnterior(int quantidadeAnterior) {
+        this.quantidadeAnterior = quantidadeAnterior;
+    }
+
+    public int getQuantidadeAjustada() {
+        return quantidadeAjustada;
+    }
+
+    public void setQuantidadeAjustada(int quantidadeAjustada) {
+        this.quantidadeAjustada = quantidadeAjustada;
+    }
+
+    public Date getDataAbertura() {
+        return dataAbertura;
+    }
+
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
+    }
+
+    public Date getDataFechamento() {
+        return dataFechamento;
+    }
+
+    public void setDataFechamento(Date dataFechamento) {
+        this.dataFechamento = dataFechamento;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -65,5 +115,7 @@ public class Inventario implements Serializable {
     public String toString() {
         return "br.com.icone.martan.modelo.Inventario[ id=" + id + " ]";
     }
+    
+    
     
 }
