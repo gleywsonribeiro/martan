@@ -7,11 +7,14 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
@@ -32,11 +35,8 @@ public class Inventario implements Serializable {
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dataFechamento;
     
-    @Column(nullable = false, name = "qtd_anterior")
-    private int quantidadeAnterior;
-    @Column(nullable = false, name = "qtd_ajustada")
-    private int quantidadeAjustada;
-    
+    @OneToMany(mappedBy = "inventario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ItemInventario> itens;
     
     @OneToOne
     private Usuario usuario;
@@ -47,22 +47,6 @@ public class Inventario implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getQuantidadeAnterior() {
-        return quantidadeAnterior;
-    }
-
-    public void setQuantidadeAnterior(int quantidadeAnterior) {
-        this.quantidadeAnterior = quantidadeAnterior;
-    }
-
-    public int getQuantidadeAjustada() {
-        return quantidadeAjustada;
-    }
-
-    public void setQuantidadeAjustada(int quantidadeAjustada) {
-        this.quantidadeAjustada = quantidadeAjustada;
     }
 
     public Date getDataAbertura() {
@@ -87,6 +71,14 @@ public class Inventario implements Serializable {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<ItemInventario> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemInventario> itens) {
+        this.itens = itens;
     }
     
     
