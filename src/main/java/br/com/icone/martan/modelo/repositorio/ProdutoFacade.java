@@ -39,4 +39,9 @@ public class ProdutoFacade extends AbstractFacade<Produto> implements Serializab
         return getEntityManager().createQuery("SELECT p FROM Produto AS p WHERE P.ativo = TRUE AND UPPER(p.descricao) LIKE :descricao", Produto.class)
                 .setParameter("descricao", "%" + descricao.toUpperCase() + "%").getResultList();
     }
+
+    public List<Produto> getProdutosPorCodigo(String cod) {
+        return getEntityManager().createQuery("SELECT p FROM Produto AS p WHERE P.ativo = TRUE AND p.codigoDeBarras LIKE :cod", Produto.class)
+                .setParameter("cod", "%" + cod + "%").getResultList();
+    }
 }

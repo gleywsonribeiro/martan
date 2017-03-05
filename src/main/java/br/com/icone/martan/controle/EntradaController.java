@@ -140,5 +140,8 @@ public class EntradaController implements Serializable {
     public List<Produto> buscaProdutoDescricao(String descricao) {
         return repositorioProduto.getProdutosPorDescricao(descricao);
     }
-
+    
+    public List<Produto> buscaProdutoCodigo(String cod) {
+        return repositorioProduto.getProdutosPorCodigo(cod);
+    }
 }

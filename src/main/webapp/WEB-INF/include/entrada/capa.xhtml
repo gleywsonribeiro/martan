@@ -9,8 +9,8 @@
         <p:outputLabel value="Código"/>
         <p:inputText value="#{entradaController.entrada.id}" disabled="true" size="10"/>
 
-        <p:outputLabel value="Data de Entrada"/>
-        <p:outputLabel value="#{entradaController.entrada.dataEntrada}" style="font-weight: bold" >
+        <p:outputLabel value="Data de Entrada: "/>
+        <p:outputLabel value="#{entradaController.entrada.dataEntrada}" style="font-weight: 900;" >
             <f:convertDateTime pattern="dd/MM/yyyy"/>
         </p:outputLabel>
 
