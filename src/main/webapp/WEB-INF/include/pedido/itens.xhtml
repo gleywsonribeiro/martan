@@ -8,7 +8,12 @@
     <h:panelGrid columns="4" id="item">
         <h:panelGroup>
             <p:watermark for="sku" value="Código"/>
-            <p:inputText id="sku" style="width: 110px" value="#{pedidoController.item.produto.id}"/>
+            <p:autoComplete id="sku" value="#{pedidoController.item.produto}" converter="#{produtoConverter}"
+                            var="produto" itemLabel="#{produto.codigoDeBarras}" itemValue="#{produto}"
+                            completeMethod="#{pedidoController.buscaProdutoCodigo}" forceSelection="true"
+                            >
+                <p:ajax update="item" event="itemSelect"/>
+            </p:autoComplete>
         </h:panelGroup>
 
         <h:panelGroup>

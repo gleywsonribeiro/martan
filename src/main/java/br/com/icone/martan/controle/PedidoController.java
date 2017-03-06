@@ -184,6 +184,10 @@ public class PedidoController implements Serializable {
     public List<Produto> buscaProdutoDescricao(String descricao) {
         return produtoRepository.getProdutosPorDescricao(descricao);
     }
+    
+    public List<Produto> buscaProdutoCodigo(String cod) {
+        return produtoRepository.getProdutosPorCodigo(cod);
+    }
 
     public boolean isTemItem() {
         return this.item.getProduto() != null;
