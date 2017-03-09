@@ -13,7 +13,7 @@
         <h:form id="formProdutos">
             <p:toolbar>
                 <p:toolbarGroup align="right">
-                    <p:commandButton value="Finalizar Inventário" action="#{inventarioController.atualizarEstoque()}" process="@this" update="produtoTable"/>
+                    <p:commandButton value="Finalizar Inventário"  process="@this" update="produtoTable"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="left">
                     <p:commandButton value="Pesquisar"/>
@@ -34,8 +34,8 @@
                 </p:selectOneMenu>
             </h:panelGrid>
 
-            <p:dataTable id="produtoTable" value="#{inventarioController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                         var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="30"
+            <p:dataTable id="produtoTable" value="#{inventarioController.inventario.itens}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="item" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="30"
                          editable="true" editMode="cell">
 
                 <p:ajax event="cellEdit" update="produtoTable"/>
@@ -49,24 +49,24 @@
                 </f:facet>
 
                 <p:column headerText="Código" style="text-align: center; width: 50px">
-                    <h:outputText value="#{produto.id}"/>
+                    <h:outputText value="#{item.produto.id}"/>
                 </p:column>
 
                 <p:column headerText="SKU" style="text-align: center; width: 50px">
-                    <h:outputText value="#{produto.sku}"/>
+                    <h:outputText value="#{item.produto.sku}"/>
                 </p:column>
 
                 <p:column headerText="Produto">
-                    <h:outputText value="#{produto.descricao}"/>
+                    <h:outputText value="#{item.produto.descricao}"/>
                 </p:column>
 
                 <p:column headerText="Estoque Atual" style="text-align: right; width: 100px">
                     <p:cellEditor>
                         <f:facet name="output">
-                            <h:outputText value="#{produto.estoqueAtual}"/>
+                            <h:outputText value="#{item.produto.estoqueAtual}"/>
                         </f:facet>
                         <f:facet name="input">
-                            <p:spinner value="#{produto.estoqueAtual}" min="0"/>
+                            <p:spinner value="#{item.produto.estoqueAtual}" min="0"/>
                         </f:facet>
                     </p:cellEditor>
                 </p:column>

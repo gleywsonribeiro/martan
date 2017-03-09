@@ -6,6 +6,7 @@
 package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -40,6 +41,12 @@ public class Inventario implements Serializable {
     
     @OneToOne
     private Usuario usuario;
+
+    public Inventario() {
+        itens = new ArrayList<ItemInventario>();
+    }
+    
+    
 
     public Long getId() {
         return id;

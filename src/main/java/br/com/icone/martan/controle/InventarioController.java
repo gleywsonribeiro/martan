@@ -6,7 +6,9 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Inventario;
+import br.com.icone.martan.modelo.ItemInventario;
 import br.com.icone.martan.modelo.Produto;
+import br.com.icone.martan.modelo.Usuario;
 import br.com.icone.martan.modelo.repositorio.InventarioFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
@@ -14,6 +16,7 @@ import java.io.Serializable;
 import java.util.List;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -29,28 +32,52 @@ public class InventarioController implements Serializable {
 
     @Inject
     private ProdutoFacade repositorio;
-    private List<Produto> produtos;
+    
     
     @Inject
     private InventarioFacade inventarioRepository;
     private Inventario inventario;
+    private List<Inventario> inventarios;
+    
+    @ManagedProperty(value = "#{loginController.usuario}")
+    private Usuario usuario;
 
     public InventarioController() {
         this.inventario = new Inventario();
+//        List<Produto> produtos = repositorio.findAll();
+//        for (Produto produto : produtos) {
+//            ItemInventario item = new ItemInventario();
+//            item.setProduto(produto);
+//            this.inventario.getItens().add(item);
+//        }
     }
+   
     
-    
-    
-    public List<Produto> getProdutos() {
-        if(this.produtos == null) {
-            this.produtos = repositorio.findAll();
-        }
-        return this.produtos;
+
+    public Inventario getInventario() {
+        return inventario;
     }
 
-    public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+    public void setInventario(Inventario inventario) {
+        this.inventario = inventario;
     }
+
+    public List<Inventario> getInventarios() {
+        if(inventarios == null) {
+            inventarios = inventarioRepository.findAll();
+        }
+        return inventarios;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 
     public void onCellEdit(CellEditEvent event) {
         Object oldValue = event.getOldValue();
@@ -62,12 +89,22 @@ public class InventarioController implements Serializable {
         }
     }
 
-    public void atualizarEstoque() {
-        for (Produto item : produtos) {
-            repositorio.edit(item);
-        }
-        JsfUtil.addMessage("Inventário finalizado com sucesso!");
-    }
+//    public void atualizarEstoque() {
+//        for (Produto item : produtos) {
+//            repositorio.edit(item);
+//        }
+//        JsfUtil.addMessage("Inventário finalizado com sucesso!");
+//    }
 
+    
+    public void salvar() {
+        if(inventario.getId() == null) {
+            inventarioRepository.create(inventario);
+        }
+        else {
+            inventarioRepository.edit(inventario);
+        }
+        JsfUtil.addMessage("Salvo com sucesso!");
+    }
     
 }
