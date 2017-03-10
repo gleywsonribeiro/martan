@@ -16,7 +16,7 @@
                     <p:commandButton value="Finalizar Inventário"  process="@this" update="produtoTable"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="left">
-                    <p:commandButton value="Pesquisar"/>
+                    <p:commandButton value="Pesquisar" action="#{inventarioController.pesquisar()}" update="produtoTable"/>
                 </p:toolbarGroup>
             </p:toolbar>
 

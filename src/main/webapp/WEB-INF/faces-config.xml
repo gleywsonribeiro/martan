@@ -15,9 +15,9 @@
         <phase-listener>br.com.icone.martan.filtro.Autorizacao</phase-listener>
     </lifecycle>
     
-<!--    <factory>
+    <factory>
         <exception-handler-factory>
             br.com.icone.martan.util.jsf.JsfExceptionHandlerFactory
         </exception-handler-factory>
-    </factory>-->
+    </factory>
 </faces-config>

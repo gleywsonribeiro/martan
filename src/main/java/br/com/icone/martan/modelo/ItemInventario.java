@@ -34,9 +34,9 @@ public class ItemInventario implements Serializable {
     @JoinColumn(nullable = false)
     private Inventario inventario;
     
-    @Column(nullable = false, name = "qtd_anterior")
+    @Column(nullable = false, name = "qtd_atual")
     private int quantidadeAnterior;
-    @Column(nullable = false, name = "qtd_ajustada")
+    @Column(nullable = false, name = "qtd_contada")
     private int quantidadeAjustada;
 
     public int getQuantidadeAnterior() {

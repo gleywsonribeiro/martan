@@ -77,6 +77,16 @@ public class InventarioController implements Serializable {
         this.usuario = usuario;
     }
     
+    public void pesquisar() {
+        List<Produto> produtos = repositorio.findAll();
+        for (Produto produto : produtos) {
+            ItemInventario item = new ItemInventario();
+            item.setProduto(produto);
+            item.setInventario(inventario);
+            this.inventario.getItens().add(item);
+        }
+    }
+    
     
 
     public void onCellEdit(CellEditEvent event) {
