@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -32,8 +33,10 @@ public class Inventario implements Serializable {
     private Long id;
     
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Column(name = "dt_abertura")
     private Date dataAbertura;
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Column(name = "dt_fechamento")
     private Date dataFechamento;
     
     @OneToMany(mappedBy = "inventario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -46,8 +49,6 @@ public class Inventario implements Serializable {
         itens = new ArrayList<ItemInventario>();
     }
     
-    
-
     public Long getId() {
         return id;
     }

@@ -31,6 +31,7 @@ public class Produto implements Serializable {
     private String sku;
     
     private boolean ativo;
+    private boolean bloqueado;
     
     @ManyToOne
     @JoinColumn(nullable = false)
@@ -92,6 +93,16 @@ public class Produto implements Serializable {
         return estoqueMinimo;
     }
 
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(boolean bloqueado) {
+        this.bloqueado = bloqueado;
+    }
+
+    
+    
     public void setEstoqueMinimo(int estoqueMinimo) {
         this.estoqueMinimo = estoqueMinimo;
     }
@@ -104,7 +115,9 @@ public class Produto implements Serializable {
         this.estoqueMaximo = estoqueMaximo;
     }
 
-
+    
+    
+    
     
     public Long getId() {
         return id;
