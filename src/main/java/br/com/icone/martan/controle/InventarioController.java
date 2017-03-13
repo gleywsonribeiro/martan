@@ -82,6 +82,7 @@ public class InventarioController implements Serializable {
         for (Produto produto : produtos) {
             ItemInventario item = new ItemInventario();
             item.setProduto(produto);
+            item.setQuantidadeAtual(produto.getEstoqueAtual());
             item.setInventario(inventario);
             this.inventario.getItens().add(item);
         }

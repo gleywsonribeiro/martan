@@ -35,24 +35,24 @@ public class ItemInventario implements Serializable {
     private Inventario inventario;
     
     @Column(nullable = false, name = "qtd_atual")
-    private int quantidadeAnterior;
+    private int quantidadeAtual;
     @Column(nullable = false, name = "qtd_contada")
-    private int quantidadeAjustada;
+    private int quantidadeContada;
 
-    public int getQuantidadeAnterior() {
-        return quantidadeAnterior;
+    public int getQuantidadeAtual() {
+        return quantidadeAtual;
     }
 
-    public void setQuantidadeAnterior(int quantidadeAnterior) {
-        this.quantidadeAnterior = quantidadeAnterior;
+    public void setQuantidadeAtual(int quantidadeAtual) {
+        this.quantidadeAtual = quantidadeAtual;
     }
 
-    public int getQuantidadeAjustada() {
-        return quantidadeAjustada;
+    public int getQuantidadeContada() {
+        return quantidadeContada;
     }
 
-    public void setQuantidadeAjustada(int quantidadeAjustada) {
-        this.quantidadeAjustada = quantidadeAjustada;
+    public void setQuantidadeContada(int quantidadeContada) {
+        this.quantidadeContada = quantidadeContada;
     }
 
     public Produto getProduto() {

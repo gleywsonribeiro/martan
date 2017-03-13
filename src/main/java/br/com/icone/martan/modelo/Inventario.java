@@ -46,6 +46,7 @@ public class Inventario implements Serializable {
     private Usuario usuario;
 
     public Inventario() {
+        this.dataAbertura = new Date();
         itens = new ArrayList<ItemInventario>();
     }
     
