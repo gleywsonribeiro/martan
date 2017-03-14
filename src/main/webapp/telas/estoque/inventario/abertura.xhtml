@@ -20,17 +20,14 @@
                 </p:toolbarGroup>
             </p:toolbar>
 
-            <h:panelGrid id="painel" columns="1" style="margin-top: 5px; width: 100%">
-                <p:outputLabel for="produto" value="Produtos:" />
-                <p:selectManyMenu id="produto" value="#{inventarioController.produtosSelecionados}" converter="#{produtoConverter}" style="width: 10%"
-                                  var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
-                    <f:selectItems value="#{inventarioController.produtosInventario}" var="produto" itemLabel="#{produto.id} #{produto.descricao} #{produto.categoria.nome}" itemValue="#{produto}" />
+            <h:panelGrid id="painel" columns="1" style="margin-top: 5px">
 
-                    <p:column>
-                        <h:outputText value="#{t.descricao}" />
-                    </p:column>
-                </p:selectManyMenu>
-                
+                <h:outputLabel for="produtos" value="Seleção de produtos" />
+                <p:selectCheckboxMenu id="produtos" value="#{inventarioController.produtosSelecionados}" label="Produtos" converter="#{produtoConverter}"
+                                      filter="true" filterMatchMode="contains" panelStyle="width:250px">
+                    <f:selectItems value="#{inventarioController.produtosInventario}" var="produto" itemLabel="#{produto.id} #{produto.descricao} #{produto.categoria.nome}" itemValue="#{produto}" />
+                </p:selectCheckboxMenu>
+
                 <p:commandButton value="ok" action="#{inventarioController.adicionar()}" update="painel itensTable"/>
             </h:panelGrid>
 
