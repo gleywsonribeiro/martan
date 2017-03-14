@@ -22,8 +22,8 @@
 
             <h:panelGrid id="painel" columns="1" style="margin-top: 5px">
 
-                <h:outputLabel for="produtos" value="Seleção de produtos" />
-                <p:selectCheckboxMenu id="produtos" value="#{inventarioController.produtosSelecionados}" label="Produtos" converter="#{produtoConverter}"
+                <h:outputText value="Seleção de produtos (itens duplicados serão ignorados)" style="font-weight: bold; color: brown"/>
+                <p:selectCheckboxMenu id="produtos" value="#{inventarioController.produtosSelecionados}" label="Produtos" converter="#{produtoConverter}" 
                                       filter="true" filterMatchMode="contains" panelStyle="width:250px">
                     <f:selectItems value="#{inventarioController.produtosInventario}" var="produto" itemLabel="#{produto.id} #{produto.descricao} #{produto.categoria.nome}" itemValue="#{produto}" />
                 </p:selectCheckboxMenu>
@@ -71,11 +71,6 @@
                         </f:facet>
                     </p:cellEditor>
                 </p:column>
-                <!--                    <p:column style="width: 100px; text-align: center">
-                                        <p:commandButton icon="ui-icon-pencil" title="Editar">
-                                            <f:setPropertyActionListener target="" value=""/>
-                                        </p:commandButton>                
-                                    </p:column>-->
             </p:dataTable>
         </h:form>
     </ui:define>
