@@ -20,26 +20,27 @@
                 </p:toolbarGroup>
             </p:toolbar>
 
-            <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
-                <p:outputLabel value="Código" for="codigo"/>
-                <p:inputText id="codigo" size="5"/>
+            <h:panelGrid id="painel" columns="1" style="margin-top: 5px; width: 100%">
+                <p:outputLabel for="produto" value="Produtos:" />
+                <p:selectManyMenu id="produto" value="#{inventarioController.produtosSelecionados}" converter="#{produtoConverter}" style="width: 10%"
+                                  var="t" filter="true" filterMatchMode="contains" showCheckbox="true">
+                    <f:selectItems value="#{inventarioController.produtosInventario}" var="produto" itemLabel="#{produto.id} #{produto.descricao} #{produto.categoria.nome}" itemValue="#{produto}" />
 
-                <p:outputLabel value="Nome do Produto" for="nome"/>
-                <p:inputText id="nome" size="60"/>
-
-                <p:outputLabel value="Categoria" for="categoria"/>
-                <p:selectOneMenu id="categoria" style="width: 100px" converter="#{categoriaConverter}">
-                    <f:selectItem itemLabel="Selecione"/>
-                    <f:selectItems value="#{categoriaController.categorias}" var="categoria" itemValue="#{categoria}" itemLabel="#{categoria.nome}"/>
-                </p:selectOneMenu>
+                    <p:column>
+                        <h:outputText value="#{t.descricao}" />
+                    </p:column>
+                </p:selectManyMenu>
+                
+                <p:commandButton value="ok" action="#{inventarioController.adicionar()}" update="painel itensTable"/>
             </h:panelGrid>
+
 
             <p:dataTable id="itensTable" value="#{inventarioController.inventario.itens}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="item" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="30"
                          editable="true" editMode="cell">
 
-                <p:ajax event="cellEdit" update="itensTable"/>
-                <p:ajax event="cellEditCancel" update="itensTable"/>
+                <p:ajax event="cellEdit" update="itensTable" />
+                <p:ajax event="cellEditCancel" update="itensTable" />
 
                 <f:facet name="header">
                     <div align="right">

@@ -13,6 +13,7 @@ import br.com.icone.martan.modelo.repositorio.InventarioFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javax.faces.application.FacesMessage;
@@ -32,6 +33,7 @@ public class InventarioController implements Serializable {
 
     @Inject
     private ProdutoFacade repositorio;
+    private List<Produto> produtosSelecionados;
     
     
     @Inject
@@ -44,6 +46,7 @@ public class InventarioController implements Serializable {
 
     public InventarioController() {
         this.inventario = new Inventario();
+        this.produtosSelecionados = new ArrayList<Produto>();
 //        List<Produto> produtos = repositorio.findAll();
 //        for (Produto produto : produtos) {
 //            ItemInventario item = new ItemInventario();
@@ -69,6 +72,14 @@ public class InventarioController implements Serializable {
         return inventarios;
     }
 
+    public List<Produto> getProdutosSelecionados() {
+        return produtosSelecionados;
+    }
+
+    public void setProdutosSelecionados(List<Produto> produtosSelecionados) {
+        this.produtosSelecionados = produtosSelecionados;
+    }
+
     public Usuario getUsuario() {
         return usuario;
     }
@@ -86,6 +97,17 @@ public class InventarioController implements Serializable {
             item.setInventario(inventario);
             this.inventario.getItens().add(item);
         }
+    }
+    
+    public void adicionar() {
+        for (Produto produtosSelecionado : produtosSelecionados) {
+            ItemInventario item = new ItemInventario();
+            item.setProduto(produtosSelecionado);
+            item.setQuantidadeAtual(produtosSelecionado.getEstoqueAtual());
+            item.setInventario(inventario);
+            this.inventario.getItens().add(item);
+        }
+        produtosSelecionados.clear();
     }
     
     
@@ -106,6 +128,10 @@ public class InventarioController implements Serializable {
 //        }
 //        JsfUtil.addMessage("Inventário finalizado com sucesso!");
 //    }
+    
+    public List<Produto> getProdutosInventario() {
+        return repositorio.findAll();
+    }
 
     
     public void salvar() {
