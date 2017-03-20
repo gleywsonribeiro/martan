@@ -6,7 +6,13 @@ body {
     margin: 0px;
     font-weight: normal;
 }
- 
+
+.up {
+    input {
+        text-transform: uppercase;
+    }
+}
+
 .ui-selectonelistbox .ui-selectlistbox-item, .ui-selectmanymenu .ui-selectlistbox-item, .ui-multiselectlistbox .ui-multiselectlistbox-item {
     font-size: 12px !important;
     font-family: Arial, Helvetica, sans-serif !important;
