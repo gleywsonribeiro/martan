@@ -53,9 +53,10 @@
             <version>6.0</version>
         </dependency>
         <dependency>
-            <groupId>com.outjected</groupId>
-            <artifactId>simple-email</artifactId>
-            <version>0.2.5-SNAPSHOT</version>
+            <groupId>org.simplejavamail</groupId>
+            <artifactId>simple-java-mail</artifactId>
+            <version>4.2.1</version>
+            <!--version>4.2.1-java6-release</version-->
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>

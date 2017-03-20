@@ -18,9 +18,9 @@ import br.com.icone.martan.modelo.repositorio.PedidoFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
-import br.com.icone.martan.util.mail.Mailer;
-import com.outjected.email.api.MailMessage;
-import com.outjected.email.impl.templating.velocity.VelocityTemplate;
+//import br.com.icone.martan.util.mail.Mailer;
+//import com.outjected.email.api.MailMessage;
+//import com.outjected.email.impl.templating.velocity.VelocityTemplate;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -46,8 +46,8 @@ public class PedidoController implements Serializable {
     @Inject
     private ProdutoFacade produtoRepository;
     
-    @Inject
-    private Mailer mailer; 
+//    @Inject
+//    private Mailer mailer; 
 
     private Pedido pedido;
 
@@ -96,17 +96,17 @@ public class PedidoController implements Serializable {
         }
     }
     
-    public void enviarPorEmail() {
-        MailMessage message = mailer.novaMensagem();
-        message.to(this.pedido.getCliente().getContato().getEmail())
-                .subject("Pedido " + pedido.getId())
-                .bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template")))
-                .put("pedido", this.pedido)
-                .put("numberTool", new NumberTool())
-                .put("locale", new Locale("pt", "BR"))
-                .send();
-        JsfUtil.addMessage("Email enviado com sucesso!");
-    }
+//    public void enviarPorEmail() {
+//        MailMessage message = mailer.novaMensagem();
+//        message.to(this.pedido.getCliente().getContato().getEmail())
+//                .subject("Pedido " + pedido.getId())
+//                .bodyHtml(new VelocityTemplate(getClass().getResourceAsStream("/emails/pedido.template")))
+//                .put("pedido", this.pedido)
+//                .put("numberTool", new NumberTool())
+//                .put("locale", new Locale("pt", "BR"))
+//                .send();
+//        JsfUtil.addMessage("Email enviado com sucesso!");
+//    }
 
     public List<Pedido> getPedidos() {
         if (pedidos == null) {
