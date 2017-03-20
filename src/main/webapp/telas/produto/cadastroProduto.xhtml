@@ -44,7 +44,7 @@
                     <h:panelGrid>
                         <h:panelGroup>
                             <p:outputLabel value="Categoria" for="categoria"/>
-                            <p:outputLabel for="newcat" value="Novo" style="visibility: hidden"/>
+                            <!--<p:outputLabel for="newcat" value="Novo" style="visibility: hidden"/>-->
                         </h:panelGroup>
                         <h:panelGroup>
                             <h:panelGrid columns="2">
@@ -54,7 +54,7 @@
                                     <f:selectItems value="#{categoriaController.categorias}" var="categoria"
                                                    itemValue="#{categoria}" itemLabel="#{categoria.nome}"/>
                                 </p:selectOneMenu>
-                                <p:commandButton id="newcat" icon="fa fa-angle-down" style="margin-top: 0px"/>
+                                <!--<p:commandButton id="newcat" icon="fa fa-angle-down" process="@this" style="margin-top: 0px" onclick="PF('dlgCat').show; return false;" ajax="false"/>-->
                             </h:panelGrid>
                         </h:panelGroup>
                     </h:panelGrid>
@@ -63,6 +63,7 @@
 
                 <h:panelGrid columns="2">
                     <h:panelGroup style="float: left">
+                        
                         <h:panelGrid style="clear: left; float: left">
                             <p:outputLabel value="Estoque Atual" for="atual"/>
                             <p:spinner id="atual" size="8" min="0" value="#{cadastroProdutoController.produto.estoqueAtual}" required="true"/>
@@ -77,7 +78,7 @@
                         </h:panelGrid>
 
                         <h:panelGrid style="float: left">
-                            <p:outputLabel value="Valor de Venda" for="custo"/>
+                            <p:outputLabel value="Valor de Custo" for="custo"/>
                             <p:inputNumber id="custo" size="15" symbol="R$ " decimalSeparator=","
                                            value="#{cadastroProdutoController.produto.valorCusto}"
                                            thousandSeparator="." decimalPlaces="2" required="true"
@@ -109,10 +110,17 @@
 
                     </h:panelGroup>
                 </h:panelGrid>
-
-
             </p:panel>
+
+<!--            <p:dialog id="dialog" header="Cadastro de Categoria" widgetVar="dlgCat" showEffect="explode" hideEffect="bounce" height="100">
+                <h:panelGrid columns="3" id="painel">
+                    <p:outputLabel value="Categoria" for="categoria"/>
+                    <p:inputText id="dlgCategoria" styleClass="up" value="" required="true" requiredMessage="nome da categoria é obrigatório"/>
+                    <p:commandButton value="Salvar" action="" process="@this" update="painel"/>
+                </h:panelGrid>
+            </p:dialog>-->
         </h:form>
+
     </ui:define>
 
 </ui:composition>

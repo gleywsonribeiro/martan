@@ -7,6 +7,7 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,6 +37,10 @@ public class Produto implements Serializable {
     @ManyToOne
     @JoinColumn(nullable = false)
     Categoria categoria;
+    
+    private List<Fornecedor> fornecedores;
+    
+    
     //Unidade
     //Barcode
     @Column(nullable = false, length = 75)

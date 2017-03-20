@@ -59,7 +59,9 @@ public class Fornecedor implements Serializable {
     
     @Embedded
     private Contato contato;
-
+    
+    
+    
     public Fornecedor() {
         this.contato = new Contato();
         this.endereco = new Endereco();
