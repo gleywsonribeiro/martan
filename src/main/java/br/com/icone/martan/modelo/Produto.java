@@ -36,7 +36,10 @@ public class Produto implements Serializable {
     
     @ManyToOne
     @JoinColumn(nullable = false)
-    Categoria categoria;
+    private Categoria categoria;
+    
+    @ManyToOne
+    private Marca marca;
     
     private List<Fornecedor> fornecedores;
     
@@ -51,6 +54,14 @@ public class Produto implements Serializable {
 
     @Column(nullable = false, name = "vl_custo", scale = 2, precision = 10)
     private BigDecimal valorCusto;
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
     
     @Column(name = "codigo_barras", length = 50)
     private String codigoDeBarras;

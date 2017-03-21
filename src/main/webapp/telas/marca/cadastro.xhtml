@@ -6,34 +6,34 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="titulo">Estoque</ui:define>
+    <ui:define name="titulo">Marca</ui:define>
 
     <ui:define name="corpo">
         <h:form id="form">
             <p:messages autoUpdate="true" closable="true"/>
             <h:panelGrid columns="3" id="painel">
-                <p:outputLabel value="Categoria" for="categoria"/>
-                <p:inputText id="categoria" styleClass="up" value="#{categoriaController.categoria.nome}" required="true" requiredMessage="nome da categoria é obrigatório"/>
-                <p:commandButton value="Salvar" action="#{categoriaController.salvar()}" process="@form" update="painel categoriaTable"/>
+                <p:outputLabel value="Descrição" for="marca"/>
+                <p:inputText id="marca" styleClass="up" value="#{marcaController.marca.descricao}" required="true" requiredMessage="Informe a descrição da marca"/>
+                <p:commandButton value="Salvar" action="#{marcaController.salvar()}" process="@form" update="painel marcaTable"/>
             </h:panelGrid>
 
-            <p:dataTable id="categoriaTable" value="#{categoriaController.categorias}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                         var="categoria" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+            <p:dataTable id="marcaTable" value="#{marcaController.marcas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="marca" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                 <p:column headerText="Código" style="text-align: center; width: 100px">
-                    <h:outputText value="#{categoria.id}"/>
+                    <h:outputText value="#{marca.id}"/>
                 </p:column>
 
                 <p:column headerText="Categoria">
-                    <h:outputText value="#{categoria.nome}"/>
+                    <h:outputText value="#{marca.nome}"/>
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
                     <p:commandButton icon="ui-icon-pencil" title="Editar" update=":form:painel" process="@this">
-                        <f:setPropertyActionListener target="#{categoriaController.categoria}" value="#{categoria}"/>
+                        <f:setPropertyActionListener target="#{marcaController.marca}" value="#{marca}"/>
                     </p:commandButton>
-                    <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{categoriaController.remover()}" process="@this" update="@form">
-                        <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir categoria #{categoria.nome}?" icon="ui-icon-alert"/>
-                        <f:setPropertyActionListener target="#{categoriaController.categoria}" value="#{categoria}"/>
+                    <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{marcaController.excluir()}" process="@this" update="@form">
+                        <p:confirm header="esclusão da marca" message="Tem certeza que deseja excluir a marca #{categoria.nome}?" icon="ui-icon-alert"/>
+                        <f:setPropertyActionListener target="#{marcaController.marca}" value="#{marca}"/>
                     </p:commandButton>                
                 </p:column>
             </p:dataTable>
