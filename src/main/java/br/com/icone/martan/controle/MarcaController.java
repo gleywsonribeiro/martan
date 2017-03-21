@@ -43,7 +43,9 @@ public class MarcaController implements Serializable {
     }
     
     public void excluir() {
-        
+        repositorio.remove(marca);
+        this.marca = new Marca();
+        this.marcas = null;
     }
 
     public List<Marca> getMarcas() {

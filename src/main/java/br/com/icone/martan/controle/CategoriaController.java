@@ -9,10 +9,13 @@ import br.com.icone.martan.modelo.Categoria;
 import br.com.icone.martan.modelo.repositorio.CategoriaFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -40,6 +43,19 @@ public class CategoriaController implements Serializable {
         }
         categoria = new Categoria();
         categorias = null;
+    }
+    
+    public void abrirDialogo() {
+        Map<String, Object> opcoes = new HashMap<String, Object>();
+        opcoes.put("modal", true);
+        opcoes.put("resizable", false);
+        opcoes.put("contentHeight", 300);
+
+        RequestContext.getCurrentInstance().openDialog("/telas/categoria/dialogoCategoria", opcoes, null);
+    }
+    
+    public void selecionar(Categoria categoria) {
+        RequestContext.getCurrentInstance().closeDialog(categoria);
     }
 
     public void remover() {

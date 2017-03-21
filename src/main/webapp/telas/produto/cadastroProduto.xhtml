@@ -38,13 +38,17 @@
                     </h:panelGrid>
                     <h:panelGrid>
                         <p:outputLabel value="Descrição do Produto" for="descricao"/>
-                        <p:inputText id="descricao" size="50" maxlength="50" value="#{cadastroProdutoController.produto.descricao}" required="true"/>
+                        <p:inputText id="descricao" size="68" maxlength="50" value="#{cadastroProdutoController.produto.descricao}" required="true"/>
                     </h:panelGrid>
 
+
+                </h:panelGrid>
+
+                <h:panelGrid columns="4">
                     <h:panelGrid>
                         <h:panelGroup>
                             <p:outputLabel value="Categoria" for="categoria"/>
-                            <!--<p:outputLabel for="newcat" value="Novo" style="visibility: hidden"/>-->
+                            <p:outputLabel for="newcat" value="Novo" style="visibility: hidden"/>
                         </h:panelGroup>
                         <h:panelGroup>
                             <h:panelGrid columns="2">
@@ -54,16 +58,58 @@
                                     <f:selectItems value="#{categoriaController.categorias}" var="categoria"
                                                    itemValue="#{categoria}" itemLabel="#{categoria.nome}"/>
                                 </p:selectOneMenu>
-                                <!--<p:commandButton id="newcat" icon="fa fa-angle-down" process="@this" style="margin-top: 0px" onclick="PF('dlgCat').show; return false;" ajax="false"/>-->
+                                <p:commandButton id="newcat" icon="fa fa-plus" process="@this" update="categoria" action="#{categoriaController.abrirDialogo()}">
+                                    <p:ajax event="dialogReturn" listener="#{cadastroProdutoController.categoriaSelecionada}"  process="@this" update="@form"/>
+                                </p:commandButton>
                             </h:panelGrid>
                         </h:panelGroup>
                     </h:panelGrid>
 
+                    <h:panelGrid>
+                        <h:panelGroup>
+                            <p:outputLabel value="Marca" for="marca"/>
+                            <p:outputLabel for="newmar" value="Novo" style="visibility: hidden"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <h:panelGrid columns="2">
+                                <p:selectOneMenu id="marca" style="width: 100px" value="#{cadastroProdutoController.produto.marca}"
+                                                 converter="#{marcaConverter}">
+                                    <f:selectItem itemLabel="Selecione"/>
+                                    <f:selectItems value="#{marcaController.marcas}" var="marca"
+                                                   itemValue="#{marca}" itemLabel="#{marca.descricao}"/>
+                                </p:selectOneMenu>
+                                <p:commandButton id="newmar" icon="fa fa-plus" process="@this" update="marca">
+                                    <p:ajax event="dialogReturn" process="@this" update="marca"/>
+                                </p:commandButton>
+                            </h:panelGrid>
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+                    <h:panelGrid>
+                        <p:outputLabel value="Valor de Custo" for="custo"/>
+                        <p:inputNumber id="custo" size="15" symbol="R$ " decimalSeparator=","
+                                       value="#{cadastroProdutoController.produto.valorCusto}"
+                                       thousandSeparator="." decimalPlaces="2" required="true"
+                                       requiredMessage="Por favor, informe o valor de venda">
+                        </p:inputNumber>
+                    </h:panelGrid>
+
+                    <h:panelGrid style="font-weight: bold; font-size: 1.1em; color: darkgreen">
+                        <p:outputLabel value="Valor de Venda" for="venda"/>
+                        <p:inputNumber id="venda" size="15" symbol="R$ " decimalSeparator=","
+                                       value="#{cadastroProdutoController.produto.valorVenda}"
+                                       thousandSeparator="." decimalPlaces="2" required="true"
+                                       requiredMessage="Por favor, informe o valor de venda">
+                        </p:inputNumber>
+                    </h:panelGrid>
+
                 </h:panelGrid>
+
+
 
                 <h:panelGrid columns="2">
                     <h:panelGroup style="float: left">
-                        
+
                         <h:panelGrid style="clear: left; float: left">
                             <p:outputLabel value="Estoque Atual" for="atual"/>
                             <p:spinner id="atual" size="8" min="0" value="#{cadastroProdutoController.produto.estoqueAtual}" required="true"/>
@@ -75,24 +121,6 @@
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Estoque Mínimo" for="minimo"/>
                             <p:spinner id="minimo" size="8" min="0" value="#{cadastroProdutoController.produto.estoqueMinimo}" required="true"/>
-                        </h:panelGrid>
-
-                        <h:panelGrid style="float: left">
-                            <p:outputLabel value="Valor de Custo" for="custo"/>
-                            <p:inputNumber id="custo" size="15" symbol="R$ " decimalSeparator=","
-                                           value="#{cadastroProdutoController.produto.valorCusto}"
-                                           thousandSeparator="." decimalPlaces="2" required="true"
-                                           requiredMessage="Por favor, informe o valor de venda">
-                            </p:inputNumber>
-                        </h:panelGrid>
-
-                        <h:panelGrid style="float: left; margin-left: 15px; font-weight: bold; font-size: 1.1em; color: darkgreen">
-                            <p:outputLabel value="Valor de Venda" for="venda"/>
-                            <p:inputNumber id="venda" size="15" symbol="R$ " decimalSeparator=","
-                                           value="#{cadastroProdutoController.produto.valorVenda}"
-                                           thousandSeparator="." decimalPlaces="2" required="true"
-                                           requiredMessage="Por favor, informe o valor de venda">
-                            </p:inputNumber>
                         </h:panelGrid>
 
                         <h:panelGrid style="float: left">
@@ -108,17 +136,12 @@
 
 
 
+
                     </h:panelGroup>
                 </h:panelGrid>
             </p:panel>
 
-<!--            <p:dialog id="dialog" header="Cadastro de Categoria" widgetVar="dlgCat" showEffect="explode" hideEffect="bounce" height="100">
-                <h:panelGrid columns="3" id="painel">
-                    <p:outputLabel value="Categoria" for="categoria"/>
-                    <p:inputText id="dlgCategoria" styleClass="up" value="" required="true" requiredMessage="nome da categoria é obrigatório"/>
-                    <p:commandButton value="Salvar" action="" process="@this" update="painel"/>
-                </h:panelGrid>
-            </p:dialog>-->
+
         </h:form>
 
     </ui:define>

@@ -5,15 +5,20 @@
  */
 package br.com.icone.martan.controle;
 
+import br.com.icone.martan.modelo.Categoria;
 import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -54,6 +59,11 @@ public class CadastroProdutoController implements Serializable {
         JsfUtil.addMessage("Salvo com sucesso!");
     }
 
+    public void categoriaSelecionada(SelectEvent event) {
+        Categoria categoria = (Categoria) event.getObject();
+        produto.setCategoria(categoria);
+    }
+    
     public String novo() {
         this.produto = new Produto();
         return "cadastroProduto?faces-redirect=true";
