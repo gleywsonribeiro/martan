@@ -20,8 +20,15 @@
                 <p:commandButton value="Salvar" action="#{categoriaController.salvar()}" process="@form" update="painel categoriaTable"/>
             </h:panelGrid>
 
-            <p:dataTable id="categoriaTable" value="#{categoriaController.categorias}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+            <p:dataTable id="categoriaTable" value="#{categoriaController.categorias}" widgetVar="categoryTable" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="categoria" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+
+                <f:facet name="header">
+                    <p:outputPanel>
+                        <p:inputText id="filtro" onkeyup="PF('categoryTable').filter()" style="width:150px" placeholder="Digite aqui para buscar"/>
+                    </p:outputPanel>
+                </f:facet>
+
                 <p:column headerText="Código" style="text-align: center; width: 100px">
                     <h:outputText value="#{categoria.id}"/>
                 </p:column>
@@ -31,8 +38,8 @@
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar" update=":form:painel" process="@this">
-                        <f:setPropertyActionListener target="#{categoriaController.categoria}" value="#{categoria}"/>
+                    <p:commandButton icon="ui-icon-pencil" title="Editar" process="@this">
+                        <f:setPropertyActionListener target="#{cadastroProdutoController.produto.categoria}" value="#{categoria}"/>
                     </p:commandButton>
                     <p:commandButton icon="ui-icon-check" title="Selecionar" action="#{categoriaController.selecionar(categoria)}" process="@this" />
                 </p:column>

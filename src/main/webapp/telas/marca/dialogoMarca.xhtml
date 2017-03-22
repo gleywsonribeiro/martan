@@ -16,11 +16,11 @@
             <p:messages autoUpdate="true" closable="true"/>
             <h:panelGrid columns="3" id="painel">
                 <p:outputLabel value="Descrição" for="marca"/>
-                <p:inputText id="marca" value="#{marcaController.marca.descricao}" required="true" requiredMessage="Informe a descrição da marca"/>
-                <p:commandButton value="Salvar" action="#{marcaController.salvar()}" process="@form" update="painel marcaTable"/>
+                <p:inputText id="marca" value="#{marcaBean.marca.descricao}" required="true" requiredMessage="Informe a descrição da marca"/>
+                <p:commandButton value="Salvar" action="#{marcaBean.salvar()}"/>
             </h:panelGrid>
 
-            <p:dataTable id="marcaTable" value="#{marcaController.marcas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+            <p:dataTable id="marcaTable" value="#{marcaBean.marcas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="marca" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                 <p:column headerText="Código" style="text-align: center; width: 100px">
                     <h:outputText value="#{marca.id}"/>
@@ -34,12 +34,11 @@
                     <p:commandButton icon="ui-icon-pencil" title="Editar" update=":form:painel" process="@this">
                         <f:setPropertyActionListener target="#{marcaController.marca}" value="#{marca}"/>
                     </p:commandButton>
-                    <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{marcaController.excluir()}" process="@this" update="@form">
-                        <p:confirm header="esclusão da marca" message="Tem certeza que deseja excluir a marca #{categoria.nome}?" icon="ui-icon-alert"/>
-                        <f:setPropertyActionListener target="#{marcaController.marca}" value="#{marca}"/>
-                    </p:commandButton>                
+                    <p:commandButton icon="ui-icon-check" title="Selecionar" action="#{categoriaController.selecionar(marca)}" process="@this" />                
                 </p:column>
             </p:dataTable>
+            
+            <!--<p:dialog />-->
 
             <p:confirmDialog global="true">  
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  

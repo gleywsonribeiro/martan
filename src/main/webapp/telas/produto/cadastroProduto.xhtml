@@ -58,7 +58,7 @@
                                     <f:selectItems value="#{categoriaController.categorias}" var="categoria"
                                                    itemValue="#{categoria}" itemLabel="#{categoria.nome}"/>
                                 </p:selectOneMenu>
-                                <p:commandButton id="newcat" icon="fa fa-plus" process="@this" update="categoria" action="#{categoriaController.abrirDialogo()}">
+                                <p:commandButton id="newcat" icon="fa fa-plus" process="@this" disabled="true" update="categoria" action="#{categoriaController.abrirDialogo()}">
                                     <p:ajax event="dialogReturn" listener="#{cadastroProdutoController.categoriaSelecionada}"  process="@this" update="@form"/>
                                 </p:commandButton>
                             </h:panelGrid>
@@ -78,7 +78,7 @@
                                     <f:selectItems value="#{marcaController.marcas}" var="marca"
                                                    itemValue="#{marca}" itemLabel="#{marca.descricao}"/>
                                 </p:selectOneMenu>
-                                <p:commandButton id="newmar" icon="fa fa-plus" process="@this" update="marca">
+                                <p:commandButton id="newmar" icon="fa fa-plus" disabled="true" process="@this" update="marca">
                                     <p:ajax event="dialogReturn" process="@this" update="marca"/>
                                 </p:commandButton>
                             </h:panelGrid>

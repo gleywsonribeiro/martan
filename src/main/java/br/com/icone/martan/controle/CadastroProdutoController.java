@@ -6,6 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Categoria;
+import br.com.icone.martan.modelo.Marca;
 import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
@@ -63,7 +64,10 @@ public class CadastroProdutoController implements Serializable {
         Categoria categoria = (Categoria) event.getObject();
         produto.setCategoria(categoria);
     }
-    
+    public void marcaSelecionada(SelectEvent event) {
+        Marca marca = (Marca) event.getObject();
+        produto.setMarca(marca);
+    }
     public String novo() {
         this.produto = new Produto();
         return "cadastroProduto?faces-redirect=true";
