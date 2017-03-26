@@ -6,24 +6,20 @@
 package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author Gleywson
  */
 @Entity
-public class Categoria implements Serializable {
-
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<SubCategoria> subCategorias;
+public class SubCategoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -33,6 +29,18 @@ public class Categoria implements Serializable {
     @Column(length = 30, nullable = false)
     private String nome;
     
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Categoria categoria;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -41,20 +49,12 @@ public class Categoria implements Serializable {
         this.nome = nome;
     }
 
-    public List<SubCategoria> getSubCategorias() {
-        return subCategorias;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setSubCategorias(List<SubCategoria> subCategorias) {
-        this.subCategorias = subCategorias;
-    }
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     @Override
@@ -67,10 +67,10 @@ public class Categoria implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Categoria)) {
+        if (!(object instanceof SubCategoria)) {
             return false;
         }
-        Categoria other = (Categoria) object;
+        SubCategoria other = (SubCategoria) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -79,7 +79,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.iconeinformartica.martan.modelo.Categoria[ id=" + id + " ]";
+        return "br.com.icone.martan.modelo.SubCategoria[ id=" + id + " ]";
     }
     
 }

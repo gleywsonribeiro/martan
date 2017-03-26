@@ -11,11 +11,15 @@
     <ui:define name="corpo">
         <h:form id="form">
             <p:messages autoUpdate="true" closable="true"/>
-            <h:panelGrid columns="3" id="painel">
-                <p:outputLabel value="Categoria" for="categoria"/>
-                <p:inputText id="categoria" value="#{categoriaController.categoria.nome}" converter="#{upperCaseConverter}" required="true" requiredMessage="nome da categoria é obrigatório"/>
-                <p:commandButton value="Salvar" action="#{categoriaController.salvar()}" process="@form" update="painel categoriaTable"/>
-            </h:panelGrid>
+            <p:panel>
+                <h:panelGrid columns="3" id="painel">
+                    <p:outputLabel value="Categoria" for="categoria"/>
+                    <p:inputText id="categoria" value="#{categoriaController.categoria.nome}" converter="#{upperCaseConverter}" required="true" requiredMessage="nome da categoria é obrigatório"/>
+                    <p:commandButton value="Salvar" action="#{categoriaController.salvar()}" process="@form" update="painel categoriaTable"/>
+                </h:panelGrid>
+                
+            </p:panel>
+            
 
             <p:dataTable id="categoriaTable" value="#{categoriaController.categorias}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="categoria" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
@@ -37,7 +41,7 @@
                     </p:commandButton>                
                 </p:column>
             </p:dataTable>
-
+            
             <p:confirmDialog global="true">  
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
