@@ -21,16 +21,16 @@
             <h:panelGrid style="float: left">
                 <p:outputLabel value="Logradoutro" for="entregaLogradouro"/>
                 <p:inputText id="entregaLogradouro" size="50" value="#{pedidoController.pedido.enderecoEntrega.logradouro}"
-                             disabled="#{pedidoController.pedido.emitido}" required="true"/>
+                            converter="#{upperCaseConverter}" disabled="#{pedidoController.pedido.emitido}" required="true"/>
             </h:panelGrid>
             <h:panelGrid style="float: left">
                 <p:outputLabel value="Número" for="entregaNumero" />
-                <p:inputText id="entregaNumero" size="5" value="#{pedidoController.pedido.enderecoEntrega.numero}" required="true" disabled="#{pedidoController.pedido.emitido}"/>
+                <p:inputText id="entregaNumero" size="5" converter="#{upperCaseConverter}" value="#{pedidoController.pedido.enderecoEntrega.numero}" required="true" disabled="#{pedidoController.pedido.emitido}"/>
             </h:panelGrid>
 
             <h:panelGrid style="clear: left; float: left">
                 <p:outputLabel value="Complemento" for="entregaComplemento"/>
-                <p:inputText id="entregaComplemento" size="80" value="#{pedidoController.pedido.enderecoEntrega.complemento}" disabled="#{pedidoController.pedido.emitido}"/>
+                <p:inputText id="entregaComplemento" size="80" converter="#{upperCaseConverter}" value="#{pedidoController.pedido.enderecoEntrega.complemento}" disabled="#{pedidoController.pedido.emitido}"/>
             </h:panelGrid>
             <h:panelGrid style="clear: left; float: left">
                 <p:outputLabel value="Estado" for="estado"/>
@@ -59,8 +59,8 @@
 
             <h:panelGrid style="float: left">
                 <p:outputLabel value="Bairro" for="bairro"/>
-                <p:inputText id="bairro" size="15" value="#{pedidoController.pedido.enderecoEntrega.bairro}" 
-                             disabled="#{pedidoController.pedido.emitido}" required="true"/>
+                <p:inputText id="bairro" size="15"  value="#{pedidoController.pedido.enderecoEntrega.bairro}" 
+                            converter="#{upperCaseConverter}" disabled="#{pedidoController.pedido.emitido}" required="true"/>
             </h:panelGrid>
         </h:panelGroup>
     </h:panelGrid>

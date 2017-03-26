@@ -46,7 +46,7 @@
                     </p:tab>
                     <p:tab title="Observação">
                         <h:panelGroup layout="block" style="padding: 3px">
-                            <p:inputTextarea rows="6" style="width: 100%; resize: none" value="#{pedidoController.pedido.observacao}"/>
+                            <p:inputTextarea rows="6" style="width: 100%; resize: none" value="#{pedidoController.pedido.observacao}" converter="#{upperCaseConverter}"/>
                         </h:panelGroup>
                     </p:tab>
                 </p:tabView>

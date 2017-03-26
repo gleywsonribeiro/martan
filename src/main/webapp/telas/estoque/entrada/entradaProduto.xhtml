@@ -42,7 +42,7 @@
                         <!--                    <ui:include src="../WEB-INF/template/pedido/itensPedido.xhtml" />-->
                     </p:tab>
                     <p:tab title="Observação">
-                        <p:inputTextarea rows="5" value="" style="width: 100%"/>
+                        <p:inputTextarea rows="5" value="" style="width: 100%" converter="#{upperCaseConverter}"/>
                     </p:tab>
                 </p:tabView>
             </p:panel>

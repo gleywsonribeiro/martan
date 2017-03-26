@@ -32,12 +32,12 @@
 
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Nome" for="nome"/>
-                            <p:inputText id="nome" size="34" maxlength="50" value="#{fornecedorController.fornecedor.nome}" required="true"/>
+                            <p:inputText id="nome" size="34" maxlength="50" value="#{fornecedorController.fornecedor.nome}" required="true" converter="#{upperCaseConverter}"/>
                         </h:panelGrid>
 
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Razão Social" for="razaoSocial"/>
-                            <p:inputText id="razaoSocial" size="30" maxlength="50" value="#{fornecedorController.fornecedor.razaoSocial}"/>
+                            <p:inputText id="razaoSocial" size="30" maxlength="50" value="#{fornecedorController.fornecedor.razaoSocial}" converter="#{upperCaseConverter}"/>
                         </h:panelGrid>
 
                         <h:panelGrid style="clear: left; float: left">
@@ -64,7 +64,7 @@
                 <p:fieldset legend="Contato" style="width: 510px; margin-bottom: 10px">
                     <h:panelGrid style="clear: left; float: left">
                         <p:outputLabel value="E-mail" for="email"/>
-                        <p:inputText id="email" size="30" maxlength="50" value="#{fornecedorController.fornecedor.contato.email}"/>
+                        <p:inputText style="text-transform: lowercase" id="email" size="30" maxlength="50" value="#{fornecedorController.fornecedor.contato.email}"/>
                     </h:panelGrid>
 
                     <h:panelGrid style="float: left">
@@ -85,15 +85,15 @@
                     </h:panelGrid>
                     <h:panelGrid style="float: left">
                         <p:outputLabel value="Número" for="numero"/>
-                        <p:inputText id="numero" value="#{fornecedorController.fornecedor.endereco.numero}" size="10"/>
+                        <p:inputText id="numero" value="#{fornecedorController.fornecedor.endereco.numero}" size="10" converter="#{upperCaseConverter}"/>
                     </h:panelGrid>
                     <h:panelGrid style="float: left">
                         <p:outputLabel value="CEP" for="cep"/>
-                        <p:inputText id="cep" value="#{fornecedorController.fornecedor.endereco.cep}" size="10"/>
+                        <p:inputMask mask="99999-999" id="cep" value="#{fornecedorController.fornecedor.endereco.cep}" size="10"/>
                     </h:panelGrid>
                     <h:panelGrid style="clear: left; float: left">
                         <p:outputLabel value="Complemento" for="complemento"/>
-                        <p:inputText id="complemento" value="#{fornecedorController.fornecedor.endereco.complemento}" size="40"/>
+                        <p:inputText id="complemento" value="#{fornecedorController.fornecedor.endereco.complemento}" size="40" converter="#{upperCaseConverter}"/>
                     </h:panelGrid>
                     <h:panelGrid style="clear: left; float: left">
                         <p:outputLabel value="Estado" for="estado"/>
@@ -122,7 +122,7 @@
                     </h:panelGrid>
                     <h:panelGrid style="clear: left; float: left">
                         <p:outputLabel value="Observações" for="obs"/>
-                        <p:inputTextarea id="obs" value="#{fornecedorController.fornecedor.observacao}" rows="4" cols="75" autoResize="false" style="resize: none"/>
+                        <p:inputTextarea id="obs" value="#{fornecedorController.fornecedor.observacao}" rows="4" cols="75" autoResize="false" style="resize: none" converter="#{upperCaseConverter}"/>
                     </h:panelGrid>
                 </p:fieldset>
             </p:panel>

@@ -55,7 +55,7 @@
             </h:panelGrid>
             <h:panelGrid columns="1">
                 <p:outputLabel for="obs" value="Observações: "/>
-                <p:inputTextarea id="obs" value="#{contaPagarController.conta.observacao}" rows="3" cols="85"/>
+                <p:inputTextarea id="obs" value="#{contaPagarController.conta.observacao}" rows="3" cols="85" converter="#{upperCaseConverter}"/>
             </h:panelGrid>
         </h:form>
     </ui:define>

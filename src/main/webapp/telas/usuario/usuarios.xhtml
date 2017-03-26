@@ -17,10 +17,10 @@
 
                 <h:panelGrid columns="2" id="painel">
                     <p:outputLabel for="nome" value="Nome" />
-                    <p:inputText id="nome" value="#{usuarioController.usuario.nome}" required="true" />
+                    <p:inputText id="nome" value="#{usuarioController.usuario.nome}" required="true" converter="#{upperCaseConverter}"/>
 
                     <p:outputLabel for="login" value="Login" />
-                    <p:inputText id="login" value="#{usuarioController.usuario.login}" required="true"/>
+                    <p:inputText style="text-transform: lowercase" id="login" value="#{usuarioController.usuario.login}" required="true"/>
 
                     <p:outputLabel for="senha" value="Senha"/>
                     <p:password id="senha" value="#{usuarioController.usuario.senha}" required="true" match="confirmacao" feedback="true"/>

@@ -9,14 +9,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="sistema.css"/>
         <h:outputScript library="scripts" name="calendario.js"/>
-        <h:outputScript library="scripts" name="uppercase.js"/>
+        <!--<h:outputScript library="scripts" name="uppercase.js"/>-->
     </h:head>
     <h:body>
         <h:form id="form">
             <p:messages autoUpdate="true" closable="true"/>
             <h:panelGrid columns="3" id="painel">
                 <p:outputLabel value="Categoria" for="categoria"/>
-                <p:inputText id="categoria" value="#{categoriaController.categoria.nome}" required="true" requiredMessage="nome da categoria é obrigatório"/>
+                <p:inputText id="categoria" converter="#{upperCaseConverter}" value="#{categoriaController.categoria.nome}" required="true" requiredMessage="nome da categoria é obrigatório"/>
                 <p:commandButton value="Salvar" action="#{categoriaController.salvar()}" process="@form" update="painel categoriaTable"/>
             </h:panelGrid>
 

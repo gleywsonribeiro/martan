@@ -34,11 +34,11 @@
                     </h:panelGrid>
                     <h:panelGrid>
                         <p:outputLabel value="SKU" for="sku"/>
-                        <p:inputText id="sku" size="8" maxlength="10" value="#{cadastroProdutoController.produto.sku}"/>
+                        <p:inputText id="sku" size="8" maxlength="10" value="#{cadastroProdutoController.produto.sku}" converter="#{upperCaseConverter}"/>
                     </h:panelGrid>
                     <h:panelGrid>
                         <p:outputLabel value="Descrição do Produto" for="descricao"/>
-                        <p:inputText id="descricao" size="68" maxlength="50" value="#{cadastroProdutoController.produto.descricao}" required="true"/>
+                        <p:inputText id="descricao" size="68" maxlength="50" value="#{cadastroProdutoController.produto.descricao}" required="true" converter="#{upperCaseConverter}"/>
                     </h:panelGrid>
 
 

@@ -16,10 +16,10 @@
             <p:panel header="Cadastro de Grupos">
                 <h:panelGrid columns="2" id="painel">
                     <p:outputLabel for="nome" value="Nome"/>
-                    <p:inputText id="nome" value="#{grupoController.grupo.nome}"/>
+                    <p:inputText id="nome" value="#{grupoController.grupo.nome}" converter="#{upperCaseConverter}"/>
 
                     <p:outputLabel for="descricao" value="Descrição"/>
-                    <p:inputText id="descricao" value="#{grupoController.grupo.descricao}"/>
+                    <p:inputText id="descricao" value="#{grupoController.grupo.descricao}" converter="#{upperCaseConverter}"/>
                 </h:panelGrid>
                 <p:commandButton value="Salvar" action="#{grupoController.salvar()}" update="painel grupoTable"/>
             </p:panel>
