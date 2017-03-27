@@ -6,6 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Categoria;
+import br.com.icone.martan.modelo.SubCategoria;
 import br.com.icone.martan.modelo.repositorio.CategoriaFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
@@ -27,14 +28,26 @@ public class CategoriaController implements Serializable {
 
     private Categoria categoria;
     private List<Categoria> categorias;
+    private SubCategoria subCategoria;
 
     @Inject
     private CategoriaFacade repositorio;
 
     public CategoriaController() {
         categoria = new Categoria();
+        subCategoria = new SubCategoria();
     }
 
+    public void addSubCategoria() {
+        categoria.getSubCategorias().add(subCategoria);
+        subCategoria = new SubCategoria();
+    }
+    
+    public void removeSubCategoria() {
+        categoria.getSubCategorias().remove(subCategoria);
+        subCategoria = new SubCategoria();
+    }
+    
     public void salvar() {
         if (categoria.getId() == null) {
             repositorio.create(categoria);
@@ -76,6 +89,14 @@ public class CategoriaController implements Serializable {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public SubCategoria getSubCategoria() {
+        return subCategoria;
+    }
+
+    public void setSubCategoria(SubCategoria subCategoria) {
+        this.subCategoria = subCategoria;
     }
 
     public List<Categoria> getCategorias() {
