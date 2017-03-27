@@ -10,26 +10,39 @@
 
     <ui:define name="corpo">
         <h:form id="form">
-            <p:messages autoUpdate="true" closable="true"/>
+            <p:growl autoUpdate="true"/>
             <p:panel>
                 <h:panelGrid columns="3" id="painel">
                     <p:outputLabel value="Categoria" for="categoria"/>
                     <p:inputText id="categoria" value="#{categoriaController.categoria.nome}" converter="#{upperCaseConverter}" required="true" requiredMessage="nome da categoria é obrigatório"/>
-                    <p:commandButton value="Salvar" action="#{categoriaController.salvar()}" process="@form" update="painel categoriaTable"/>
+                    <p:commandButton value="Salvar" action="#{categoriaController.salvar()}" process="@form" update="@form"/>
                 </h:panelGrid>
 
-                <p:panel >
-                    <p:panelGrid columns="2">
-                        <p:watermark value="subcategoria" for="subcategoria"/>
-                        <p:inputText id="subcategoria" value=""/> 
-                    </p:panelGrid>
-                    <p:dataTable value="#{categoriaController.categoria.subCategorias}" var="subcategoria" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                                 rendered="#{not empty categoriaController.categorias}" emptyMessage="Não há registros." paginator="true" rows="5">
+                <p:fieldset id="fildSubCategorias" legend="Subcategorias" style="width: 300px; margin-top: 5px" toggleable="true">
+                    <h:panelGrid columns="2">
+                        <h:panelGroup>
+                            <p:watermark value="subcategoria" for="subcategoria"/>
+                            <p:inputText id="subcategoria" value="#{categoriaController.subCategoria.nome}" converter="#{upperCaseConverter}">
+                                <p:ajax event="keyup" delay="1000" update="btInsertSub"/>
+                            </p:inputText>
+                        </h:panelGroup>
+                        <p:commandButton id="btInsertSub" icon="fa fa-plus" action="#{categoriaController.addSubCategoria()}"
+                                         disabled="#{categoriaController.subCategoria.nome eq null}" process="@this subcategoria" update="subcategoria tableSubCategoria @this"/>
+                    </h:panelGrid>
+
+                    <p:dataTable id="tableSubCategoria" value="#{categoriaController.categoria.subCategorias}" var="subcategoria" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                                 rendered="#{not empty categoriaController.categoria.subCategorias}" paginator="true" rows="5">
                         <p:column headerText="subcategoria">
                             <h:outputText value="#{subcategoria.nome}"/>
                         </p:column>
+                        <p:column style="width: 30px; text-align: center">
+                            <p:tooltip for="btremove" value="Remover Subcategoria"/>
+                            <p:commandButton id="btremove" icon="fa fa-trash-o" update=":form:fildSubCategorias" process="@this" action="#{categoriaController.removeSubCategoria()}">
+                                <f:setPropertyActionListener target="#{categoriaController.subCategoria}" value="#{subcategoria}"/>
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
-                </p:panel>
+                </p:fieldset>
 
             </p:panel>
 
@@ -45,7 +58,7 @@
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar" update=":form:painel" process="@this">
+                    <p:commandButton icon="ui-icon-pencil" title="Editar" update=":form:painel :form:fildSubCategorias" process="@this">
                         <f:setPropertyActionListener target="#{categoriaController.categoria}" value="#{categoria}"/>
                     </p:commandButton>
                     <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{categoriaController.remover()}" process="@this" update="@form">

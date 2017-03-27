@@ -39,6 +39,7 @@ public class CategoriaController implements Serializable {
     }
 
     public void addSubCategoria() {
+        subCategoria.setCategoria(categoria);
         categoria.getSubCategorias().add(subCategoria);
         subCategoria = new SubCategoria();
     }
@@ -56,6 +57,7 @@ public class CategoriaController implements Serializable {
         }
         categoria = new Categoria();
         categorias = null;
+        JsfUtil.addMessage("Salvo!");
     }
     
     public void abrirDialogo() {

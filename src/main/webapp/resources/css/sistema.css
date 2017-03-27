@@ -13,7 +13,11 @@ input, textarea {
     text-transform: uppercase;
 }
 
-
+.ui-growl {
+    position:absolute;
+    top:20px;
+    left:40%;
+}
 
 
 .ui-selectonelistbox .ui-selectlistbox-item, .ui-selectmanymenu .ui-selectlistbox-item, .ui-multiselectlistbox .ui-multiselectlistbox-item {

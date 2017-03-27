@@ -53,7 +53,7 @@
                         <h:panelGroup>
                             <h:panelGrid columns="2">
                                 <p:selectOneMenu id="categoria" style="width: 100px" value="#{cadastroProdutoController.produto.categoria}"
-                                                 required="true" requiredMessage="A categoria deve ser informada" converter="#{categoriaConverter}">
+                                                 converter="#{categoriaConverter}">
                                     <f:selectItem itemLabel="Selecione"/>
                                     <f:selectItems value="#{categoriaController.categorias}" var="categoria"
                                                    itemValue="#{categoria}" itemLabel="#{categoria.nome}"/>

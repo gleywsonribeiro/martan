@@ -6,10 +6,12 @@
 package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +24,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Categoria implements Serializable {
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SubCategoria> subCategorias;
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +34,11 @@ public class Categoria implements Serializable {
     
     @Column(length = 30, nullable = false)
     private String nome;
-    
+
+    public Categoria() {
+        this.subCategorias = new ArrayList<SubCategoria>();
+    }
+
     public String getNome() {
         return nome;
     }

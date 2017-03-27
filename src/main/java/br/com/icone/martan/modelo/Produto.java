@@ -35,13 +35,14 @@ public class Produto implements Serializable {
     private boolean bloqueado;
     
     @ManyToOne
-    @JoinColumn(nullable = false)
     private Categoria categoria;
+    @ManyToOne
+    private SubCategoria subCategoria;
     
     @ManyToOne
     private Marca marca;
     
-    private List<Fornecedor> fornecedores;
+    //private List<Fornecedor> fornecedores;
     
     
     //Unidade
@@ -95,6 +96,14 @@ public class Produto implements Serializable {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public SubCategoria getSubCategoria() {
+        return subCategoria;
+    }
+
+    public void setSubCategoria(SubCategoria subCategoria) {
+        this.subCategoria = subCategoria;
     }
 
     public String getSku() {
