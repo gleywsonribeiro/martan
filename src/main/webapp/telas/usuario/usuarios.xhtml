@@ -30,12 +30,13 @@
                 </h:panelGrid>
 
                 <h:panelGrid columns="1">
-                    <p:outputLabel value="Permissão" for="grupo"/>
-                    <p:selectManyMenu id="grupo" value="#{usuarioController.usuario.grupos}"
-                                     required="true" requiredMessage="Escolha um grupo" converter="#{grupoConverter}">
+                    <p:outputLabel value="Permissão"/>
+                    <p:selectCheckboxMenu id="grupo" value="#{usuarioController.usuario.grupos}" label="Grupos"
+                                          required="true" requiredMessage="Escolha um grupo" converter="#{grupoConverter}"
+                                          panelStyle="width:250px">
                         <f:selectItems value="#{grupoController.grupos}" var="grupo"
                                        itemValue="#{grupo}" itemLabel="#{grupo.nome}"/>
-                    </p:selectManyMenu>
+                    </p:selectCheckboxMenu>
                 </h:panelGrid>
 
                 <p:commandButton value="Salvar" action="#{usuarioController.salvar()}" update="painel usuarioTable" style="margin-top: 10px"/>
