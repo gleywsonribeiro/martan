@@ -7,7 +7,6 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -30,21 +29,22 @@ public class Produto implements Serializable {
 
     @Column(length = 10)
     private String sku;
-    
+
     private boolean ativo;
     private boolean bloqueado;
-    
+
     @ManyToOne
     private Categoria categoria;
     @ManyToOne
     private SubCategoria subCategoria;
-    
+
     @ManyToOne
     private Marca marca;
-    
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Unidade unidade;
+
     //private List<Fornecedor> fornecedores;
-    
-    
     //Unidade
     //Barcode
     @Column(nullable = false, length = 75)
@@ -56,23 +56,15 @@ public class Produto implements Serializable {
     @Column(nullable = false, name = "vl_custo", scale = 2, precision = 10)
     private BigDecimal valorCusto;
 
-    public Marca getMarca() {
-        return marca;
-    }
-
-    public void setMarca(Marca marca) {
-        this.marca = marca;
-    }
-    
     @Column(name = "codigo_barras", length = 50)
     private String codigoDeBarras;
-    
+
     @Column(nullable = false, name = "estoque_atual")
     private int estoqueAtual;
-    
+
     @Column(nullable = false, name = "estoque_min")
     private int estoqueMinimo;
-    
+
     @Column(nullable = false, name = "estoque_max")
     private int estoqueMaximo;
 
@@ -114,6 +106,22 @@ public class Produto implements Serializable {
         this.sku = sku;
     }
 
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
+        this.marca = marca;
+    }
+
+    public Unidade getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(Unidade unidade) {
+        this.unidade = unidade;
+    }
+
     public int getEstoqueMinimo() {
         return estoqueMinimo;
     }
@@ -126,8 +134,6 @@ public class Produto implements Serializable {
         this.bloqueado = bloqueado;
     }
 
-    
-    
     public void setEstoqueMinimo(int estoqueMinimo) {
         this.estoqueMinimo = estoqueMinimo;
     }
@@ -140,10 +146,6 @@ public class Produto implements Serializable {
         this.estoqueMaximo = estoqueMaximo;
     }
 
-    
-    
-    
-    
     public Long getId() {
         return id;
     }
@@ -165,13 +167,13 @@ public class Produto implements Serializable {
     }
 
     public void setCodigoDeBarras(String codigoDeBarras) {
-       this.codigoDeBarras = codigoDeBarras;
+        this.codigoDeBarras = codigoDeBarras;
     }
-    
+
     public void setCodigoDeBarras(long codigoDeBarras) {
-       this.codigoDeBarras = String.format("%010d", codigoDeBarras);
+        this.codigoDeBarras = String.format("%010d", codigoDeBarras);
     }
-    
+
     public String getDescricao() {
         return descricao;
     }
@@ -219,19 +221,19 @@ public class Produto implements Serializable {
     public boolean isPossuiCodBarras() {
         return this.codigoDeBarras != null;
     }
-    
+
     public void baixar(int quantidade) {
-        if(this.estoqueAtual >= quantidade) {
-            this.estoqueAtual -= quantidade; 
+        if (this.estoqueAtual >= quantidade) {
+            this.estoqueAtual -= quantidade;
         } else {
             System.out.println("Não foi possivel tirar do estoque!");
         }
     }
-    
+
     public void adicionar(int quantidade) {
         this.estoqueAtual += quantidade;
     }
-    
+
     @Override
     public String toString() {
         return "br.com.iconeinformartica.martan.modelo.Produto[ id=" + id + " ]";

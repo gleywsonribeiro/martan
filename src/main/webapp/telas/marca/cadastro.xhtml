@@ -13,7 +13,7 @@
             <p:messages autoUpdate="true" closable="true"/>
             <h:panelGrid columns="3" id="painel">
                 <p:outputLabel value="Descrição" for="marca"/>
-                <p:inputText id="marca" value="#{marcaController.marca.descricao}" required="true" requiredMessage="Informe a descrição da marca"/>
+                <p:inputText id="marca" value="#{marcaController.marca.descricao}" converter="#{upperCaseConverter}" required="true" requiredMessage="Informe a descrição da marca"/>
                 <p:commandButton value="Salvar" action="#{marcaController.salvar()}" process="@form" update="painel marcaTable"/>
             </h:panelGrid>
 

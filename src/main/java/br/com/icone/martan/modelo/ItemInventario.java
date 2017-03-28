@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
  *
  * @author Gleywson
  */
-@Entity
+@Entity(name = "item_inventario")
 public class ItemInventario implements Serializable {
 
     private static final long serialVersionUID = 1L;
