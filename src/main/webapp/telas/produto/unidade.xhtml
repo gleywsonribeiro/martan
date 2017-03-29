@@ -11,12 +11,12 @@
     <ui:define name="corpo">
         <h:form id="form">
             <p:messages autoUpdate="true" closable="true"/>
-            <h:outputText value="Cadastro de Unidade" style="font-size: x-large; font-weight: 400; color: darkblue;"/>
+            <h:outputText value="Cadastro de Unidade" styleClass="titulo"/>
             <p:panel style="width: 400px; margin-top: 20px">
                 <h:panelGrid columns="4" id="painel">
                     <h:panelGrid>
                         <p:outputLabel value="Código" for="codigo"/>
-                        <p:inputText id="codigo" maxlength="10" size="5" value="#{unidadecontroller.unidade.codigo}" converter="#{unidadeConverter}" required="true" />
+                        <p:inputText id="codigo" maxlength="10" size="5" value="#{unidadecontroller.unidade.codigo}" converter="#{upperCaseConverter}" required="true" />
                     </h:panelGrid>
 
                     <h:panelGrid>
@@ -32,9 +32,9 @@
                         </p:inputNumber>
                     </h:panelGrid>
                 </h:panelGrid>
-                <p:commandButton value="Salvar" style="margin-left: 5px" action="#{unidadecontroller.salvar()}" process="@this painel" update="painel unidadeTable"/>
+                <p:commandButton value="Salvar" style="margin-left: 5px" action="#{unidadecontroller.salvar()}" update="painel unidadeTable"/>
             </p:panel>
-            
+
             <p:dataTable id="unidadeTable" value="#{unidadecontroller.unidades}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="unidade" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                 <p:column headerText="Código" style="text-align: center; width: 100px">

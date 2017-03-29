@@ -11,7 +11,9 @@
     <ui:define name="corpo">
         <h:form id="formEntrada">
             <p:messages autoUpdate="true" closable="true"/>
-            <h:outputText value="Entrada de Produto" style="font-size: x-large; font-weight: 400; color: darkblue"/>
+            
+            <h:outputText value="Entrada de Produto" styleClass="titulo"/>
+            
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <p:commandButton value="Nova Entrada" process="@this" update="@form" action="#{entradaController.novo()}"/> 

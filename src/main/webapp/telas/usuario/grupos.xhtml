@@ -13,7 +13,9 @@
         <p:growl autoUpdate="true"/>
         <h:form id="form">
 
-            <p:panel header="Cadastro de Grupos">
+            <h:outputText value="Cadastro de Categorias e Subcategorias" styleClass="titulo" />
+            
+            <p:panel style="margin-top: 20px">
                 <h:panelGrid columns="2" id="painel">
                     <p:outputLabel for="nome" value="Nome"/>
                     <p:inputText id="nome" value="#{grupoController.grupo.nome}" converter="#{upperCaseConverter}"/>

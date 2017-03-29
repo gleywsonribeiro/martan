@@ -11,7 +11,10 @@
     <ui:define name="corpo">
         <h:form>
             <p:messages autoUpdate="true" closable="true"/>
-            <p:toolbar style="margin-bottom: 5px">
+            
+            <h:outputText value="Cadastro de Fornecedores" styleClass="titulo" />
+            
+            <p:toolbar style="margin-top: 20px">
                 <f:facet name="left">
                     <p:commandButton value="Novo" icon="ui-icon-document" action="#{fornecedorController.novo()}" process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
                     <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{fornecedorController.salvar()}" update="@form"/>
@@ -22,7 +25,7 @@
             </p:toolbar>
             <!--<h1>Cadastro do Produto</h1>-->
 
-            <p:panel header="Cadastro de Fornecedor">
+            <p:panel>
                 <h:panelGrid columns="2">
                     <h:panelGroup style="float: left">
                         <h:panelGrid style="float: left">

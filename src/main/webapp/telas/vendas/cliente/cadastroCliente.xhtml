@@ -11,7 +11,8 @@
     <ui:define name="corpo">
         <h:form>
             <p:messages autoUpdate="true" closable="true"/>
-            <p:toolbar style="margin-bottom: 5px">
+            <h:outputText value="Cadastro de Clientes" styleClass="titulo" />
+            <p:toolbar style="margin-top: 20px">
                 <f:facet name="left">
                     <p:commandButton value="Novo" icon="fa fa-file" action="#{clienteController.novo()}" process="@this" update="@form"/>
                     <p:commandButton value="Salvar" id="btSalvar" icon="fa fa-save" action="#{clienteController.salvar()}" update="@form"/>

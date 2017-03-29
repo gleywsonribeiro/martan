@@ -11,7 +11,7 @@
     <ui:define name="corpo">
         <h:form id="formPedido">
             <p:messages autoUpdate="true" closable="true"/>
-            <h:outputText value="Novo Pedido" style="font-size: x-large; font-weight: 400; color: darkblue"/>
+            <h:outputText value="Novo Pedido" styleClass="titulo"/>
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <p:commandButton value="Novo" icon="fa fa-file" action="#{pedidoController.novo()}" process="@this" update="@form"/> 

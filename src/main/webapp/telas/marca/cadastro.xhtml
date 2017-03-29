@@ -11,7 +11,10 @@
     <ui:define name="corpo">
         <h:form id="form">
             <p:messages autoUpdate="true" closable="true"/>
-            <h:panelGrid columns="3" id="painel">
+            
+            <h:outputText value="Cadastro de Marcas" styleClass="titulo" />
+            
+            <h:panelGrid columns="3" id="painel" style="margin-top: 20px">
                 <p:outputLabel value="Descrição" for="marca"/>
                 <p:inputText id="marca" value="#{marcaController.marca.descricao}" converter="#{upperCaseConverter}" required="true" requiredMessage="Informe a descrição da marca"/>
                 <p:commandButton value="Salvar" action="#{marcaController.salvar()}" process="@form" update="painel marcaTable"/>
