@@ -11,14 +11,16 @@
     <ui:define name="corpo">
         <h:form id="form">
             <p:messages autoUpdate="true" closable="true"/>
-            
+
             <h:outputText value="Cadastro de Marcas" styleClass="titulo" />
-            
-            <h:panelGrid columns="3" id="painel" style="margin-top: 20px">
-                <p:outputLabel value="Descrição" for="marca"/>
-                <p:inputText id="marca" value="#{marcaController.marca.descricao}" converter="#{upperCaseConverter}" required="true" requiredMessage="Informe a descrição da marca"/>
-                <p:commandButton value="Salvar" action="#{marcaController.salvar()}" process="@form" update="painel marcaTable"/>
-            </h:panelGrid>
+
+            <p:panel style="width: 350px; margin-top: 20px">
+                <h:panelGrid columns="3" id="painel">
+                    <p:outputLabel value="Descrição" for="marca"/>
+                    <p:inputText id="marca" value="#{marcaController.marca.descricao}" converter="#{upperCaseConverter}" required="true" requiredMessage="Informe a descrição da marca"/>
+                    <p:commandButton value="Salvar" action="#{marcaController.salvar()}" process="@form" update="painel marcaTable"/>
+                </h:panelGrid>
+            </p:panel>
 
             <p:dataTable id="marcaTable" value="#{marcaController.marcas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="marca" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
@@ -45,7 +47,7 @@
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
             </p:confirmDialog>
-            
+
         </h:form>
     </ui:define>
 

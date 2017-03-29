@@ -15,7 +15,10 @@
 
         <h:form>
             <p:messages autoUpdate="true" closable="true"/>
-            <p:toolbar style="margin-bottom: 20px">
+            
+            <h:outputText value="Cadastro de Produto" styleClass="titulo"/>
+            
+            <p:toolbar style="margin-top: 20px">
                 <f:facet name="left">
                     <p:commandButton value="Novo" icon="ui-icon-document" action="#{cadastroProdutoController.novo()}" process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
                     <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{cadastroProdutoController.salvar()}" update="@form"/>
@@ -25,9 +28,9 @@
                 </f:facet>
             </p:toolbar>
             
-            <h:outputText value="Cadastro de Produto" styleClass="titulo"/>
             
-            <p:panel style="margin-top: 20px">
+            
+            <p:panel>
                 <h:panelGrid columns="5">
                     <h:panelGrid>
                         <p:outputLabel value="Código" for="codigo"/>
@@ -58,7 +61,7 @@
                                     <f:selectItem itemLabel="Selecione"/>
                                     <f:selectItems value="#{categoriaController.categorias}" var="categoria"
                                                    itemValue="#{categoria}" itemLabel="#{categoria.nome}"/>
-                                    <p:ajax update="subcategoria" event="change" process="@this categoria"/>
+                                    <p:ajax update="subcategoria" process="@this"/>
                                 </p:selectOneMenu>
                                 <p:commandButton id="newcat" icon="fa fa-plus" process="@this" disabled="true" update="categoria" action="#{categoriaController.abrirDialogo()}">
                                     <p:ajax event="dialogReturn" listener="#{cadastroProdutoController.categoriaSelecionada}"  process="@this" update="@form"/>
@@ -70,9 +73,9 @@
                     <h:panelGrid>
                         <p:outputLabel value="Subcategoria" for="subcategoria" />
                         <p:selectOneMenu id="subcategoria" style="width: 100px" value="#{cadastroProdutoController.produto.subCategoria}"
-                                                 converter="#{categoriaConverter}">
+                                         converter="#{subcategoria}">
                                     <f:selectItem itemLabel="Selecione"/>
-                                    <f:selectItems value="#{categoriaController.categoria.subCategorias}" var="subcategoria"
+                                    <f:selectItems value="#{cadastroProdutoController.produto.categoria.subCategorias}" var="subcategoria"
                                                    itemValue="#{subcategoria}" itemLabel="#{subcategoria.nome}"/>
                                 </p:selectOneMenu>
                     </h:panelGrid>
