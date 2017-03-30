@@ -16,11 +16,11 @@
             
             <p:toolbar style="margin-top: 20px">
                 <f:facet name="left">
-                    <p:commandButton value="Novo" icon="ui-icon-document" action="#{fornecedorController.novo()}" process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
-                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{fornecedorController.salvar()}" update="@form"/>
+                    <p:commandButton value="Novo" icon="fa fa-file" action="#{fornecedorController.novo()}" process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
+                    <p:commandButton value="Salvar" id="btSalvar" icon="fa fa-save" action="#{fornecedorController.salvar()}" update="@form"/>
                 </f:facet>
                 <f:facet name="right">
-                    <p:button value="Pesquisar" icon="ui-icon-search" outcome="pesquisa"/>
+                    <p:button value="Pesquisar" icon="fa fa-search" outcome="pesquisa"/>
                 </f:facet>
             </p:toolbar>
             <!--<h1>Cadastro do Produto</h1>-->

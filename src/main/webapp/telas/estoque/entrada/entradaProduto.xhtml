@@ -16,19 +16,19 @@
             
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
-                    <p:commandButton value="Nova Entrada" process="@this" update="@form" action="#{entradaController.novo()}"/> 
-                    <p:commandButton value="Salvar" id="botaoSalvar" process="@this painel" 
+                    <p:commandButton value="Nova Entrada" icon="fa fa-file" process="@this" update="@form" action="#{entradaController.novo()}"/> 
+                    <p:commandButton value="Salvar" id="botaoSalvar" process="@this painel" icon="fa fa-save"
                                      update="painel :formEntrada:tabview:itens :formEntrada:tabview:item" action="#{entradaController.salvar()}" 
                                      disabled="#{entradaController.entrada.naoEditavel}"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <!--<p:commandButton id="emitir" value="Emitir" process="@this" update="@form"/>-->
-                    <p:commandButton id="cancelar" value="Cancelar" />
+                    <p:commandButton id="cancelar" value="Cancelar" icon="fa fa-remove"/>
                     <!--<p:commandButton id="enviar" value="Enviar por e-mail" />-->
 
                     <p:separator/>
 
-                    <p:commandButton value="Pesquisar" process="@this" action="pesquisaEntrada?faces-redirect=true"/>
+                    <p:commandButton value="Pesquisar" icon="fa fa-search" process="@this" action="pesquisaEntrada?faces-redirect=true"/>
                 </p:toolbarGroup>
             </p:toolbar>
             

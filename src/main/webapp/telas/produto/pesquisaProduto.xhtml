@@ -17,10 +17,10 @@
             <h:form id="formProdutos">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="Pesquisar"/>
+                        <p:commandButton value="Pesquisar" icon="fa fa-search" />
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
-                        <p:commandButton value="Novo" id="novo" action="#{cadastroProdutoController.novo()}"/>
+                        <p:commandButton value="Novo" icon="fa fa-file" id="novo" action="#{cadastroProdutoController.novo()}"/>
                     </p:toolbarGroup>
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
@@ -61,10 +61,10 @@
                         </h:outputText>
                     </p:column>
                     <p:column style="width: 100px; text-align: center">
-                        <p:commandButton icon="ui-icon-pencil" title="Editar" action="#{cadastroProdutoController.editar()}">
+                        <p:commandButton icon="fa fa-pencil" title="Editar" action="#{cadastroProdutoController.editar()}">
                             <f:setPropertyActionListener target="#{cadastroProdutoController.produto}" value="#{produto}"/>
                         </p:commandButton>
-                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{cadastroProdutoController.remover()}" update="produtoTable">
+                        <p:commandButton icon="fa fa-trash" title="Excluir" action="#{cadastroProdutoController.remover()}" update="produtoTable">
                             <p:confirm header="Exclusão da Produto" message="Tem certeza que deseja este produto?" icon="ui-icon-alert"/>
                             <f:setPropertyActionListener target="#{cadastroProdutoController.produto}" value="#{produto}"/>
                         </p:commandButton>                

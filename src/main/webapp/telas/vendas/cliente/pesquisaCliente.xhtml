@@ -54,10 +54,10 @@
                         <h:outputText value="#{cliente.contato.telefone}"/>
                     </p:column>
                     <p:column style="width: 100px; text-align: center">
-                        <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastroCliente?faces-redirect=true">
+                        <p:commandButton icon="fa fa-pencil" title="Editar" action="cadastroCliente?faces-redirect=true">
                             <f:setPropertyActionListener target="#{clienteController.cliente}" value="#{cliente}"/>
                         </p:commandButton>
-                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{clienteController.remover()}" update="clienteTable">
+                        <p:commandButton icon="fa fa-trash" title="Excluir" action="#{clienteController.remover()}" update="clienteTable">
                             <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir este cliente?" icon="ui-icon-alert"/>
                             <f:setPropertyActionListener target="#{clienteController.cliente}" value="#{cliente}"/>
                         </p:commandButton>                

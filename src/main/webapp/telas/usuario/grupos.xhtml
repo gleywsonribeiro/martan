@@ -23,7 +23,7 @@
                     <p:outputLabel for="descricao" value="Descrição"/>
                     <p:inputText id="descricao" value="#{grupoController.grupo.descricao}" converter="#{upperCaseConverter}"/>
                 </h:panelGrid>
-                <p:commandButton value="Salvar" action="#{grupoController.salvar()}" update="painel grupoTable"/>
+                <p:commandButton value="Salvar" icon="fa fa-save" action="#{grupoController.salvar()}" update="painel grupoTable"/>
             </p:panel>
 
             <p:dataTable id="grupoTable" value="#{grupoController.grupos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
@@ -37,10 +37,10 @@
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar" process="@this" update=":form:painel">
+                    <p:commandButton icon="fa fa-pencil" title="Editar" process="@this" update=":form:painel">
                         <f:setPropertyActionListener target="#{grupoController.grupo}" value="#{grupo}"/>
                     </p:commandButton>
-                    <p:commandButton icon="ui-icon-trash" title="Excluir" update="grupoTable :form:painel" action="#{grupoController.remover()}">
+                    <p:commandButton icon="fa fa-trash" title="Excluir" update="grupoTable :form:painel" action="#{grupoController.remover()}">
                         <p:confirm message="Tem certeza que deseja este grupo?" icon="ui-icon-alert"/>
                         <f:setPropertyActionListener target="#{grupoController.grupo}" value="#{grupo}"/>
                     </p:commandButton>                

@@ -14,10 +14,10 @@
             <h:outputText value="Pesquisa Entrada de Produtos" style="font-size: x-large; font-weight: 400; color: darkblue"/>
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
-                    <p:commandButton value="Pesquisar" process="@this"/>
+                    <p:commandButton value="Pesquisar" process="@this" icon="fa fa-search"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
-                    <p:commandButton value="Novo" process="@this" action="entradaProduto?faces-redirect=true" actionListener="#{entradaController.novo()}"/>
+                    <p:commandButton value="Novo" icon="fa fa-file" process="@this" action="entradaProduto?faces-redirect=true" actionListener="#{entradaController.novo()}"/>
                 </p:toolbarGroup>
             </p:toolbar>
 

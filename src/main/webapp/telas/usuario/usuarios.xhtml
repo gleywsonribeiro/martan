@@ -41,8 +41,8 @@
                     </p:selectCheckboxMenu>
                 </h:panelGrid>
 
-                <p:commandButton value="Salvar" action="#{usuarioController.salvar()}" update="painel usuarioTable" style="margin-top: 10px"/>
-                <p:commandButton value="Novo" action="#{usuarioController.novo()}" process="@this" update="painel" style="margin-top: 10px"/>
+                <p:commandButton value="Salvar" icon="fa fa-save" action="#{usuarioController.salvar()}" update="painel usuarioTable" style="margin-top: 10px"/>
+                <p:commandButton value="Novo" icon="fa fa-file" action="#{usuarioController.novo()}" process="@this" update="painel" style="margin-top: 10px"/>
             </p:panel>
 
             <p:dataTable id="usuarioTable" value="#{usuarioController.usuarios}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
@@ -56,10 +56,10 @@
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar" process="@this" update=":form:painel">
+                    <p:commandButton icon="fa fa-pencil" title="Editar" process="@this" update=":form:painel">
                         <f:setPropertyActionListener target="#{usuarioController.usuario}" value="#{usuario}"/>
                     </p:commandButton>
-                    <p:commandButton icon="ui-icon-trash" title="Excluir" update="usuarioTable :form:painel" process="@this" action="#{usuarioController.remover()}">
+                    <p:commandButton icon="fa fa-trash" title="Excluir" update="usuarioTable :form:painel" process="@this" action="#{usuarioController.remover()}">
                         <p:confirm message="Tem certeza que deseja remover #{usuario.nome}?" icon="ui-icon-alert"/>
                         <f:setPropertyActionListener target="#{usuarioController.usuario}" value="#{usuario}"/>
                     </p:commandButton>                

@@ -52,6 +52,10 @@ public class MarcaController implements Serializable {
         repositorio.remove(marca);
         this.marca = new Marca();
         this.marcas = null;
+        
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Exclusão", "Registro removido com sucesso!");
+        
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
     }
 
     public List<Marca> getMarcas() {

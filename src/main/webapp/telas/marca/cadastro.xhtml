@@ -18,7 +18,7 @@
                 <h:panelGrid columns="3" id="painel">
                     <p:outputLabel value="Descrição" for="marca"/>
                     <p:inputText id="marca" value="#{marcaController.marca.descricao}" converter="#{upperCaseConverter}" required="true" requiredMessage="Informe a descrição da marca"/>
-                    <p:commandButton value="Salvar" action="#{marcaController.salvar()}" process="@form" update="painel marcaTable"/>
+                    <p:commandButton value="Salvar" icon="fa fa-save" action="#{marcaController.salvar()}" process="@form" update="painel marcaTable"/>
                 </h:panelGrid>
             </p:panel>
 
@@ -33,10 +33,10 @@
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar" update=":form:painel" process="@this">
+                    <p:commandButton icon="fa fa-pencil" title="Editar" update=":form:painel" process="@this">
                         <f:setPropertyActionListener target="#{marcaController.marca}" value="#{marca}"/>
                     </p:commandButton>
-                    <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{marcaController.excluir()}" process="@this" update="@form">
+                    <p:commandButton icon="fa fa-trash" title="Excluir" action="#{marcaController.excluir()}" process="@this" update="@form">
                         <p:confirm header="esclusão da marca" message="Tem certeza que deseja excluir a marca #{categoria.nome}?" icon="ui-icon-alert"/>
                         <f:setPropertyActionListener target="#{marcaController.marca}" value="#{marca}"/>
                     </p:commandButton>                

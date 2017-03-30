@@ -14,10 +14,10 @@
             <h:form id="formFornecedores">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="Pesquisar"/>
+                        <p:commandButton value="Pesquisar" icon="fa fa-search"/>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
-                        <p:commandButton value="Novo" id="novo" action="cadastro?faces-redirect=true" actionListener="#{fornecedorController.novo()}"/>
+                        <p:commandButton value="Novo" id="novo" icon="fa fa-file" action="cadastro?faces-redirect=true" actionListener="#{fornecedorController.novo()}"/>
                     </p:toolbarGroup>
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">

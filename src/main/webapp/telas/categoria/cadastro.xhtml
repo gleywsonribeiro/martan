@@ -18,7 +18,7 @@
                 <h:panelGrid columns="3" id="painel">
                     <p:outputLabel value="Categoria" for="categoria"/>
                     <p:inputText id="categoria" value="#{categoriaController.categoria.nome}" converter="#{upperCaseConverter}" required="true" requiredMessage="nome da categoria é obrigatório"/>
-                    <p:commandButton value="Salvar" action="#{categoriaController.salvar()}" process="@form" update="@form"/>
+                    <p:commandButton value="Salvar" icon="fa fa-save" action="#{categoriaController.salvar()}" process="@form" update="@form"/>
                 </h:panelGrid>
 
                 <p:fieldset id="fildSubCategorias" legend="Subcategorias" style="width: 300px; margin-top: 5px" toggleable="true">
@@ -34,7 +34,7 @@
                     </h:panelGrid>
 
                     <p:dataTable id="tableSubCategoria" value="#{categoriaController.categoria.subCategorias}" var="subcategoria" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                                 rendered="#{not empty categoriaController.categoria.subCategorias}" paginator="true" rows="5">
+                                 emptyMessage="Não há subcategorias vinculadas" paginator="true" rows="5">
                         <p:column headerText="subcategoria">
                             <h:outputText value="#{subcategoria.nome}"/>
                         </p:column>
@@ -61,10 +61,10 @@
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar" update=":form:painel :form:fildSubCategorias" process="@this">
+                    <p:commandButton icon="fa fa-pencil" title="Editar" update=":form:painel :form:fildSubCategorias" process="@this">
                         <f:setPropertyActionListener target="#{categoriaController.categoria}" value="#{categoria}"/>
                     </p:commandButton>
-                    <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{categoriaController.remover()}" process="@this" update="@form">
+                    <p:commandButton icon="fa fa-trash" title="Excluir" action="#{categoriaController.remover()}" process="@this" update="@form">
                         <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir categoria #{categoria.nome}?" icon="ui-icon-alert"/>
                         <f:setPropertyActionListener target="#{categoriaController.categoria}" value="#{categoria}"/>
                     </p:commandButton>                
