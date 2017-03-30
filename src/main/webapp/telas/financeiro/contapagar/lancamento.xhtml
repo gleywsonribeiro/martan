@@ -15,48 +15,51 @@
 
             <p:toolbar style="margin-top: 20px">
                 <f:facet name="left">
-                    <p:commandButton value="Novo" icon="ui-icon-document"  process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
-                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk"  update="@form" action="#{contaPagarController.salvar()}"/>
+                    <p:commandButton value="Novo" icon="fa fa-file"  process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
+                    <p:commandButton value="Salvar" id="btSalvar" icon="fa fa-save"  update="@form" action="#{contaPagarController.salvar()}"/>
                 </f:facet>
                 <f:facet name="right">
-                    <p:commandButton value="Pesquisar" icon="ui-icon-search"  process="@this"/>
+                    <p:commandButton value="Pesquisar" icon="fa fa-search"  process="@this"/>
                 </f:facet>
             </p:toolbar>
 
-            <h:panelGrid columns="4" style="width: 600px">
-                <p:outputLabel value="Cod" for="cod"/>
-                <p:inputText id="cod" value="#{contaPagarController.conta.id}" disabled="true" size="5"/>
+            <p:panel>
+                <h:panelGrid columns="4" style="width: 600px">
+                    <p:outputLabel value="Cod" for="cod"/>
+                    <p:inputText id="cod" value="#{contaPagarController.conta.id}" disabled="true" size="5"/>
 
-                <p:spacer/>
-                <p:spacer/>
+                    <p:spacer/>
+                    <p:spacer/>
 
-                <p:outputLabel for="dtLancamento" value="Data de Lançamento"/>
-                <p:calendar id="dtLancamento" value="#{contaPagarController.conta.lancamento}" disabled="true"
-                            locale="pt" mask="true" pattern="dd/MM/yyyy" size="10"/>
+                    <p:outputLabel for="dtLancamento" value="Data de Lançamento"/>
+                    <p:calendar id="dtLancamento" value="#{contaPagarController.conta.lancamento}" disabled="true"
+                                locale="pt" mask="true" pattern="dd/MM/yyyy" size="10"/>
 
-                <p:outputLabel for="valor" value="Valor"/>
-                <p:inputNumber id="valor" value="#{contaPagarController.conta.valor}" size="15"
-                               symbol="R$ " decimalSeparator="," thousandSeparator="."
-                               decimalPlaces="2" required="true"/>
+                    <p:outputLabel for="valor" value="Valor"/>
+                    <p:inputNumber id="valor" value="#{contaPagarController.conta.valor}" size="15"
+                                   symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                   decimalPlaces="2" required="true"/>
 
-                <p:outputLabel for="vencimento" value="Vencimento" />
-                <p:calendar id="vencimento" value="#{contaPagarController.conta.vencimento}"
-                            locale="pt" mask="true" pattern="dd/MM/yyyy" 
-                            size="10" required="true" requiredMessage="Informe o vencimento"/>
+                    <p:outputLabel for="vencimento" value="Vencimento" />
+                    <p:calendar id="vencimento" value="#{contaPagarController.conta.vencimento}"
+                                locale="pt" mask="true" pattern="dd/MM/yyyy" 
+                                size="10" required="true" requiredMessage="Informe o vencimento"/>
 
-                <p:outputLabel for="fornecedor" value="Fornecedor"/>
-                <p:selectOneMenu id="fornecedor" value="#{contaPagarController.conta.fornecedor}" converter="#{fornecedorConverter}" required="true">
-                    <f:selectItem itemLabel="Selecione"/>
-                    <f:selectItems value="#{fornecedorController.fornecedores}" var="fornecedor" itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor}"/>
-                </p:selectOneMenu>
+                    <p:outputLabel for="fornecedor" value="Fornecedor"/>
+                    <p:selectOneMenu id="fornecedor" value="#{contaPagarController.conta.fornecedor}" converter="#{fornecedorConverter}" required="true">
+                        <f:selectItem itemLabel="Selecione"/>
+                        <f:selectItems value="#{fornecedorController.fornecedores}" var="fornecedor" itemLabel="#{fornecedor.nome}" itemValue="#{fornecedor}"/>
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+                
+                <h:panelGrid columns="1">
+                    <p:outputLabel for="obs" value="Observações: "/>
+                    <p:inputTextarea id="obs" value="#{contaPagarController.conta.observacao}" rows="3" cols="85" converter="#{upperCaseConverter}"/>
+                </h:panelGrid>
+            </p:panel>
 
 
-
-            </h:panelGrid>
-            <h:panelGrid columns="1">
-                <p:outputLabel for="obs" value="Observações: "/>
-                <p:inputTextarea id="obs" value="#{contaPagarController.conta.observacao}" rows="3" cols="85" converter="#{upperCaseConverter}"/>
-            </h:panelGrid>
         </h:form>
     </ui:define>
 
