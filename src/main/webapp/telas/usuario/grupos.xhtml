@@ -13,12 +13,12 @@
         <p:growl autoUpdate="true"/>
         <h:form id="form">
 
-            <h:outputText value="Cadastro de Categorias e Subcategorias" styleClass="titulo" />
+            <h:outputText value="Cadastro de Grupos" styleClass="titulo" />
             
             <p:panel style="margin-top: 20px">
                 <h:panelGrid columns="2" id="painel">
                     <p:outputLabel for="nome" value="Nome"/>
-                    <p:inputText id="nome" value="#{grupoController.grupo.nome}" converter="#{upperCaseConverter}"/>
+                    <p:inputText id="nome" value="#{grupoController.grupo.nome}" required="true" converter="#{upperCaseConverter}"/>
 
                     <p:outputLabel for="descricao" value="Descrição"/>
                     <p:inputText id="descricao" value="#{grupoController.grupo.descricao}" converter="#{upperCaseConverter}"/>

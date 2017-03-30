@@ -73,7 +73,7 @@
                     <h:panelGrid>
                         <p:outputLabel value="Subcategoria" for="subcategoria" />
                         <p:selectOneMenu id="subcategoria" style="width: 100px" value="#{cadastroProdutoController.produto.subCategoria}"
-                                         converter="#{subcategoria}">
+                                         converter="#{subcategoriaConverter}">
                                     <f:selectItem itemLabel="Selecione"/>
                                     <f:selectItems value="#{cadastroProdutoController.produto.categoria.subCategorias}" var="subcategoria"
                                                    itemValue="#{subcategoria}" itemLabel="#{subcategoria.nome}"/>
