@@ -19,7 +19,7 @@
                     <p:commandButton value="Salvar" id="btSalvar" icon="fa fa-save"  update="@form" action="#{contaPagarController.salvar()}"/>
                 </f:facet>
                 <f:facet name="right">
-                    <p:commandButton value="Pesquisar" icon="fa fa-search"  process="@this"/>
+                    <p:commandButton value="Pesquisar" icon="fa fa-search"  process="@this" action="pesquisa?faces-redirect=true"/>
                 </f:facet>
             </p:toolbar>
 
