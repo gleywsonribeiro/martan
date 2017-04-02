@@ -25,10 +25,10 @@
                     <p:inputText style="text-transform: lowercase" id="login" value="#{usuarioController.usuario.login}" required="true"/>
 
                     <p:outputLabel for="senha" value="Senha"/>
-                    <p:password id="senha" value="#{usuarioController.usuario.senha}" required="true" match="confirmacao" feedback="true"/>
+                    <p:password id="senha" value="#{usuarioController.usuario.senha}" required="true" />
 
-                    <p:outputLabel for="confirmacao" value="Confirme a Senha"/>
-                    <p:password id="confirmacao" value="#{usuarioController.usuario.senha}" required="true" feedback="true"/>
+                    <!--<p:outputLabel for="confirmacao" value="Confirme a Senha"/>-->
+                    <!--<p:password id="confirmacao" value="" required="true" feedback="true"/>-->
                 </h:panelGrid>
 
                 <h:panelGrid columns="1">
