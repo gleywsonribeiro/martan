@@ -7,8 +7,10 @@ package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Categoria;
 import br.com.icone.martan.modelo.Produto;
+import br.com.icone.martan.modelo.Unidade;
 import br.com.icone.martan.modelo.repositorio.CategoriaFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
+import br.com.icone.martan.modelo.repositorio.UnidadeFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -29,6 +31,7 @@ public class GeraProdutoController implements Serializable{
     private CategoriaFacade categoriaFacade;
     @Inject
     private ProdutoFacade produtoFacade;
+    @Inject UnidadeFacade unidadeFacade;
     
     public GeraProdutoController() {
         this.produto = new Produto();
@@ -36,9 +39,11 @@ public class GeraProdutoController implements Serializable{
     
     public void gerarProdutos() {
         Categoria categoria = categoriaFacade.find(new Long(1));
+        Unidade unidade = unidadeFacade.find(new Long(1));
         this.produto = new Produto();
         for (int i = 0; i < 1000; i++) {
             produto.setCategoria(categoria);
+            produto.setUnidade(unidade);
             produto.setDescricao("Produto " + (i+1));
             produto.setEstoqueMinimo(5);
             produto.setEstoqueMaximo(10);

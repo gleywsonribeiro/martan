@@ -28,7 +28,7 @@
         <p:autoComplete value="#{pedidoController.pedido.cliente}" converter="#{clienteConverter}"
                         var="client" itemLabel="#{client.nome}" itemValue="#{client}"
                         completeMethod="#{pedidoController.completarClientes}"
-                        disabled="#{pedidoController.pedido.emitido}"
+                        disabled="#{pedidoController.pedido.emitido}" maxResults="10"
                         forceSelection="true" id="cliente" dropdown="true"
                         required="true" requiredMessage="Escolha o cliente">
             <p:ajax update=":formPedido:tabview:entrega" event="itemSelect" listener="${pedidoController.setMesmoEnderecoCliente()}"/>

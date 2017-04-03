@@ -10,7 +10,7 @@
             <p:watermark for="sku" value="Código"/>
             <!--<p:inputText id="sku" style="width: 110px" value=""/>-->
             <p:autoComplete id="sku" value="#{entradaController.item.produto}" converter="#{produtoConverter}"
-                            var="produto" itemLabel="#{produto.codigoDeBarras}" itemValue="#{produto}"
+                            var="produto" itemLabel="#{produto.codigoDeBarras}" itemValue="#{produto}" maxResults="10"
                             completeMethod="#{entradaController.buscaProdutoCodigo}" forceSelection="true"
                             >
                 <p:ajax update="item" event="itemSelect"/>
@@ -20,7 +20,7 @@
         <h:panelGroup>
             <p:watermark for="produto" value="Produto"/>
             <p:autoComplete id="produto" value="#{entradaController.item.produto}" converter="#{produtoConverter}"
-                            var="produto" itemLabel="#{produto.descricao}" itemValue="#{produto}"
+                            var="produto" itemLabel="#{produto.descricao}" itemValue="#{produto}" maxResults="10"
                             completeMethod="#{entradaController.buscaProdutoDescricao}" forceSelection="true"
                             >
                 <p:ajax update="item" event="itemSelect"/>
