@@ -11,13 +11,13 @@
     <ui:define name="corpo">
         <h:form>
             <p:messages autoUpdate="true" closable="true"/>
-            <h:form id="formFornecedores">
+            <h:form id="formContas">
                 <p:toolbar>
                     <p:toolbarGroup>
                         <p:commandButton value="Pesquisar" icon="fa fa-search"/>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
-                        <p:commandButton value="Novo" id="novo" icon="fa fa-file" action="cadastro?faces-redirect=true" actionListener="#{fornecedorController.novo()}"/>
+                        <p:commandButton value="Novo" id="novo" icon="fa fa-file"/>
                     </p:toolbarGroup>
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
@@ -28,33 +28,35 @@
                     <p:inputText id="nome" size="60"/>
                 </h:panelGrid>
 
-                <p:dataTable id="fornecedorTable" value="#{fornecedorController.fornecedores}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                             var="fornecedor" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+                <p:dataTable id="ContasTable" value="#{pesquisaContaPagar.contas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                             var="conta" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                     <p:column headerText="Código" style="text-align: center; width: 100px">
-                        <h:outputText value="#{fornecedor.id}"/>
+                        <h:outputText value="#{conta.id}"/>
                     </p:column>
 
-                    <p:column headerText="Nome">
-                        <h:outputText value="#{fornecedor.nome}"/>
+                    <p:column headerText="Fornecedor">
+                        <h:outputText value="#{conta.fornecedor.nome}"/>
                     </p:column>
                     
-                    <p:column headerText="CGC">
-                        <h:outputText value="#{fornecedor.documentoReceitaFederal}"/>
+                    <p:column headerText="Valor">
+                        <h:outputText value="#{conta.valor}"/>
                     </p:column>
                     
-                    <p:column headerText="Telefone">
-                        <h:outputText value="#{fornecedor.contato.telefone}"/>
+                    <p:column headerText="Vencimento">
+                        <h:outputText value="#{conta.vencimento}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:outputText>
                     </p:column>
                     
-                    <p:column style="width: 100px; text-align: center">
+<!--                    <p:column style="width: 100px; text-align: center">
                         <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastro?faces-redirect=true">
-                            <f:setPropertyActionListener target="#{fornecedorController.fornecedor}" value="#{fornecedor}"/>
+                            <f:setPropertyActionListener target="" value=""/>
                         </p:commandButton>
-                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="#{fornecedorController.remover()}" update="fornecedorTable">
+                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="" update="fornecedorTable">
                             <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir este fornecedor?" icon="ui-icon-alert"/>
-                            <f:setPropertyActionListener target="#{fornecedorController.fornecedor}" value="#{fornecedor}"/>
+                            <f:setPropertyActionListener target="" value=""/>
                         </p:commandButton>                
-                    </p:column>
+                    </p:column>-->
                 </p:dataTable>
 
                 <p:confirmDialog global="true">  
