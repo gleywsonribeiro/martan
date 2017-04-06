@@ -9,6 +9,7 @@ import br.com.icone.martan.modelo.ContaPagar;
 import br.com.icone.martan.modelo.repositorio.ContaPagarFacade;
 import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -23,19 +24,12 @@ public class pesquisaContaPagar implements Serializable {
 
     @Inject
     private ContaPagarFacade repositorio;
-    
-    private List<ContaPagar> contas;
-    
+
     public pesquisaContaPagar() {
     }
 
     public List<ContaPagar> getContas() {
-        if(contas == null) {
-            contas = repositorio.findAll();
-        }
-        return contas;
+        return repositorio.findAll();
     }
-    
-    
-    
+
 }

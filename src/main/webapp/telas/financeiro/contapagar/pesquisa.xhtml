@@ -17,7 +17,7 @@
                         <p:commandButton value="Pesquisar" icon="fa fa-search"/>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
-                        <p:commandButton value="Novo" id="novo" icon="fa fa-file"/>
+                        <p:commandButton value="Novo" id="novo" icon="fa fa-file" process="@this" action="lancamento?faces-redirect=true"/>
                     </p:toolbarGroup>
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
@@ -38,25 +38,27 @@
                         <h:outputText value="#{conta.fornecedor.nome}"/>
                     </p:column>
                     
-                    <p:column headerText="Valor">
-                        <h:outputText value="#{conta.valor}"/>
+                    <p:column headerText="Valor" style="text-align: right; width: 200px">
+                        <h:outputText value="#{conta.valor}">
+                            <f:convertNumber type="currency" />
+                        </h:outputText>
                     </p:column>
                     
-                    <p:column headerText="Vencimento">
+                    <p:column headerText="Vencimento" style="text-align: center; width: 200px">
                         <h:outputText value="#{conta.vencimento}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
                     
-<!--                    <p:column style="width: 100px; text-align: center">
-                        <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastro?faces-redirect=true">
-                            <f:setPropertyActionListener target="" value=""/>
+                    <p:column style="width: 100px; text-align: center">
+                        <p:commandButton icon="fa fa-pencil" title="Editar" action="lancamento?faces-redirect=true">
+                            <f:setPropertyActionListener target="#{contaPagarController.conta}" value="#{conta}"/>
                         </p:commandButton>
-                        <p:commandButton icon="ui-icon-trash" title="Excluir" action="" update="fornecedorTable">
-                            <p:confirm header="Exclusão da Sede" message="Tem certeza que deseja excluir este fornecedor?" icon="ui-icon-alert"/>
-                            <f:setPropertyActionListener target="" value=""/>
+                        <p:commandButton icon="fa fa-trash" title="Excluir" action="#{contaPagarController.remover()}" update="ContasTable">
+                            <p:confirm header="Exclusão de registro" message="Está prestes a remover uma conta, está certo disso?" icon="ui-icon-alert"/>
+                            <f:setPropertyActionListener target="#{contaPagarController.conta}" value="#{conta}"/>
                         </p:commandButton>                
-                    </p:column>-->
+                    </p:column>
                 </p:dataTable>
 
                 <p:confirmDialog global="true">  

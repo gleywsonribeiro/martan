@@ -25,7 +25,6 @@ public class ContaPagarController implements Serializable {
     private ContaPagarFacade repositorio;
     
     private ContaPagar conta;
-    private List<ContaPagar> contas;
     
     public ContaPagarController() {
         conta = new ContaPagar();
@@ -39,12 +38,6 @@ public class ContaPagarController implements Serializable {
         this.conta = conta;
     }
 
-    public List<ContaPagar> getContas() {
-        if(contas == null) {
-            contas = repositorio.findAll();
-        }
-        return contas;
-    }
     
     public void salvar() {
         if(conta.getId() == null) {
@@ -53,5 +46,10 @@ public class ContaPagarController implements Serializable {
             repositorio.edit(conta);
         }
         JsfUtil.addMessage("Conta salva com sucesso!");
+    }
+    
+    public void remover() {
+        repositorio.remove(conta);
+        this.conta = new ContaPagar();
     }
 }
