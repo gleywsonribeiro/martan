@@ -17,7 +17,7 @@
                         <p:commandButton value="Pesquisar" icon="fa fa-search"/>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
-                        <p:commandButton value="Novo" id="novo" icon="fa fa-file" process="@this" action="lancamento?faces-redirect=true"/>
+                        <p:commandButton value="Novo" id="novo" actionListener="#{contaPagarController.novo()}" icon="fa fa-file" process="@this" action="lancamento?faces-redirect=true"/>
                     </p:toolbarGroup>
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
@@ -45,7 +45,7 @@
                     </p:column>
                     
                     <p:column headerText="Vencimento" style="text-align: center; width: 200px">
-                        <h:outputText value="#{conta.vencimento}">
+                        <h:outputText value="#{conta.dataVencimento}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>

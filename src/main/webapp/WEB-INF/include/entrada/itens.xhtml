@@ -22,7 +22,7 @@
             <p:autoComplete id="produto" value="#{entradaController.item.produto}" converter="#{produtoConverter}"
                             var="produto" itemLabel="#{produto.descricao}" itemValue="#{produto}" maxResults="10"
                             completeMethod="#{entradaController.buscaProdutoDescricao}" forceSelection="true"
-                            >
+                            size="75">
                 <p:ajax update="item" event="itemSelect"/>
             </p:autoComplete>
 

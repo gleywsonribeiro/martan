@@ -15,7 +15,7 @@
 
             <p:toolbar style="margin-top: 20px">
                 <f:facet name="left">
-                    <p:commandButton value="Novo" icon="fa fa-file"  process="@this" update="@form"/> <!--outcome="/produtos/CadastroProduto"-->
+                    <p:commandButton value="Novo" icon="fa fa-file"  process="@this" update="@form" action="#{contaPagarController.novo()}"/> <!--outcome="/produtos/CadastroProduto"-->
                     <p:commandButton value="Salvar" id="btSalvar" icon="fa fa-save"  update="@form" action="#{contaPagarController.salvar()}"/>
                 </f:facet>
                 <f:facet name="right">
@@ -41,7 +41,7 @@
                                    decimalPlaces="2" required="true"/>
 
                     <p:outputLabel for="vencimento" value="Vencimento" />
-                    <p:calendar id="vencimento" value="#{contaPagarController.conta.vencimento}"
+                    <p:calendar id="vencimento" value="#{contaPagarController.conta.dataVencimento}"
                                 locale="pt" mask="true" pattern="dd/MM/yyyy" 
                                 size="10" required="true" requiredMessage="Informe o vencimento"/>
 

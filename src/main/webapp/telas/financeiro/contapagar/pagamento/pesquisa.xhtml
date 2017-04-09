@@ -29,6 +29,7 @@
                 </h:panelGrid>
 
                 <p:dataTable id="contasTable" value="#{pesquisaContaPagar.contasPendentes}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                             rowStyleClass="#{conta.vencida? 'pendente-atraso' : 'pendente-sem-atraso'}"
                              var="conta" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                     <p:column headerText="Código" style="text-align: center; width: 100px">
                         <h:outputText value="#{conta.id}"/>
@@ -45,7 +46,7 @@
                     </p:column>
                     
                     <p:column headerText="Vencimento" style="text-align: center; width: 200px">
-                        <h:outputText value="#{conta.vencimento}">
+                        <h:outputText value="#{conta.dataVencimento}">
                             <f:convertDateTime pattern="dd/MM/yyyy" />
                         </h:outputText>
                     </p:column>
@@ -54,8 +55,7 @@
                         <p:commandButton icon="fa fa-check" title="Confirmar pagamento" action="#{pesquisaContaPagar.pagar()}" update="contasTable">
                             <f:setPropertyActionListener target="#{pesquisaContaPagar.conta}" value="#{conta}"/>
                         </p:commandButton>
-                        <p:commandButton disabled="true" icon="fa fa-trash" title="Excluir" action="#{contaPagarController.remover()}" update="contasTable">
-                            <p:confirm header="Exclusão de registro" message="Está prestes a remover uma conta, está certo disso?" icon="ui-icon-alert"/>
+                        <p:commandButton icon="fa fa-money" title="Lançar Pagamento" action="pagamento?faces-redirect=true">
                             <f:setPropertyActionListener target="#{contaPagarController.conta}" value="#{conta}"/>
                         </p:commandButton>                
                     </p:column>

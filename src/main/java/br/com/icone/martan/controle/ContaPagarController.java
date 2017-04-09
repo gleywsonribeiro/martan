@@ -38,6 +38,9 @@ public class ContaPagarController implements Serializable {
         this.conta = conta;
     }
 
+    public void novo() {
+        this.conta = new ContaPagar();
+    }
     
     public void salvar() {
         if(conta.getId() == null) {

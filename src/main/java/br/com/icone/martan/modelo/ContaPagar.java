@@ -35,7 +35,7 @@ public class ContaPagar implements Serializable {
 
     @Temporal(javax.persistence.TemporalType.DATE)
     @Column(name = "dt_vencimento", nullable = false)
-    private Date vencimento;
+    private Date dataVencimento;
 
     @Column(name = "nr_documento", length = 50)
     private String numeroDocumento;
@@ -120,12 +120,12 @@ public class ContaPagar implements Serializable {
         this.observacao = observacao;
     }
     
-    public Date getVencimento() {
-        return vencimento;
+    public Date getDataVencimento() {
+        return dataVencimento;
     }
 
-    public void setVencimento(Date dataContaPagar) {
-        this.vencimento = dataContaPagar;
+    public void setDataVencimento(Date dataContaPagar) {
+        this.dataVencimento = dataContaPagar;
     }
 
     public Fornecedor getFornecedor() {
@@ -163,6 +163,10 @@ public class ContaPagar implements Serializable {
         this.dataPagamento = dataPagamento;
     }
 
+    public boolean isVencida() {
+        return this.dataVencimento.before(new Date());
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

@@ -7,7 +7,26 @@ body {
     margin: 0px;
     font-weight: normal;
 }
+span {
+    font-size: 12px;
+}
 
+.pendente-atraso {
+    background-color: #ffac68 ;
+    color: black;
+    /*font-weight: bold;*/
+}
+
+.pendente-sem-atraso {
+    background-color: #44ff55 ;
+    color: black;
+    /*font-weight: bold;*/
+}
+
+.pago{
+    /*background-color: green;*/ 
+    color: green;
+}
 
 input, textarea {
     text-transform: uppercase;
