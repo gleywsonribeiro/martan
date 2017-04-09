@@ -7,6 +7,7 @@ package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.ContaPagar;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,4 +31,7 @@ public class ContaPagarFacade extends AbstractFacade<ContaPagar> implements Seri
         super(ContaPagar.class);
     }
     
+    public List<ContaPagar> contasPendentes() {
+        return getEntityManager().createQuery("SELECT conta FROM conta_pagar conta WHERE conta.dataPagamento IS NULL", ContaPagar.class).getResultList();
+    }
 }
