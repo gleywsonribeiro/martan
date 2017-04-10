@@ -12,20 +12,20 @@ span {
 }
 
 .pendente-atraso {
-    background-color: #ffac68 ;
-    color: black;
+    background-color: #f7d4d4 ;
+    /*color: black;*/
     /*font-weight: bold;*/
 }
 
 .pendente-sem-atraso {
-    background-color: #44ff55 ;
-    color: black;
+    background-color: #c2f0c6 ;
+    /*color: black;*/
     /*font-weight: bold;*/
 }
 
 .pago{
     /*background-color: green;*/ 
-    color: green;
+    color: #c2f0c6;
 }
 
 input, textarea {
@@ -116,6 +116,14 @@ h1 {
 .campo {
     /*text-align: left;*/
     /*width: 200px*/
+}
+
+/*Estilo alinhando para grid*/
+.label {
+    text-align: right;
+}
+.field {
+    font-weight: bold;
 }
 
 .menu-sistema {

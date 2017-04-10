@@ -48,6 +48,7 @@ public class pesquisaContaPagar implements Serializable {
         this.conta = new ContaPagar();
         JsfUtil.addMessage("Conta paga com sucesso!");
     }
+   
 
     public ContaPagar getConta() {
         return conta;

@@ -11,6 +11,7 @@ import br.com.icone.martan.util.jsf.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -49,6 +50,13 @@ public class ContaPagarController implements Serializable {
             repositorio.edit(conta);
         }
         JsfUtil.addMessage("Conta salva com sucesso!");
+        this.conta = new ContaPagar();
+    }
+    
+    public String confirmarPagamento() {
+        this.conta.setDataPagamento(new Date());
+        salvar();
+        return "pesquisa?faces-redirect=true";
     }
     
     public void remover() {
