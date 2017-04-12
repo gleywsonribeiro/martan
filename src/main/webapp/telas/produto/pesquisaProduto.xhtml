@@ -41,7 +41,7 @@
                         <h:outputText value="#{produto.sku}"/>
                     </p:column>
 
-                    <p:column headerText="Produto">
+                    <p:column headerText="Produto" filterBy="#{produto.descricao}" filterMatchMode="contains">
                         <h:outputText value="#{produto.descricao}"/>
                     </p:column>
                     

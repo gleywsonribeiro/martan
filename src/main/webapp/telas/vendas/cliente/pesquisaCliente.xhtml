@@ -34,7 +34,7 @@
                         <h:outputText value="#{cliente.id}"/>
                     </p:column>
 
-                    <p:column headerText="Nome">
+                    <p:column headerText="Nome" filterBy="#{cliente.nome}" filterMatchMode="contains">
                         <h:outputText value="#{cliente.nome}"/>
                     </p:column>
                     
