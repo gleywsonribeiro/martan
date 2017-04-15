@@ -53,6 +53,7 @@
                     
                     <p:column style="width: 100px; text-align: center">
                         <p:commandButton icon="fa fa-check" title="Confirmar pagamento" action="#{pesquisaContaPagar.pagar()}" update="contasTable">
+                            <p:confirm header="Confirmação de Pagamento" message="Confirma pagamento para a conta #{conta.id}?" icon="ui-icon-alert"/>
                             <f:setPropertyActionListener target="#{pesquisaContaPagar.conta}" value="#{conta}"/>
                         </p:commandButton>
                         <p:commandButton icon="fa fa-money" title="Lançar Pagamento" action="pagamento?faces-redirect=true">

@@ -45,8 +45,8 @@ public class pesquisaContaPagar implements Serializable {
         this.conta.setDataPagamento(new Date());
         this.conta.setValorPago(conta.getValor());
         repositorio.edit(conta);
+        JsfUtil.addMessage("Conta " + conta.getId() + " paga com sucesso!");
         this.conta = new ContaPagar();
-        JsfUtil.addMessage("Conta paga com sucesso!");
     }
    
 
