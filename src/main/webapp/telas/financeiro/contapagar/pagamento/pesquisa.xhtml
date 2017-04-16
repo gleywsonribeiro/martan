@@ -14,7 +14,7 @@
             <h:form id="formContas">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="Pesquisar" icon="fa fa-search"/>
+                        <p:commandButton value="Pesquisar" icon="fa fa-search" action="#{pesquisaContaPagar.pesquisar()}" update="contasTable"/>
                     </p:toolbarGroup>
 <!--                    <p:toolbarGroup align="right">
                         <p:commandButton value="Novo" id="novo" icon="fa fa-file" process="@this" action="lancamento?faces-redirect=true"/>
@@ -22,10 +22,10 @@
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
                     <p:outputLabel value="Código" for="codigo"/>
-                    <p:inputText id="codigo" size="5"/>
+                    <p:inputText id="codigo" value="#{pesquisaContaPagar.filtro.id}" size="5"/>
 
                     <p:outputLabel value="Nome do Fornecedor" for="nome"/>
-                    <p:inputText id="nome" size="60"/>
+                    <p:inputText id="nome" value="#{pesquisaContaPagar.filtro.nome}" size="60"/>
                 </h:panelGrid>
 
                 <p:dataTable id="contasTable" value="#{pesquisaContaPagar.contasPendentes}" paginatorAlwaysVisible="false" paginatorPosition="bottom"

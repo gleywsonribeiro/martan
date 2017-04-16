@@ -17,7 +17,7 @@
             <h:form id="formProdutos">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="Pesquisar" icon="fa fa-search" />
+                        <p:commandButton value="Pesquisar" update="produtoTable" icon="fa fa-search" action="#{cadastroProdutoController.pesquisar()}"/>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
                         <p:commandButton value="Novo" icon="fa fa-file" id="novo" action="#{cadastroProdutoController.novo()}"/>
@@ -25,13 +25,13 @@
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
                     <p:outputLabel value="Código" for="codigo"/>
-                    <p:inputText id="codigo" size="5"/>
+                    <p:inputText id="codigo" size="5" value="#{cadastroProdutoController.filtro.id}"/>
 
                     <p:outputLabel value="Nome do Produto" for="nome"/>
-                    <p:inputText id="nome" size="60"/>
+                    <p:inputText id="nome" size="60" value="#{cadastroProdutoController.filtro.descricao}"/>
                 </h:panelGrid>
 
-                <p:dataTable id="produtoTable" value="#{cadastroProdutoController.produtos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                <p:dataTable id="produtoTable" value="#{cadastroProdutoController.produtosFiltrados}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                              var="produto" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                     <p:column headerText="Código" style="text-align: center; width: 100px">
                         <h:outputText value="#{produto.id}"/>
@@ -41,7 +41,7 @@
                         <h:outputText value="#{produto.sku}"/>
                     </p:column>
 
-                    <p:column headerText="Produto" filterBy="#{produto.descricao}" filterMatchMode="contains">
+                    <p:column headerText="Produto">
                         <h:outputText value="#{produto.descricao}"/>
                     </p:column>
                     

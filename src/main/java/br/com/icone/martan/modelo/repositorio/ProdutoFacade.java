@@ -6,11 +6,21 @@
 package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.Produto;
+import br.com.icone.martan.modelo.repositorio.filter.ProdutoFilter;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import org.eclipse.persistence.internal.oxm.schema.model.Restriction;
 
 /**
  *
@@ -43,5 +53,32 @@ public class ProdutoFacade extends AbstractFacade<Produto> implements Serializab
     public List<Produto> getProdutosPorCodigo(String cod) {
         return getEntityManager().createQuery("SELECT p FROM Produto AS p WHERE P.ativo = TRUE AND p.codigoDeBarras LIKE :cod", Produto.class)
                 .setParameter("cod", "%" + cod + "%").getResultList();
+    }
+    
+    public List<Produto> getProdutosFiltrados(ProdutoFilter filtro) {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Produto> query = builder.createQuery(Produto.class);
+        Root<Produto> from = query.from(Produto.class);
+        Predicate predicate = builder.and();
+        
+        if(filtro.getId() != null) {
+            predicate = builder.and(predicate, builder.equal(from.get("id"), filtro.getId()));
+        }
+        
+        if(filtro.getDescricao() != null) {
+            predicate = builder.and(predicate, builder.like(from.<String>get("descricao"),"%"+ filtro.getDescricao().toUpperCase() +"%"));
+        }
+        
+        TypedQuery<Produto> typedQuery = getEntityManager().createQuery(
+                query.select(from)
+                .where(predicate)
+//                .orderBy(builder.asc(from.get("descricao")))
+        );
+        return typedQuery.getResultList();
+//        Query query = getEntityManager().createQuery("SELECT p FROM Produto as p WHERE p.id = :cod OR p.descricao LIKE :descricao", Produto.class)
+//                .setParameter("cod", filtro.getId())
+//                .setParameter("descricao", filtro.getDescricao());
+//        
+//        return query.getResultList();
     }
 }

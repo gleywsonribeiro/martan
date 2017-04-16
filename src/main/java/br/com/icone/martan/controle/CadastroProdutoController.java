@@ -9,9 +9,11 @@ import br.com.icone.martan.modelo.Categoria;
 import br.com.icone.martan.modelo.Marca;
 import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
+import br.com.icone.martan.modelo.repositorio.filter.ProdutoFilter;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +32,8 @@ import org.primefaces.event.SelectEvent;
 public class CadastroProdutoController implements Serializable {
 
     private Produto produto;
-    private List<Produto> produtos;
+    private ProdutoFilter filtro;
+    private List<Produto> produtosFiltrados;
 
     @Inject
     private ProdutoFacade repositorio;
@@ -40,6 +43,8 @@ public class CadastroProdutoController implements Serializable {
 
     public CadastroProdutoController() {
         this.produto = new Produto();
+        this.filtro = new ProdutoFilter();
+        this.produtosFiltrados = new ArrayList<Produto>();
     }
 
     public String validar() {
@@ -56,8 +61,12 @@ public class CadastroProdutoController implements Serializable {
             repositorio.edit(produto);
         }
         this.produto = new Produto();
-        this.produtos = null;
+        this.produtosFiltrados = null;
         JsfUtil.addMessage("Salvo com sucesso!");
+    }
+    
+    public void pesquisar() {
+        this.produtosFiltrados = repositorio.getProdutosFiltrados(filtro);
     }
 
     public void categoriaSelecionada(SelectEvent event) {
@@ -80,9 +89,17 @@ public class CadastroProdutoController implements Serializable {
 
     public void remover() {
         repositorio.remove(produto);
-        produtos = null;
+        produtosFiltrados = null;
         produto = new Produto();
         JsfUtil.addMessage("Produto removido com sucesso!");
+    }
+
+    public ProdutoFilter getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(ProdutoFilter filtro) {
+        this.filtro = filtro;
     }
 
     public Produto getProduto() {
@@ -93,11 +110,8 @@ public class CadastroProdutoController implements Serializable {
         this.produto = produto;
     }
 
-    public List<Produto> getProdutos() {
-        if (produtos == null) {
-            produtos = repositorio.findAll();
-        }
-        return produtos;
+    public List<Produto> getProdutosFiltrados() {
+        return produtosFiltrados;
     }
 
     public void gerarEtiquetas() {

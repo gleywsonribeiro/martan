@@ -6,6 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.ContaPagar;
+import br.com.icone.martan.modelo.Fornecedor;
 import br.com.icone.martan.modelo.repositorio.ContaPagarFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
@@ -27,10 +28,13 @@ public class pesquisaContaPagar implements Serializable {
     @Inject
     private ContaPagarFacade repositorio;
     
+    private Fornecedor filtro;
+    
     private ContaPagar conta;
 
     public pesquisaContaPagar() {
         this.conta = new ContaPagar();
+        this.filtro = new Fornecedor();
     }
 
     public List<ContaPagar> getContas() {
@@ -49,6 +53,9 @@ public class pesquisaContaPagar implements Serializable {
         this.conta = new ContaPagar();
     }
    
+    public void pesquisar() {
+        
+    }
 
     public ContaPagar getConta() {
         return conta;
@@ -56,6 +63,14 @@ public class pesquisaContaPagar implements Serializable {
 
     public void setConta(ContaPagar conta) {
         this.conta = conta;
+    }
+
+    public Fornecedor getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(Fornecedor filtro) {
+        this.filtro = filtro;
     }
     
 }
