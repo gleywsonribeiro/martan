@@ -56,7 +56,7 @@
                         </h:panelGroup>
                         <h:panelGroup>
                             <h:panelGrid columns="2">
-                                <p:selectOneMenu id="categoria" style="width: 100px" value="#{cadastroProdutoController.produto.categoria}"
+                                <p:selectOneMenu id="categoria" style="width: 100px" value="#{cadastroProdutoController.produto.categoria}" required="true"
                                                  converter="#{categoriaConverter}">
                                     <f:selectItem itemLabel="Selecione"/>
                                     <f:selectItems value="#{categoriaController.categorias}" var="categoria"
@@ -88,7 +88,7 @@
                         </h:panelGroup>
                         <h:panelGroup>
                             <h:panelGrid columns="2">
-                                <p:selectOneMenu id="marca" style="width: 100px" value="#{cadastroProdutoController.produto.marca}"
+                                <p:selectOneMenu id="marca" style="width: 100px" value="#{cadastroProdutoController.produto.marca}" required="true"
                                                  converter="#{marcaConverter}">
                                     <f:selectItem itemLabel="Selecione"/>
                                     <f:selectItems value="#{marcaController.marcas}" var="marca"
@@ -103,11 +103,11 @@
                     
                     <h:panelGrid>
                         <p:outputLabel value="Unidade" for="unidade" />
-                        <p:selectOneMenu id="unidade" style="width: 100px" value="#{cadastroProdutoController.produto.unidade}"
+                        <p:selectOneMenu id="unidade" style="width: 100px" value="#{cadastroProdutoController.produto.unidade}" required="true"
                                          converter="#{unidadeConverter}">
                                     <f:selectItem itemLabel="Selecione"/>
                                     <f:selectItems value="#{unidadecontroller.unidades}" var="unidade"
-                                                   itemValue="#{unidade}" itemLabel="#{unidade.descricao}"/>
+                                                   itemValue="#{unidade}" itemLabel="#{unidade.codigo}"/>
                                 </p:selectOneMenu>
                     </h:panelGrid>
                 </h:panelGrid>
