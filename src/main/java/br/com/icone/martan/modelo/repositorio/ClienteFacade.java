@@ -6,11 +6,17 @@
 package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.Cliente;
+import br.com.icone.martan.modelo.repositorio.filter.ClienteFilter;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -31,9 +37,31 @@ public class ClienteFacade extends AbstractFacade<Cliente> implements Serializab
         super(Cliente.class);
     }
 
-    public List<Cliente> getClientesPorNome(String nome) { 
+    public List<Cliente> getClientesPorNome(String nome) {
         return getEntityManager().createQuery("SELECT c FROM Cliente AS c WHERE UPPER(c.nome) LIKE :nome", Cliente.class)
                 .setParameter("nome", "%" + nome.toUpperCase() + "%").getResultList();
+    }
+
+    public List<Cliente> getClientesFiltrados(ClienteFilter filtro) {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Cliente> query = builder.createQuery(Cliente.class);
+        Root<Cliente> from = query.from(Cliente.class);
+        Predicate predicate = builder.and();
+
+        if (filtro.getId() != null) {
+            predicate = builder.and(predicate, builder.equal(from.get("id"), filtro.getId()));
+        }
+
+        if (filtro.getNome() != null) {
+            predicate = builder.and(predicate, builder.like(from.<String>get("nome"), "%" + filtro.getNome().toUpperCase() + "%"));
+        }
+
+        TypedQuery<Cliente> typedQuery = getEntityManager().createQuery(
+                query.select(from)
+                .where(predicate)
+        //                .orderBy(builder.asc(from.get("descricao")))
+        );
+        return typedQuery.getResultList();
     }
 
 }

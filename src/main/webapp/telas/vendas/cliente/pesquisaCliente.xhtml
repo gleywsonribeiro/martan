@@ -14,7 +14,7 @@
             <h:form id="formClientes">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="Pesquisar"/>
+                        <p:commandButton value="Pesquisar" update="painel clienteTable" process="@this painel" action="#{clienteController.pesquisar()}"/>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
                         <p:commandButton value="Novo" id="novo" action="cadastroCliente?faces-redirect=true" actionListener="#{clienteController.novo()}"/>
@@ -22,19 +22,21 @@
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
                     <p:outputLabel value="Código" for="codigo"/>
-                    <p:inputText id="codigo" size="5"/>
+                    <p:inputText id="codigo" size="5" value="#{clienteController.filtro.id}">
+                        <f:convertNumber/>
+                    </p:inputText>
 
                     <p:outputLabel value="Nome Cliente" for="nome"/>
-                    <p:inputText id="nome" size="60"/>
+                    <p:inputText id="nome" size="60" value="#{clienteController.filtro.nome}"/>
                 </h:panelGrid>
 
-                <p:dataTable id="clienteTable" value="#{clienteController.clientes}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                <p:dataTable id="clienteTable" value="#{clienteController.clientesFiltrados}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                              var="cliente" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                     <p:column headerText="Código" style="text-align: center; width: 100px">
                         <h:outputText value="#{cliente.id}"/>
                     </p:column>
 
-                    <p:column headerText="Nome" filterBy="#{cliente.nome}" filterMatchMode="contains">
+                    <p:column headerText="Nome">
                         <h:outputText value="#{cliente.nome}"/>
                     </p:column>
                     

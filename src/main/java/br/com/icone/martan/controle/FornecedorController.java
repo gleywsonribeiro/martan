@@ -8,8 +8,10 @@ package br.com.icone.martan.controle;
 import br.com.icone.martan.modelo.Fornecedor;
 import br.com.icone.martan.modelo.TipoPessoa;
 import br.com.icone.martan.modelo.repositorio.FornecedorFacade;
+import br.com.icone.martan.modelo.repositorio.filter.FornecedorFilter;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -25,12 +27,15 @@ import javax.inject.Inject;
 public class FornecedorController implements Serializable {
 
     private Fornecedor fornecedor;
+    private FornecedorFilter filtro;
     private List<Fornecedor> fornecedores;
     @Inject
     private FornecedorFacade repositorio;
 
     public FornecedorController() {
         this.fornecedor = new Fornecedor();
+        this.filtro = new FornecedorFilter();
+        this.fornecedores = new ArrayList<Fornecedor>();
     }
 
     public Fornecedor getFornecedor() {
@@ -41,10 +46,15 @@ public class FornecedorController implements Serializable {
         this.fornecedor = fornecedor;
     }
 
+    public FornecedorFilter getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(FornecedorFilter filtro) {
+        this.filtro = filtro;
+    }
+
     public List<Fornecedor> getFornecedores() {
-        if (this.fornecedores == null) {
-            fornecedores = repositorio.findAll();
-        }
         return fornecedores;
     }
     
@@ -62,6 +72,10 @@ public class FornecedorController implements Serializable {
         }
         this.fornecedor = new Fornecedor();
         this.fornecedores = null;
+    }
+    
+    public void pesquisar() {
+        this.fornecedores = repositorio.getFornecedoresFiltrados(filtro);
     }
 
     public void remover() {

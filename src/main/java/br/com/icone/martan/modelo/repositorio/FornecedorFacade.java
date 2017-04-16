@@ -6,10 +6,17 @@
 package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.Fornecedor;
+import br.com.icone.martan.modelo.repositorio.filter.FornecedorFilter;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -28,6 +35,28 @@ public class FornecedorFacade extends AbstractFacade<Fornecedor> implements Seri
 
     public FornecedorFacade() {
         super(Fornecedor.class);
+    }
+    
+    public List<Fornecedor> getFornecedoresFiltrados(FornecedorFilter filtro) {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Fornecedor> query = builder.createQuery(Fornecedor.class);
+        Root<Fornecedor> from = query.from(Fornecedor.class);
+        Predicate predicate = builder.and();
+
+        if (filtro.getId() != null) {
+            predicate = builder.and(predicate, builder.equal(from.get("id"), filtro.getId()));
+        }
+
+        if (filtro.getNome() != null) {
+            predicate = builder.and(predicate, builder.like(from.<String>get("nome"), "%" + filtro.getNome().toUpperCase() + "%"));
+        }
+
+        TypedQuery<Fornecedor> typedQuery = getEntityManager().createQuery(
+                query.select(from)
+                .where(predicate)
+        //                .orderBy(builder.asc(from.get("descricao")))
+        );
+        return typedQuery.getResultList();
     }
     
 }

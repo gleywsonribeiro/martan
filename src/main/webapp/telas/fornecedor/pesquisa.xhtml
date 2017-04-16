@@ -14,7 +14,7 @@
             <h:form id="formFornecedores">
                 <p:toolbar>
                     <p:toolbarGroup>
-                        <p:commandButton value="Pesquisar" icon="fa fa-search"/>
+                        <p:commandButton value="Pesquisar" action="#{fornecedorController.pesquisar()}" process="@this painel" update="fornecedorTable" icon="fa fa-search"/>
                     </p:toolbarGroup>
                     <p:toolbarGroup align="right">
                         <p:commandButton value="Novo" id="novo" icon="fa fa-file" action="cadastro?faces-redirect=true" actionListener="#{fornecedorController.novo()}"/>
@@ -22,10 +22,10 @@
                 </p:toolbar>
                 <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
                     <p:outputLabel value="Código" for="codigo"/>
-                    <p:inputText id="codigo" size="5"/>
+                    <p:inputText id="codigo" size="5" value="#{fornecedorController.filtro.id}"/>
 
                     <p:outputLabel value="Nome do Fornecedor" for="nome"/>
-                    <p:inputText id="nome" size="60"/>
+                    <p:inputText id="nome" size="60" value="#{fornecedorController.filtro.nome}"/>
                 </h:panelGrid>
 
                 <p:dataTable id="fornecedorTable" value="#{fornecedorController.fornecedores}" paginatorAlwaysVisible="false" paginatorPosition="bottom"

@@ -8,8 +8,10 @@ package br.com.icone.martan.controle;
 import br.com.icone.martan.modelo.Cliente;
 import br.com.icone.martan.modelo.TipoPessoa;
 import br.com.icone.martan.modelo.repositorio.ClienteFacade;
+import br.com.icone.martan.modelo.repositorio.filter.ClienteFilter;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -25,7 +27,8 @@ import javax.inject.Inject;
 public class ClienteController implements Serializable{
 
     private Cliente cliente;
-    private List<Cliente> clientes;
+    private ClienteFilter filtro;
+    private List<Cliente> clientesFiltrados;
     
     
     @Inject
@@ -33,16 +36,20 @@ public class ClienteController implements Serializable{
     
     public ClienteController() {
         cliente  = new Cliente();
+        this.filtro = new ClienteFilter();
+        this.clientesFiltrados = new ArrayList<Cliente>();
     }
     
     public void novo() {
         this.cliente = new Cliente();
+//        this.filtro = new ClienteFilter();
+        this.clientesFiltrados = new ArrayList<Cliente>();
     }
     
     public void remover() {
         repositorio.remove(cliente);
         JsfUtil.addMessage("Cliente removido com sucesso!");
-        this.clientes = null;
+        this.clientesFiltrados = null;
     }
     
     public void salvar() {
@@ -52,10 +59,15 @@ public class ClienteController implements Serializable{
             repositorio.edit(cliente);
         }
         this.cliente = new Cliente();
-        this.clientes = null;
+//        this.filtro = new ClienteFilter();
+        this.clientesFiltrados = new ArrayList<Cliente>();
         JsfUtil.addMessage("Cliente inserido com sucesso!");
     }
 
+    public void pesquisar() {
+        this.clientesFiltrados = repositorio.getClientesFiltrados(filtro);
+    }
+    
     public Cliente getCliente() {
         return cliente;
     }
@@ -64,11 +76,16 @@ public class ClienteController implements Serializable{
         this.cliente = cliente;
     }
 
-    public List<Cliente> getClientes() {
-        if(clientes == null) {
-            clientes = repositorio.findAll();
-        }
-        return clientes;
+    public ClienteFilter getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(ClienteFilter filtro) {
+        this.filtro = filtro;
+    }
+
+    public List<Cliente> getClientesFiltrados() {
+        return clientesFiltrados;
     }
     
     public TipoPessoa[] getTiposPessoa() {
