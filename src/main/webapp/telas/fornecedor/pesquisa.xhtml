@@ -28,7 +28,7 @@
                     <p:inputText id="nome" size="60" value="#{fornecedorController.filtro.nome}"/>
                 </h:panelGrid>
 
-                <p:dataTable id="fornecedorTable" value="#{fornecedorController.fornecedores}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                <p:dataTable id="fornecedorTable" value="#{fornecedorController.fornecedoresFiltrados}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                              var="fornecedor" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
                     <p:column headerText="Código" style="text-align: center; width: 100px">
                         <h:outputText value="#{fornecedor.id}"/>

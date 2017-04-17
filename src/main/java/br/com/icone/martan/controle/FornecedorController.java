@@ -28,14 +28,15 @@ public class FornecedorController implements Serializable {
 
     private Fornecedor fornecedor;
     private FornecedorFilter filtro;
-    private List<Fornecedor> fornecedores;
+    private List<Fornecedor> fornecedoresFiltrados;
+    
     @Inject
     private FornecedorFacade repositorio;
 
     public FornecedorController() {
         this.fornecedor = new Fornecedor();
         this.filtro = new FornecedorFilter();
-        this.fornecedores = new ArrayList<Fornecedor>();
+        this.fornecedoresFiltrados = new ArrayList<Fornecedor>();
     }
 
     public Fornecedor getFornecedor() {
@@ -54,9 +55,15 @@ public class FornecedorController implements Serializable {
         this.filtro = filtro;
     }
 
-    public List<Fornecedor> getFornecedores() {
-        return fornecedores;
+    public List<Fornecedor> getFornecedoresFiltrados() {
+        return fornecedoresFiltrados;
     }
+
+    public List<Fornecedor> getFornecedores() {
+        return repositorio.findAll();
+    }
+    
+    
     
     public void novo() {
         this.fornecedor = new Fornecedor();
@@ -71,17 +78,17 @@ public class FornecedorController implements Serializable {
             JsfUtil.addMessage("Fornecedor alterado com sucesso!");
         }
         this.fornecedor = new Fornecedor();
-        this.fornecedores = null;
+        this.fornecedoresFiltrados = null;
     }
     
     public void pesquisar() {
-        this.fornecedores = repositorio.getFornecedoresFiltrados(filtro);
+        this.fornecedoresFiltrados = repositorio.getFornecedoresFiltrados(filtro);
     }
 
     public void remover() {
         this.repositorio.remove(fornecedor);
         fornecedor = new Fornecedor();
-        fornecedores = null;
+        fornecedoresFiltrados = null;
         JsfUtil.addMessage("Fornecedor removido com sucesso!");
     }
 
