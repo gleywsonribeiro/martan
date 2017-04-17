@@ -44,7 +44,7 @@ public class Pedido implements Serializable {
     private String observacao;
 
     @Temporal(javax.persistence.TemporalType.DATE)
-    @Column(name = "dt_entrega", nullable = false)
+//    @Column(name = "dt_entrega", nullable = false)
     private Date dataEntrega;
 
     @Column(name = "valor_frete", nullable = false, precision = 10, scale = 2)
@@ -61,6 +61,10 @@ public class Pedido implements Serializable {
     private StatusPedido status = StatusPedido.ORCAMENTO;
     
     private boolean entrega;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tp_pedido", nullable = false, length = 10)
+    private TipoPedido tipo;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento", nullable = false, length = 20)
@@ -71,7 +75,7 @@ public class Pedido implements Serializable {
     private Usuario vendedor;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+//    @JoinColumn(nullable = false)
     private Cliente cliente;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -85,6 +89,14 @@ public class Pedido implements Serializable {
         this.dataCriacao = new Date();
         this.enderecoEntrega = new Endereco();
         this.itens = new ArrayList<ItemPedido>();
+        this.tipo = TipoPedido.PEDIDO;
+    }
+    
+    //Eh prudente ajeitar isso depois soh pra diferenciar venda de pedido
+    public Pedido(TipoPedido tipo) {
+        this.dataCriacao = new Date();
+        this.itens = new ArrayList<ItemPedido>();
+        this.tipo = tipo;
     }
 
     public Long getId() {
@@ -93,6 +105,14 @@ public class Pedido implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public TipoPedido getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(TipoPedido tipo) {
+        this.tipo = tipo;
     }
 
     @Override
