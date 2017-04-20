@@ -81,6 +81,7 @@ public class PedidoController implements Serializable {
 
     public void novo() {
         this.pedido = new Pedido();
+        this.pedido.setEnderecoEntrega(new Endereco());
         this.item = new ItemPedido();
         this.usarEnderecoCliente = false;
     }

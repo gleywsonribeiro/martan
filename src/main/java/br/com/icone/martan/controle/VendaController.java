@@ -5,6 +5,7 @@
  */
 package br.com.icone.martan.controle;
 
+import br.com.icone.martan.modelo.ItemPedido;
 import br.com.icone.martan.modelo.Pedido;
 import br.com.icone.martan.modelo.TipoPedido;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
@@ -21,10 +22,14 @@ import java.io.Serializable;
 public class VendaController implements Serializable {
 
     private Pedido venda;
+    private ItemPedido item;
     private PedidoFacade repositorio;
     
+    
     public VendaController() {
-        venda = new Pedido(TipoPedido.VENDA);
+        venda = new Pedido();
+        venda.setTipo(TipoPedido.VENDA);
+        item = new ItemPedido();
     }
 
     public Pedido getVenda() {

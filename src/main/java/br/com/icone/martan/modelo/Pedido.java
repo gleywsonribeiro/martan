@@ -87,18 +87,11 @@ public class Pedido implements Serializable {
 
     public Pedido() {
         this.dataCriacao = new Date();
-        this.enderecoEntrega = new Endereco();
+//        this.enderecoEntrega = new Endereco();
         this.itens = new ArrayList<ItemPedido>();
         this.tipo = TipoPedido.PEDIDO;
     }
     
-    //Eh prudente ajeitar isso depois soh pra diferenciar venda de pedido
-    public Pedido(TipoPedido tipo) {
-        this.dataCriacao = new Date();
-        this.itens = new ArrayList<ItemPedido>();
-        this.tipo = tipo;
-    }
-
     public Long getId() {
         return id;
     }
