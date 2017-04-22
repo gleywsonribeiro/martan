@@ -14,13 +14,13 @@
             <h:outputText value="Venda Direta" styleClass="titulo"/>
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
-                    <p:commandButton value="Novo" icon="fa fa-file" action="#{pedidoController.novo()}" process="@this" update="@form"/> 
-                    <p:commandButton value="Salvar" icon="fa fa-save" id="botaoSalvar" process="@this painel" action="#{pedidoController.salvar()}" update="@form"/>
+                    <!--<p:commandButton value="Novo" icon="fa fa-file" />--> 
+                    <p:commandButton value="Salvar" icon="fa fa-save" id="botaoSalvar" process="@this painel" action="#{vendaController.salvar()}" update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
-                    <p:commandButton id="emitir" icon="fa fa-check" value="Emitir" disabled="#{pedidoController.pedido.emitido}" process="@this painel" action="#{pedidoController.emitir()}" update="@form"/>
+                    <p:commandButton id="emitir" icon="fa fa-check" value="Emitir" process="@this painel" update="@form"/>
                     <p:separator/>
-                    <p:commandButton value="Pesquisar" process="@this" action="pesquisaPedido?faces-redirect=true" icon="fa fa-search"/>
+                    <!--<p:commandButton value="Pesquisar" process="@this" action="pesquisaPedido?faces-redirect=true" icon="fa fa-search"/>-->
                 </p:toolbarGroup>
             </p:toolbar>
 
@@ -40,6 +40,5 @@
 
         </h:form>
     </ui:define>
-
 
 </ui:composition>

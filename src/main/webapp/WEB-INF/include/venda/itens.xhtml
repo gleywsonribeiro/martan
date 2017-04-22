@@ -8,7 +8,7 @@
     <h:panelGrid columns="4" id="item">
         <h:panelGroup>
             <p:watermark for="sku" value="Código"/>
-            <p:autoComplete id="sku" value="#{pedidoController.item.produto}" converter="#{produtoConverter}"
+            <p:autoComplete id="sku" value="#{vendaController.item.produto}" converter="#{produtoConverter}"
                             var="produto" itemLabel="#{produto.codigoDeBarras}" itemValue="#{produto}" maxResults="10"
                             completeMethod="#{pedidoController.buscaProdutoCodigo}" forceSelection="true"
                             >
