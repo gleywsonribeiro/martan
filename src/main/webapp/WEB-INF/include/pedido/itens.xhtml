@@ -7,7 +7,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:panelGrid columns="4" id="item">
         <h:panelGroup>
-            <p:watermark for="sku" value="Código"/>
+            <p:watermark for="sku" value="Codigo"/>
             <p:autoComplete id="sku" value="#{pedidoController.item.produto}" converter="#{produtoConverter}"
                             var="produto" itemLabel="#{produto.codigoDeBarras}" itemValue="#{produto}" maxResults="10"
                             completeMethod="#{pedidoController.buscaProdutoCodigo}" forceSelection="true"
