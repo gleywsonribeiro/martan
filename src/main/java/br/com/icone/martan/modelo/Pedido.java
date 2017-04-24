@@ -66,10 +66,6 @@ public class Pedido implements Serializable {
     @Column(name = "tp_pedido", nullable = false, length = 10)
     private TipoPedido tipo;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "forma_pagamento", nullable = false, length = 20)
-    private FormaPagamento formaPagamento;
-
     @ManyToOne
     @JoinColumn(name = "vendedor_id", nullable = false)
     private Usuario vendedor;
@@ -183,14 +179,6 @@ public class Pedido implements Serializable {
 
     public void setStatus(StatusPedido status) {
         this.status = status;
-    }
-
-    public FormaPagamento getFormaPagamento() {
-        return formaPagamento;
-    }
-
-    public void setFormaPagamento(FormaPagamento formaPagamento) {
-        this.formaPagamento = formaPagamento;
     }
 
     public Usuario getVendedor() {

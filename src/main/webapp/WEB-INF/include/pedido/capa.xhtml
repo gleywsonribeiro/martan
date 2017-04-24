@@ -36,13 +36,8 @@
 
 
 
-        <p:outputLabel value="Forma de pagamento" for="pagamento"/>
-        <p:selectOneMenu id="pagamento" value="#{pedidoController.pedido.formaPagamento}" required="true"
-                         disabled="#{pedidoController.pedido.emitido}"
-                         requiredMessage="Escolha a forma de pagamento">
-            <f:selectItem itemLabel="Selecione"/>
-            <f:selectItems value="#{pedidoController.formasPagamento}" var="pagamento" itemLabel="#{pagamento.descricao}" itemValue="#{pagamento}"/>
-        </p:selectOneMenu>
+        <p:spacer/>
+        <p:spacer/>
 
         <p:outputLabel value="Valor do frete" for="frete"/>
         <p:inputNumber id="frete" size="10" maxlength="10" value="#{pedidoController.pedido.valorFrete}"

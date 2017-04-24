@@ -21,12 +21,8 @@
         </p:selectOneMenu>
 
   
-        <p:outputLabel value="Forma de pagamento" for="pagamento"/>
-        <p:selectOneMenu id="pagamento" value="#{vendaController.venda.formaPagamento}" required="true"
-                         requiredMessage="Escolha a forma de pagamento">
-            <f:selectItem itemLabel="Selecione"/>
-            <f:selectItems value="#{pedidoController.formasPagamento}" var="pagamento" itemLabel="#{pagamento.descricao}" itemValue="#{pagamento}"/>
-        </p:selectOneMenu>
+        <p:spacer/>
+        <p:spacer/>
 
       
 
