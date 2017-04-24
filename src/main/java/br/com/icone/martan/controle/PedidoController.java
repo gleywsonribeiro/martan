@@ -45,10 +45,9 @@ public class PedidoController implements Serializable {
     private ClienteFacade clienteRepository;
     @Inject
     private ProdutoFacade produtoRepository;
-    
+
 //    @Inject
 //    private Mailer mailer; 
-
     private Pedido pedido;
 
 //    private Produto produtoCorrente;
@@ -87,7 +86,9 @@ public class PedidoController implements Serializable {
     }
 
     public void salvar() {
-        if (pedido.isNovo()) {
+        if (pedido.getItens().isEmpty()) {
+            JsfUtil.addWarnMessage("Adicione pelo menos um item");
+        } else if (pedido.isNovo()) {
             repositorio.create(pedido);
             this.pedidos = null;
             JsfUtil.addMessage("Pedido salvo com sucesso!");
@@ -96,7 +97,7 @@ public class PedidoController implements Serializable {
             JsfUtil.addMessage("Pedido alterado com sucesso com sucesso!");
         }
     }
-    
+
 //    public void enviarPorEmail() {
 //        MailMessage message = mailer.novaMensagem();
 //        message.to(this.pedido.getCliente().getContato().getEmail())
@@ -108,10 +109,9 @@ public class PedidoController implements Serializable {
 //                .send();
 //        JsfUtil.addMessage("Email enviado com sucesso!");
 //    }
-
     public List<Pedido> getPedidos() {
         if (pedidos == null) {
-            this.pedidos = repositorio.findAll();
+            this.pedidos = repositorio.getPedidos();
         }
         return pedidos;
     }
@@ -131,10 +131,10 @@ public class PedidoController implements Serializable {
     public void setUsarEnderecoCliente(boolean usarEnderecoCliente) {
         this.usarEnderecoCliente = usarEnderecoCliente;
     }
-    
+
     public List<Cliente> getClientes() {
         return clienteRepository.findAll();
-    } 
+    }
 
 //    public Produto getProdutoCorrente() {
 //        return produtoCorrente;
@@ -171,7 +171,7 @@ public class PedidoController implements Serializable {
     public void ajustarEndereco() {
         this.pedido.setEnderecoEntrega(new Endereco());
     }
-    
+
     public void setMesmoEnderecoCliente() {
         pedido.setEnderecoEntrega(pedido.getCliente().getEndereco());
     }
@@ -185,7 +185,7 @@ public class PedidoController implements Serializable {
     public List<Produto> buscaProdutoDescricao(String descricao) {
         return produtoRepository.getProdutosPorDescricao(descricao);
     }
-    
+
     public List<Produto> buscaProdutoCodigo(String cod) {
         return produtoRepository.getProdutosPorCodigo(cod);
     }

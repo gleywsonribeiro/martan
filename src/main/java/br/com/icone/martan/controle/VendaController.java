@@ -9,6 +9,7 @@ import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.ItemPedido;
 import br.com.icone.martan.modelo.Pedido;
 import br.com.icone.martan.modelo.Produto;
+import br.com.icone.martan.modelo.StatusPedido;
 import br.com.icone.martan.modelo.TipoPedido;
 import br.com.icone.martan.modelo.Usuario;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
@@ -45,21 +46,26 @@ public class VendaController implements Serializable {
     public VendaController() {
         novaVenda();
     }
-    
+
     private void novaVenda() {
         venda = new Pedido();
         venda.setTipo(TipoPedido.VENDA);
         item = new ItemPedido();
+        venda.setStatus(StatusPedido.EMITIDO);
     }
 
     public void salvar() {
-        if (venda.isNovo()) {
-            repositorio.create(venda);
+        if (venda.getItens().isEmpty()) {
+            JsfUtil.addWarnMessage("Adicione pelo menos um item");
         } else {
-            repositorio.edit(venda);
+            if (venda.isNovo()) {
+                repositorio.create(venda);
+            } else {
+                repositorio.edit(venda);
+            }
+            JsfUtil.addMessage("Venda salva!");
+            novaVenda();
         }
-        JsfUtil.addMessage("Venda salva!");
-        novaVenda();
     }
 
     public Pedido getVenda() {
