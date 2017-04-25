@@ -26,24 +26,25 @@
             <p:panel>
                 <h:panelGrid columns="4" style="width: 600px">
                     <p:outputLabel value="Cod" for="cod"/>
-                    <p:inputText id="cod" value="#{contaPagarController.conta.id}" disabled="true" size="5"/>
+                    <p:inputText id="cod" value="#{contaPagarController.conta.id}" disabled="true" size="15"/>
 
                     <p:spacer/>
                     <p:spacer/>
 
                     <p:outputLabel for="dtLancamento" value="Data de Lançamento"/>
                     <p:calendar id="dtLancamento" value="#{contaPagarController.conta.lancamento}" disabled="true"
-                                locale="pt" mask="true" pattern="dd/MM/yyyy" size="10"/>
+                                locale="pt" mask="true" pattern="dd/MM/yyyy" size="15"/>
+
+
+                    <p:outputLabel for="vencimento" value="Vencimento" />
+                    <p:calendar id="vencimento" value="#{contaPagarController.conta.dataVencimento}"
+                                locale="pt" mask="true" pattern="dd/MM/yyyy" 
+                                size="1" required="true" requiredMessage="Informe o vencimento"/>
 
                     <p:outputLabel for="valor" value="Valor"/>
                     <p:inputNumber id="valor" value="#{contaPagarController.conta.valor}" size="15"
                                    symbol="R$ " decimalSeparator="," thousandSeparator="."
                                    decimalPlaces="2" required="true"/>
-
-                    <p:outputLabel for="vencimento" value="Vencimento" />
-                    <p:calendar id="vencimento" value="#{contaPagarController.conta.dataVencimento}"
-                                locale="pt" mask="true" pattern="dd/MM/yyyy" 
-                                size="10" required="true" requiredMessage="Informe o vencimento"/>
 
                     <p:outputLabel for="fornecedor" value="Fornecedor"/>
                     <p:selectOneMenu id="fornecedor" value="#{contaPagarController.conta.fornecedor}" converter="#{fornecedorConverter}" required="true">
@@ -52,8 +53,11 @@
                     </p:selectOneMenu>
 
                 </h:panelGrid>
-                
+
                 <h:panelGrid columns="1">
+                    <p:outputLabel value="Descrição" for="descricao"/>
+                    <p:inputText id="descricao" value="#{contaPagarController.conta.descricao}" converter="#{upperCaseConverter}" required="true"/>
+
                     <p:outputLabel for="obs" value="Observações: "/>
                     <p:inputTextarea id="obs" value="#{contaPagarController.conta.observacao}" rows="3" cols="85" converter="#{upperCaseConverter}"/>
                 </h:panelGrid>

@@ -7,6 +7,7 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -14,12 +15,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,9 +31,10 @@ import javax.persistence.TemporalType;
  * @author raque
  */
 @Entity
+@Table(name = "conta_receber")
 public class ContaReceber implements Serializable {
 
-    @OneToMany(mappedBy = "contaReceber", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "contaReceber", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Parcela> parcelas;
 
     private static final long serialVersionUID = 1L;
@@ -39,14 +43,14 @@ public class ContaReceber implements Serializable {
     private Long id;
     
     @Enumerated(EnumType.STRING)
-    @Column(length = 50, nullable = false)
+    @Column(length = 50, name = "forma_pagamento")
     private FormaPagamento formaPagamento;
     
     @Column(nullable = false, name = "dt_vencimento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataVencimento;
     
-    @Column(nullable = false, name = "dt_pagamento")
+    @Column(name = "dt_pagamento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataPagamento;
     
@@ -59,9 +63,17 @@ public class ContaReceber implements Serializable {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal juros = BigDecimal.ZERO;
     
+    @Column(columnDefinition = "text")
+    private String observacao;
+    
     @OneToOne
-    @JoinColumn(nullable = false)
     private Pedido pedido;
+
+    public ContaReceber() {
+        this.parcelas = new ArrayList<Parcela>();
+    }
+    
+    
 
     public Long getId() {
         return id;
@@ -69,6 +81,14 @@ public class ContaReceber implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     public List<Parcela> getParcelas() {

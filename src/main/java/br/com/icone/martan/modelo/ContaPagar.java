@@ -39,6 +39,9 @@ public class ContaPagar implements Serializable {
 
     @Column(name = "nr_documento", length = 50)
     private String numeroDocumento;
+    
+    @Column(nullable = false, length = 100)
+    private String descricao;
 
     @Column(nullable = false)
     private double valor;
@@ -78,6 +81,14 @@ public class ContaPagar implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public Date getLancamento() {

@@ -36,7 +36,10 @@
                     <p:menuitem value="Relatório de CP por Venda"/>
                     <p:menuitem value="Relatório de CP por Cobrança"/>
                 </p:submenu>
-                <p:menuitem value="Contas a Receber" outcome="/telas/financeiro/contareceber/conta"/>
+                <p:submenu label="Contas a Receber">
+                    <p:menuitem value="Receber Pagamentos" outcome="/telas/financeiro/contareceber/conta"/>
+                    <p:menuitem value="Lançamento" outcome="/telas/financeiro/contareceber/lancamento"/>
+                </p:submenu>
                 <p:menuitem value="Contas Bancárias"/>
                 <p:menuitem value="Categorias" outcome="/telas/categoria/cadastro"/>
                 <p:submenu label="Controle de Acesso">
