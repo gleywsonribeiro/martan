@@ -50,7 +50,7 @@
                 </p:selectManyCheckbox>
             </p:panelGrid>
 
-            <p:dataTable id="pedidosTable" value="#{entradaController.entradas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+            <p:dataTable id="recebimentos" value="#{entradaController.entradas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
                          var="entrada" style="margin-top: 20px;" emptyMessage="Nenhuma entrada de produto encontrada." paginator="true" rows="20">
                 <p:column headerText="Número" style="text-align: center; width: 50px">
                     <h:outputText value="#{entrada.id}"/>

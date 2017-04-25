@@ -15,10 +15,10 @@
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup>
                     <!--<p:commandButton value="Novo" icon="fa fa-file" />--> 
-                    <p:commandButton value="Salvar" icon="fa fa-save" id="botaoSalvar" process="@this painel" action="#{vendaController.salvar()}" update="@form"/>
+                    <p:commandButton value="Salvar" icon="fa fa-save" id="botaoSalvar" process="@this painel" disabled="true" action="#{vendaController.salvar()}" update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
-                    <p:commandButton id="emitir" icon="fa fa-check" value="Emitir" process="@this painel" update="@form"/>
+                    <p:commandButton id="emitir" icon="fa fa-check" value="Emitir" process="@this painel" update="@form" action="#{vendaController.emitir()}"/>
                     <p:separator/>
                     <!--<p:commandButton value="Pesquisar" process="@this" action="pesquisaPedido?faces-redirect=true" icon="fa fa-search"/>-->
                 </p:toolbarGroup>

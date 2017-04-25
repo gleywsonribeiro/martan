@@ -203,32 +203,40 @@ public class PedidoController implements Serializable {
     }
 
     public void emitir() {
-        boolean possuiTodosItens = true;
-
-        for (ItemPedido itemDoCarrinho : pedido.getItens()) {
-            if (itemDoCarrinho.isEstoqueInsuficiente()) {
-                possuiTodosItens = false;
-                break;
-            }
-        }
-
-        if (possuiTodosItens) {
+        if (pedido.getItens().isEmpty()) {
+            JsfUtil.addWarnMessage("Adicione pelo menos um item");
+        } else {
+            boolean possuiTodosItens = true;
 
             for (ItemPedido itemDoCarrinho : pedido.getItens()) {
-                itemDoCarrinho.getProduto().baixar(itemDoCarrinho.getQuantidade());
+                if (itemDoCarrinho.isEstoqueInsuficiente()) {
+                    possuiTodosItens = false;
+                    break;
+                }
             }
 
-            this.pedido.setStatus(StatusPedido.EMITIDO);
-            if (pedido.getId() == null) {
-                repositorio.create(pedido);
+            if (possuiTodosItens) {
+
+                for (ItemPedido itemDoCarrinho : pedido.getItens()) {
+//                itemDoCarrinho.getProduto().baixar(itemDoCarrinho.getQuantidade());
+                    Produto produto = itemDoCarrinho.getProduto();
+                    produto.baixar(itemDoCarrinho.getQuantidade());
+
+                    produtoRepository.edit(produto);
+                }
+
+                this.pedido.setStatus(StatusPedido.EMITIDO);
+                if (pedido.getId() == null) {
+                    repositorio.create(pedido);
+                } else {
+                    repositorio.edit(pedido);
+                }
+                //dar baixa no estoque
+                JsfUtil.addMessage("Pedido emitido com sucesso!");
+
             } else {
-                repositorio.edit(pedido);
+                JsfUtil.addWarnMessage("Infelizmente não há estoque para todos os itens!");
             }
-            //dar baixa no estouqe
-            JsfUtil.addMessage("Pedido emitido com sucesso!");
-
-        } else {
-            JsfUtil.addWarnMessage("Infelizmente não há estoque para todos os itens!");
         }
     }
 }

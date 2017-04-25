@@ -7,7 +7,28 @@
 
     <ui:define name="corpo">
 
-        <h:outputText value="Contas a receber aqui" />
+        <p:growl autoUpdate="true"/>
+        <h:form>
+            <h:outputText value="Recebimento de Contas" styleClass="titulo"/>
+            
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup>
+                    <p:commandButton value="Pesquisar"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <!--<p:commandButton value="Novo" process="@this" action="cadastroPedido?faces-redirect=true" actionListener=""/>-->
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:dataTable id="recebimentos" value="#{recebePagamentoController.contas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="conta" style="margin-top: 20px;" emptyMessage="Sem contas" paginator="true" rows="20">
+                <p:column headerText="Número Pedido/Venda " style="text-align: center; width: 50px">
+                    <h:outputText value="#{conta.pedido.id}"/>
+                </p:column>
+
+
+            </p:dataTable>
+        </h:form>
 
     </ui:define>
 

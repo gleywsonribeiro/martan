@@ -12,6 +12,7 @@ package br.com.icone.martan.modelo;
 public enum StatusPedido {
     ORCAMENTO("Orçamento"),
     EMITIDO("Emitido"),
+    FINALIZADO("Finalizado"),
     CANCELADO("Cancelado");
 
     private final String descricao;

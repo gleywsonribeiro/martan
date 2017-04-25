@@ -7,6 +7,7 @@ package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.ContaReceber;
 import java.io.Serializable;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,4 +31,8 @@ public class ContaReceberFacade extends AbstractFacade<ContaReceber> implements 
         super(ContaReceber.class);
     }
     
+//    public List<ContaReceber> getContasEmitidas() {
+//        
+//    }
+//    
 }

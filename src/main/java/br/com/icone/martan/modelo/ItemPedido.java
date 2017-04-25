@@ -36,7 +36,7 @@ public class ItemPedido implements Serializable {
     @Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
     private BigDecimal valorUnitario = BigDecimal.ZERO;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(nullable = false)
     private Produto produto;
 
@@ -124,7 +124,7 @@ public class ItemPedido implements Serializable {
     }
     
     public boolean isEstoqueSuficiente() {
-        return this.getPedido().isEmitido() || this.getProduto().getEstoqueAtual() >= this.getQuantidade();
+        return this.getProduto().getEstoqueAtual() >= this.getQuantidade();
     }
     
     public boolean isEstoqueInsuficiente() {

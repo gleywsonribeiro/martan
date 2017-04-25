@@ -46,7 +46,7 @@ public class ContaReceber implements Serializable {
     @Column(length = 50, name = "forma_pagamento")
     private FormaPagamento formaPagamento;
     
-    @Column(nullable = false, name = "dt_vencimento")
+    @Column(name = "dt_vencimento")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataVencimento;
     

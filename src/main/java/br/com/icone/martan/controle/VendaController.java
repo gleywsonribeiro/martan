@@ -5,6 +5,7 @@
  */
 package br.com.icone.martan.controle;
 
+import br.com.icone.martan.modelo.ContaReceber;
 import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.ItemPedido;
 import br.com.icone.martan.modelo.Pedido;
@@ -12,6 +13,7 @@ import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.StatusPedido;
 import br.com.icone.martan.modelo.TipoPedido;
 import br.com.icone.martan.modelo.Usuario;
+import br.com.icone.martan.modelo.repositorio.ContaReceberFacade;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
@@ -42,6 +44,9 @@ public class VendaController implements Serializable {
 
     @Inject
     private UsuarioFacade usuarioRepository;
+    
+    @Inject
+    private ContaReceberFacade repositorioCR;
 
     public VendaController() {
         novaVenda();
@@ -54,17 +59,47 @@ public class VendaController implements Serializable {
         venda.setStatus(StatusPedido.EMITIDO);
     }
 
-    public void salvar() {
+    public void emitir() {
         if (venda.getItens().isEmpty()) {
             JsfUtil.addWarnMessage("Adicione pelo menos um item");
         } else {
-            if (venda.isNovo()) {
-                repositorio.create(venda);
-            } else {
-                repositorio.edit(venda);
+            boolean possuiTodosItens = true;
+
+            for (ItemPedido itemDoCarrinho : venda.getItens()) {
+                if (itemDoCarrinho.isEstoqueInsuficiente()) {
+                    possuiTodosItens = false;
+                    break;
+                }
             }
-            JsfUtil.addMessage("Venda salva!");
-            novaVenda();
+
+            if (possuiTodosItens) {
+                for (ItemPedido itemDoCarrinho : venda.getItens()) {
+//                    itemDoCarrinho.getProduto().baixar(itemDoCarrinho.getQuantidade());
+                    Produto produto = itemDoCarrinho.getProduto();
+                    produto.baixar(itemDoCarrinho.getQuantidade());
+
+                    produtoRepository.edit(produto);
+                }
+                this.venda.setStatus(StatusPedido.EMITIDO);
+                if (venda.isNovo()) {
+                    repositorio.create(venda);
+                } else {
+                    repositorio.edit(venda);
+                }
+                
+                
+                ContaReceber conta = new ContaReceber();
+                conta.setPedido(venda);
+                conta.setValor(venda.getValorTotal());
+                
+                repositorioCR.create(conta);
+                
+                JsfUtil.addMessage("Venda emitida com sucesso!");
+                novaVenda();
+
+            } else {
+                JsfUtil.addWarnMessage("Não há estoque suficiente para esta venda! Reveja o carrinho.");
+            }
         }
     }
 
