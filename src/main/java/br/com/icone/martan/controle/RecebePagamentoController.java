@@ -10,8 +10,11 @@ import br.com.icone.martan.modelo.repositorio.ContaReceberFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.inject.Inject;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -42,6 +45,13 @@ public class RecebePagamentoController implements Serializable {
         return repositorioConta.findAll();
     }
     
-    
+    public void abrirDialogo() {
+        Map<String, Object> opcoes = new HashMap<String, Object>();
+        opcoes.put("modal", true);
+        opcoes.put("resizable", false);
+        opcoes.put("contentHeight", 300);
+
+        RequestContext.getCurrentInstance().openDialog("/telas/categoria/dialogoCategoria", opcoes, null);
+    }
     
 }
