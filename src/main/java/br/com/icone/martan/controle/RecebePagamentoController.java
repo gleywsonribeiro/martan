@@ -6,6 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.ContaReceber;
+import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.repositorio.ContaReceberFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -51,7 +52,12 @@ public class RecebePagamentoController implements Serializable {
         opcoes.put("resizable", false);
         opcoes.put("contentHeight", 300);
 
-        RequestContext.getCurrentInstance().openDialog("/telas/categoria/dialogoCategoria", opcoes, null);
+        RequestContext.getCurrentInstance().openDialog("/telas/financeiro/contareceber/dialogo/dlgpagamento", opcoes, null);
+    }
+    
+    
+    public FormaPagamento[] getFormasPagamento() {
+        return FormaPagamento.values();
     }
     
 }

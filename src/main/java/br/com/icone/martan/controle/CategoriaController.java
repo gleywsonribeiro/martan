@@ -6,6 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Categoria;
+import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.SubCategoria;
 import br.com.icone.martan.modelo.repositorio.CategoriaFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
@@ -59,6 +60,7 @@ public class CategoriaController implements Serializable {
         categorias = null;
         JsfUtil.addMessage("Salvo!");
     }
+    
     
     public void abrirDialogo() {
         Map<String, Object> opcoes = new HashMap<String, Object>();
