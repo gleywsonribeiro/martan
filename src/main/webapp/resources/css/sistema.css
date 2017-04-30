@@ -38,6 +38,21 @@ input, textarea {
     color: darkblue;
 }
 
+.pagamento {
+    font-size: x-large; 
+    font-weight: 400; 
+    /*color: darkblue;*/
+}
+
+.columLeft {
+    text-align: left;
+}
+
+.columRight {
+    text-align: right;
+}
+
+
 .ui-growl {
     position:absolute;
     top:20px;

@@ -239,6 +239,7 @@ public class PedidoController implements Serializable {
                 ContaReceber conta = new ContaReceber();
                 conta.setPedido(pedido);
                 conta.setValor(pedido.getValorTotal());
+                conta.setDesconto(pedido.getValorDesconto());
                 
                 repositorioCR.create(conta);
                 

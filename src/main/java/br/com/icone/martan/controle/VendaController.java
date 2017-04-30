@@ -91,6 +91,7 @@ public class VendaController implements Serializable {
                 ContaReceber conta = new ContaReceber();
                 conta.setPedido(venda);
                 conta.setValor(venda.getValorTotal());
+                conta.setDesconto(venda.getValorDesconto());
                 
                 repositorioCR.create(conta);
                 

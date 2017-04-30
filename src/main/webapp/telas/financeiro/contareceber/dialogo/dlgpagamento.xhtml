@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Dialogo Marca</title>
+        <title>Pagamento</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="sistema.css"/>
         <h:outputScript library="scripts" name="calendario.js"/>
@@ -14,34 +14,57 @@
     <h:body>
         <h:form id="form">
             <p:messages autoUpdate="true" closable="true"/>
-            <h:panelGrid columns="3" id="painel">
-                <p:outputLabel value="Forma de pagamento" for="pagamento"/>
-                <p:selectOneMenu id="pagamento" required="true" value="#{recebePagamentoController.conta.formaPagamento}">
-                    <f:selectItem itemLabel="Selecione"/>
-                    <f:selectItems value="#{recebePagamentoController.formasPagamento}" var="forma" itemValue="#{forma}" itemLabel="#{forma.descricao}"/>
-                </p:selectOneMenu>
-            </h:panelGrid>
+            <!--            <h:panelGrid columns="3" id="painel">
+                            <p:outputLabel value="Forma de pagamento" for="pagamento"/>
+                            <p:selectOneMenu id="pagamento" required="true" value="">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="" var="forma" itemValue="" itemLabel=""/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>-->
 
-            <p:dataTable id="categoriaTable" value="#{categoriaController.categorias}" widgetVar="categoryTable" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                         var="categoria" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
-
+            <h:panelGrid columns="2" style="width: 100%" columnClasses="columLeft, columRight">
+                <h:outputText value="Total a Pagar" styleClass="pagamento"/>
+                <h:outputText value="#{recebePagamentoController.conta.valor}" styleClass="pagamento">
+                    <f:convertNumber type="currency"/>
+                </h:outputText>
                 
-
-                <p:column headerText="Código" style="text-align: center; width: 100px">
-                    <h:outputText value="#{categoria.id}"/>
-                </p:column>
-
-                <p:column headerText="Categoria">
-                    <h:outputText value="#{categoria.nome}"/>
-                </p:column>
-
-                <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar" process="@this">
-                        <f:setPropertyActionListener target="#{cadastroProdutoController.produto.categoria}" value="#{categoria}"/>
-                    </p:commandButton>
-                    <p:commandButton icon="ui-icon-check" title="Selecionar" action="#{categoriaController.selecionar(categoria)}" process="@this" />
-                </p:column>
-            </p:dataTable>
+                <h:outputText value="Desconto" styleClass="pagamento" style="color: red"/>
+                <h:outputText value="#{recebePagamentoController.conta.desconto}" styleClass="pagamento" style="color: red">
+                    <f:convertNumber type="currency"/>
+                </h:outputText>
+                
+                <h:panelGroup>
+                    <h:panelGrid columns="2">
+                        <p:graphicImage library="imagens" name="dinheiro.png"/>
+                        <h:outputText value="Dinheiro"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <p:inputText style="text-align: right"/>
+                
+                <h:panelGroup>
+                    <h:panelGrid columns="2">
+                        <p:graphicImage library="imagens" name="maquininha.png"/>
+                        <h:outputText value="Débito"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <p:inputText style="text-align: right"/>
+                
+                <h:panelGroup>
+                    <h:panelGrid columns="2">
+                        <p:graphicImage library="imagens" name="card.png" />
+                        <h:outputText value="Crédito"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <p:inputText style="text-align: right"/>
+                
+                <h:panelGroup>
+                    <h:panelGrid columns="2">
+                        <p:graphicImage library="imagens" name="cheque.png"/>
+                        <h:outputText value="Cheque"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+                <p:inputText style="text-align: right"/>
+            </h:panelGrid>
 
             <p:confirmDialog global="true">  
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  

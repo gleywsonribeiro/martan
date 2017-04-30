@@ -51,6 +51,7 @@ public class RecebePagamentoController implements Serializable {
         opcoes.put("modal", true);
         opcoes.put("resizable", false);
         opcoes.put("contentHeight", 300);
+        opcoes.put("contentWidth", 400);
 
         RequestContext.getCurrentInstance().openDialog("/telas/financeiro/contareceber/dialogo/dlgpagamento", opcoes, null);
     }
