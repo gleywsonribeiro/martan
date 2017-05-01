@@ -5,9 +5,9 @@
  */
 package br.com.icone.martan.controle;
 
-import br.com.icone.martan.modelo.ContaReceber;
+import br.com.icone.martan.modelo.Pagamento;
 import br.com.icone.martan.modelo.FormaPagamento;
-import br.com.icone.martan.modelo.repositorio.ContaReceberFacade;
+import br.com.icone.martan.modelo.repositorio.PagamentoFacade;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -25,24 +25,24 @@ import org.primefaces.context.RequestContext;
 @SessionScoped
 public class RecebePagamentoController implements Serializable {
 
-    private ContaReceber conta;
+    private Pagamento conta;
 //    private List<ContaReceber> contas;
     @Inject
-    private ContaReceberFacade repositorioConta;
+    private PagamentoFacade repositorioConta;
     
     public RecebePagamentoController() {
-        this.conta = new ContaReceber();
+        this.conta = new Pagamento();
     }
 
-    public ContaReceber getConta() {
+    public Pagamento getConta() {
         return conta;
     }
 
-    public void setConta(ContaReceber conta) {
+    public void setConta(Pagamento conta) {
         this.conta = conta;
     }
 
-    public List<ContaReceber> getContas() {
+    public List<Pagamento> getContas() {
         return repositorioConta.findAll();
     }
     

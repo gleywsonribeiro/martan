@@ -7,42 +7,26 @@ package br.com.icone.martan.modelo;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
 
 /**
  *
- * @author raque
+ * @author Gleywson
  */
 @Entity
-public class Parcela implements Serializable {
+public class TipoPagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(nullable = false)
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataVencimento;
-    
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date dataPagamento;
-    
     @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal valor;
-    
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Pagamento contaReceber;
+    private BigDecimal valor = BigDecimal.ZERO;
 
     public Long getId() {
         return id;
@@ -50,30 +34,6 @@ public class Parcela implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Date getDataVencimento() {
-        return dataVencimento;
-    }
-
-    public void setDataVencimento(Date dataVencimento) {
-        this.dataVencimento = dataVencimento;
-    }
-
-    public Date getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
-    }
-
-    public Pagamento getContaReceber() {
-        return contaReceber;
-    }
-
-    public void setContaReceber(Pagamento contaReceber) {
-        this.contaReceber = contaReceber;
     }
 
     public BigDecimal getValor() {
@@ -94,10 +54,10 @@ public class Parcela implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Parcela)) {
+        if (!(object instanceof TipoPagamento)) {
             return false;
         }
-        Parcela other = (Parcela) object;
+        TipoPagamento other = (TipoPagamento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -106,7 +66,7 @@ public class Parcela implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.icone.martan.modelo.Parcela[ id=" + id + " ]";
+        return "br.com.icone.martan.modelo.TipoPagamento[ id=" + id + " ]";
     }
     
 }

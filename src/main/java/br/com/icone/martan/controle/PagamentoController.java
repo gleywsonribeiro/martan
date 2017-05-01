@@ -5,8 +5,8 @@
  */
 package br.com.icone.martan.controle;
 
-import br.com.icone.martan.modelo.ContaReceber;
-import br.com.icone.martan.modelo.repositorio.ContaReceberFacade;
+import br.com.icone.martan.modelo.Pagamento;
+import br.com.icone.martan.modelo.repositorio.PagamentoFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import java.io.Serializable;
 import javax.inject.Named;
@@ -19,22 +19,22 @@ import javax.inject.Inject;
  */
 @Named(value = "contaReceberController")
 @ViewScoped
-public class ContaReceberController implements Serializable {
+public class PagamentoController implements Serializable {
 
     @Inject
-    ContaReceberFacade repositorio;
+    PagamentoFacade repositorio;
     
-    private ContaReceber conta;
+    private Pagamento conta;
     
-    public ContaReceberController() {
-        this.conta = new ContaReceber();
+    public PagamentoController() {
+        this.conta = new Pagamento();
     }
 
-    public ContaReceber getConta() {
+    public Pagamento getConta() {
         return conta;
     }
 
-    public void setConta(ContaReceber conta) {
+    public void setConta(Pagamento conta) {
         this.conta = conta;
     }
     
@@ -46,7 +46,7 @@ public class ContaReceberController implements Serializable {
             repositorio.edit(conta);
         }
         JsfUtil.addMessage("Conta salva com sucesso!");
-        conta = new ContaReceber();
+        conta = new Pagamento();
     }
     
 }

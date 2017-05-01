@@ -6,7 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Cliente;
-import br.com.icone.martan.modelo.ContaReceber;
+import br.com.icone.martan.modelo.Pagamento;
 import br.com.icone.martan.modelo.Endereco;
 import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.ItemPedido;
@@ -15,7 +15,7 @@ import br.com.icone.martan.modelo.Produto;
 import br.com.icone.martan.modelo.StatusPedido;
 import br.com.icone.martan.modelo.Usuario;
 import br.com.icone.martan.modelo.repositorio.ClienteFacade;
-import br.com.icone.martan.modelo.repositorio.ContaReceberFacade;
+import br.com.icone.martan.modelo.repositorio.PagamentoFacade;
 import br.com.icone.martan.modelo.repositorio.PedidoFacade;
 import br.com.icone.martan.modelo.repositorio.ProdutoFacade;
 import br.com.icone.martan.modelo.repositorio.UsuarioFacade;
@@ -48,7 +48,7 @@ public class PedidoController implements Serializable {
     @Inject
     private ProdutoFacade produtoRepository;
     @Inject
-    private ContaReceberFacade repositorioCR;
+    private PagamentoFacade repositorioCR;
 
 //    @Inject
 //    private Mailer mailer; 
@@ -236,7 +236,7 @@ public class PedidoController implements Serializable {
                     repositorio.edit(pedido);
                 }
                 
-                ContaReceber conta = new ContaReceber();
+                Pagamento conta = new Pagamento();
                 conta.setPedido(pedido);
                 conta.setValor(pedido.getValorTotal());
                 conta.setDesconto(pedido.getValorDesconto());

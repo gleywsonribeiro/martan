@@ -5,7 +5,7 @@
  */
 package br.com.icone.martan.modelo.repositorio;
 
-import br.com.icone.martan.modelo.ContaReceber;
+import br.com.icone.martan.modelo.Pagamento;
 import java.io.Serializable;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -17,7 +17,7 @@ import javax.persistence.PersistenceContext;
  * @author raque
  */
 @Stateless
-public class ContaReceberFacade extends AbstractFacade<ContaReceber> implements Serializable {
+public class PagamentoFacade extends AbstractFacade<Pagamento> implements Serializable {
 
     @PersistenceContext(unitName = "martanPU")
     private EntityManager em;
@@ -27,8 +27,8 @@ public class ContaReceberFacade extends AbstractFacade<ContaReceber> implements 
         return em;
     }
 
-    public ContaReceberFacade() {
-        super(ContaReceber.class);
+    public PagamentoFacade() {
+        super(Pagamento.class);
     }
     
 //    public List<ContaReceber> getContasEmitidas() {

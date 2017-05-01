@@ -32,7 +32,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "conta_receber")
-public class ContaReceber implements Serializable {
+public class Pagamento implements Serializable {
 
     @OneToMany(mappedBy = "contaReceber", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Parcela> parcelas;
@@ -63,14 +63,77 @@ public class ContaReceber implements Serializable {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal juros = BigDecimal.ZERO;
     
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal total = BigDecimal.ZERO;
+    
+    /**
+    Esses campos podem ser removidos na próxima atualização
+    */
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal dinheiro = BigDecimal.ZERO;
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal credito = BigDecimal.ZERO;
+    
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal debito = BigDecimal.ZERO;
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal cheque = BigDecimal.ZERO;
+    
+    
     @Column(columnDefinition = "text")
     private String observacao;
     
     @OneToOne
     private Pedido pedido;
+    
+    
 
-    public ContaReceber() {
+    public Pagamento() {
         this.parcelas = new ArrayList<Parcela>();
+    }
+
+    public BigDecimal getDinheiro() {
+        return dinheiro;
+    }
+
+    public void setDinheiro(BigDecimal dinheiro) {
+        this.dinheiro = dinheiro;
+    }
+
+    public BigDecimal getCredito() {
+        return credito;
+    }
+
+    public void setCredito(BigDecimal credito) {
+        this.credito = credito;
+    }
+
+    public BigDecimal getDebito() {
+        return debito;
+    }
+
+    public void setDebito(BigDecimal debito) {
+        this.debito = debito;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public BigDecimal getCheque() {
+        return cheque;
+    }
+
+    public void setCheque(BigDecimal cheque) {
+        this.cheque = cheque;
     }
     
     
@@ -154,6 +217,10 @@ public class ContaReceber implements Serializable {
     public void setJuros(BigDecimal juros) {
         this.juros = juros;
     }
+    
+    public void atualizaValorPagamento(){
+        
+    }
 
     @Override
     public int hashCode() {
@@ -165,10 +232,10 @@ public class ContaReceber implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ContaReceber)) {
+        if (!(object instanceof Pagamento)) {
             return false;
         }
-        ContaReceber other = (ContaReceber) object;
+        Pagamento other = (Pagamento) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
