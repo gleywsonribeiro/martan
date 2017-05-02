@@ -14,14 +14,7 @@
     <h:body>
         <h:form id="form">
             <p:messages autoUpdate="true" closable="true"/>
-            <!--            <h:panelGrid columns="3" id="painel">
-                            <p:outputLabel value="Forma de pagamento" for="pagamento"/>
-                            <p:selectOneMenu id="pagamento" required="true" value="">
-                                <f:selectItem itemLabel="Selecione"/>
-                                <f:selectItems value="" var="forma" itemValue="" itemLabel=""/>
-                            </p:selectOneMenu>
-                        </h:panelGrid>-->
-
+          
             <h:panelGrid columns="2" style="width: 100%" columnClasses="columLeft, columRight">
                 <h:outputText value="Total a Pagar" styleClass="pagamento"/>
                 <h:outputText value="#{recebePagamentoController.conta.valor}" styleClass="pagamento">
@@ -42,7 +35,7 @@
                 <p:inputNumber id="dinheiro" size="15" symbol="R$ " decimalSeparator=","
                                value="#{recebePagamentoController.conta.dinheiro}" 
                                thousandSeparator="." decimalPlaces="2" required="true">
-                    <p:ajax update="troco"/>
+                    <p:ajax update="troco labelTroco finaliza"/>
                 </p:inputNumber>
 
                 <h:panelGroup>
@@ -54,7 +47,7 @@
                 <p:inputNumber id="debito" size="15" symbol="R$ " decimalSeparator=","
                                value="#{recebePagamentoController.conta.debito}"
                                thousandSeparator="." decimalPlaces="2" required="true">
-                    <p:ajax update="troco"/>
+                    <p:ajax update="troco labelTroco finaliza"/>
                 </p:inputNumber>
 
                 <h:panelGroup>
@@ -66,7 +59,7 @@
                 <p:inputNumber id="credito" size="15" symbol="R$ " decimalSeparator=","
                                value="#{recebePagamentoController.conta.credito}"
                                thousandSeparator="." decimalPlaces="2" required="true">
-                    <p:ajax update="troco"/>
+                    <p:ajax update="troco labelTroco finaliza"/>
                 </p:inputNumber>
 
                 <h:panelGroup>
@@ -78,13 +71,17 @@
                 <p:inputNumber id="cheque" size="15" symbol="R$ " decimalSeparator=","
                                value="#{recebePagamentoController.conta.cheque}"
                                thousandSeparator="." decimalPlaces="2" required="true">
-                    <p:ajax update="troco"/>
+                    <p:ajax update="troco labelTroco finaliza"/>
                 </p:inputNumber>
                 
-                <h:outputText id="labelTroco" value="Troco" styleClass="pagamento" rendered="#{recebePagamentoController.conta.troco != 0}"/>
-                <h:outputText id="troco" value="#{recebePagamentoController.conta.troco}" styleClass="pagamento" rendered="#{recebePagamentoController.conta.troco != 0}"/>
+                <h:outputText id="labelTroco" value="#{recebePagamentoController.conta.statusTroco}" styleClass="pagamento"/>
+                <h:outputText id="troco" value="#{recebePagamentoController.conta.trocoAbsoluto}" styleClass="pagamento"/>
+                
             </h:panelGrid>
-
+            <center>
+                <p:commandButton id="finaliza" value="Finalizar" style="width: 99%" action="#{recebePagamentoController.fecharVenda()}" disabled="#{recebePagamentoController.aindaFalta}" process="@this"/>
+            </center>
+            
             
 
             <p:confirmDialog global="true">  

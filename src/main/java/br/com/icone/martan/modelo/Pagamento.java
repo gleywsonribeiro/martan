@@ -62,8 +62,7 @@ public class Pagamento implements Serializable {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal juros = BigDecimal.ZERO;
     
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal total = BigDecimal.ZERO;
+    
     
     /**
     Esses campos podem ser removidos na próxima atualização
@@ -117,14 +116,6 @@ public class Pagamento implements Serializable {
 
     public void setDebito(BigDecimal debito) {
         this.debito = debito;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
     }
 
     public BigDecimal getCheque() {
@@ -218,8 +209,21 @@ public class Pagamento implements Serializable {
     }
     
     public BigDecimal getTroco(){
-        BigDecimal total = dinheiro.add(credito).add(debito).add(cheque);
-        return total;
+        BigDecimal totalPagamentos = dinheiro.add(credito).add(debito).add(cheque);
+        return totalPagamentos.subtract(this.valor);
+    }
+    
+    public BigDecimal getTrocoAbsoluto() {
+        return getTroco().abs();
+    }
+    
+    public String getStatusTroco() {
+        if(getTroco().compareTo(BigDecimal.ZERO) > 0) {
+            return "Troco";
+        }
+        else {
+            return "Falta";
+        }
     }
 
     @Override

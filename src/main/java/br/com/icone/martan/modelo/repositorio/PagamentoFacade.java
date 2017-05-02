@@ -11,6 +11,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -31,8 +32,8 @@ public class PagamentoFacade extends AbstractFacade<Pagamento> implements Serial
         super(Pagamento.class);
     }
     
-//    public List<ContaReceber> getContasEmitidas() {
-//        
-//    }
-//    
+    public List<Pagamento> getContasEmitidas() {
+        return getEntityManager().createQuery("SELECT conta FROM Pagamento conta WHERE conta.pedido IS NOT NULL and conta.dataPagamento IS NULL", Pagamento.class).getResultList();
+    }
+    
 }

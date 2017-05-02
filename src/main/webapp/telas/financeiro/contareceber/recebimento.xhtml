@@ -45,7 +45,7 @@
                 <p:column style="text-align: center; width: 50px">
                     <p:commandButton icon="fa fa-money" process="@this" action="#{recebePagamentoController.abrirDialogo()}">
                         <f:setPropertyActionListener target="#{recebePagamentoController.conta}" value="#{conta}"/>
-                        <!--<p:ajax event="dialogReturn" listener=""  process="@this" update="@form"/>-->
+                        <p:ajax event="dialogReturn"  process="@this" update="@form"/>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
