@@ -27,46 +27,65 @@
                 <h:outputText value="#{recebePagamentoController.conta.valor}" styleClass="pagamento">
                     <f:convertNumber type="currency"/>
                 </h:outputText>
-                
+
                 <h:outputText value="Desconto" styleClass="pagamento" style="color: red"/>
                 <h:outputText value="#{recebePagamentoController.conta.desconto}" styleClass="pagamento" style="color: red">
                     <f:convertNumber type="currency"/>
                 </h:outputText>
-                
+
                 <h:panelGroup>
                     <h:panelGrid columns="2">
                         <p:graphicImage library="imagens" name="dinheiro.png"/>
                         <h:outputText value="Dinheiro"/>
                     </h:panelGrid>
                 </h:panelGroup>
-                <p:inputText value="#{recebePagamentoController.conta.dinheiro}" style="text-align: right"/>
-                
+                <p:inputNumber id="dinheiro" size="15" symbol="R$ " decimalSeparator=","
+                               value="#{recebePagamentoController.conta.dinheiro}" 
+                               thousandSeparator="." decimalPlaces="2" required="true">
+                    <p:ajax update="troco"/>
+                </p:inputNumber>
+
                 <h:panelGroup>
                     <h:panelGrid columns="2">
                         <p:graphicImage library="imagens" name="maquininha.png"/>
                         <h:outputText value="Débito"/>
                     </h:panelGrid>
                 </h:panelGroup>
-                <p:inputText value="#{recebePagamentoController.conta.debito}" style="text-align: right"/>
-                
+                <p:inputNumber id="debito" size="15" symbol="R$ " decimalSeparator=","
+                               value="#{recebePagamentoController.conta.debito}"
+                               thousandSeparator="." decimalPlaces="2" required="true">
+                    <p:ajax update="troco"/>
+                </p:inputNumber>
+
                 <h:panelGroup>
                     <h:panelGrid columns="2">
                         <p:graphicImage library="imagens" name="card.png" />
                         <h:outputText value="Crédito"/>
                     </h:panelGrid>
                 </h:panelGroup>
-                <p:inputText value="#{recebePagamentoController.conta.credito}" style="text-align: right"/>
-                
+                <p:inputNumber id="credito" size="15" symbol="R$ " decimalSeparator=","
+                               value="#{recebePagamentoController.conta.credito}"
+                               thousandSeparator="." decimalPlaces="2" required="true">
+                    <p:ajax update="troco"/>
+                </p:inputNumber>
+
                 <h:panelGroup>
                     <h:panelGrid columns="2">
                         <p:graphicImage library="imagens" name="cheque.png"/>
                         <h:outputText value="Cheque"/>
                     </h:panelGrid>
                 </h:panelGroup>
-                <p:inputText value="#{recebePagamentoController.conta.cheque}" style="text-align: right"/>
+                <p:inputNumber id="cheque" size="15" symbol="R$ " decimalSeparator=","
+                               value="#{recebePagamentoController.conta.cheque}"
+                               thousandSeparator="." decimalPlaces="2" required="true">
+                    <p:ajax update="troco"/>
+                </p:inputNumber>
+                
+                <h:outputText id="labelTroco" value="Troco" styleClass="pagamento" rendered="#{recebePagamentoController.conta.troco != 0}"/>
+                <h:outputText id="troco" value="#{recebePagamentoController.conta.troco}" styleClass="pagamento" rendered="#{recebePagamentoController.conta.troco != 0}"/>
             </h:panelGrid>
+
             
-            <!--<h:outputText value="" mostrar o troco aqui-->
 
             <p:confirmDialog global="true">  
                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  

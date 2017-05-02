@@ -42,7 +42,7 @@ public class Parcela implements Serializable {
     
     @ManyToOne
     @JoinColumn(nullable = false)
-    private Pagamento contaReceber;
+    private Pagamento pagamento;
 
     public Long getId() {
         return id;
@@ -68,12 +68,12 @@ public class Parcela implements Serializable {
         this.dataPagamento = dataPagamento;
     }
 
-    public Pagamento getContaReceber() {
-        return contaReceber;
+    public Pagamento getPagamento() {
+        return pagamento;
     }
 
-    public void setContaReceber(Pagamento contaReceber) {
-        this.contaReceber = contaReceber;
+    public void setPagamento(Pagamento pagamento) {
+        this.pagamento = pagamento;
     }
 
     public BigDecimal getValor() {

@@ -31,10 +31,9 @@ import javax.persistence.TemporalType;
  * @author raque
  */
 @Entity
-@Table(name = "conta_receber")
 public class Pagamento implements Serializable {
 
-    @OneToMany(mappedBy = "contaReceber", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "pagamento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Parcela> parcelas;
 
     private static final long serialVersionUID = 1L;
@@ -218,8 +217,9 @@ public class Pagamento implements Serializable {
         this.juros = juros;
     }
     
-    public void atualizaValorPagamento(){
-        
+    public BigDecimal getTroco(){
+        BigDecimal total = dinheiro.add(credito).add(debito).add(cheque);
+        return total;
     }
 
     @Override
