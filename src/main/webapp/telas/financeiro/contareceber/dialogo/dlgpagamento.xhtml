@@ -13,8 +13,6 @@
     </h:head>
     <h:body>
         <h:form id="form">
-            <p:messages autoUpdate="true" closable="true"/>
-          
             <h:panelGrid columns="2" style="width: 100%" columnClasses="columLeft, columRight">
                 <h:outputText value="Total a Pagar" styleClass="pagamento"/>
                 <h:outputText value="#{recebePagamentoController.conta.valor}" styleClass="pagamento">
@@ -79,7 +77,9 @@
                 
             </h:panelGrid>
             <center>
-                <p:commandButton id="finaliza" value="Finalizar" style="width: 99%" action="#{recebePagamentoController.fecharVenda()}" disabled="#{recebePagamentoController.aindaFalta}" process="@this"/>
+                <p:commandButton id="finaliza" value="Finalizar" style="width: 99%"
+                                 action="#{recebePagamentoController.fecharVenda()}"
+                                 disabled="#{recebePagamentoController.aindaFalta}" process="@this"/>
             </center>
             
             

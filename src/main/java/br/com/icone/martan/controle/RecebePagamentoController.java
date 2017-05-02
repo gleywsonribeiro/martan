@@ -8,6 +8,7 @@ package br.com.icone.martan.controle;
 import br.com.icone.martan.modelo.Pagamento;
 import br.com.icone.martan.modelo.FormaPagamento;
 import br.com.icone.martan.modelo.repositorio.PagamentoFacade;
+import br.com.icone.martan.util.jsf.JsfUtil;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -16,8 +17,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -59,12 +62,15 @@ public class RecebePagamentoController implements Serializable {
     }
     
     public void fecharVenda() {
-        RequestContext.getCurrentInstance().closeDialog(null);
         conta.setDataPagamento(new Date());
         repositorioConta.edit(conta);
         
+//        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, null, "Venda finalizada com sucesso!");
         
+        RequestContext.getCurrentInstance().closeDialog(null);
     }
+    
+   
     
     public boolean getAindaFalta() {
         return conta.getTroco().compareTo(BigDecimal.ZERO) < 0;
