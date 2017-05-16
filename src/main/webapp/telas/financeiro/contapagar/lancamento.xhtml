@@ -39,7 +39,7 @@
                     <p:outputLabel for="vencimento" value="Vencimento" />
                     <p:calendar id="vencimento" value="#{contaPagarController.conta.dataVencimento}"
                                 locale="pt" mask="true" pattern="dd/MM/yyyy" 
-                                size="1" required="true" requiredMessage="Informe o vencimento"/>
+                                size="10" required="true" requiredMessage="Informe o vencimento"/>
 
                     <p:outputLabel for="valor" value="Valor"/>
                     <p:inputNumber id="valor" value="#{contaPagarController.conta.valor}" size="15"
