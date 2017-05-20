@@ -79,7 +79,9 @@
             <center>
                 <p:commandButton id="finaliza" value="Finalizar" style="width: 99%"
                                  action="#{recebePagamentoController.fecharVenda()}"
-                                 disabled="#{recebePagamentoController.aindaFalta}" process="@this"/>
+                                 disabled="#{recebePagamentoController.aindaFalta}" process="@this">
+                    <p:confirm header="Confirmação" message="Confirma este pagamento?" icon="ui-icon-alert" />
+                </p:commandButton>
             </center>
             
             
