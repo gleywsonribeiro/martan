@@ -6,7 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Pagamento;
-import br.com.icone.martan.modelo.FormaPagamento;
+import br.com.icone.martan.modelo.TipoPagamento;
 import br.com.icone.martan.modelo.repositorio.PagamentoFacade;
 import br.com.icone.martan.util.jsf.JsfUtil;
 import javax.inject.Named;
@@ -76,8 +76,8 @@ public class RecebePagamentoController implements Serializable {
         return conta.getTroco().compareTo(BigDecimal.ZERO) < 0;
     }
     
-    public FormaPagamento[] getFormasPagamento() {
-        return FormaPagamento.values();
+    public TipoPagamento[] getFormasPagamento() {
+        return TipoPagamento.values();
     }
     
 }

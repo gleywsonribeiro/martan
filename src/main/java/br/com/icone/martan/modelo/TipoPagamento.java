@@ -5,68 +5,25 @@
  */
 package br.com.icone.martan.modelo;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 /**
  *
  * @author Gleywson
  */
-@Entity
-public class TipoPagamento implements Serializable {
+public enum TipoPagamento {
+    DINHEIRO("Dinheiro"),
+    CARTAO_CREDITO("Cartão de crédito"),
+    CARTAO_DEBITO("Cartão de débito"),
+    CHEQUE("Cheque"),
+    BOLETO_BANCARIO("Boleto bancário"),
+    DEPOSITO_BANCARIO("Depósito bancário");
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal valor = BigDecimal.ZERO;
+    private final String descricao;
 
-    public Long getId() {
-        return id;
+    TipoPagamento(String descricao) {
+        this.descricao = descricao;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getDescricao() {
+        return descricao;
     }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoPagamento)) {
-            return false;
-        }
-        TipoPagamento other = (TipoPagamento) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "br.com.icone.martan.modelo.TipoPagamento[ id=" + id + " ]";
-    }
-    
 }

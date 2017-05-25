@@ -6,7 +6,7 @@
 package br.com.icone.martan.controle;
 
 import br.com.icone.martan.modelo.Pagamento;
-import br.com.icone.martan.modelo.FormaPagamento;
+import br.com.icone.martan.modelo.TipoPagamento;
 import br.com.icone.martan.modelo.ItemPedido;
 import br.com.icone.martan.modelo.Pedido;
 import br.com.icone.martan.modelo.Produto;
@@ -128,8 +128,8 @@ public class VendaController implements Serializable {
         return usuarioRepository.findAll();
     }
 
-    public FormaPagamento[] getFormasPagamento() {
-        return FormaPagamento.values();
+    public TipoPagamento[] getFormasPagamento() {
+        return TipoPagamento.values();
     }
 
     public void recalcularPedido() {

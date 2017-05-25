@@ -43,7 +43,7 @@ public class Pagamento implements Serializable {
     
     @Enumerated(EnumType.STRING)
     @Column(length = 50, name = "forma_pagamento")
-    private FormaPagamento formaPagamento;
+    private TipoPagamento formaPagamento;
     
     @Column(name = "dt_vencimento")
     @Temporal(TemporalType.TIMESTAMP)
@@ -160,11 +160,11 @@ public class Pagamento implements Serializable {
         this.pedido = pedido;
     }
 
-    public FormaPagamento getFormaPagamento() {
+    public TipoPagamento getFormaPagamento() {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(FormaPagamento formaPagamento) {
+    public void setFormaPagamento(TipoPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 
