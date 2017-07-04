@@ -7,10 +7,9 @@
     <h:head>
         <title>Login</title>
         <h:outputStylesheet library="css" name="login.css"/>
-        <!--<h:graphicImage library="imagens" name="fundo2.jpg" style="width: 100%; height: 100%; display: block; padding: 0px; position: fixed;"/>-->
     </h:head>
     
-    <h:body>
+    <h:body style="background: url('resources/imagens/fundo.jpg') no-repeat !important;">
         <p:dialog visible="true" closable="false" draggable="false" resizable="false" showHeader="false" styleClass="painel">
             <h:form>
                 <p:growl id="alerta" life="3000"/>
@@ -22,7 +21,7 @@
                         </p:row>  
                     </f:facet>
                     <p:row>
-                        <p:column rowspan="4"><h:graphicImage library="imagens" name="Apps-Keys-icon.png" width="100px" height="100px"/></p:column>
+                        <p:column rowspan="4"><h:graphicImage library="imagens" name="cadeado.png" width="100px" height="100px"/></p:column>
                     </p:row>
                     <p:row>
                         <!--<p:column>Login:</p:column>-->
