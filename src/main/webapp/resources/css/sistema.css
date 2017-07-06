@@ -2,8 +2,8 @@
 
 body {
     font-size: 12px;
-    /*font-family: Arial, Helvetica, sans-serif;*/
-    font-family: "Comic Sans MS", sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    /*font-family: "Comic Sans MS", sans-serif;*/
     margin: 0px;
     font-weight: normal;
 }
@@ -35,7 +35,7 @@ input, textarea {
 .titulo {
     font-size: x-large; 
     font-weight: 400; 
-    color: darkblue;
+    color: #941739;
 }
 
 .pagamento {
@@ -69,8 +69,7 @@ header {
     padding: 5px 0px;
     margin-bottom: 20px;
     height: 30px;
-    background-color: #941739;
-    /*background-color: #006699;*/
+    background-color: #006699;
     /*background: linear-gradient(#878717, burlywood, #e3e304);  Standard syntax */
     /*background-color:  #545454;*/
     color: #fff;
