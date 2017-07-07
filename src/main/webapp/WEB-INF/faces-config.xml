@@ -15,11 +15,11 @@
         <phase-listener>br.com.icone.martan.filtro.Autorizacao</phase-listener>
     </lifecycle>-->
     
-<!--    <factory>
+    <factory>
         <exception-handler-factory>
             br.com.icone.martan.util.jsf.JsfExceptionHandlerFactory
         </exception-handler-factory>
-    </factory>-->
+    </factory>
     <application>
         <action-listener>org.primefaces.application.DialogActionListener</action-listener>
         <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
