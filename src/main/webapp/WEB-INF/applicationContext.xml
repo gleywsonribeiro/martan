@@ -5,7 +5,7 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
-        
+     
     <http pattern="/login.xhtml" security="none" />
     <!--<http pattern="/login_bkp.xhtml" security="none" />-->
     <http pattern="/resources/**" security="none" />
@@ -19,6 +19,7 @@
         <intercept-url pattern="/index.xhtml" access="isAuthenticated()" />
         <intercept-url pattern="/telas/vendas/**" access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES')" />
         <intercept-url pattern="/telas/produto/**" access="hasAnyRole('ADMINISTRADORES')" />
+        <intercept-url pattern="/telas/**" access="hasAnyRole('SUPERUSER')" />
         <intercept-url pattern="/**" access="denyAll" />
         
         <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?invalid=true" 
@@ -31,6 +32,7 @@
             <user-service>
                 <user name="joao" password="joao" authorities="VENDEDORES" />
                 <user name="admin" password="admin" authorities="ADMINISTRADORES" />
+                <user name="gleywson" password="gleywson" authorities="SUPERUSER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>

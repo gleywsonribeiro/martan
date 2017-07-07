@@ -31,13 +31,14 @@
                         disabled="#{pedidoController.pedido.emitido}" maxResults="10"
                         forceSelection="true" id="cliente" dropdown="true"
                         required="true" requiredMessage="Escolha o cliente">
-            <p:ajax update=":formPedido:tabview:entrega" event="itemSelect" listener="${pedidoController.setMesmoEnderecoCliente()}"/>
+            <p:ajax update=":formPedido:tabview:entrega" event="itemSelect" listener="#{pedidoController.setMesmoEnderecoCliente()}"/>
         </p:autoComplete>
 
-
-
-        <p:spacer/>
-        <p:spacer/>
+        <p:outputLabel value="Entrega?" for="entrega"/>
+        <p:selectBooleanCheckbox value="#{pedidoController.pedido.entrega}" id="entrega"
+                                 disabled="#{pedidoController.pedido.emitido}">
+            <p:ajax update=":formPedido:tabview" event="change" />
+        </p:selectBooleanCheckbox>
 
         <p:outputLabel value="Valor do frete" for="frete"/>
         <p:inputNumber id="frete" size="10" maxlength="10" value="#{pedidoController.pedido.valorFrete}"

@@ -54,7 +54,7 @@ public class JsfExceptionHandler extends ExceptionHandlerWrapper {
                 } else {
                     tratado = true;
                     //log deve ficar aqui -> log.error("Erro de sistema: " + exception.getMessage(), exception);
-                    JsfUtil.redirect("/faces/erro.xhtml");
+                    JsfUtil.redirect("/erro.xhtml");
                 }
             } finally {
                 if (tratado) {
