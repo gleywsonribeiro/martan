@@ -20,7 +20,7 @@
     refresh-home-on-connect-failure="true" />-->
                      
                      
-    <beans:bean id = "userEJBLocal"
+<!--    <beans:bean id = "userEJBLocal"
                 class = "org.springframework.ejb.access.LocalStatelessSessionProxyFactoryBean" >
         <property name = "jndiName" value = "ejb/userFind" />
         <property name = "businessInterface" value = "br.com.icone.martan.modelo.repositorio.UserEJBLocal" />
@@ -28,7 +28,7 @@
 
     <beans:bean id = "myController" class = "br.com.icone.martan.security.AppUserDetailsService" >
         <property name = "userEJBLocal" ref = "userEJBLocal" />
-    </beans:bean> 
+    </beans:bean> -->
     
     <beans:bean id="appUserDetailsService" class="br.com.icone.martan.security.AppUserDetailsService" />
     
