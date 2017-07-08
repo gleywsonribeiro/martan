@@ -1,39 +1,57 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
              xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:jee="http://www.springframework.org/schema/jee"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security-3.1.xsd">
      
+    <!--    <beans:bean id ="myBean" class="org.springframework.ejb.access.LocalStetelessSessionProxyFactoryBean">
+        <property name="jndiName" value="ejb/userFind#br.com.icone.martan.modelo.repositorio.UserEJB=Local" />
+        <property name="businessInterface" value="br.com.icone.martan.modelo.repositorio.UserEJBLocal" />
+    </beans:bean>-->
+    
+    <!--    <jee:remote-slsb id="userFind"
+    jndi-name="ejb/userFind#br.com.icone.martan.modelo.repositorio.UserEJBLocal"
+    business-interface="br.com.icone.martan.modelo.repositorio.UserEJBLocal"
+    home-interface="br.com.icone.martan.modelo.repositorio.UserEJBLocal"
+    cache-home="false" lookup-home-on-startup="false"
+    refresh-home-on-connect-failure="true" />-->
+                     
+                     
+    <beans:bean id = "userEJBLocal"
+                class = "org.springframework.ejb.access.LocalStatelessSessionProxyFactoryBean" >
+        <property name = "jndiName" value = "ejb/userFind" />
+        <property name = "businessInterface" value = "br.com.icone.martan.modelo.repositorio.UserEJBLocal" />
+    </beans:bean>
+
+    <beans:bean id = "myController" class = "br.com.icone.martan.security.AppUserDetailsService" >
+        <property name = "userEJBLocal" ref = "userEJBLocal" />
+    </beans:bean> 
+    
+    <beans:bean id="appUserDetailsService" class="br.com.icone.martan.security.AppUserDetailsService" />
+    
     <http pattern="/login.xhtml" security="none" />
-    <!--<http pattern="/login_bkp.xhtml" security="none" />-->
     <http pattern="/resources/**" security="none" />
     <http pattern="/erro.xhtml" security="none" />
     <http pattern="/javax.faces.resource/**" security="none" />
     
-    <http auto-config="false" use-expressions="true">
-        <!--        <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?error=true" />
-        <logout logout-success-url="/login.xhtml" /> -->
-        
+    <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/index.xhtml" access="isAuthenticated()" />
         <intercept-url pattern="/telas/vendas/**" access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES', 'SUPERUSER')" />
         <intercept-url pattern="/telas/produto/**" access="hasAnyRole('ADMINISTRADORES', 'SUPERUSER')" />
         <intercept-url pattern="/telas/**" access="hasAnyRole('SUPERUSER')" />
         <intercept-url pattern="/**" access="denyAll" />
         
-        <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?invalid=true" 
+        <!--        <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?invalid=true" 
                     default-target-url="/" always-use-default-target="true" />
-        <logout logout-url="/j_spring_security_logout" invalidate-session="true" />
+        <logout logout-url="/j_spring_security_logout" invalidate-session="true" />-->
     </http>
 	
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="joao" password="joao" authorities="VENDEDORES" />
-                <user name="admin" password="admin" authorities="ADMINISTRADORES" />
-                <user name="gleywson" password="gleywson" authorities="SUPERUSER" />
-            </user-service>
+        <authentication-provider user-service-ref="appUserDetailsService" >
+            <!--<password-encoder hash="md5" />-->
         </authentication-provider>
     </authentication-manager>
            

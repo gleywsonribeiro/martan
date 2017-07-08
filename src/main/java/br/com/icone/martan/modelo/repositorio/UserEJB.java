@@ -6,7 +6,6 @@
 package br.com.icone.martan.modelo.repositorio;
 
 import br.com.icone.martan.modelo.Usuario;
-import java.io.Serializable;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -16,21 +15,13 @@ import javax.persistence.PersistenceContext;
  *
  * @author Gleywson
  */
-@Stateless
-public class UsuarioFacade extends AbstractFacade<Usuario> implements Serializable {
+@Stateless(mappedName = "ejb/userFind")
+public class UserEJB implements UserEJBLocal {
 
     @PersistenceContext(unitName = "martanPU")
     private EntityManager em;
 
     @Override
-    protected EntityManager getEntityManager() {
-        return em;
-    }
-
-    public UsuarioFacade() {
-        super(Usuario.class);
-    }
-
     public Usuario getUsuarioPorLogin(String login) {
         Usuario usuario = null;
 
@@ -44,4 +35,7 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements Serializab
         return usuario;
     }
 
+    protected EntityManager getEntityManager() {
+        return em;
+    }
 }
