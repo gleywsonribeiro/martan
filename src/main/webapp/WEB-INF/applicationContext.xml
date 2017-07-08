@@ -17,8 +17,8 @@
         <logout logout-success-url="/login.xhtml" /> -->
         
         <intercept-url pattern="/index.xhtml" access="isAuthenticated()" />
-        <intercept-url pattern="/telas/vendas/**" access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES')" />
-        <intercept-url pattern="/telas/produto/**" access="hasAnyRole('ADMINISTRADORES')" />
+        <intercept-url pattern="/telas/vendas/**" access="hasAnyRole('VENDEDORES', 'AUXILIARES', 'ADMINISTRADORES', 'SUPERUSER')" />
+        <intercept-url pattern="/telas/produto/**" access="hasAnyRole('ADMINISTRADORES', 'SUPERUSER')" />
         <intercept-url pattern="/telas/**" access="hasAnyRole('SUPERUSER')" />
         <intercept-url pattern="/**" access="denyAll" />
         

@@ -48,6 +48,10 @@
                         <p:ajax event="dialogReturn"  process="@this" update="@form"/>
                     </p:commandButton>
                 </p:column>
+                <p:column style="text-align: center;width: 50px">
+                    <p:commandButton icon="fa fa-times-circle" id="cancel"/>
+                    <p:tooltip value="Aqui deve cancelar a venda e quem sabe o pedido" for="cancel"/>
+                </p:column>
             </p:dataTable>
         </h:form>
 
