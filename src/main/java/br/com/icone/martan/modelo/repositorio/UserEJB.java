@@ -15,14 +15,15 @@ import javax.persistence.PersistenceContext;
  *
  * @author Gleywson
  */
-@Stateless(mappedName = "ejb/userFind")
-public class UserEJB implements UserEJBLocal {
+@Stateless
+public class UserEJB implements UserEJBRemote {
 
     @PersistenceContext(unitName = "martanPU")
     private EntityManager em;
 
     @Override
     public Usuario getUsuarioPorLogin(String login) {
+        System.out.println("Metodo foi chamado");
         Usuario usuario = null;
 
         try {
