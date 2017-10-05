@@ -36,6 +36,7 @@ public class Autorizacao implements PhaseListener {
 
     @Override
     public void beforePhase(PhaseEvent event) {
+
     }
 
     @Override

@@ -21,7 +21,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import br.com.icone.martan.modelo.repositorio.UserEJBRemote;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 
 /**
  *
